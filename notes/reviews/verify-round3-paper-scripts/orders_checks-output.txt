@@ -1,0 +1,14 @@
+(a) union of the exponent cones
+  B = diag(1,0): in k_alpha for alpha in {1, 10, 1e3, 1e6}? [np.False_, np.False_, np.False_, np.False_]
+  B + 0.1 I in k_alpha from alpha = 10.0: True (so the closure of the union is {sym B >= 0})
+  B + 0.001 I in k_alpha from alpha = 1000.0: True (so the closure of the union is {sym B >= 0})
+  residual covariance of N(0,I) for B = diag(1,0), t = 0.7: [0.75340304 0.        ] PSD: True
+
+(b) ordered-density step set of the dyadic profile, d = 2 and d = 3
+  R(sqrt 2) = 1.000000, R(2) = 2.000000, R(1.9) = 1.000000
+  d = 2: M = diag(4,...,4,16) in K_R: True;  M^(1/2) = diag(2,...,2,4) in K_R: False
+  d = 3: M = diag(4,...,4,16) in K_R: True;  M^(1/2) = diag(2,...,2,4) in K_R: False
+
+(c) the atom of a Matern ray increment
+  gamma = 1.0, lam = 1.5: lam^(-2 gamma) = 0.444444, lim_u E e^(-uY) = 0.444444, e^(-Levy mass) = 0.444444 (mass 0.810930 vs 2 gamma log lam = 0.810930)
+  gamma = 2.5, lam = 1.2: lam^(-2 gamma) = 0.401878, lim_u E e^(-uY) = 0.401878, e^(-Levy mass) = 0.401878 (mass 0.911608 vs 2 gamma log lam = 0.911608)

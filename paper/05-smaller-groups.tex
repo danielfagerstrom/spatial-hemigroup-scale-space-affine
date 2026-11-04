@@ -1,0 +1,159 @@
+% §4.9 Smaller groups --- a one-page summary (Q-0312, review flags 4, 12 and 19). Until Q-0312 this
+% was section 4.7, with eight statements, and it stood between the step sets of the orbits and the
+% theorem on the general linear row, which it delayed (the review's "side branch"). The statements
+% moved by paper placement (records/affine/move-q0312-section-4.py; the earlier text is in git):
+% prop:similarity-stable-order-families, whose clauses (1)-(2) thm:wedge-axis spends, to the end of
+% 4.6; prop:frame-families, prop:fixed-frame-families, prop:similarity-ray-families,
+% prop:diagonal-ray-families and prop:diagonal-stable-order-families, with their proofs, to Appendix F
+% (appendix-smaller-groups.tex). One linear flow and the similarities with the Loewner order were
+% already Appendices G and H. No blueprint node changed; the table rows of the smaller groups stay in
+% tab:landscape. No material leaves the paper (the brief: a sequel is the author's decision).
+% Round-2 review (Gemini), items 8 and 9, the author's decision D8 (2026-11-03;
+% records/affine/reviews/VERIFY-round2-structure-paper.md § 9, option (b)): clauses (3)-(5) of
+% prop:similarity-stable-order-families are the node prop:similarity-stable-order-kernels, printed here
+% at the end of the paragraph "The stable order" as the subsection's one statement, with the lead
+% sentences and the comments that stood beside it in 4.6; clauses (1)-(2) stay at the end of 4.6.
+
+\subsection{Smaller groups}\label{sec:smaller-groups}
+
+A smaller group serves a use that transports fewer shapes. A comparison of an image with its rotated
+and rescaled copies, but not with its sheared ones, needs covariance under the similarities only. A
+filter applied in the fixed axes of the sampling grid, with a scale for each axis, needs covariance
+under the positive diagonal matrices only. Neither group carries every shape to every other, so
+neither supports shape selection in the sense of \S\ref{sec:landscape-uses}. Following a shape across
+scale and changing it remain, and a smaller group admits at least as many families for them in every
+column of Table~\ref{tab:landscape}, strictly more in the cells listed after it. The main gain is in the Loewner column: with the
+similarities in place of the general linear group, the classical order keeps non-Gaussian families.
+For $0 < \alpha < 2$, $b \ge 0$ and $\kappa > 0$ with $\alpha\kappa^2 - (d+1)\kappa - 1 \ge 0$, one is an
+affine Gaussian, trivial when $b = 0$, convolved with a stable kernel whose shape is pulled towards the
+isotropic one,
+\[
+  \mu_\Sigma = N(0, 2b\Sigma) * S_\alpha(\Sigma + \kappa\tr(\Sigma)I) ,
+\]
+with $N(0, C)$ the centred Gaussian law of covariance $C$. It cascades along every Loewner step and is
+covariant under the similarities, and its stable part is rotation invariant only at the multiples of
+$I$ (Proposition~\ref{prop:similarity-stable-family}(3)). The statements behind the rows of the two
+smaller groups are in Appendices~\ref{app:smaller-groups}--\ref{app:similarity}, except
+Proposition~\ref{prop:similarity-stable-order-kernels}, which ends this subsection.
+
+\paragraph{Frames.} The affine image of a product of $d$ cascades on the line cascades along the axes
+of its own frame. Only the Gaussian loses its frame, in the sense that its kernel depends on the
+aperture only through $A\Sigma A^{\tp}$ and not on the frame $A$ (Proposition~\ref{prop:frame-families}).
+Conversely, a family covariant under the positive diagonal matrices that cascades along each axis is
+a product of self-decomposable laws on the line, one per axis (Proposition~\ref{prop:fixed-frame-families}).
+Such a family gains anisotropy along its axes as fast per step as the Gaussian does and cannot turn,
+while the stable orbits turn with a smaller gain per step. Turning alone therefore does not exclude non-Gaussian kernels.
+
+\paragraph{The ray column.} Along rays a family of any group is a continuous covariant field of
+self-decomposable laws (Proposition~\ref{prop:gw-ray-families}(2)). For the similarities the orbits of
+the shapes form a simplex of dimension $d-1$, and for the positive diagonal matrices they are indexed
+by the correlation matrices. In both rows the isotropic member no longer determines the family
+(Propositions~\ref{prop:similarity-ray-families} and~\ref{prop:diagonal-ray-families}), and the
+similarity row keeps every rotation-invariant self-decomposable law as an isotropic member in every
+column, the Loewner column included.
+
+\paragraph{One linear flow.} The families covariant under one group $\{e^{sB}\}$ that cascade along
+its curve $e^{sB}\Sigma_0e^{sB^{\tp}}$ lie outside the scheme, the curve not being an order on
+$\PSD(d)$. They are the operator-self-decomposable laws with exponent $B$
+(Proposition~\ref{prop:one-parameter-families}, Appendix~\ref{app:linear-flow}), and for a contracting
+flow a rotation-invariant non-Gaussian one exists exactly when $\tr B < (d+2)\,\lambda_{\min}(\mathrm{sym}\,B)$
+(Proposition~\ref{prop:anisotropy-budget}).
+
+\paragraph{The similarities with the Loewner order.} This is the classical order with the smaller
+group, and here non-Gaussian families survive. Theorem~\ref{thm:affine-rigidity} needs the whole
+general linear group, since its proof transports one rank-deficient step to every other. A kernel is
+infinitely divisible, a Gaussian part convolved with a non-Gaussian part of exponent $\psi_\Sigma$
+(Proposition~\ref{prop:similarity-cascade-families}). What the order still controls is how far that
+part is from rotation invariance, measured by its exponent spread against the eccentricity of the
+aperture, both defined in Proposition~\ref{prop:similarity-stable-order-kernels} below: every family has
+$\operatorname{es}(\psi_\Sigma) \le 4\operatorname{ecc}(\Sigma)$ (clause (2) of that proposition). The spread
+% Round 3 (content review), E section 13: the rank-one limit named.
+is bounded uniformly in $\Sigma$ when the rank-one limit of the \Levy{} measures of the part
+(Proposition~\ref{prop:similarity-general-sandwich}(4)) stays comparable to the \Levy{} measure of the
+isotropic member (Proposition~\ref{prop:similarity-general-bounded-shape}),
+and without such a condition it can grow like a power of the eccentricity
+(Proposition~\ref{prop:similarity-degenerate-family}). When the profile of the isotropic member is
+bounded at the origin, as the \Matern{} profile is, the \Levy{} measure of every part has the same
+logarithmic rate at the origin in every direction (Propositions~\ref{prop:similarity-orbit-family}
+and~\ref{prop:similarity-general-index-zero}); away from the origin it need not be rotation invariant
+(Proposition~\ref{prop:similarity-line-family}).
+
+\paragraph{The stable order.} For the diagonal group the isotropic member must be
+operator-self-decomposable for every diagonal exponent of the cone $\mathfrak k_\alpha$, and on the
+frame's shapes the cell lies strictly between its neighbours in the diagonal row
+(Proposition~\ref{prop:diagonal-stable-order-families}). For the similarities the stable order
+$\le_\alpha$ of Proposition~\ref{prop:similarity-stable-order-families} bounds how far a kernel is from
+rotation invariance by the \emph{eccentricity} $\operatorname{ecc}(\Sigma)$ of the aperture, the ratio of
+its extreme eigenvalues. The main measure is the \emph{exponent spread} of the exponent of the
+non-Gaussian part, which is $1$ exactly for a rotation-invariant exponent. The others are condition
+numbers of the Gaussian part and of moment matrices of the \Levy{} measure. All are defined in the
+statement, and Appendix~\ref{app:similarity} studies them further. The bounds come from a sandwich:
+every definite $\Sigma$ lies between two multiples of $I$ in the order
+(Proposition~\ref{prop:similarity-stable-order-families}(1)). They are relative to the shape of
+$\Sigma$, as they must be, since the stable orbit belongs to the cell.
+
+% shared with blueprint prop:similarity-stable-order-kernels+91a1ab218491
+\begin{proposition}[similarity covariance along the stable order: the families and the shape of their kernels]\label{prop:similarity-stable-order-kernels}
+Let $d \ge 2$ and $0 < \alpha < 2$, and let $\le_\alpha$ be the stable order on $\PSD(d)$ and
+$\varepsilon_\alpha(\Sigma)$ and $t_\alpha(\Sigma)$ its thresholds, as in
+Proposition~\ref{prop:similarity-stable-order-families}(1). Write $\mathrm S(d)$ for the similarities $cQ$, $c > 0$,
+$Q \in \Orth(d)$, and $\operatorname{ecc}(\Sigma) := \lambda_{\max}(\Sigma)/\lambda_{\min}(\Sigma)$ for
+$\Sigma \in \PD(d)$. For a measure $L$ on $\RR^d \setminus \{0\}$ and $s > 0$ put
+\[
+  \psi_L(\omega) := \int(1 - \cos\langle\omega,x\rangle)\,L(dx) ,
+  \qquad
+  \mathcal M_s(L) := \int(|x|^2 \wedge s^2)\,\frac{xx^{\tp}}{|x|^2}\,L(dx) ;
+\]
+for a function $\psi \ge 0$ on $\RR^d$ let the \emph{exponent spread} $\operatorname{es}(\psi)$ be the
+infimum of the $K \ge 1$ with $\psi(Q\omega) \le K\,\psi(\omega)$ for every $Q \in \Orth(d)$ and
+$\omega \in \RR^d$, the infimum of the empty set being $\infty$; and put
+$\operatorname{cond}M := \lambda_{\max}(M)/\lambda_{\min}(M) \in [1,\infty]$ for
+$M \in \PSD(d) \setminus \{0\}$. These are the functionals of
+Proposition~\ref{prop:similarity-general-bounded-shape}.
+\begin{enumerate}
+\item \emph{(The kernels of the similarity row.)} Let $G$ be a closed subgroup of $\GL(d)$ with
+$\mathrm S(d) \subseteq G$, and $(\mu_{\Sigma,\Sigma'})$ a $(G, \le_\alpha)$-cascade family of kernels.
+Every $\mu_{\Sigma,\Sigma'}$ and every kernel from scale zero $\mu_\Sigma$ is infinitely divisible; for
+$\Sigma \in \PD(d)$, $\mu_\Sigma$ is a symmetric law with generating triplet $(C(\Sigma), L_\Sigma, 0)$;
+the family $(\mu_\Sigma)_{\Sigma \in \PD(d)}$ is covariant under the similarities,
+$(\sqrt c\,Q)_*\mu_\Sigma = \mu_{cQ\Sigma Q^{\tp}}$ for $c > 0$, $Q \in \Orth(d)$ and $\Sigma \in \PD(d)$
+(so it satisfies the hypotheses of Proposition~\ref{prop:similarity-general-sandwich}); and every
+step $\Sigma \le_\alpha \Sigma'$ in $\PD(d)$ has the infinitely divisible increment $\mu_{\Sigma,\Sigma'}$.
+For $G = \mathrm S(d)$ the isotropic members $\mu_I$ of these families are exactly the rotation-invariant
+self-decomposable laws other than $\delta_0$.
+\item \emph{(The sandwich, and the shape.)} In the setting of (1) let $\Sigma \in \PD(d)$,
+$\varepsilon := \varepsilon_\alpha(\Sigma)$ and $t := t_\alpha(\Sigma)$, and write
+$\psi_\Sigma := \psi_{L_\Sigma}$. Then $C(I) = c_0I$ with $c_0 \ge 0$, and
+\[
+  \varepsilon c_0I \le C(\Sigma) \le tc_0I , \qquad
+  (\sqrt\varepsilon\,I)_*L_I \le L_\Sigma \le (\sqrt t\,I)_*L_I , \qquad
+  \psi_I(\sqrt\varepsilon\,\omega) \le \psi_\Sigma(\omega) \le \psi_I(\sqrt t\,\omega) .
+\]
+Consequently $\operatorname{cond}C(\Sigma) \le \operatorname{ecc}(\Sigma)^{(d+\alpha)/\alpha}$ if $c_0 > 0$,
+$\operatorname{cond}\mathcal M_s(L_\Sigma) \le \operatorname{ecc}(\Sigma)^{(d+\alpha)/\alpha}$ for every $s > 0$ if
+$L_I \ne 0$, and $\operatorname{es}(\psi_\Sigma) \le 4\operatorname{ecc}(\Sigma)^{(d+\alpha)/\alpha}$. For a
+$(G, \text{Loewner})$-cascade family of kernels the same holds with $\varepsilon := \lambda_{\min}(\Sigma)$,
+$t := \lambda_{\max}(\Sigma)$ and $\operatorname{ecc}(\Sigma)$ in place of
+$\operatorname{ecc}(\Sigma)^{(d+\alpha)/\alpha}$.
+\item \emph{(The cell is not the union of its neighbours.)} Let $b > 0$ and $\kappa > 0$, and for
+$\Sigma \in \PSD(d)$ put $S_\alpha(\Sigma) := (\Sigma^{1/2})_*S_\alpha(I)$ and
+\[
+  \mu_\Sigma := N\bigl(0,\, 2b(\Sigma + \kappa\tr(\Sigma)\,I)\bigr) * S_\alpha(\Sigma) .
+\]
+Then $(\mu_\Sigma)$ is the family of kernels from scale zero of an $(\mathrm S(d), \le_\alpha)$-cascade
+family of kernels, and it is not covariant under $\GL(d)$, hence the kernels of no
+$(\GL(d), \le_\alpha)$-family (Lemma~\ref{lem:gw-kernels-from-origin}(2)). For $P \in \PSD(d)$ with $0 < \rank P < d$ there
+is no positive finite measure $\rho$ with $\mu_{I+P} = \mu_I * \rho$; so $(\mu_\Sigma)$ is the family of
+kernels from scale zero of no $(\mathrm S(d), \text{Loewner})$-cascade family.
+\end{enumerate}
+\end{proposition}
+
+A uniform bound on the anisotropy is impossible in this cell, since the stable orbit belongs to it by
+Proposition~\ref{prop:similarity-stable-order-families}(2) with exponent spread
+$\operatorname{ecc}(\Sigma)^{\alpha/2}$. The last sentence of clause (2), the bound
+$4\operatorname{ecc}(\Sigma)$, holds for every (similarities, Loewner)-cascade family, with no further
+hypothesis. The cell contains the restrictions of its two neighbours, the general linear cell of
+Proposition~\ref{prop:similarity-stable-order-families}(2) and the (similarities, Loewner) cell
+(Lemma~\ref{lem:gw-kernels-from-origin}(1)), and clause (3) gives a family in neither. Whether the
+exponent $(d+\alpha)/\alpha$ is sharp is open; the stable orbit has $\alpha/2$. The proof is in
+Appendix~\ref{app:proofs}.

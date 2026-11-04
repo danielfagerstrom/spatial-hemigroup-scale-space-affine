@@ -1,0 +1,17 @@
+Item 13
+   A.Sigma - lam^2 Sigma: 0.0
+   t(lam^2 Sigma)/t(Sigma) = 1.7  lam = 1.7
+   t(vI) - sqrt(v): 0.0
+   s=0.5: t(phi(s) I) - chi(s) = 5.55e-17
+   s=1.0: t(phi(s) I) - chi(s) = 1.11e-16
+   s=4.0: t(phi(s) I) - chi(s) = -1.78e-15
+Item 14
+   |Q Q^T - I|: 1.5543122344752192e-15  |Sigma^{1/2} Q - A|: 1.3322676295501878e-15
+   |(AQ')(AQ')^T - A A^T|: 1.1102230246251565e-16
+Item 19
+   (i) geodesic velocity spectrum vs spectrum of log M, max diff: 1.19e-10
+   (ii) |MN - NM| = 14.327; |log(M^1/2 N M^1/2) - log M - log N| = 0.476
+        tr e^{X+Y} = 43.7535  tr e^X e^Y = 46.9697
+        commuting pair: |log(M^1/2 N M^1/2) - log M - log N| = 2.22e-16
+   (iii) Lemma C.1(2) over 2000 random pairs: largest violation 1.29e-13 (<= 0 or rounding)
+   (iv) diag(4,1) then diag(4,1): [16.  1.]  then diag(1,4): [4. 4.]

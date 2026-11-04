@@ -1,0 +1,2 @@
+diagonal  : slope 0.1064  (continuum 0.1061)
+rotated 45: slope 0.1092  (continuum 0.1061)

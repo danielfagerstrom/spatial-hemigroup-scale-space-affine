@@ -1,0 +1,778 @@
+% Appendix A --- from operators to kernels, and the deferred proofs of section 4. Moved out of
+% section 4 (Q-0291, the author's decision of 2026-10-04 to shorten sections 3 and 4 by moving
+% material to appendices, as Q-0290 did for section 5; records/affine/
+% move-sections-3-4-to-appendices*.py, three passes).
+%   - lem:operators-to-kernels moved whole, with its `% shared with blueprint` marker, verbatim, with
+%     the paragraph on its converses and the one on the operator form of thm:affine-rigidity; no
+%     later argument of section 4 consumes it, and 4.1 keeps a paragraph saying what it gives.
+%   - the proofs, unchanged but for their headings, in main-text order: prop:isotropic-corner, with
+%     the two paragraphs naming what it uses (4.1); lem:affine-gauge, lem:parameter-space (4.2);
+%     thm:cascade-infinitely-divisible (4.3); lem:charfn-one-on-subspace (with the sentences on a
+%     negative-definite form of it), lem:affine-reduction, lem:single-ratio-cauchy (4.4). Section 4
+%     keeps the proofs of thm:rank-deficient-step and thm:affine-rigidity.
+%   - rem:no-covariance: the second paragraph of rem:kelker (4.5), verbatim (paper-only text).
+% Q-0309 (fix group 2; records/affine/move-q0309-flow.py, move-q0309-no-covariance.py): this is
+% Appendix A, the first of the proof appendices. It gains the proofs of lem:gw-kernels-from-origin
+% and prop:gw-ray-families, whose statements moved to section 3.1, and loses rem:no-covariance,
+% which became open problem 7 of section 5 (review flag 38).
+% Q-0312 (review flag 20; records/affine/move-q0312-corner-parameter-space.py): prop:isotropic-corner
+% with its two paragraphs, and the body of section 3.2 (lem:affine-gauge, lem:parameter-space and
+% their prose), moved here verbatim, each before its proof; the main text keeps one paragraph for
+% each. Edited after the move: the defences of [Iso]'s terminology (flags 10, 11) cut, [Iso] cited by
+% statement name.
+
+\section{Between operators and kernels, and the axiom scheme}\label{app:classical}
+
+The two lemmas of the first subsection pass between the operator form of the scheme of
+\S\ref{sec:affine-covariance} and its kernel form, in both directions. The other subsections prove the statements of
+\S\S\ref{sec:affine-covariance}--\ref{sec:affine-single-step} whose proofs the main text defers, in
+their order. Two of them also state what the main text summarizes in a paragraph: the isotropic
+corner, and the two lemmas on the parameter space.
+
+\subsection{Between operators and kernels}
+
+The axioms of the scheme are stated on operators, in Definition~\ref{def:gw-cascade-family}(1), as the
+line paper states its own (Definition~\ref{def:line-family}), and the paper works on kernels. The two
+lemmas of this subsection show that nothing is lost. Lemma~\ref{lem:operators-to-kernels} passes from a
+family of operators to its kernels, as Lemma~\ref{lem:line-representation} does on the line, and
+Lemma~\ref{lem:kernels-to-operators} passes back.
+% Round 3 (content review), B.R2 (VERIFY-round3-front-classical-paper.md; READING-wendel1952left.md,
+% READING-larsen1971introduction.md; Wendel's p. 252 re-read at the page image for this edit).
+Clause (1) of the first is, on the real space $L^1(\RR^d)$, Wendel's theorem on left centralizers
+(\sscite{wendel1952left}, Thm.~1, p.~252; for operators commuting with the translations,
+\sscite{larsen1971introduction}, Thm.~0.1.1, p.~2), with positivity and mass making the measure a
+probability measure.
+
+% shared with blueprint lem:operators-to-kernels
+\begin{lemma}[from operators to kernels in dimension $d$]\label{lem:operators-to-kernels}
+Fix $d \ge 1$. On the real space $L^1(\RR^d)$ write $T_af := f(\cdot - a)$ for $a \in \RR^d$,
+$D_Af := |\det A|^{-1}f(A^{-1}\,\cdot)$ for $A \in \GL(d)$, and, for a probability measure $\mu$
+on $\RR^d$, $(\mu * f)(x) := \int f(x - y)\,\mu(dy)$. Let $\varphi(x) := (2\pi)^{-d/2}e^{-|x|^2/2}$
+be the standard Gaussian density.
+\begin{enumerate}
+\item \emph{(Representation.)} Let $\Phi : L^1(\RR^d) \to L^1(\RR^d)$ be linear and satisfy the
+single-operator axioms of \restated{V}{Def.~3.1}{def:line-family} other than the reflection axiom (A3), read in $\RR^d$:
+(A1) $\Phi$ is
+bounded; (A2) $\Phi T_a = T_a\Phi$ for every $a \in \RR^d$; (A4) $\Phi f \ge 0$ whenever
+$f \ge 0$; (A5) $\int\Phi f = \int f$ whenever $f \ge 0$. Then there is a unique probability
+measure $\mu$ on $\RR^d$ with
+\[
+  \Phi f = \mu * f, \qquad f \in L^1(\RR^d) .
+\]
+Uniqueness holds in the strong form: if $\mu$ and $\nu$ are probability measures on $\RR^d$ with
+$\mu * \varphi = \nu * \varphi$, then $\mu = \nu$. Conversely, for every probability measure $\mu$
+on $\RR^d$ the operator $f \mapsto \mu * f$ satisfies (A1), (A2), (A4) and (A5).
+\item \emph{(Transport.)} For every probability measure $\mu$ on $\RR^d$, every $A \in \GL(d)$ and
+every $f \in L^1(\RR^d)$, $D_A(\mu * f) = (A_*\mu) * D_Af$. Consequently, for probability measures
+$\mu$ and $\nu$, the operators satisfy $D_A\,(\mu * \cdot\,)\,D_A^{-1} = \nu * \cdot$ if and only
+if $A_*\mu = \nu$.
+\item \emph{(Continuity.)} If $\mu_n$ and $\mu$ are probability measures on $\RR^d$ with
+$\mu_n * \varphi \to \mu * \varphi$ in $L^1(\RR^d)$, then $\widehat\mu_n(\omega) \to
+\widehat\mu(\omega)$ for every $\omega \in \RR^d$.
+\item \emph{(The $(G, W)$ families, and the affine family.)} Let $(G, W)$ be a wedge datum in
+dimension $d$ and $(\Phi_{\Sigma,\Sigma'})_{(\Sigma,\Sigma') \in P_W}$ a $(G, W)$-cascade family of
+operators (Definition~\ref{def:gw-cascade-family}(1)). Then the measures $\mu_{\Sigma,\Sigma'}$ that (1) gives,
+$\Phi_{\Sigma,\Sigma'}f = \mu_{\Sigma,\Sigma'} * f$, form a $(G, W)$-cascade family of kernels
+(Definition~\ref{def:gw-cascade-family}(2)). In particular, let $(\Phi_{\Sigma,\Sigma'})$ be linear
+operators on $L^1(\RR^d)$, indexed by the pairs $\Sigma \le \Sigma'$ in $\PSD(d)$, with the axioms
+of the case $(\GL(d), \text{Loewner})$: each $\Phi_{\Sigma,\Sigma'}$ satisfies (A1), (A2),
+(A4) and (A5); (A6) $\Phi_{\Sigma,\Sigma} = \mathrm{Id}$ and
+$\Phi_{\Sigma',\Sigma''}\Phi_{\Sigma,\Sigma'} = \Phi_{\Sigma,\Sigma''}$ whenever
+$\Sigma \le \Sigma' \le \Sigma''$; (A7) for every $f \in L^1(\RR^d)$ the map
+$(\Sigma,\Sigma') \mapsto \Phi_{\Sigma,\Sigma'}f$ is continuous from the set of pairs into
+$L^1(\RR^d)$; $D_A\Phi_{\Sigma,\Sigma'}D_A^{-1} = \Phi_{A\Sigma A^{\tp},\,A\Sigma'A^{\tp}}$ for
+every $A \in \GL(d)$ and every pair; and $\Phi_{0,I} \ne \mathrm{Id}$. Then the measures form an
+affine cascade family in dimension $d$ (Definition~\ref{def:affine-cascade-family}).
+\item \emph{(The isotropic family.)} Let $(\Phi_{s,t})_{0 \le s \le t}$ be linear operators on
+$L^1(\RR^d)$ with these axioms: each $\Phi_{s,t}$ satisfies (A1),
+(A2), (A4) and (A5); (A6) $\Phi_{t,t} = \mathrm{Id}$ and $\Phi_{s,t}\Phi_{r,s} = \Phi_{r,t}$ for
+$r \le s \le t$; (A7) for every $f \in L^1(\RR^d)$ the map $(s,t) \mapsto \Phi_{s,t}f$ is
+continuous from $\{0 \le s \le t\}$ into $L^1(\RR^d)$; $\Phi_{s,t}R_Q = R_Q\Phi_{s,t}$ for every
+$Q \in \Orth(d)$, with $R_Qf := f(Q^{-1}\,\cdot)$; (A8) there are increasing bijections
+$S_\lambda$ of $[0,\infty)$, $\lambda > 0$, with
+$D_\lambda\Phi_{s,t} = \Phi_{S_\lambda s,\,S_\lambda t}D_\lambda$, where
+$D_\lambda f := \lambda^{-d}f(\cdot/\lambda)$; and (ND) $\Phi_{s,t} \ne \mathrm{Id}$ whenever
+$s < t$. Then the measures $\mu_{s,t}$ that (1) gives form an isotropic cascade family in
+dimension $d$ (Definition~\ref{def:isotropic-kernel-family}).
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+Two facts are used throughout. For a probability measure $\mu$ and $f \in L^1(\RR^d)$, $\mu * f$
+is the $L^1(\RR^d)$-valued Bochner integral $\int T_yf\,\mu(dy)$: the map $y \mapsto T_yf$ is
+continuous because translation acts continuously on $L^1(\RR^d)$, and it is bounded by
+$\|f\|_1$. And with $\widehat h(\omega) := \int e^{i\langle\omega,x\rangle}h(x)\,dx$ for
+$h \in L^1(\RR^d)$, Fubini gives the pairing
+\[
+  \widehat{\mu * f}(\omega) = \widehat\mu(\omega)\,\widehat f(\omega),
+  \qquad |\widehat h(\omega)| \le \|h\|_1 ,
+\]
+and $\widehat\varphi(\omega) = e^{-|\omega|^2/2} > 0$.
+
+\emph{(1), the interchange identity.} For $f, g \in L^1(\RR^d)$, $f * g = \int f(y)\,T_yg\,dy$ as
+a Bochner integral, dominated by $|f(y)|\,\|g\|_1$. A bounded operator commutes with an
+$L^1(\RR^d)$-valued integral, so (A1) and (A2) give $\Phi(f * g) = \int f(y)\,T_y\Phi g\,dy
+= f * \Phi g$.
+
+\emph{The approximants.} Let $B_\varepsilon := \{|x| < \varepsilon\}$, $|B_\varepsilon|$ its
+volume, $\rho_\varepsilon := |B_\varepsilon|^{-1}\mathbf 1_{B_\varepsilon}$ and
+$h_\varepsilon := \Phi\rho_\varepsilon$. By (A4) and (A5), $h_\varepsilon \ge 0$ with
+$\int h_\varepsilon = 1$, so $\nu_\varepsilon := h_\varepsilon\,dx$ is a probability measure on
+$\RR^d$. For every $f$, $\|f * \rho_\varepsilon - f\|_1 \le \sup_{|y| < \varepsilon}
+\|T_yf - f\|_1 \to 0$ as $\varepsilon \downarrow 0$.
+
+\emph{Tightness.} By the interchange identity $\rho_1 * h_\varepsilon = \Phi(\rho_1 *
+\rho_\varepsilon)$, which tends to $\Phi\rho_1$ in $L^1(\RR^d)$ by (A1). Along
+$\varepsilon_n := 1/(n+1)$ the functions $\rho_1 * h_{\varepsilon_n}$ therefore have uniformly
+small tails: given $\eta > 0$ there is $R$ with $\int_{|x| > R}(\rho_1 * h_{\varepsilon_n}) < \eta$
+for every $n$ (choose $N$ with $\|\rho_1 * h_{\varepsilon_n} - \Phi\rho_1\|_1 < \eta/2$ for
+$n \ge N$, then $R$ for $\Phi\rho_1$ and the first $N$ terms). Convolution with a nonnegative
+unit-mass density carried by the unit ball moves mass by at most $1$: for $|y| > R + 1$ the
+translate $\rho_1(\cdot - y)$ is carried by $\{|x| > R\}$, so by Tonelli
+\[
+  \int_{|x| > R}(\rho_1 * h_\varepsilon)(x)\,dx
+  = \int h_\varepsilon(y)\int_{|x| > R}\rho_1(x - y)\,dx\,dy
+  \ge \nu_\varepsilon\bigl(\{|y| > R + 1\}\bigr) .
+\]
+So the sequence $(\nu_{\varepsilon_n})$ is tight, with the closed balls of radius $R + 1$ as
+compacts.
+
+\emph{The limit.} By Prokhorov's theorem a subsequence $\nu_{\varepsilon_{n_k}}$ converges weakly
+to a probability measure $\mu$ on $\RR^d$.
+
+\emph{Identification.} Let $\Psi \in L^\infty(\RR^d)$, acting on $L^1(\RR^d)$ by
+$\Psi(h) := \int\Psi h$, and $f \in L^1(\RR^d)$. The map $y \mapsto \Psi(T_yf)$ is continuous and
+bounded by $\|\Psi\|_\infty\|f\|_1$, hence a test function for weak convergence. Since
+$f * h_\varepsilon = \int h_\varepsilon(y)\,T_yf\,dy$ and $\Psi$ commutes with the integral,
+\[
+  \Psi(f * h_{\varepsilon_{n_k}}) = \int\Psi(T_yf)\,\nu_{\varepsilon_{n_k}}(dy)
+  \ \xrightarrow{\ k \to \infty\ }\ \int\Psi(T_yf)\,\mu(dy) = \Psi(\mu * f) .
+\]
+On the other hand $f * h_\varepsilon = \Phi(f * \rho_\varepsilon) \to \Phi f$ in $L^1(\RR^d)$, by
+the interchange identity and (A1). Hence $\Psi(\Phi f - \mu * f) = 0$ for every $\Psi$; taking
+$\Psi$ the sign of $\Phi f - \mu * f$ gives $\Phi f = \mu * f$.
+
+\emph{Uniqueness.} If $\mu * \varphi = \nu * \varphi$, the pairing gives
+$\widehat\mu(\omega)\,\widehat\varphi(\omega) = \widehat\nu(\omega)\,\widehat\varphi(\omega)$, so
+$\widehat\mu = \widehat\nu$ because $\widehat\varphi > 0$, and $\mu = \nu$ because a finite measure
+on $\RR^d$ is determined by its Fourier transform. In particular two measures representing the
+same operator agree.
+
+\emph{Converse.} For a probability measure $\mu$, $\|\mu * f\|_1 \le \|f\|_1$ by Minkowski's
+integral inequality (A1); $T_a(\mu * f) = \mu * T_af$, both being
+$x \mapsto \int f(x - a - y)\,\mu(dy)$ (A2); $\mu * f \ge 0$ when $f \ge 0$ (A4); and
+$\int\mu * f = \int f$ for $f \ge 0$ by Tonelli (A5).
+
+\emph{(2).} For $x \in \RR^d$, substituting $z = Ay$,
+\[
+  \bigl((A_*\mu) * D_Af\bigr)(x) = \int |\det A|^{-1}f\bigl(A^{-1}(x - z)\bigr)\,(A_*\mu)(dz)
+  = |\det A|^{-1}\int f(A^{-1}x - y)\,\mu(dy) = D_A(\mu * f)(x) .
+\]
+$D_A$ is invertible on $L^1(\RR^d)$ with inverse $D_{A^{-1}}$, so applying the identity to
+$D_A^{-1}g$ gives $D_A\,(\mu * D_A^{-1}g) = (A_*\mu) * g$ for every $g$: the operator
+$D_A\,(\mu * \cdot\,)\,D_A^{-1}$ is convolution by $A_*\mu$. It is convolution by $\nu$ if and
+only if $A_*\mu = \nu$, by the uniqueness clause of (1).
+
+\emph{(3).} By the pairing, $|\widehat\mu_n(\omega) - \widehat\mu(\omega)|\,\widehat\varphi(\omega)
+\le \|\mu_n * \varphi - \mu * \varphi\|_1 \to 0$; divide by $\widehat\varphi(\omega) > 0$. The test
+density must have a zero-free transform, which is why the indicator of a ball would not do.
+
+\emph{(4).} By (1), each $\Phi_{\Sigma,\Sigma'}$ is convolution by a unique probability measure
+$\mu_{\Sigma,\Sigma'}$. The four axioms of the kernel form follow.
+\begin{itemize}
+\item (K1): $\Phi_{\Sigma,\Sigma} = \mathrm{Id}$ is convolution by $\delta_0$, so
+$\mu_{\Sigma,\Sigma} = \delta_0$ by uniqueness. By Fubini
+$\mu_{\Sigma',\Sigma''} * (\mu_{\Sigma,\Sigma'} * f) = (\mu_{\Sigma',\Sigma''} *
+\mu_{\Sigma,\Sigma'}) * f$, so the cascade says that $\mu_{\Sigma,\Sigma''}$ and
+$\mu_{\Sigma',\Sigma''} * \mu_{\Sigma,\Sigma'}$ represent the same operator, and they are equal by
+uniqueness.
+\item (K2): $P_W$ is a subset of a finite-dimensional space, so continuity on it is sequential. If
+$(\Sigma_n,\Sigma'_n) \to (\Sigma,\Sigma')$ in $P_W$, continuity at $f = \varphi$ gives
+$\mu_{\Sigma_n,\Sigma'_n} * \varphi \to \mu_{\Sigma,\Sigma'} * \varphi$ in $L^1(\RR^d)$, and (3)
+gives $\widehat\mu_{\Sigma_n,\Sigma'_n}(\omega) \to \widehat\mu_{\Sigma,\Sigma'}(\omega)$.
+\item (K3): for $A \in G$, $A\cdot\Sigma \le_W A\cdot\Sigma'$ because $W$ is $G$-invariant, so the
+right-hand side of the covariance axiom is a member of the family, and (2) with
+$\mu = \mu_{\Sigma,\Sigma'}$ and $\nu = \mu_{A\cdot\Sigma,A\cdot\Sigma'}$ turns the axiom into
+$A_*\mu_{\Sigma,\Sigma'} = \mu_{A\cdot\Sigma,\,A\cdot\Sigma'}$.
+\item (K4): if $\mu_{0,I} = \delta_0$ then $\Phi_{0,I}f = \delta_0 * f = f$ for every $f$, against
+$\Phi_{0,I} \ne \mathrm{Id}$.
+\end{itemize}
+The pair $(\GL(d), \text{Loewner})$ is a wedge
+datum: $\GL(d)$ is closed in itself and contains the dilations, and the Loewner order is
+$\GL(d)$-invariant, since $A(\Sigma' - \Sigma)A^{\tp}$ is positive semidefinite with
+$\Sigma' - \Sigma$, and contains the rays, since $c'\Sigma - c\Sigma = (c' - c)\Sigma$; its kernel
+form is Definition~\ref{def:affine-cascade-family}.
+
+\emph{(5).} The same argument on the parameter set $\{0 \le s \le t\}$ gives (I1) from (A6) and
+(I2) from (A7). (I3): $|\det Q| = 1$, so $R_Q = D_Q$, and the commutation reads
+$D_Q\Phi_{s,t}D_Q^{-1} = \Phi_{s,t}$; (2) with $\nu = \mu = \mu_{s,t}$ gives
+$Q_*\mu_{s,t} = \mu_{s,t}$. (I4): $D_\lambda = D_{\lambda I}$, and (A8) reads
+$D_{\lambda I}\Phi_{s,t}D_{\lambda I}^{-1} = \Phi_{S_\lambda s,\,S_\lambda t}$; (2) gives
+$(\lambda I)_*\mu_{s,t} = \mu_{S_\lambda s,\,S_\lambda t}$. (ND): if $\mu_{s,t} = \delta_0$ with
+$s < t$ then $\Phi_{s,t} = \mathrm{Id}$, against (ND).
+\end{proof}
+
+The converses of (4) and (5) hold as well, and the next lemma states them: convolution
+with the kernels of a $(G, W)$-cascade family is a $(G, W)$-cascade family of operators, and
+convolution with an isotropic cascade family satisfies the operator axioms of (5). The step
+that is not formal is continuity in $L^1$, which (K2) gives only pointwise in the frequency.
+Clause (1) of the lemma supplies it by smoothing with a Gaussian, without weak convergence.
+
+% shared with blueprint lem:kernels-to-operators
+\begin{lemma}[from kernels to operators in dimension $d$]\label{lem:kernels-to-operators}
+Fix $d \ge 1$, and use the notation of Lemma~\ref{lem:operators-to-kernels}.
+\begin{enumerate}
+\item \emph{(Continuity.)} If $\mu_n$ and $\mu$ are probability measures on $\RR^d$ with
+$\widehat\mu_n(\omega) \to \widehat\mu(\omega)$ for every $\omega \in \RR^d$, then
+$\mu_n * f \to \mu * f$ in $L^1(\RR^d)$ for every $f \in L^1(\RR^d)$.
+\item \emph{(The $(G, W)$ families.)} Let $(G, W)$ be a wedge datum in dimension $d$ and
+$(\mu_{\Sigma,\Sigma'})_{(\Sigma,\Sigma') \in P_W}$ a $(G, W)$-cascade family of kernels
+(Definition~\ref{def:gw-cascade-family}(2)). Then the operators $\Phi_{\Sigma,\Sigma'}f := \mu_{\Sigma,\Sigma'} * f$
+on $L^1(\RR^d)$ form a $(G, W)$-cascade family of operators (Definition~\ref{def:gw-cascade-family}(1)), and the
+measures that Lemma~\ref{lem:operators-to-kernels}(1) gives for them are the $\mu_{\Sigma,\Sigma'}$. So, for
+every wedge datum, convolution is a one-to-one correspondence between the $(G, W)$-cascade families of
+kernels and those of operators, and its inverse is the passage of
+Lemma~\ref{lem:operators-to-kernels}(4).
+\item \emph{(The isotropic family.)} Let $(\mu_{s,t})_{0 \le s \le t}$ be an isotropic cascade family
+in dimension $d$ (Definition~\ref{def:isotropic-kernel-family}). Then the operators $\Phi_{s,t}f := \mu_{s,t} * f$
+on $L^1(\RR^d)$ satisfy the axioms of Lemma~\ref{lem:operators-to-kernels}(5), with the bijections
+$S_\lambda$ of (I4) in (A8), and the measures that Lemma~\ref{lem:operators-to-kernels}(1) gives for them are
+the $\mu_{s,t}$.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+For $\sigma > 0$ write $\varphi_\sigma(x) := \sigma^{-d}\varphi(x/\sigma)$, the centred Gaussian density
+with covariance $\sigma^2I$. For a probability measure $\nu$ and $f, g \in L^1(\RR^d)$ three facts are
+used, each by Fubini's theorem: $\|\nu * f\|_1 \le \|f\|_1$; $\|g * f\|_1 \le \|g\|_1\|f\|_1$; and
+$\nu * (g * f) = (\nu * g) * f$, where $\nu * g$ is the integrable function
+$x \mapsto \int g(x - y)\,\nu(dy)$.
+
+\emph{(1), the smoothed measures.} The Gaussian integral gives, for every $z \in \RR^d$,
+\[
+  \varphi_\sigma(z) = (2\pi)^{-d}\int e^{-i\langle\omega,z\rangle}e^{-\sigma^2|\omega|^2/2}\,d\omega .
+\]
+Put $z = x - y$ and integrate in $\nu(dy)$. The integrand is bounded by $e^{-\sigma^2|\omega|^2/2}$,
+which is integrable for $d\omega \otimes \nu$, so Fubini's theorem gives, for every probability
+measure $\nu$ and every $x \in \RR^d$,
+\[
+  (\nu * \varphi_\sigma)(x) = (2\pi)^{-d}\int e^{-i\langle\omega,x\rangle}\,\widehat\nu(\omega)\,
+  e^{-\sigma^2|\omega|^2/2}\,d\omega .
+\]
+Put $h_n := \mu_n * \varphi_\sigma$ and $h := \mu * \varphi_\sigma$. Since $|\widehat\mu_n| \le 1$ and
+$\widehat\mu_n \to \widehat\mu$ pointwise, dominated convergence gives $h_n(x) \to h(x)$ for every
+$x$. The $h_n$ and $h$ are nonnegative with integral $1$ (Tonelli), so $\int(h_n - h) = 0$ and
+\[
+  \|h_n - h\|_1 = 2\int(h - h_n)^+ \xrightarrow{\ n \to \infty\ } 0 ,
+\]
+by dominated convergence again, since $0 \le (h - h_n)^+ \le h$ and $(h - h_n)^+ \to 0$ pointwise.
+
+\emph{(1), the approximation.} By Minkowski's integral inequality and the substitution $y = \sigma z$,
+\[
+  \|\varphi_\sigma * f - f\|_1 \le \int\varphi_\sigma(y)\,\|T_yf - f\|_1\,dy
+  = \int\varphi(z)\,\|T_{\sigma z}f - f\|_1\,dz ,
+\]
+which tends to $0$ as $\sigma \downarrow 0$ by dominated convergence: the integrand is bounded by
+$2\|f\|_1\varphi(z)$ and tends to $0$ pointwise, translation being continuous on $L^1(\RR^d)$. Now
+split $f = (f - \varphi_\sigma * f) + \varphi_\sigma * f$. By the three facts,
+$\mu_n * (\varphi_\sigma * f) = h_n * f$ and $\mu * (\varphi_\sigma * f) = h * f$, so
+\[
+  \|\mu_n * f - \mu * f\|_1 \le 2\,\|f - \varphi_\sigma * f\|_1 + \|(h_n - h) * f\|_1
+  \le 2\,\|f - \varphi_\sigma * f\|_1 + \|h_n - h\|_1\,\|f\|_1 .
+\]
+Given $\varepsilon > 0$, choose $\sigma$ so that the first term is below $\varepsilon$, and then $n_0$ so
+that the second is below $\varepsilon$ for $n \ge n_0$.
+
+\emph{(2).} Each $\Phi_{\Sigma,\Sigma'}$ is linear and satisfies (A1), (A2), (A4) and (A5) by the
+converse in Lemma~\ref{lem:operators-to-kernels}(1). \emph{Cascade (A6).} $\Phi_{\Sigma,\Sigma} = \delta_0 * \cdot
+= \mathrm{Id}$ by (K1), and for $\Sigma \le_W \Sigma' \le_W \Sigma''$, by the associativity of
+convolution (Fubini) and (K1),
+$\Phi_{\Sigma',\Sigma''}\Phi_{\Sigma,\Sigma'}f = \mu_{\Sigma',\Sigma''} * (\mu_{\Sigma,\Sigma'} * f)
+= (\mu_{\Sigma',\Sigma''} * \mu_{\Sigma,\Sigma'}) * f = \Phi_{\Sigma,\Sigma''}f$.
+\emph{Continuity (A7).} $P_W$ is a subset of the finite-dimensional space of pairs of symmetric matrices,
+so continuity on it is sequential. If $(\Sigma_n,\Sigma'_n) \to (\Sigma,\Sigma')$ in $P_W$, (K2) gives
+$\widehat\mu_{\Sigma_n,\Sigma'_n}(\omega) \to \widehat\mu_{\Sigma,\Sigma'}(\omega)$ for every $\omega$,
+and (1) gives $\Phi_{\Sigma_n,\Sigma'_n}f \to \Phi_{\Sigma,\Sigma'}f$ in $L^1(\RR^d)$ for every $f$.
+\emph{(ND).} If $\Phi_{0,I} = \mathrm{Id}$, then $\mu_{0,I}$ and $\delta_0$ represent the same
+operator, so $\mu_{0,I} = \delta_0$ by the uniqueness clause of Lemma~\ref{lem:operators-to-kernels}(1),
+against (K4). \emph{Covariance.} For $A \in G$ and $(\Sigma,\Sigma') \in P_W$, the pair
+$(A\cdot\Sigma, A\cdot\Sigma')$ lies in $P_W$ because $W$ is $G$-invariant, and (K3) says
+$A_*\mu_{\Sigma,\Sigma'} = \mu_{A\cdot\Sigma,\,A\cdot\Sigma'}$; by Lemma~\ref{lem:operators-to-kernels}(2)
+this is $D_A\Phi_{\Sigma,\Sigma'}D_A^{-1} = \Phi_{A\cdot\Sigma,\,A\cdot\Sigma'}$. \emph{The measures.}
+$\Phi_{\Sigma,\Sigma'}$ is convolution by $\mu_{\Sigma,\Sigma'}$, so by the uniqueness clause of
+Lemma~\ref{lem:operators-to-kernels}(1) the measure that clause gives is $\mu_{\Sigma,\Sigma'}$. \emph{The
+correspondence.} Kernels to operators to kernels returns the kernels, by the last step. Operators to
+kernels to operators returns the operators, since the measures of
+Lemma~\ref{lem:operators-to-kernels}(4) satisfy $\Phi_{\Sigma,\Sigma'}f = \mu_{\Sigma,\Sigma'} * f$.
+
+\emph{(3).} The same argument on the parameter set $\{0 \le s \le t\}$, a subset of $\RR^2$, gives the
+four single-operator axioms, (A6) from (I1), (A7) from (I2) and (1), and (ND) at every $s < t$ from
+(ND). For $Q \in \Orth(d)$, $|\det Q| = 1$, so $D_Q = R_Q$, and (I3) with
+Lemma~\ref{lem:operators-to-kernels}(2) gives $R_Q\Phi_{s,t}R_Q^{-1} = \Phi_{s,t}$, that is
+$\Phi_{s,t}R_Q = R_Q\Phi_{s,t}$. For $\lambda > 0$, $D_\lambda = D_{\lambda I}$, and (I4) with
+Lemma~\ref{lem:operators-to-kernels}(2) gives $D_\lambda\Phi_{s,t}D_\lambda^{-1} =
+\Phi_{S_\lambda s,\,S_\lambda t}$, which is (A8). The measures are the $\mu_{s,t}$, as in (2).
+\end{proof}
+
+The sufficiency statements of the paper on $(G, W)$-cascade families and on isotropic families are
+stated on kernels, and by Lemma~\ref{lem:kernels-to-operators} each holds on operators as well. The
+rigidity on operators is Theorem~\ref{thm:affine-rigidity-operators}. The families of one linear flow
+(Proposition~\ref{prop:one-parameter-families}) lie outside the scheme and are stated on kernels only.
+
+\subsection{A family is its kernels from scale zero}\label{app:classical-kernels}
+
+% Round 3 (report B, part 3 (vii); VERIFY-round3-front-classical-paper.md, B.x): the proof of record
+% transcribed verbatim, so that clause (3) reads the G-invariance of W for (K3), as the blueprint does.
+\begin{proof}[Proof of Lemma~\ref{lem:gw-kernels-from-origin}]
+\emph{(1).} $P_W \subseteq P_{W'}$, and a triple $\Sigma \le_W \Sigma' \le_W \Sigma''$ is a triple for
+$W'$, so (K1) holds on $P_W$; (K2) is the restriction of a continuous map to the subspace $P_W$; (K3)
+holds for every $A \in G \subseteq G'$, and $(A\cdot\Sigma, A\cdot\Sigma') \in P_W$ by the
+$G$-invariance of $W$; and $(0, I) \in P_W$, so (K4) is the same condition.
+
+\emph{(2).} (a) is (K1) at the pair $(0,0)$ and (K4). (b) is (K3) at the pair $(0, \Sigma)$, as
+$A\cdot 0 = 0$. (c): $0 \le_W \Sigma$ for every $\Sigma$, since $W$ contains the rays, and
+$\Sigma \mapsto (0, \Sigma)$ is continuous from $\PSD(d)$ into $P_W$; compose with (K2). (d) is (K1) at
+$0 \le_W \Sigma \le_W \Sigma'$. If $\mu_{\Sigma'} = \mu_\Sigma * \rho$, then
+$\widehat\rho = \widehat\mu_{\Sigma'}/\widehat\mu_\Sigma$ wherever $\widehat\mu_\Sigma \ne 0$, which is
+everywhere when $\widehat\mu_\Sigma$ has no zero; so $\rho$ is determined by its transform.
+
+\emph{(3).} By the last sentence, $\mu_{\Sigma,\Sigma'}$ is well defined and its transform is the
+quotient $q_{\Sigma,\Sigma'} := \widehat\mu_{\Sigma'}/\widehat\mu_\Sigma$. At $\Sigma = 0$ the quotient is
+$\widehat\mu_{\Sigma'}$, by (a), so $\mu_{0,\Sigma'} = \mu_{\Sigma'}$. (K1): $q_{\Sigma,\Sigma} = 1$, and
+$q_{\Sigma',\Sigma''}\,q_{\Sigma,\Sigma'} = q_{\Sigma,\Sigma''}$ whenever $\Sigma \le_W \Sigma' \le_W \Sigma''$;
+uniqueness of the transform turns these into $\mu_{\Sigma,\Sigma} = \delta_0$ and the cascade identity.
+(K2): by (c) the numerator and the denominator of $q_{\Sigma,\Sigma'}(\omega)$ are continuous on
+$\PSD(d) \times \PSD(d)$ and the denominator has no zero, so the quotient is continuous there, and in
+particular on $P_W$. (K3): for $A \in G$, $(A\cdot\Sigma, A\cdot\Sigma') \in P_W$ by $G$-invariance, and by
+(b) the transform of $A_*\mu_{\Sigma,\Sigma'}$ at $\omega$ is
+$q_{\Sigma,\Sigma'}(A^{\tp}\omega) = \widehat\mu_{A\cdot\Sigma'}(\omega)/\widehat\mu_{A\cdot\Sigma}(\omega)
+= q_{A\cdot\Sigma,A\cdot\Sigma'}(\omega)$. (K4): $\mu_{0,I} = \mu_I \ne \delta_0$.
+\end{proof}
+
+
+\subsection{The isotropic corner}
+
+The isotropic paper states the isotropic theory with its own definition,
+Definition~\ref{def:isotropic-kernel-family}. That definition differs from the scheme's isotropic
+corner, read on the multiples of $I$, in two ways. It leaves the relabelling $S_\lambda$ of the
+scales free, where the scheme lets the dilation $\lambda I$ act on the multiples of $I$ by
+$s \mapsto \lambda^2 s$. And it requires nondegeneracy at every pair, where the scheme requires it
+at $(0, I)$ alone. The next proposition shows that, when $G$ contains $\Orth(d)$, neither difference
+matters on the slice: the two theories
+agree up to a change of the scale coordinate, which is unique up to a constant. The new coordinate
+is $\varphi = \chi^2$, where $\chi$ is the coordinate of \prog{V}{Prop.~6.6} in which the dilations act
+by multiplication, $\chi(S_\lambda t) = \lambda\,\chi(t)$. In \prog{V}{Rem.~6.7} $\varphi$ is the
+\emph{variance gauge}: in it the Gaussian member is a one-parameter semigroup, and its scale is
+proportional to the variance. The proposition calls the restriction of a family to the pairs
+$(sI, tI)$ its \emph{slice}. Its proof, at the end of this subsection, reads an isotropic family
+through its marginal family on a line (Lemma~\ref{lem:isotropic-marginal-family}) and builds the
+families it needs from the ray order (Proposition~\ref{prop:gw-ray-families}).
+% CHANGED Q-0281 wave 2: blind review W2C-2: the list of what the proposition uses follows the
+% wave-2 proof (no longer prop:similarity-ray-families(3)).
+
+% shared with blueprint prop:isotropic-corner+b1800e754ff1
+\begin{proposition}[the slice of the isotropic corner is the isotropic theory]\label{prop:isotropic-corner}
+Let $d \ge 1$, and let $\mathrm S(d) := \{cQ : c > 0,\ Q \in \Orth(d)\}$ be the similarities. Let
+$(G, W)$ be a wedge datum in dimension $d$ (Definition~\ref{def:gw-cascade-family}) and
+$(\nu_{\Sigma,\Sigma'})$ a $(G, W)$-cascade family of kernels, with kernels from scale zero
+$\nu_\Sigma := \nu_{0,\Sigma}$. Since $W$ contains the rays, $(sI, tI) \in P_W$ whenever
+$0 \le s \le t$; the family $(\nu_{sI,tI})_{0 \le s \le t}$ is the \emph{slice} of
+$(\nu_{\Sigma,\Sigma'})$.
+\begin{enumerate}
+\item \emph{(The slice is an isotropic family.)} If $\Orth(d) \subseteq G$, the slice of every
+$(G, W)$-cascade family of kernels is an isotropic cascade family in dimension $d$
+(Definition~\ref{def:isotropic-kernel-family}) with the dilation action $S_\lambda s = \lambda^2 s$. In
+particular $\nu_{sI,tI} \ne \delta_0$ whenever $s < t$.
+\item \emph{(Every isotropic family is a slice, in the variance gauge.)} Let $(\mu_{s,t})$ be an
+isotropic cascade family in dimension $d$ with dilation action $(S_\lambda)$. There is a gauge
+$\chi$ with $\chi(S_\lambda t) = \lambda\,\chi(t)$ for every $\lambda > 0$ and $t \ge 0$; put
+$\varphi := \chi^2$, a gauge. Then there is exactly one $(\GL(d), \text{rays})$-cascade family of
+kernels $(\nu_{\Sigma,\Sigma'})$ with
+\[
+  \mu_{s,t} = \nu_{\varphi(s)I,\,\varphi(t)I}, \qquad 0 \le s \le t ,
+\]
+and its restriction to the datum $(\mathrm S(d), \text{rays})$ is an $(\mathrm S(d), \text{rays})$-cascade family of kernels
+with the same property.
+\item \emph{(The change of gauge is unique up to a constant.)} In the setting of (2), let $\psi$ be
+a gauge, $(G, W)$ a wedge datum, and $(\nu'_{\Sigma,\Sigma'})$ a
+$(G, W)$-cascade family of kernels with $\mu_{s,t} = \nu'_{\psi(s)I,\,\psi(t)I}$ for
+$0 \le s \le t$. Then $\psi = c\,\varphi$ for some $c > 0$. Conversely, for every $c > 0$ the family
+$(\nu_{c^{-1}\Sigma,\,c^{-1}\Sigma'})$ is a $(\GL(d), \text{rays})$-cascade family of kernels with
+this property for $\psi = c\,\varphi$.
+\item \emph{(What the slice determines.)} A $(\GL(d), \text{rays})$-cascade family of kernels is
+determined by its slice. For $d \ge 2$ an $(\mathrm S(d), \text{rays})$-cascade family of kernels
+is not: the slice of every such family is the slice of two such families whose kernels from scale zero differ at every $\Sigma \in \PD(d)$ that is not a multiple of $I$.
+\end{enumerate}
+\end{proposition}
+
+Clause (1) says that, when $G$ contains $\Orth(d)$, nondegeneracy at the one pair $(0, I)$ gives
+it at every pair of the slice. Off the slice it does not follow. For $d \ge 2$ the similarities
+with the ray order admit a family whose kernel from scale zero at $\Sigma$ is
+$((\det\Sigma)^{1/(2d)}I)_*m$, for a rotation-invariant
+self-decomposable law $m \ne \delta_0$ (Proposition~\ref{prop:similarity-ray-families}(3)). Its
+kernels at the singular
+$\Sigma$ are all $\delta_0$, so its increments along the ray of such a $\Sigma$ are trivial, and
+(ND) at every pair would exclude it. Clauses (2) and (3) say that the free gauge costs nothing:
+the change of coordinate is the variance gauge $\varphi = \chi^2$, with $\chi$ taken from the
+marginal family on a line (Lemma~\ref{lem:isotropic-marginal-family}). Clause (4) says what the corner adds to its slice:
+nothing for $\GL(d)$, the shapes of the apertures for the similarities.
+
+% CHANGED Q-0281 wave 2: blind review W2C-2: the lead and the next two paragraphs follow the
+% wave-2 proof, which builds the shape-blind family through prop:gw-ray-families(2), proves S(d)
+% closed in place, and reads lem:parameter-space(2), instead of prop:similarity-ray-families(3).
+What the proof takes from the ray order is this. By
+Proposition~\ref{prop:gw-ray-families}(3), a $(\GL(d), \text{rays})$-cascade family is determined by its
+kernel at $I$, and for every rotation-invariant self-decomposable law $m \ne \delta_0$ there is one
+with kernel $m$ at $I$, whose kernels from scale zero are $\nu_\Sigma = (\Sigma^{1/2})_*m$. By
+Proposition~\ref{prop:gw-ray-families}(2), for a wedge datum with the ray order the kernels from scale zero of a family are self-decomposable, and every map $\Sigma \mapsto \nu_\Sigma$ into
+self-decomposable laws with $\nu_0 = \delta_0$, $\nu_I \ne \delta_0$, covariance under the group and
+transforms continuous in $\Sigma$ is the family of kernels from scale zero of exactly one family. For
+the similarities $\Sigma \mapsto ((\det\Sigma)^{1/(2d)}I)_*m$ is such a map, and it gives the second
+family of clause (4). By Lemma~\ref{lem:parameter-space}(2), a rotation-invariant law other than
+$\delta_0$ has the orthogonal group as its stabilizer, which is what separates the two families off
+the multiples of $I$.
+
+The proof also uses three elementary facts. The transform of a self-decomposable law has no zero, and
+a linear image $A_*\mu$ of a self-decomposable law is self-decomposable, with the residuals
+$A_*\rho_c$ (Proposition~\ref{prop:gw-ray-families}(1)). When
+$\widehat\nu_\Sigma$ has no zero, $\nu_{\Sigma'} = \nu_\Sigma * \rho$ determines
+$\widehat\rho = \widehat\nu_{\Sigma'}/\widehat\nu_\Sigma$, so the increment $\nu_{\Sigma,\Sigma'}$
+is the only such law $\rho$ (Lemma~\ref{lem:gw-kernels-from-origin}(2)). And a family of the general
+linear group with the ray order is also one of the similarities, with the same kernels, since (K1),
+(K2) and (K4) do not involve the group and (K3) for the similarities is part of (K3) for $\GL(d)$; the
+similarities with the ray order are a wedge datum, as the proof shows.
+
+\begin{proof}[Proof of Proposition~\ref{prop:isotropic-corner} (sketch)]
+A fact used twice is the argument of \prog{V}{Lem.~6.3}: \emph{if a law $m$ on $\RR^d$ satisfies
+$(aI)_*m = m$ for one $a > 0$ with $a \ne 1$, then $m = \delta_0$.} Indeed
+$\widehat m(\omega) = \widehat m(a^n\omega)$ for every $n \in \ZZ$, and letting $a^n \to 0$ gives
+$\widehat m(\omega) = 1$.
+
+\emph{(1).} Since $W$ contains the rays and $Q \cdot (sI) = sI$ for $Q \in \Orth(d)$, (K1), (K2)
+and (K3) of Definition~\ref{def:gw-cascade-family} give (I1), (I2) and (I3) of
+Definition~\ref{def:isotropic-kernel-family}. For
+$\lambda > 0$, $(\lambda I) \cdot (sI) = \lambda^2 s\,I$, so (K3) at $\lambda I$ is (I4) with
+$S_\lambda s = \lambda^2 s$. For (ND), (K3) with $A = \sqrt t\,I$ gives
+$\nu_{tI} = (\sqrt t\,I)_*\nu_I$. If $\nu_{sI,tI} = \delta_0$ with $s < t$, (K1) gives
+$\nu_{tI} = \nu_{sI}$. For $s = 0$ this makes $\nu_I = \delta_0$. For $s > 0$ it makes $\nu_I$
+invariant under $(\sqrt{s/t}\,I)_*$, and the fact gives $\nu_I = \delta_0$. Both contradict (K4).
+
+\emph{(2).} The marginal family of Lemma~\ref{lem:isotropic-marginal-family}, the images
+$\kappa_{s,t}$ of the $\mu_{s,t}$ on a line through the origin acting by $f \mapsto \kappa_{s,t} * f$,
+satisfies (A1)--(A8) and (ND) with the same $(S_\lambda)$. \prog{V}{Prop.~6.6}, restated in the part used:
+\emph{for such a family, $\ell(\lambda) := S_\lambda 1$ is a continuous strictly increasing bijection of
+$(0,\infty)$ with $\ell(1) = 1$, and $\chi := \ell^{-1}$, with $\chi(0) := 0$, is an increasing bijection of
+$[0,\infty)$ with $\chi(S_\lambda t) = \lambda\,\chi(t)$.} With $\theta := \varphi^{-1}$ this gives
+$S_\lambda\theta(u) = \theta(\lambda^2 u)$. Put $m := \mu_{0,\theta(1)}$. By (I3), (I4) and (ND),
+$m$ is rotation invariant, not $\delta_0$, and $\mu_{0,\theta(s)} = (\sqrt s\,I)_*m$ for $s \ge 0$.
+By (I1) it is self-decomposable, \ref{eq:self-decomposable}, with the residuals
+$\mu_{\theta(c^2),\theta(1)}$. Let $(\nu_{\Sigma,\Sigma'})$ be the $(\GL(d), \text{rays})$-cascade
+family with kernel $m$ at $I$. Then $\nu_{uI} = \mu_{0,\theta(u)}$, and since the transforms of its
+kernels from scale zero have no zero, (I1) and the uniqueness of increments
+(Lemma~\ref{lem:gw-kernels-from-origin}(2)) give
+$\nu_{uI,vI} = \mu_{\theta(u),\theta(v)}$ for $u \le v$. With $u = \varphi(s)$ and $v = \varphi(t)$
+this is the claim. A second such family has the same kernel $m$ at $I$, hence is the same family.
+For every $d \ge 1$ the similarities $\mathrm S(d)$ form a subgroup containing the dilations, closed
+in $\GL(d)$, as an invertible limit $A$ of similarities has $AA^{\tp} = kI$ with $k > 0$; so
+$(\mathrm S(d), \text{rays})$ is a wedge datum, the ray order being a partial order that contains the rays and is invariant
+under $\GL(d)$.
+% CHANGED Q-0281 wave 2: blind review W2C-3: the wedge datum moved here from (4), mirroring the blueprint;
+% the two \ref's added in (1) and (2) name nodes the blueprint proof \uses (lem:gw-scheme-claims is
+% not printed in this paper).
+As $\mathrm S(d) \subseteq \GL(d)$, (K1), (K2) and (K4) do not involve the group, and (K3) for
+$\mathrm S(d)$ is part of (K3) for $\GL(d)$, the family is also an
+$(\mathrm S(d), \text{rays})$-cascade family, with the same kernels.
+
+\emph{(3).} Put $m' := \nu'_I$, which is not $\delta_0$ by (K4). As in (1),
+$\nu'_{uI} = (\sqrt u\,I)_*m'$. At the pairs $(0, t)$ the two families give
+$(\sqrt{\psi(t)}\,I)_*m' = \mu_{0,t} = (\sqrt{\varphi(t)}\,I)_*m$, and at $t_0 := \theta(1)$ this
+reads $m = (\sqrt{\psi(t_0)}\,I)_*m'$. So $m'$ is invariant under
+$((\varphi(t)\psi(t_0)/\psi(t))^{1/2}I)_*$ for every $t > 0$, and the fact gives
+$\psi = \psi(t_0)\,\varphi$. The converse is a check of (K1)--(K4) for
+$\nu_{c^{-1}\Sigma,\,c^{-1}\Sigma'}$, the ray order being invariant under $\Sigma \mapsto c^{-1}\Sigma$.
+
+\emph{(4).} Two $(\GL(d), \text{rays})$-cascade families with the same slice have the same kernel
+at $I$, and are equal. Let $d \ge 2$, and let $(\nu_{\Sigma,\Sigma'})$ be an
+$(\mathrm S(d), \text{rays})$-cascade family and $m := \nu_I$. It is rotation invariant,
+self-decomposable and not $\delta_0$, and $\nu_{sI} = (\sqrt s\,I)_*m$. Proposition~\ref{prop:gw-ray-families}
+gives two families with the kernels from scale zero $(\Sigma^{1/2})_*m$ and
+$((\det\Sigma)^{1/(2d)}I)_*m$. They have the kernel $(\sqrt s\,I)_*m$ at $sI$ as well, and by the
+uniqueness of increments the three slices agree. If the two kernels agree at $\Sigma \in \PD(d)$,
+then $v^{-1}\Sigma^{1/2}$, with $v := (\det\Sigma)^{1/(2d)}$, fixes $m$, so it is orthogonal by
+Lemma~\ref{lem:parameter-space}(2), and $\Sigma = v^2I$.
+\end{proof}
+
+\subsection{The parameter space}
+
+The two lemmas of \S\ref{sec:parameter-space} say why the kernels of the scheme at the positive
+definite matrices are indexed by $\PD(d)$, and what it costs. The first says that covariance fixes the
+parametrization up to one constant. Their proofs follow them.
+
+% shared with blueprint lem:affine-gauge
+\begin{lemma}[the affine gauge is a constant]\label{lem:affine-gauge}
+Let $h : \PD(d) \to \PD(d)$ satisfy $h(A\Sigma A^{\tp}) = A\,h(\Sigma)\,A^{\tp}$ for every
+$A \in \GL(d)$ and $\Sigma \in \PD(d)$. Then there is a $c > 0$ with $h(\Sigma) = c\,\Sigma$ for
+every $\Sigma$. On the isotropic slice $\{sI : s > 0\}$ the dilation $x \mapsto \lambda x$,
+$\lambda > 0$, which is $A = \lambda I$, acts by $s \mapsto \lambda^2 s$.
+\end{lemma}
+
+The group acts transitively on $\PD(d)$, and the parametrization there is forced up to one
+constant. On the multiples of $I$, Proposition~\ref{prop:isotropic-corner}(2) and (3) identify
+the parameter with the variance gauge, up to that constant. In the Gaussian family
+\ref{eq:affine-gaussian} the parameter is the covariance matrix up to the factor $2b$.
+
+The second lemma says why $\PD(d)$ at all. A law that no proper subspace carries has a compact
+stabilizer, and a rotation-invariant law other than $\delta_0$ has exactly $\Orth(d)$. An orbit of
+$\GL(d)$ through a full law can therefore be indexed covariantly by $\PD(d) = \GL(d)/\Orth(d)$
+exactly when it
+has a rotation-invariant member.
+% Round 3 (content review), B.R3 (READING-meerschaert2001limit.md, section 4, pp. 33-34 read at the
+% page images for this edit).
+Clause (1) is a classical consequence of the convergence of types (\sscite{meerschaert2001limit},
+Thm.~2.3.10, p.~33, where the symmetries may carry a shift), and (3)(b) has the form of their
+Thm.~2.3.11, p.~34, on the compact subgroups of $\GL(d)$.
+
+% shared with blueprint lem:parameter-space+be463c730309
+\begin{lemma}[the parameter space: compact stabilizers and the isotropic member]\label{lem:parameter-space}
+Let $d \ge 1$. For a probability measure $\mu$ on $\RR^d$ write
+$\operatorname{Stab}(\mu) := \{A \in \GL(d) : A_*\mu = \mu\}$ and
+$\operatorname{Orb}(\mu) := \{A_*\mu : A \in \GL(d)\}$, and call $\mu$ \emph{full} if
+$\mu(V) < 1$ for every linear subspace $V \ne \RR^d$.
+\begin{enumerate}
+\item \emph{(Compact stabilizers.)} $\operatorname{Stab}(\mu)$ is a closed subgroup of $\GL(d)$. If
+$\mu$ is full, $\operatorname{Stab}(\mu)$ is compact. So a law whose stabilizer is not compact is
+carried by a proper linear subspace; for $d \ge 2$ it need not be $\delta_0$: the stabilizer of
+$\delta_{e_1}$ contains every $A$ with $Ae_1 = e_1$.
+\item \emph{(Rotation-invariant laws.)} If $Q_*\mu = \mu$ for every $Q \in \Orth(d)$ and
+$\mu \ne \delta_0$, then $\mu$ is full and $\operatorname{Stab}(\mu) = \Orth(d)$.
+\item \emph{(The isotropic member is the axiom of the parameter space $\PD(d)$.)} Let $\mu_0$ be
+full. The following are equivalent:
+(a) $\operatorname{Orb}(\mu_0)$ has a rotation-invariant member;
+(b) $\operatorname{Stab}(\mu_0) = C\,\Orth(d)\,C^{-1}$ for some $C \in \GL(d)$;
+(c) there is a map $\Sigma \mapsto \mu_\Sigma$ from $\PD(d)$ into $\operatorname{Orb}(\mu_0)$ with
+$A_*\mu_\Sigma = \mu_{A\Sigma A^{\tp}}$ for every $A \in \GL(d)$ and $\Sigma \in \PD(d)$.
+When they hold, every map as in (c) is a bijection of $\PD(d)$ onto $\operatorname{Orb}(\mu_0)$, and
+for any two such maps $\mu$ and $\mu'$ there is a $c > 0$ with $\mu'_\Sigma = \mu_{c\Sigma}$ for
+every $\Sigma \in \PD(d)$.
+\item \emph{(An orbit without an isotropic member.)} Let $p_1, \dots, p_d > 0$ be distinct with
+$p_1 + \dots + p_d = 1$, and $\mu_0 := \sum_jp_j\,\delta_{e_j}$. Then $\mu_0$ is full,
+$\operatorname{Stab}(\mu_0) = \{I\}$, the map $A \mapsto A_*\mu_0$ is a bijection of $\GL(d)$ onto
+$\operatorname{Orb}(\mu_0)$, and no member of $\operatorname{Orb}(\mu_0)$ is rotation invariant.
+\item \emph{(In the scheme.)} Let $(G, W)$ be a wedge datum with $\Orth(d) \subseteq G$ and
+$(\mu_{\Sigma,\Sigma'})$ a $(G, W)$-cascade family of kernels (Definition~\ref{def:gw-cascade-family}(2)). Then
+$\mu_I$ is rotation invariant and full, $\operatorname{Stab}(\mu_I) = \Orth(d)$, and
+$\Sigma \mapsto \mu_\Sigma$ is injective on $\{AA^{\tp} : A \in G\}$, which is $\PD(d)$ when
+$G = \GL(d)$. Without $\Orth(d) \subseteq G$, (K4) need not make $\mu_I$ full: for $d \ge 2$, $G$
+the invertible diagonal matrices and $W$ the Loewner order, the centred Gaussian laws
+$\mu_{\Sigma,\Sigma'}$ with $\widehat\mu_{\Sigma,\Sigma'}(\omega) =
+\exp[-\tfrac12(\Sigma' - \Sigma)_{11}\,\omega_1^2]$ form a $(G, W)$-cascade family of kernels whose
+$\mu_I$ is carried by the first axis and has a stabilizer that is not compact.
+\end{enumerate}
+\end{lemma}
+
+For $G = \GL(d)$, clause (5) makes the kernels from scale zero at $\PD(d)$ correspond one to one to
+$\GL(d)/\Orth(d) = \PD(d)$. For a smaller group containing $\Orth(d)$ it gives injectivity on
+$\{AA^{\tp} : A \in G\}$ only. Without an isotropic member, a full law can have a trivial
+stabilizer, and its orbit is then in bijection with $\GL(d)$ itself, of dimension $d^2$ against
+$d(d+1)/2$ (clause (4)).
+
+\begin{proof}[Proof of Lemma~\ref{lem:affine-gauge}]
+For $Q \in \Orth(d)$, $QQ^{\tp} = I$ gives $Q\,h(I)\,Q^{\tp} = h(I)$: the symmetric matrix
+$H := h(I)$ commutes with every orthogonal matrix. Taking $Q$ the reflection
+$I - 2e_ie_i^{\tp}$, the entry $(QHQ^{\tp})_{ik}$ is $-H_{ik}$ for $k \ne i$, so $H_{ik} = 0$ and
+$H$ is diagonal; taking $Q$ the permutation matrix exchanging $e_i$ and $e_k$ gives
+$H_{ii} = H_{kk}$. So $H = cI$, and $c > 0$ because $H \in \PD(d)$. For $\Sigma \in \PD(d)$ put
+$A = \Sigma^{1/2}$: then $h(\Sigma) = h(AIA^{\tp}) = A(cI)A^{\tp} = c\,\Sigma$. Finally
+$(\lambda I)(sI)(\lambda I)^{\tp} = \lambda^2 s\,I$, which is how $\lambda I$ moves the parameter of
+Definition~\ref{def:affine-cascade-family}.
+\end{proof}
+
+\begin{proof}[Proof of Lemma~\ref{lem:parameter-space} (sketch)]
+\emph{(1).} By uniqueness of the transform, $A_*\mu = \mu$ exactly when
+$\widehat\mu(A^{\tp}\omega) = \widehat\mu(\omega)$ for every $\omega$, so $\operatorname{Stab}(\mu)$ is
+a subgroup, closed by the continuity of $\widehat\mu$. Let $\mu$ be full. The function
+$f(B) := \int\min(1, |Bx|)\,\mu(dx)$ is continuous, by dominated convergence, and has a minimum $c$
+on the compact sphere $\{\|B\| = 1\}$; $c > 0$, since $f(B) = 0$ would make $\mu$ carried by the
+proper subspace $\ker B$. For $A$ in the stabilizer and $t := \|A\|$, since $A_*\mu = \mu$,
+\[
+  c \le f(A/t) = \int\min\bigl(1, |y|/t\bigr)\,\mu(dy) ,
+\]
+which tends to $0$ as $t \to \infty$. The stabilizer is therefore bounded, and as it contains the
+inverses, $|\det A|$ is bounded away from $0$ on it. A limit of its elements is then invertible, and
+in it, as it is closed in $\GL(d)$; so it is compact. For $\delta_{e_1}$ the matrices
+$I + t\,e_1e_2^{\tp}$, $t \in \RR$, fix $e_1$ and are unbounded.
+
+\emph{(2).} If a proper subspace carried $\mu$, so would a hyperplane $u^\perp$, hence by rotation
+invariance every hyperplane, and so would the intersection $\{0\}$ of the coordinate hyperplanes.
+So $\mu$ is full, and by (1) its stabilizer $K$ is compact and contains $\Orth(d)$. For $A \in K$
+with polar decomposition $A = PQ$, the factor $P = AQ^{-1} \in \PD(d)$ lies in $K$, and so do its
+powers $P^n$, $n \in \ZZ$. An eigenvalue $p$ of $P$ then has $p^n$ bounded, so $p = 1$ and $A = Q$.
+
+\emph{(3).} For $B \in \GL(d)$, $B_*\mu$ is full with $\mu$, and
+$\operatorname{Stab}(B_*\mu) = B\operatorname{Stab}(\mu)B^{-1}$. So (a) gives (b) by (2). From
+(b), $\nu := (C^{-1})_*\mu_0$ is rotation invariant, and $\mu_\Sigma := (\Sigma^{1/2})_*\nu$ is as in
+(c): for $\Sigma' := A\Sigma A^{\tp}$ the matrix $\Sigma'^{-1/2}A\Sigma^{1/2}$ is orthogonal. From
+(c), $\mu_I$ is a rotation-invariant member. For a map as in (c), covariance with
+$A = \Sigma^{1/2}$ gives $\mu_\Sigma = (\Sigma^{1/2})_*\mu_I$, which is onto the orbit and, by (2),
+one to one. For a second map $\mu'$, $h := \mu^{-1} \circ \mu'$ satisfies
+$h(A\Sigma A^{\tp}) = A\,h(\Sigma)A^{\tp}$, and Lemma~\ref{lem:affine-gauge} gives $h(\Sigma) = c\,\Sigma$.
+
+\emph{(4).} A proper subspace misses some $e_j$, so it has $\mu_0$-measure at most $1 - p_j$. An
+$A$ that fixes $\mu_0$ fixes each atom, the masses being distinct, so $A = I$. A member $A_*\mu_0$
+gives positive mass only to the $d$ points $Ae_j$, and mass $p_1$ to $x := Ae_1 \ne 0$. If it were
+rotation invariant, every point of norm $r := |x|$, being $Qx$ for an orthogonal $Q$, would carry
+that mass and be one of those $d$ points; but the $2d$ points $\pm r\,e_j$ have norm $r$.
+
+\emph{(5).} For $Q \in \Orth(d) \subseteq G$, $Q \cdot 0 = 0$ and $Q \cdot I = I$, so (K3) and (K4)
+of Definition~\ref{def:gw-cascade-family} make $\mu_I$ rotation invariant and not $\delta_0$, and (2)
+applies. (K3) gives $\mu_{AA^{\tp}} = A_*\mu_I$ for $A \in G$, and $A_*\mu_I = B_*\mu_I$ forces
+$B^{-1}A \in \Orth(d)$, hence $AA^{\tp} = BB^{\tp}$. In the example the exponents are additive in
+$\Sigma' - \Sigma$ and continuous, a diagonal $A$ multiplies them by $a_1^2$, and
+$\widehat\mu_{0,I}(e_1) = e^{-1/2} \ne 1$. The stabilizer of its $\mu_I$ contains the unbounded
+matrices $\diag(1, t, 1, \dots, 1)$, $t > 0$.
+\end{proof}
+
+\subsection{Infinitely divisible increments}
+
+\begin{proof}[Proof of Theorem~\ref{thm:cascade-infinitely-divisible}]
+\emph{Small increments.} Under the hypotheses of (1), for every $\varepsilon > 0$ and $\eta > 0$
+there is $\delta > 0$ with $\mu_{a,b}(\{|x| > \varepsilon\}) < \eta$ whenever $0 \le a \le b \le 1$
+and $b - a < \delta$. Otherwise there are pairs $0 \le a_n \le b_n \le 1$ with $b_n - a_n \to 0$ and
+$\mu_{a_n,b_n}(\{|x| > \varepsilon\}) \ge \eta$. For each $\omega$ the function
+$(a,b) \mapsto \widehat\mu_{a,b}(\omega)$ is uniformly continuous on the compact triangle
+$\{0 \le a \le b \le 1\}$ and equal to $1$ on its diagonal, so $\widehat\mu_{a_n,b_n}(\omega) \to 1$.
+By \Levy's continuity theorem on $\RR^d$, $\mu_{a_n,b_n} \to \delta_0$ weakly, and the portmanteau inequality for
+the closed set $\{|x| \ge \varepsilon\}$ bounds the upper limit of its measures by $0$, a
+contradiction.
+
+% CHANGED Q-0281 wave 2: blind review W2C-5: the partition has n + 1 steps, as in the blueprint's
+% proof and the ledger's A6 (r_n = n + 1); and W2C-1: the continuity theorem is named on R^d.
+\emph{(1).} Fix $s \le t$, and for $n \ge 1$ put $t_{n,k} := s + k(t - s)/(n+1)$ and
+$\mu_{n,k} := \mu_{t_{n,k-1},\,t_{n,k}}$, $1 \le k \le n+1$. The cascade identity and the commutativity
+of convolution give, by induction on the number of steps,
+\[
+  \mu_{s,t} = \mu_{n,1} * \mu_{n,2} * \dots * \mu_{n,n+1} \qquad \text{for every } n .
+\]
+\emph{The rows are infinitesimal.} Given $\varepsilon > 0$ and $\eta > 0$, take $\delta$ from the
+small increments: once $(t - s)/(n+1) < \delta$, every $\mu_{n,k}(\{|x| > \varepsilon\})$ is below
+$\eta$. \emph{Khintchine.} The $\mu_{n,k}$ form a null array with $r_n = n + 1$ entries in row $n$,
+whose row products all equal $\mu_{s,t}$, so C1 with $b_n = 0$ makes $\mu_{s,t}$ infinitely
+divisible.
+
+\emph{(2).} For a $W$-chain $\zeta$ from $\Sigma$ to $\Sigma'$, the laws
+$\nu_{u,v} := \mu_{\zeta(u),\zeta(v)}$, $0 \le u \le v \le 1$, satisfy the hypotheses of (1) by
+(K1) and (K2) of Definition~\ref{def:gw-cascade-family}, since $(u,v) \mapsto (\zeta(u),\zeta(v))$
+is continuous. And $\nu_{0,1} = \mu_{\Sigma,\Sigma'}$. The kernel $\mu_\Sigma$ is the increment of
+the pair $0 \le_W \Sigma$.
+
+\emph{(3).} (a) $\zeta(t) - \zeta(s) = (t - s)(\Sigma' - \Sigma)$ is positive semidefinite. (b)
+Along each chain a later value is a multiple of an earlier one by a factor at least $1$. (c) By the
+spectral theorem $M^s$ is positive definite, continuous in $s$, and $M^aM^b = M^{a+b}$. For
+$s \le t$ put $B := \Sigma^{1/2}M^{s/2}$, so that $\zeta(s) = BB^{\tp}$ and
+$\zeta(t) = BM^{t-s}B^{\tp}$. Then $Q := \zeta(s)^{-1/2}B$ is orthogonal, and
+$\zeta(s)^{-1/2}\zeta(t)\zeta(s)^{-1/2} = QM^{t-s}Q^{\tp}$ lies in $\mathcal K$ by the two
+closure properties. The three sets named are closed under orthogonal conjugation, and
+$M \mapsto M^\tau$ raises every eigenvalue, the least one and the determinant to the power
+$\tau \ge 0$, which preserves each defining inequality. For $M = e^X$, $\lambda_{\min}(M) =
+e^{\lambda_{\min}(X)}$ and $\det M = e^{\tr X}$, which gives the description of $\mathcal K_\alpha$.
+The Loewner and the ray order are partial orders directly. That the relation of $\mathcal K_\alpha$
+% Round 3 (content review), B.S7: the order clause of 4.7(2) spends no cited fact.
+is one is the first sentence of Proposition~\ref{prop:stable-step-cone}(2), which rests on no cited fact.
+
+\emph{(4).} For $s \le t$ the laws $\nu_{u,v} := \mu_{s + u(t-s),\,s + v(t-s)}$ satisfy the hypotheses
+of (1) by (I1) and (I2) of Definition~\ref{def:isotropic-kernel-family}, and
+$\nu_{0,1} = \mu_{s,t}$.
+\end{proof}
+
+\subsection{The single step}
+
+\begin{proof}[Proof of Lemma~\ref{lem:charfn-one-on-subspace}]
+Let $U := \{\eta \in H : |\eta| < r\}$, with $r > 0$ so small that $\widehat\rho = 1$ on $U$. For
+$\eta \in U$, $0 = \mathrm{Re}\bigl(1 - \widehat\rho(\eta)\bigr)
+= \int\bigl(1 - \cos\langle\eta,x\rangle\bigr)\rho(dx)$ with a nonnegative integrand, so
+$\langle\eta,x\rangle \in 2\pi\ZZ$ for every $x$ outside a $\rho$-null set $N_\eta$. Let
+$D \subseteq U$ be countable and dense in $U$, and $N := \bigcup_{\eta\in D}N_\eta$, a $\rho$-null
+set. For $x \notin N$ the linear map $\ell_x : H \to \RR$, $\eta \mapsto \langle\eta,x\rangle$, is
+continuous and maps $D$ into the closed set $2\pi\ZZ$, hence maps $U$, which lies in the closure
+of $D$, into $2\pi\ZZ$. As $U$ is connected, $\ell_x(U)$ is a connected subset of $2\pi\ZZ$, a
+single point, and it contains $\ell_x(0) = 0$; so $\ell_x = 0$ on $U$, hence on $H$, which is the
+union of the dilates of $U$. That is $x \in H^\perp$. Thus $\rho(\RR^d \setminus
+H^\perp) \le \rho(N) = 0$, and for $\eta \in H$,
+$\widehat\rho(\omega+\eta) = \int_{H^\perp}e^{i\langle\omega,x\rangle}e^{i\langle\eta,x\rangle}\rho(dx)
+= \widehat\rho(\omega)$. For $H = \RR^d$ the complement is $\{0\}$, so $\rho = \delta_0$.
+\end{proof}
+
+\begin{proof}[Proof of Lemma~\ref{lem:affine-reduction}]
+\emph{The kernel from scale zero at $I$ is radial and real.} For $Q \in \Orth(d)$, (K3) of
+Definition~\ref{def:affine-cascade-family} with $\Sigma = 0$,
+$\Sigma' = I$ gives $Q_*\mu_I = \mu_{QQ^{\tp}} = \mu_I$, so
+$\widehat\mu_I(Q^{\tp}\omega) = \widehat\mu_I(\omega)$ and $\widehat\mu_I$ is constant on spheres.
+Put $\vartheta(u) := \widehat\mu_I(\sqrt u\,e_1)$ for $u \ge 0$; then
+$\widehat\mu_I(\omega) = \vartheta(|\omega|^2)$, $\vartheta$ is continuous because a characteristic
+function is, and $\vartheta(0) = 1$. With $Q = -I$,
+$\widehat\mu_I(\omega) = \widehat\mu_I(-\omega) = \overline{\widehat\mu_I(\omega)}$, so $\vartheta$ is
+real, and $|\vartheta| \le 1$.
+
+\emph{Every kernel from scale zero.} For $\Sigma \in \PD(d)$, (K3) with $A = \Sigma^{1/2}$ gives
+$\mu_\Sigma = A_*\mu_I$, so $\widehat\mu_\Sigma(\omega) = \widehat\mu_I(\Sigma^{1/2}\omega)
+= \vartheta(\langle\omega,\Sigma\omega\rangle)$. For $\Sigma \in \PSD(d)$ singular,
+$\Sigma_n := \Sigma + n^{-1}I \in \PD(d)$ tends to $\Sigma$, and (K2) along the pairs
+$(0,\Sigma_n) \to (0,\Sigma)$ with the continuity of $\vartheta$ gives
+$\widehat\mu_\Sigma(\omega) = \lim_n\vartheta(\langle\omega,\Sigma_n\omega\rangle)
+= \vartheta(\langle\omega,\Sigma\omega\rangle)$.
+
+\emph{No zeros.} Fix $\omega$ and put $f(s,t) := \widehat\mu_{sI,tI}(\omega)$ for $0 \le s \le t$.
+By (K2) $f$ is continuous; by (K1), and because the transform of a convolution is the product of
+the transforms, $f(t,t) = 1$ and $f(r,t) = f(s,t)\,f(r,s)$ for $r \le s \le t$. Suppose
+$f(0,t) = 0$ for some $t$, and let $t^*$ be the infimum of such $t$. As $f(0,\cdot)$ is continuous
+with $f(0,0) = 1$, $t^* > 0$ and $f(0,t^*) = 0$. By continuity at $(t^*,t^*)$, where $f = 1$, there
+is $s \in (0,t^*)$ with $f(s,t^*) \ne 0$, and $f(0,s) \ne 0$ because $s < t^*$; then
+$f(0,t^*) = f(s,t^*)\,f(0,s) \ne 0$, a contradiction. Hence
+$\vartheta(t|\omega|^2) = \widehat\mu_{tI}(\omega) \ne 0$ for all $t \ge 0$ and $\omega$, so $\vartheta$
+has no zero on $[0,\infty)$. Being real and continuous with $\vartheta(0) = 1$, it is positive, and
+$g := -\log\vartheta$ is continuous, nonnegative because $\vartheta \le 1$, and $g(0) = 0$. This is
+\ref{eq:affine-reduction}.
+
+\emph{Increments.} For $\Sigma \le \Sigma'$, (K1) gives $\mu_{\Sigma'} = \mu_{\Sigma,\Sigma'} *
+\mu_\Sigma$, so $\widehat\mu_{\Sigma'} = \widehat\mu_{\Sigma,\Sigma'}\,\widehat\mu_\Sigma$, and
+$\widehat\mu_\Sigma > 0$ gives \ref{eq:affine-increment}.
+
+\emph{Nondegeneracy.} If $g \equiv 0$ then $\widehat\mu_I \equiv 1$ and
+Lemma~\ref{lem:charfn-one-on-subspace} with $H = \RR^d$ gives $\mu_I = \delta_0$, against (K4).
+\end{proof}
+
+\begin{proof}[Proof of Lemma~\ref{lem:single-ratio-cauchy}]
+\emph{A constant difference on a half-line.} Fix $\delta > 0$ and put $u_\delta := \delta/(a-1)$,
+so that $a u_\delta = u_\delta + \delta$. For $x \ge u_\delta$, \ref{eq:single-ratio} at
+$u = u_\delta$ and $w = x - u_\delta \ge 0$ reads
+$g(x+\delta) - g(x) = g(u_\delta + \delta) - g(u_\delta) =: \kappa(\delta)$, independent of $x$ on
+$[u_\delta,\infty)$.
+
+\emph{A constant difference everywhere.} Fix $\delta > 0$ and $y > 0$. For every integer
+$n \ge \delta/((a-1)y)$ the points $y + j\delta/n$, $0 \le j < n$, are at least
+$y \ge u_{\delta/n}$, so the previous step with $\delta/n$ in place of $\delta$ gives
+\[
+  g(y+\delta) - g(y) = \sum_{j=0}^{n-1}\Bigl[g\bigl(y + \tfrac{(j+1)\delta}{n}\bigr)
+     - g\bigl(y + \tfrac{j\delta}{n}\bigr)\Bigr] = n\,\kappa(\delta/n) .
+\]
+Given $y_1, y_2 > 0$, an $n$ admissible for both shows
+$g(y_1+\delta) - g(y_1) = g(y_2+\delta) - g(y_2)$. So $K(\delta) := g(y+\delta) - g(y)$ does not
+depend on $y > 0$, and $K(2\delta) = [g(y+2\delta) - g(y+\delta)] + [g(y+\delta) - g(y)]
+= 2K(\delta)$.
+
+\emph{Additivity, from continuity at $0$ alone.} Put $h(\delta) := g(\delta) - K(\delta)$ for
+$\delta > 0$. With $y = \delta$ the previous step gives $g(2\delta) = g(\delta) + K(\delta)$, so
+$h(2\delta) = g(\delta) + K(\delta) - 2K(\delta) = h(\delta)$. By induction, for every $n \ge 0$,
+\[
+  h(\delta) = h(\delta 2^{-n}) , \qquad K(\delta) = 2^nK(\delta 2^{-n}) , \qquad\text{hence}\qquad
+  h(\delta) = g(\delta 2^{-n}) - 2^{-n}K(\delta) .
+\]
+Letting $n \to \infty$, continuity at $0$ and $g(0) = 0$ give $h(\delta) = 0$, that is
+$g(\delta) = K(\delta)$. Hence $g(y + \delta) = g(y) + g(\delta)$ for all $y, \delta > 0$.
+
+\emph{Cauchy's equation.} By induction $g(n\delta) = n\,g(\delta)$ for integers $n \ge 1$, so
+$q\,g(p/q) = g(p) = p\,g(1)$ and $g(r) = r\,g(1)$ for every positive rational $r$. As $g \ge 0$,
+$g(y+\delta) \ge g(y)$: $g$ is nondecreasing on $(0,\infty)$. For $x > 0$ and rationals
+$0 < r < x < r'$ this gives $r\,g(1) \le g(x) \le r'\,g(1)$, and letting $r, r' \to x$ gives
+$g(x) = x\,g(1)$. With $g(0) = 0$ that is the claim.
+\end{proof}

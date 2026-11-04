@@ -1,0 +1,16 @@
+(a) transform identity
+   difference: 0
+(b) B_d from the Newtonian leading term, d symbolic
+   c_d (d-2)            = gamma(d/2)/(2*pi**(d/2))
+   B_d (paper) - c_d(d-2) = 0
+   B_d * |S^{d-1}|      = 1
+(c) exact limits in d = 3 and d = 2
+   d=3: limit - B_3(3<yhat,P yhat> - tr P) = 0
+   d=2: max |r^2 q(r yhat) - B_2(2<yhat,P yhat> - tr P)| at r = 1e-8, 5 directions: 1.53e-16
+(d) Proposition E.4(4)
+   bracket in an eigenbasis: (p1 - p2)*cos(2*phi)
+   integral of the negative part over the circle: 2*p1 - 2*p2
+   B_2 * Theta = (p1 - p2)/pi
+   step t^2 I -> t^2 diag(1+eps,1): P' = Matrix([[epsilon/(epsilon + 1), 0], [0, 0]])  B_2 Theta = epsilon/(pi*(epsilon + 1))
+(e) the bracket d<yhat,P'yhat> - tr P' has mean zero over the sphere and is negative at a
+    least eigenvector of P' unless P' is a multiple of I: d*lambda_min(P') < tr P' then.

@@ -1,0 +1,65 @@
+name = "AffineHemigroup"
+version = "0.1.0"
+keywords = ["math", "scale-space"]
+# Both libraries are default targets so that CI compiles the skeleton too: a skeleton statement
+# that is malformed or names a missing declaration must fail the build (Paper I's lesson,
+# 2026-08-11, kept by Paper V). The sorry guard scans `Formalization/AffineHemigroup` only.
+defaultTargets = ["AffineHemigroup"]
+
+[leanOptions]
+pp.unicode.fun = true
+relaxedAutoImplicit = false
+weak.linter.mathlibStandardSet = true
+maxSynthPendingDepth = 3
+
+# Lean and Mathlib are Paper V's pins at its release (v4.31.0), so that they resolve to one
+# revision each: hub RELEASES.md § "Dependencies between modules", and the author's decision of
+# 2026-10-04 (Q-0281). ScaleSpaceCore is ahead of Paper V's v0.2.0: this module requires v0.4.0,
+# for the L¹ operators in dimension d (SSL-5, v0.3.0, the author's decision of 2026-10-07) and for
+# the second-demand moves of this module's classification (Q-0360 to Q-0364, v0.4.0, the author's
+# decision of 2026-10-08), which replace this module's own copies and its last reads of Paper V's
+# package. Lake builds one revision per package, so Paper V's package, if a module here imported
+# it, would compile against v0.4.0; since the switch to v0.4.0 none does, and the require of Paper
+# V's package is dropped (Q-0460, the author's decision of 2026-10-17, Q-0459): a module that needs
+# it requires it again, from the public cone export at its tag. (Paper V's
+# `SpatialLine.BridgeExponents` declares trunk names in `ScaleSpace`, so it cannot be imported
+# beside `ScaleSpaceCore.BridgeExponents`, which this module reads.) A pin bump is a new store
+# entry, never `lake update`; a checkout whose ScaleSpaceCore differs from the store's other
+# consumers keeps ScaleSpaceCore as a real directory, since a package's build lives in its store
+# entry.
+
+# The shared core, pinned to a tag. v0.5.0 (Q-0395) carries the library's record of homes
+# (`site/library/data.json`) that LINKAGE.md rule 15 reads; no declaration differs from v0.4.0.
+[[require]]
+name = "ScaleSpaceCore"
+git = "https://github.com/danielfagerstrom/scale-space-lean"
+rev = "v0.5.0"
+
+[[require]]
+name = "mathlib"
+scope = "leanprover-community"
+rev = "v4.31.0"
+
+# The proved library: sorry-free by CI guard. Its declarations live in namespace
+# `AffineHemigroup`, not `Affine`: Mathlib already uses `namespace Affine` (`Affine.Simplex`) and
+# attaches scoped notation to it (`scoped[Affine]` in Mathlib.LinearAlgebra.AffineSpace), which a
+# library named `Affine` whose namespace follows its root name, as Paper V's `SpatialLine` does,
+# would land in.
+[[lean_lib]]
+name = "AffineHemigroup"
+globs = ["AffineHemigroup.*"]
+
+# Stated-but-unproved targets: the Lean type of a blueprint node, with `sorry` for the proof.
+# Separate from `AffineHemigroup` on purpose (Paper I's lakefile has the rationale); a
+# declaration MOVES into AffineHemigroup/ when it is proved, and nothing here is ever imported by
+# the proved library.
+#
+# Named `AffineSkeleton`, not `Skeleton` as article-kit's convention has it: Paper V's package
+# has a root module `Skeleton` (`Skeleton.Chapter2`, ...), and Lean module names are global across
+# the packages of a build, so a module that requires it again would collide with a second
+# `Skeleton` root. `linkage` does not hard-code the name: it infers this tree's libraries as a directory
+# `X/` beside a root file `X.lean` (linkage/release.py, `libraries()`), which `AffineSkeleton/`
+# beside `AffineSkeleton.lean` satisfies.
+[[lean_lib]]
+name = "AffineSkeleton"
+globs = ["AffineSkeleton.*"]

@@ -1,0 +1,94 @@
+# The trust boundary: the analytic interfaces a headline theorem may depend on.
+#
+# `#print axioms` on this article's proved theorems must reduce to Lean core plus exactly
+# these. CI reads this file via `linkage axioms`, which refuses any name that no AXIOMS.md
+# entry mentions in a `**Lean:**` segment -- so the boundary cannot be widened without a
+# reviewed ledger entry behind it.
+#
+# Adding a line here widens the project's trust base and is a review decision, not a fix.
+#
+# =======================================================================================
+# THIS MODULE'S OWN INTERFACES: the ledger's entries A1-A6 and A8-A11, twelve names.
+#
+# Declared in Formalization/AffineHemigroup/Interfaces.lean by the typing dispatch of Q-0281
+# (2026-10-04), each stated at its page's letter as transcribed in blueprint/AXIOMS-verbatim.md
+# and named in its entry's **Lean:** line in blueprint/AXIOMS.md. The six entries were admitted
+# by the author before this dispatch (each entry's Decision line, and Q-0281's brief for their
+# typing); typing them adds no entry and no page. Wave 2 of Q-0281 spends A1-A4: CIAxiomGuard.lean
+# prints them in the lines of their spenders, and says so beside them.
+#
+# A1 -- Sato Prop. 28.1, p. 190. Its density is nonnegative since 2026-10-05: restated at the
+# page's letter (the author's decision; no new source), blueprint/AXIOMS.md A1.
+AffineHemigroup.density_of_integrable_charFun
+# A2 -- Sato Thm. 15.10, p. 95
+AffineHemigroup.sato_polar_criterion
+# A3 -- Sato Thm. 8.1(i), (ii), (iii), pp. 37-38
+AffineHemigroup.levy_khintchine_exists
+AffineHemigroup.levy_khintchine_unique
+AffineHemigroup.levy_khintchine_converse
+# A4 -- Sato Prop. 15.5, p. 93, first clause
+AffineHemigroup.selfDecomposable_infinitelyDivisible
+# A5 -- Jurek-Mason Thm. 3.3.5, p. 83, with section 3.4, pp. 89-90
+AffineHemigroup.operatorSelfDecomposable_infinitelyDivisible
+# A6 -- Sato Thm. 9.3, p. 47
+AffineHemigroup.khintchine_null_array
+# A8 -- Wolfe Thm. 2, p. 144, read with Kanter Defs. 1.2 and 3.1, pp. 66 and 70. Admitted as a
+# Lean interface by the author on 2026-10-05, after the librarian's independent audit of the
+# transcription (blueprint/AXIOMS-verbatim.md A8, verdict MATCH); spent by
+# prop:isotropic-radial-monotone (wave 2 of Q-0281, group B).
+AffineHemigroup.wolfe_symmetric_unimodal
+# A9 -- Bhatia, Matrix Analysis, Corollary III.4.6 (Lidskii), relation (III.21), p. 73, in the weak
+# form: the partial-sum inequalities only, where the page states the full majorization (the totals
+# equal as well; the symbol as in (III.15), p. 71, and (II.2)-(II.3), p. 28). Parallel: Bhatia,
+# Positive Definite Matrices, Exercise 6.5.3, relation (6.47), p. 228, which is (III.21) with the
+# pointer to that page. Admitted as a Lean interface by the author on 2026-10-05 (the matrix
+# analysis of section 5.3, ADR-0020; Ky Fan proved in-house, no Cauchy-Binet entry), while only the
+# parallel was held; re-read at Matrix Analysis on 2026-10-06 (the librarian; the weak form stands,
+# the axiom unchanged; blueprint/AXIOMS.md A9). Spent by lem:spectral-cones-products and through it
+# by the nodes of section 5.3 that read the spectrum of a product (wave 2 of Q-0281, group F).
+AffineHemigroup.gelfand_naimark_logMajorized
+# A10 -- Schilling, Song, Vondracek, Bernstein Functions (2nd ed.), Thm. 13.14, p. 212 (the
+# necessity direction: radially continuous and negative definite in every dimension => Bernstein),
+# followed by Thm. 3.2, p. 21 (Bernstein => the representation (3.2)), with Def. 4.3, p. 36, for
+# "negative definite"; f(0) := f(0+), d over all of N, the hermitian condition automatic. The
+# uniqueness of the triplet is not carried (proved in-house). Admitted as a Lean interface by the
+# author on 2026-10-07 (Schoenberg's radial theorem); spent twice by classS_of_classAInf
+# (lem:filtration-top), and through filtration_top by thm:filtration-strict (Q-0281, wave N).
+AffineHemigroup.schoenberg_radial_bernstein
+# A11 -- Bingham, Goldie, Teugels, Regular Variation, Thm. 1.7.1' (Karamata's Tauberian theorem at
+# the origin; attributed there to Feller (1971), XIII, section 5), p. 38: only the Tauberian
+# direction (1.7.2') => (1.7.1'), from the Laplace-Stieltjes transform at infinity to the
+# distribution function at 0+, with the transform (1.7.0a), p. 37, and "slowly varying" as (1.2.1),
+# p. 6. Narrowed four ways: U is the distribution function of a finite measure on [0, infinity)
+# (the page: non-decreasing, U = 0 on x < 0, transform finite for large s), the slowly varying
+# function is positive on (0, infinity) and measurable on R (the page: on a neighbourhood of
+# infinity), and c > 0, rho > 0 (the page: c >= 0, rho >= 0). The Abelian direction is not carried,
+# nor Thm. 1.7.1 (x -> infinity); the monotone density theorem (Thm. 1.7.2b), Potter's bounds
+# (Thm. 1.5.6) and Prop. 1.5.9a of the same book are not admitted: prop:origin-rate-d proves what
+# it needs of them. Admitted on the author's decision of 2026-10-11 (Q-0416, "adopt the rate as a
+# proposition", on cited Tauberian theorems); spent by prop:origin-rate-d, once in each clause.
+AffineHemigroup.karamata_tauberian_zero
+#
+# =======================================================================================
+# PAPER V'S INTERFACES: NONE SPENT SINCE Q-0365 (2026-10-08), SO NO INCLUDE LINE.
+#
+# This development no longer requires Paper V's Lean package `SpatialHemigroup`: the
+# `require` is dropped from Formalization/lakefile.toml and lake-manifest.json (Q-0460, the
+# author's decision of 2026-10-17; Formalization/README.md, section Trust), and only the shared
+# library ScaleSpaceCore is required. Were the package required again, a declaration routed
+# through one of V's cited interfaces would print it. Before the drop none did: since Q-0365 no
+# line of CIAxiomGuard.lean prints a name of Paper V's. The one interface of V's this development
+# used to spend, SpatialLine.fourier_toolbox_levy_unique (V's A3, uniqueness clause, through V's
+# SpatialLine.main_analysis), is replaced by the shared library's ScaleSpace.main_analysis
+# (ScaleSpaceCore v0.3.0), which takes that clause as the hypothesis ScaleSpace.SymLevyUnique;
+# AffineHemigroup.line_levy_unique (prop:line-levy-unique) discharges it from this module's A3
+# above. So the line
+#
+#   include SpatialHemigroup @ v0.1 blueprint/trust-boundary.txt
+#
+# which admitted V's boundary by reference from Q-0298 to Q-0365 (V's file at commit
+# f28c066edea4dd1b5374d9fe2ae0d22dcc6d9420 of
+# https://github.com/danielfagerstrom/spatial-hemigroup-scale-space-cone), is removed: it admitted
+# names nothing spends. Since the switch to ScaleSpaceCore v0.4.0 the development imports no module
+# of Paper V's package at all (Formalization/README.md, § Trust). Restoring the line is a widening
+# of the trust base and a review decision, as adding any line here is.

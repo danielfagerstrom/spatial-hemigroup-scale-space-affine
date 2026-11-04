@@ -1,0 +1,16 @@
+d=2, sigma0=[0.7 0.3]
+  (a) C(0) = 0; C(I) = [2. 2.]
+  (b) max relative |A C(S) A^T - C(A.S)| over similarities: 3.21e-13
+  (c) |C(S)| at |S| ~ 0.01: 3.75e-03
+  (c) |C(S)| at |S| ~ 0.0001: 3.75e-05
+  (c) |C(S)| at |S| ~ 1e-08: 0.00e+00
+  (c) largest jump of C along diag(1, s, ...), s in [0,2], step 1e-3: 3.50e-03
+  at the positive definite S = diag(sigma0): eigenvalues [0.3 0.7], C(S) = 0.0e+00, so nu_S = delta_0
+d=3, sigma0=[0.5 0.3 0.2]
+  (a) C(0) = 0; C(I) = [3. 3. 3.]
+  (b) max relative |A C(S) A^T - C(A.S)| over similarities: 8.14e-13
+  (c) |C(S)| at |S| ~ 0.01: 5.36e-03
+  (c) |C(S)| at |S| ~ 0.0001: 5.36e-05
+  (c) |C(S)| at |S| ~ 1e-08: 0.00e+00
+  (c) largest jump of C along diag(1, s, ...), s in [0,2], step 1e-3: 2.74e-03
+  at the positive definite S = diag(sigma0): eigenvalues [0.2 0.3 0.5], C(S) = 0.0e+00, so nu_S = delta_0

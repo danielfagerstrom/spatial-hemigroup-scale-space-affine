@@ -1,0 +1,34 @@
+Residual matrices at lambda = 0.9; n points in R^D; smallest eigenvalue found
+(a negative value excludes F_phi from A_D; a value >= 0 is a control, not a proof)
+
+phi = J_0 (Omega_2):  F(1) = 0.1211652470, F(10) = 2.1778664201
+  D = 2: min eigenvalue -3.303e-15 (n = 9)   no negative eigenvalue found
+  D = 3: min eigenvalue -7.501e-02 (n = 9)   NEGATIVE: not in A_3
+         the same point set with F by direct quadrature: min eigenvalue -7.501e-02
+         points: [[ -4.0743,   2.5994,   1.9895],  [-11.0953,   1.5307,  -3.4917],  [ -0.876 ,   5.4273,  -1.1802],  [ -4.4662,   0.983 ,  -4.9317],  [ -2.7936,   5.541 ,   1.4765],  [  1.6038,  -0.8947,   3.228 ],  [  2.413 ,   2.5525,   4.7333],  [  3.8876,   1.5357,   1.3469],  [ -2.659 ,   2.3258,  -1.3044]]
+
+phi = sin u/u (Omega_3):  F(1) = 0.0812827268, F(10) = 1.8708550798
+  D = 2: min eigenvalue -1.638e-15 (n = 5)   no negative eigenvalue found
+  D = 3: min eigenvalue -2.220e-15 (n = 9)   no negative eigenvalue found
+  D = 4: min eigenvalue -2.554e-15 (n = 9)   no negative eigenvalue found
+
+phi = cos (Omega_1), the Cin ray:  F(1) = 0.2398117420, F(10) = 2.9252571909
+  D = 1: min eigenvalue -2.325e-15 (n = 7)   no negative eigenvalue found
+  D = 2: min eigenvalue -3.736e-01 (n = 9)   NEGATIVE: not in A_2
+         the same point set with F by direct quadrature: min eigenvalue -3.736e-01
+         points: [[ 2.6654, -4.9756],  [-0.4276,  0.4482],  [-3.228 , -1.2424],  [ 0.1178, -6.5021],  [-7.0265,  0.5376],  [ 0.3581,  0.3931],  [ 1.7641, -5.7718],  [-2.1626, -0.2704],  [-1.0422, -6.6268]]
+
+phi = (1-u)_+ (Euclid's hat h_1):  F(1) = 1.0000000000, F(10) = 3.3025850930
+  D = 1: min eigenvalue +8.841e-14 (n = 5)   no negative eigenvalue found
+  D = 2: min eigenvalue +8.908e-14 (n = 9)   no negative eigenvalue found
+
+Case 4, the profile the plane would need: k_2(s) = (1/s) int_0^s J_0(u) du
+  min k_2 on (0,60] = 0.015995 (> 0);  k_2(0.01) = 0.999992;  largest increase between grid points = 2.382e-04 at s = 6.850
+  k_2 increases on parts of (5.88, 58.72); first interval of increase starts near s = 5.880
+  rho = 0.5: int_0^4000 (1 - J_0(rho s)) k_2(s) ds/s + 1/S = 0.500000;  F_phi(rho) = 0.500000
+  rho = 1.0: int_0^4000 (1 - J_0(rho s)) k_2(s) ds/s + 1/S = 1.000000;  F_phi(rho) = 1.000000
+  rho = 3.0: int_0^4000 (1 - J_0(rho s)) k_2(s) ds/s + 1/S = 2.098612;  F_phi(rho) = 2.098612
+  so F_phi(|xi|) with phi = h_1 is the exponent of an infinitely divisible law on the plane
+  whose polar profile is not monotone: not self-decomposable there.
+
+done

@@ -1,0 +1,635 @@
+% !TEX root = ../print.tex
+% Section 5.7 of the article: the overview table and the inclusions (notes/PLAN-article-structure.md,
+% "The outline"). The table and the inclusions are prose of the article; the one node here is
+% thm:wedge-axis, the general linear row along the chain of invariant cones. It moved from the end of
+% 05-wedges.tex (5.3) on the author's decision of 2026-10-04, so that it follows every node it \uses
+% (the stable rung and the ordered-density cone of 5.5, the budget and the stable-order cell of 5.6).
+% No label, statement or proof changed in the move (scripts/check-statements-unchanged.py).
+
+\section{The overview table and the inclusions}
+\label{sec:landscape-table}
+
+The overview table has two axes, the covariance group and the wedge. Along the general linear row
+the families are read off the chain of invariant cones of
+\ref{sec:invariant-wedges}: the larger the cone, the fewer the families, and the stable cones fill the
+chain below the Gaussian's. The row's other cells, and the rows of the smaller groups, are the nodes of
+\ref{sec:affine-orbits} to \ref{sec:smaller-groups}.
+
+% not in the draft: the plan's item D3, the chain rays < K_alpha < K_beta < PSD with the gap at 2 (Q-0266).
+% What writing it down found: along a cone-generated order inside PSD(d) and away from its boundary, one
+% number of the cone, beta(C), the least alpha with C inside C_alpha, decides which stable orbits are
+% families and whether non-Gaussian families exist; the gap at 2 has two mechanisms, the
+% rank-deficient step of thm:rank-deficient-step when the cone reaches the boundary of PSD(d), and the
+% anisotropy budget of prop:anisotropy-budget between C_2 and that boundary; and cones not inside PSD(d)
+% carry no family at all.
+% CHANGED Q-0281: typed (the statement skeleton). Clauses (1), (2)(a) and (2)(b), which spend
+% nothing, are split to lem:wedge-axis-chain, placed after this node (ADR-0025;
+% records/formalization/PRICING.md: "(1), (2)(a)-(b) [T] vs (2)(c), (3)"), and \uses gains it; the
+% text is unchanged and the \lean tag names the child's declarations too.
+% CHANGED Q-0281: \uses re-pointed to the split child it reads (thm:cone-orders(4) beside (1); prop:similarity-stable-order-families(1) beside (2)).
+% CHANGED Q-0281 wave 2: entry-free route (the author's decision on W2F-1). \uses re-pointed to what
+% the proof reads: thm:cone-orders, lem:cone-orders-psd and prop:invariant-orders dropped (the orders are
+% read through prop:stable-order-generated and the causal curves, without ledger A9); the statement
+% still names thm:cone-orders(4) for the definition of the order on PSD(d), which spends nothing.
+% CHANGED Q-0281 wave 2: blind review W2H-1: \uses gains lem:spectral-cones (the last sentence of its
+% (4), which spends nothing, in the proof of the antisymmetry); the assignment says so.
+% CHANGED Q-0281 wave 2: blind review W2H-2: \uses gains def:cone-orders-curves, where the vocabulary of
+% the statement (C-causal curve, the orders on PD(d) and PSD(d)) now has its own node; the statement
+% text, shared with the paper, is unchanged and still names thm:cone-orders(4), which restates it.
+% CHANGED Q-0381 (2026-10-10; the fidelity review's paper-facing point 6): the last sentence of
+% (2)(c), "if beta(C) >= 2, the families are those of (b)", is written out. (b) is stated for another
+% cone, so "those of (b)" could be read as the families along that cone's order; what is meant, and
+% what wedge_axis_non_gaussian states (its second conjunct, an iff with EqOnPairs (causalPlusLE C)),
+% is the affine Gaussian scale spaces restricted to the pairs of this C's order. No claim changes.
+% CHANGED writing-rules pass (2026-10-14; records/affine/PASS-writing-rules-affine.md, owed item 1):
+% title only, "the wedge axis of the general linear row" -> "the general linear row along the chain of
+% cones"; "wedge axis" is a term of the plan the paper never defines. Label, statement and \lean unchanged.
+% CHANGED Q-0469 (wording only; records/affine/GATE-affine.md, Q-0317 row "second half 26"): clause (3),
+% about ninety words and three semicolons in one sentence, is a list (a)-(d), one item per semicolon-
+% separated claim, the text of each unchanged. No claim changes; the clause keeps its number.
+% CHANGED round-3 review (report E, section 3.1; the author's decision D10): the annotation's "Not
+% claimed" on the converse of the profile clause and on cones with the same beta(C) is replaced by a
+% pointer to prop:wedge-axis-profiles, after lem:wedge-axis-chain, which proves both in print. The
+% statement is unchanged, so this node's Lean still covers all of it. Annotation only.
+% CHANGED D14 (2026-11-04): the pointer says "for every profile" where it said "for a right-continuous
+% profile", prop:wedge-axis-profiles(1) having dropped the hypothesis. Annotation only.
+% CHANGED round 3, the Lean of prop:wedge-axis-profiles: the annotation's pointer no longer says that
+% that node's Lean is owed. Annotation only.
+\begin{theorem}[the general linear row along the chain of cones]
+\label{thm:wedge-axis}
+\uses{def:cone-orders-curves,prop:stable-order-generated,lem:spectral-cones,def:affine-cascade-family,def:gw-cascade-family,lem:gw-kernels-from-origin,prop:gw-ray-families,thm:rank-deficient-step,thm:affine-rigidity,lem:elliptical-stable,prop:stable-step-cone,prop:orbit-step-cone,prop:similarity-stable-order-families,prop:anisotropy-budget,prop:stable-exponent-cone,lem:stable-order-psd,lem:wedge-axis-chain,thm:cited-A3,thm:cited-A5}
+\lean{AffineHemigroup.wedge_axis_chain, AffineHemigroup.wedge_axis_not_psd,
+AffineHemigroup.wedge_axis_singular, AffineHemigroup.wedge_axis_index,
+AffineHemigroup.wedge_axis_stable, AffineHemigroup.wedge_axis_non_gaussian,
+AffineHemigroup.wedge_axis_row, AffineHemigroup.wedge_axis_row_members}\leanok
+Let $d \ge 2$, and let $C_\alpha$ and $\preceq_{C_\alpha}$ be as in \ref{prop:stable-order-generated} and
+$\preceq^+_C$ as in \ref{thm:cone-orders}(4).
+\begin{enumerate}
+\item \emph{(The chain.)} For $0 \le \alpha < \beta \le \infty$, $C_\alpha \subsetneq C_\beta$ and
+$\preceq_{C_\alpha} \subsetneq \preceq_{C_\beta}$. For $\alpha < \infty$ every nonzero member of $C_\alpha$ is positive
+definite, while $C_\infty = \PSD(d)$ contains every nonzero singular positive semidefinite matrix. The union of
+the $C_\alpha$, $0 \le \alpha < 2$, is $\{0\} \cup \{X \in \Sym(d) : (d+2)\lambda_{\min}(X) > \tr X\}$, a proper
+subset of $C_2$.
+\item \emph{(Which cones carry general linear families.)} Let $C \subseteq \Sym(d)$ be an $\Orth(d)$-invariant
+closed convex cone with $I \in C$ and $C \cap (-C) = \{0\}$, and consider the
+$(\GL(d), \preceq^+_C)$-cascade families of kernels (\ref{def:gw-cascade-family}(2)).
+\begin{enumerate}
+\item[(a)] If $C \not\subseteq \PSD(d)$, there is none.
+\item[(b)] If $C \subseteq \PSD(d)$ and $C$ contains a nonzero singular matrix, they are exactly the
+restrictions to the pairs $\Sigma \preceq^+_C \Sigma'$ of the affine Gaussian scale spaces
+\ref{eq:affine-gaussian}, $b > 0$.
+\item[(c)] Otherwise every nonzero member of $C$ is positive definite, the largest value $\beta(C)$ of
+$\tr X/\lambda_{\min}(X) - d$ over $X \in C \setminus \{0\}$ is attained, and $\beta(C) \in [0, \infty)$ is the
+least $\alpha$ with $C \subseteq C_\alpha$. For $0 < \gamma < 2$, $\Sigma \mapsto (\Sigma^{1/2})_*S_\gamma(I)$
+is the family of kernels from scale zero of a $(\GL(d), \preceq^+_C)$-cascade family if and only if
+$\gamma \ge \beta(C)$. A $(\GL(d), \preceq^+_C)$-cascade family whose $\mu_I$ is not Gaussian exists if and only
+if $\beta(C) < 2$; if $\beta(C) \ge 2$, the families are, as in (b), exactly the restrictions to the pairs
+$\Sigma \preceq^+_C \Sigma'$ of the affine Gaussian scale spaces \ref{eq:affine-gaussian}, $b > 0$.
+\end{enumerate}
+\item \emph{(The row along the chain.)} For $0 \le \alpha \le \infty$ let $\mathfrak F_\alpha$ be the set of
+laws $\mu_I$ of $(\GL(d), \preceq^+_{C_\alpha})$-cascade families of kernels.
+\begin{enumerate}
+\item[(a)] $\mathfrak F_0$ is the set of rotation-invariant self-decomposable laws other than $\delta_0$.
+\item[(b)] $\mathfrak F_\beta \subseteq \mathfrak F_\alpha$ for $\alpha \le \beta$, strictly when
+$\alpha < \beta \le 2$.
+\item[(c)] For $0 < \alpha < 2$, $\mathfrak F_\alpha$ contains $S_\gamma(I)$, $0 < \gamma < 2$, if and only
+if $\gamma \ge \alpha$, and contains the law $\mu_I$ of \ref{prop:orbit-step-cone}(1) for every profile whose
+dilation ratio has $R(\lambda) \ge \lambda^\alpha$ for $\lambda \ge 1$.
+\item[(d)] For $2 \le \alpha \le \infty$, $\mathfrak F_\alpha$ is the set of centred Gaussian laws with
+covariance $2bI$, $b > 0$.
+\end{enumerate}
+\end{enumerate}
+\statusA\quad\ledger{A5}\quad\ledger{A3}\quad\emph{(\textbf{Assignment.} \ledger{A5} and \ledger{A3}(i)--(ii)
+are spent through \ref{prop:anisotropy-budget}(1), once, in the necessity half of (2)(c) and so in (3) for
+$2 \le \alpha < \infty$, including the strictness at $\beta = 2$; \ledger{A3}(iii) through \ref{lem:elliptical-stable}(2), \ref{prop:stable-step-cone}(1)
+and \ref{prop:similarity-stable-order-families}(2), for the stable orbits and the profiles. Clauses (1), (2)(a)
+and (2)(b) spend nothing: (b) is \ref{thm:rank-deficient-step}, which cites nothing. For cascade families
+along $\preceq^+_C$, which has the path condition, entry A6 would give the infinite divisibility for which the
+budget spends A5 (\ref{thm:cascade-infinitely-divisible}(2)); the node does not take that route.
+Nor does it spend entry A9, through which \ref{thm:cone-orders}(4) makes $\preceq^+_C$ a partial order:
+the proof shows the antisymmetry directly, so that $(\GL(d), \preceq^+_C)$ is a wedge datum and (2) and (3)
+have their meaning without it, reading only the last sentence of \ref{lem:spectral-cones}(4), which spends
+nothing. The Lean does not need the antisymmetry, as its cascade families are stated for any relation.
+\textbf{What it is worth.} It is the organizing statement of the plan's wedge axis. The cones of the module form
+a chain $C_0 \subsetneq C_\alpha \subsetneq C_\beta \subsetneq C_2 \subsetneq C_\infty = \PSD(d)$, with
+$C_0$ the rays and $C_\alpha = \mathfrak k_\alpha \cap \Sym(d)$ for $0 < \alpha < 2$ (\ref{prop:stable-order-generated}(2);
+the full exponent cones are $\mathfrak k_\alpha = C_\alpha \oplus$ the skew matrices). Along it the general linear row
+shrinks from every self-decomposable orbit to the Gaussian, the stable index deciding the wedge exactly
+for the stable orbits. The gap at $2$ has two causes. When the cone reaches the boundary of $\PSD(d)$, whose
+nonzero points are the nonzero singular matrices, a single rank-deficient step $I \to e^X$ forces the
+Gaussian (\ref{thm:rank-deficient-step}), and no $C_\alpha$ with $\alpha < \infty$ reaches it. Between $C_2$ and
+that boundary the budget $\tr B < (d+2)\lambda_{\min}(\mathrm{sym}\,B)$ of \ref{prop:anisotropy-budget}
+excludes every family with a non-Gaussian $\mu_I$, at $\alpha = 2$ itself included, since the stable cones fill only the open part of
+$C_2$. For a cone in case (c), the stable orbits that are families and the existence of non-Gaussian
+families are decided by one number, $\beta(C)$ (set $\beta(C) := \infty$ in case (b)). \textbf{The
+converse of the profile clause of (3)(c)}, and the fact that two cones with the same $\beta(C)$ carry the
+same laws $\mu_I$, are \ref{prop:wedge-axis-profiles}: for every profile, with any Gaussian part,
+$\mu_I \in \mathfrak F_\alpha$ if and only if $R(\lambda) \ge \lambda^\alpha$ for every $\lambda \ge 1$, and with the
+polar criterion (\ref{thm:cited-A2}) this describes $\mathfrak F_\alpha$ completely. They are a separate node, so that this node's Lean covers all of it (ADR-0025). \textbf{Not claimed}: the single-step
+converse of \ref{prop:orbit-step-cone}, for a step not embedded in a cascade; orders on $\PD(d)$ that are not generated by a cone
+(\ref{thm:cone-orders}(3)); the Loewner order of $\PSD(d)$ itself, whose families are those of
+\ref{thm:affine-rigidity} and which is larger than $\preceq^+_{C_\infty}$; and any statement for groups
+smaller than $\GL(d)$, where \ref{prop:similarity-stable-order-kernels} has the similarity row along
+$\preceq^+_{C_\alpha}$, $0 < \alpha < 2$.)}
+\end{theorem}
+
+\begin{proof}
+\leanok
+% CHANGED Q-0281 wave 2: entry-free route (the author's decision on W2F-1). This paragraph is new: it
+% proves what the proof reads of the orders, so that no step reads thm:cone-orders(1), (4) or
+% lem:gw-kernels-from-origin(1)-(2) with (GL(d), the cone order) as a wedge datum, whose antisymmetry
+% spends ledger A9.
+% CHANGED Q-0281 wave 2: blind review W2H-1. The antisymmetry of the cone order on PSD(d), "not used"
+% before, is proved in this paragraph without ledger A9, in steps (i)-(iii): it is what makes
+% (GL(d), the cone order) a wedge datum, which the statements of (2) and (3) presuppose
+% (def:gw-cascade-family), here and in lem:wedge-axis-chain(2). New mathematics in a green node's proof;
+% the Lean is unaffected, because IsGWCascadeFamily takes any relation, so the node stays green. Step
+% (i) reads the last sentence of lem:spectral-cones(4), whose declaration
+% AffineHemigroup.orthInvariant_pointed_cone_sign prints Lean core (CIAxiomGuard.lean); it does not
+% reach logSpec_product_majorized, which in SpectralCones.lean only expSet_specCone, clause (5), uses.
+% CHANGED Q-0281 wave 2: blind review W2H-3: the restriction also reads the invariance of the smaller
+% order under the smaller group.
+% CHANGED writing-rules pass (2026-10-14; records/affine/PASS-writing-rules-affine.md, owed item 6):
+% the proof takes the wording of the paper's copy (Appendix C), without the ledger accounting: "without
+% the entry", "which thm:cone-orders(4) obtains through ledger A9 ... without it", "that sentence spends
+% no ledger entry" and "defined without ledger A9" go. Which entries the node spends stays in its
+% annotation; no step of the argument changes.
+\emph{The orders.} The proof reads of $\preceq_C$ and $\preceq^+_C$ only what the causal
+curves give directly. By facts (c) and (a) of the proof of \ref{prop:stable-order-generated}: for $X \in C$
+the curve $t \mapsto e^{tX}$ is $C$-causal from $I$ to $e^X$, so $I \preceq_C e^X$; as $(\log c)I \in C$ for
+$c \ge 1$, $\Sigma \preceq_C c\Sigma$ for $\Sigma \in \PD(d)$; and if $C \subseteq \PSD(d)$, a $C$-causal curve
+$\gamma$ has $\gamma' = \gamma^{1/2}(\gamma^{-1/2}\gamma'\gamma^{-1/2})\gamma^{1/2} \ge 0$ almost everywhere, so
+it is Loewner-monotone and $\preceq^+_C$ is contained in the Loewner order. A $C$-causal curve is
+$C'$-causal for every cone $C'$ containing $C$, so $\preceq^+_C \subseteq \preceq^+_{C'}$. Two $C$-causal curves
+$\gamma_1$, $\gamma_2$ with $\gamma_1(1) = \gamma_2(0)$ run in succession at double speed, $\gamma_1(2t)$ for
+$t \le 1/2$ and $\gamma_2(2t-1)$ after, form a $C$-causal curve: its entries are absolutely continuous, each being its value at $0$ plus the
+integral of the derivatives of $\gamma_1$ and $\gamma_2$ run at double speed, and its relative derivative is twice that of
+$\gamma_1$ or $\gamma_2$, which lies in the cone $C$. So $\preceq_C$ is transitive, and with the rays so is
+$\preceq^+_C$. For $A \in \GL(d)$, $A\gamma A^{\tp}$ is $C$-causal with $\gamma$, $C$ being $\Orth(d)$-invariant: its
+relative derivative is
+$Q(\gamma^{-1/2}\gamma'\gamma^{-1/2})Q^{\tp}$ with $Q := (A\gamma A^{\tp})^{-1/2}A\gamma^{1/2}$ orthogonal. So
+$\preceq^+_C$ is reflexive, transitive and $\GL(d)$-invariant on $\PSD(d)$ and contains the rays.
+Its antisymmetry is that of \ref{thm:cone-orders}(4), and the causal curves give it directly.
+(i) Every nonzero $X \in C$ has $\tr X > 0$, by the last sentence of \ref{lem:spectral-cones}(4), as
+$I \in C$. (ii) Let $\gamma$ be $C$-causal. By fact (b) of the proof of
+\ref{prop:stable-order-generated}, $\det\gamma$, a polynomial in the absolutely continuous entries of
+$\gamma$, is absolutely continuous on $[0,1]$, and at almost every $t$ Jacobi's formula gives
+$(\det\gamma)' = \det\gamma\,\tr Y$ with $Y := \gamma^{-1/2}\gamma'\gamma^{-1/2} \in C$, so $(\det\gamma)' \ge 0$
+by (i); being the integral of its derivative, $\det\gamma$ is nondecreasing. Now let $\Sigma \preceq_C \Sigma'$
+and $\Sigma' \preceq_C \Sigma$, along $C$-causal curves $\gamma_1$ from $\Sigma$ to $\Sigma'$ and $\gamma_2$ from
+$\Sigma'$ to $\Sigma$. Then $\det\Sigma \le \det\Sigma' \le \det\Sigma$, so $\det\gamma_1$, nondecreasing with
+equal values at $0$ and $1$, is constant, and its derivative $\det\gamma_1\,\tr Y_1$ vanishes almost
+everywhere. As $\det\gamma_1 > 0$, $\tr Y_1 = 0$ almost everywhere, and so $Y_1 = 0$ almost everywhere by (i).
+Hence $\gamma_1' = \gamma_1^{1/2}Y_1\gamma_1^{1/2} = 0$ almost everywhere, $\gamma_1$ is constant by fact (a),
+and $\Sigma = \Sigma'$. (iii) Let $\Sigma \preceq^+_C \Sigma'$ and $\Sigma' \preceq^+_C \Sigma$. Only $0$ lies
+below $0$, since $0 = c\,\Sigma''$ with $c \ge 1$ forces $\Sigma'' = 0$ and $0$ is not definite; so if one of
+the two is $0$, so is the other. Otherwise both are nonzero, and both are singular or both are definite:
+a matrix above a nonzero singular $\Sigma$ is a multiple $c\,\Sigma$, the third case of the definition
+needing $\Sigma$ definite, and a matrix above a definite one is definite. If both are singular,
+$\Sigma' = c\,\Sigma$ and $\Sigma = c'\Sigma'$ with $c, c' \ge 1$, so $cc' = 1$ and $c = 1$. If both are
+definite, each of the two relations is $\preceq_C$, as $\Sigma \preceq_C c\Sigma$ for $c \ge 1$, and (ii) gives
+$\Sigma = \Sigma'$. So $\preceq^+_C$ is a partial order, and $(\GL(d), \preceq^+_C)$ is a wedge datum
+(\ref{def:gw-cascade-family}), $\GL(d)$ being a closed subgroup containing the dilations. A family along one
+order is restricted to a smaller order by the argument of \ref{lem:gw-kernels-from-origin}(1), which reads
+of the two orders only that one contains the other and that the smaller is invariant under the smaller
+group, which every order restricted to here is; and a function that agrees on the pairs
+$\Sigma \preceq^+_C \Sigma'$ with a $(\GL(d), \preceq^+_C)$-cascade family is one, as (K1)--(K4) read it only
+on pairs, which $\preceq^+_C$ being transitive and $\GL(d)$-invariant keeps among themselves.
+
+% CHANGED Q-0281 wave 2: entry-free route (the author's decision on W2F-1). The strict inclusion of the
+% orders is read through prop:stable-order-generated(1), in place of thm:cone-orders(1) and
+% prop:invariant-orders(1).
+\emph{(1).} Let $0 \le \alpha < \beta \le \infty$. A positive semidefinite $X$ has $\lambda_{\min}(X) \ge 0$, so
+$(d+\beta)\lambda_{\min}(X) \ge (d+\alpha)\lambda_{\min}(X) \ge \tr X$ when $\beta < \infty$, and $C_\alpha
+\subseteq C_\beta$ (trivially if $\beta = \infty$). Strictness: for $\beta < \infty$,
+$X := \diag(1, \dots, 1, 1 + \beta)$ has $\tr X = d + \beta$ and $\lambda_{\min}(X) = 1$, so it lies in $C_\beta$
+and not in $C_\alpha$; for $\beta = \infty$, $X := e_1e_1^{\tp} \in \PSD(d)$ has $\lambda_{\min} = 0 < 1 = \tr$,
+so it lies in no $C_\alpha$, $\alpha < \infty$. A $C_\alpha$-causal curve is $C_\beta$-causal, so
+$\preceq_{C_\alpha} \subseteq \preceq_{C_\beta}$, and $I \preceq_{C_\beta} e^X$ for the $X$ just found. But
+$I \not\preceq_{C_\alpha} e^X$: by \ref{prop:stable-order-generated}(1), $I \preceq_{C_0} e^X$ would make $e^X = cI$,
+hence $X = (\log c)I \in C_0$, and for $\alpha > 0$, $I \preceq_{C_\alpha} e^X$ would give
+$e^{(d+\alpha)\lambda_{\min}(X)} = \lambda_{\min}(e^X)^{d+\alpha} \ge \det e^X = e^{\tr X}$, hence $X \in C_\alpha$.
+So $\preceq_{C_\alpha} \subsetneq \preceq_{C_\beta}$. For $\alpha < \infty$ and $0 \ne X \in C_\alpha$, $\tr X > 0$ and
+$\lambda_{\min}(X) \ge \tr X/(d+\alpha) > 0$. The union: a nonzero $X$ in some $C_\alpha$, $\alpha < 2$, has
+$\lambda_{\min}(X) > 0$ and so $(d+2)\lambda_{\min}(X) > (d+\alpha)\lambda_{\min}(X) \ge \tr X$; conversely
+$(d+2)\lambda_{\min}(X) > \tr X \ge d\lambda_{\min}(X)$ gives $\lambda_{\min}(X) > 0$, so $X \ge 0$, and
+$X \in C_\alpha$ with $\alpha := \tr X/\lambda_{\min}(X) - d \in [0, 2)$. The matrix $\diag(1, \dots, 1, 3)$ lies in
+$C_2$, with equality, and not in the union.
+
+\emph{(2), the kernels from scale zero.} Let a $(\GL(d), \preceq^+_C)$-cascade family be given. The ray order is
+contained in $\preceq^+_C$ (its two cases are two of the three), so the family restricts to a
+$(\GL(d), \text{rays})$-family with the same kernels from scale zero, and
+\ref{prop:gw-ray-families}(3) gives $\mu_\Sigma = (\Sigma^{1/2})_*\mu_I$ with $\mu_I$ rotation invariant,
+self-decomposable and not $\delta_0$, and $\widehat\mu_\Sigma(\omega) = F(\langle\omega,\Sigma\omega\rangle)$ with
+$F(u) = \widehat\mu_I(\sqrt u\,e_1)$ continuous, $F(0) = 1$. $F$ has no zero (\ref{prop:gw-ray-families}(1)) and is
+real ($\mu_I$ is invariant under $-I$), so $F > 0$, and $g := -\log F$ is continuous, $g(0) = 0$, $g \ge 0$ (as
+$|F| \le 1$), and $g \not\equiv 0$ (as $\mu_I \ne \delta_0$). For $X \in C$, $I \preceq^+_C e^X$, and (K1) at
+$0 \preceq^+_C I \preceq^+_C e^X$ gives $\mu_{e^X} = \mu_{I,e^X} * \mu_I$, that is
+\[
+  e^{-g(\langle\omega, e^X\omega\rangle)} = e^{-g(|\omega|^2)}\,\widehat\mu_{I,e^X}(\omega)
+  \qquad (\omega \in \RR^d), \qquad (\ast)
+\]
+
+\emph{(2)(a).} Let $X \in C$ have an eigenvalue $\lambda < 0$ with unit eigenvector $v$, and $m := e^\lambda < 1$.
+At $\omega = uv$, ($\ast$) and $|\widehat\mu_{I,e^X}| \le 1$ give $g(mu^2) \ge g(u^2)$, so $g(x) \le g(mx) \le
+\dots \le g(m^nx) \to g(0) = 0$ for every $x \ge 0$, against $g \not\equiv 0$.
+
+% CHANGED Q-0281 wave 2: entry-free route (the author's decision on W2F-1). The increments are read
+% from (K1) at 0, Sigma, Sigma' in place of lem:gw-kernels-from-origin(2), and the inclusion in the
+% Loewner order from the causal curves in place of thm:cone-orders(4).
+\emph{(2)(b).} Let $0 \ne X \in C$ be singular and $P := e^X - I$, positive semidefinite with $\rank P =
+\rank X$, since its eigenvalues $e^{x_i} - 1$ vanish exactly where those of $X$ do; so $0 < \rank P < d$. ($\ast$)
+is \ref{eq:one-step} with $\Sigma = I$ and $\rho = \mu_{I,I+P}$, and \ref{thm:rank-deficient-step} gives
+$g(u) = bu$ with $b = g(1)$, $b > 0$ as $g \not\equiv 0$. So $\widehat\mu_\Sigma(\omega) =
+e^{-b\langle\omega,\Sigma\omega\rangle}$ for every $\Sigma$. For $\Sigma \preceq^+_C \Sigma'$, (K1) at
+$0 \preceq^+_C \Sigma \preceq^+_C \Sigma'$ gives $\widehat\mu_{\Sigma'} = \widehat\mu_{\Sigma,\Sigma'}\,\widehat\mu_\Sigma$,
+and $\widehat\mu_\Sigma$ has no zeros, so $\widehat\mu_{\Sigma,\Sigma'} = e^{-b\langle\omega,(\Sigma'-\Sigma)\omega\rangle}$,
+the transform of the affine Gaussian kernel ($\Sigma \le \Sigma'$ in the Loewner order, as
+$C \subseteq \PSD(d)$): the family is the restriction of the affine Gaussian scale space. Conversely, the affine
+Gaussian scale space with constant $b > 0$ is an affine cascade family (\ref{thm:affine-rigidity}), that is a
+$(\GL(d), \text{Loewner})$-family; $\preceq^+_C$ is contained in the Loewner order as $C \subseteq \PSD(d)$, so
+its restriction is a $(\GL(d), \preceq^+_C)$-family, and so is every function that agrees with it on the pairs.
+
+% CHANGED Q-0281 wave 2: proof rewritten to the Lean route (the slice tr X = 1 in place of the unit
+% sphere of a norm).
+\emph{(2)(c), the number $\beta(C)$.} Now $C \subseteq \PSD(d)$ has no nonzero singular member, so its nonzero
+members are positive definite. On them $f(X) := \tr X/\lambda_{\min}(X) - d$ is continuous,
+nonnegative and invariant under positive scaling. The slice $\{X \in C : \tr X = 1\}$ is closed, and bounded,
+since a positive semidefinite $X$ with $\tr X = 1$ has entries in $[-1, 1]$; it contains $I/d$, and every
+$X \in C \setminus \{0\}$ has the multiple $X/\tr X$ in it. So $f$ attains on the slice a largest value
+$\beta(C) \ge 0$, which is its largest value on $C \setminus \{0\}$. For $\alpha \in [0, \infty)$,
+$C \subseteq C_\alpha$ means $(d+\alpha)\lambda_{\min}(X) \ge \tr X$, that is $\alpha \ge f(X)$, for every nonzero
+$X \in C$, which is $\alpha \ge \beta(C)$.
+
+% CHANGED Q-0281 wave 2: entry-free route (the author's decision on W2F-1). C contained in C_gamma makes
+% every C-causal curve C_gamma-causal, in place of exp C contained in exp C_gamma.
+\emph{(2)(c), the stable orbits.} If $\gamma \ge \beta(C)$, then $C \subseteq C_\gamma$, so every $C$-causal
+curve is $C_\gamma$-causal and $\preceq^+_C \subseteq \preceq^+_{C_\gamma}$; by \ref{prop:stable-order-generated}(1),
+$\preceq^+_{C_\gamma}$ is the order $\le_\gamma$ of \ref{prop:similarity-stable-order-families}(1), and that
+proposition's clause (2), read with its $\alpha$ equal to $\gamma$ and the stable law of index $\gamma$, gives a
+$(\GL(d), \le_\gamma)$-family with kernels $(\Sigma^{1/2})_*S_\gamma(I)$, which restricts. Conversely, if these
+are the kernels of a $(\GL(d), \preceq^+_C)$-family and $X \in C$, then $\mu_{e^X} = (e^{X/2})_*S_\gamma(I) =
+S_\gamma(e^X)$ (\ref{lem:elliptical-stable}(2)) is $S_\gamma(I) * \mu_{I,e^X}$, and
+\ref{prop:stable-step-cone}(1), (a)$\Rightarrow$(c), with $\Sigma = I$ and $\Sigma' = e^X$, gives
+$\lambda_{\min}(e^X)^{d+\gamma} \ge \det e^X$, that is $X \in C_\gamma$ (\ref{prop:stable-order-generated}(1)).
+So $C \subseteq C_\gamma$ and $\gamma \ge \beta(C)$.
+
+% CHANGED Q-0281 wave 2: proof rewritten to the Lean route (the Gaussian end: g read on the
+% one-dimensional marginal, in place of the covariance of a rotation-invariant Gaussian law).
+\emph{(2)(c), the non-Gaussian families.} If $\beta(C) < 2$, take any index $\gamma$ with
+$\beta(C) \le \gamma < 2$ and $\gamma > 0$, for instance $\gamma := \max(\beta(C), 1)$. The
+stable orbit of index $\gamma$ is a family, and $S_\gamma(I)$ is not Gaussian, its transform
+$e^{-|\omega|^\gamma}$ having modulus $e^{-t^\gamma}$ at $\omega = te_1$, which is $e^{-at^2}$ for no $a \ge 0$.
+Conversely let a family have a non-Gaussian $\mu_I$, and let $0 \ne X \in C$ and $t \ge 0$. By (K1), as in ($\ast$) with
+$tX \in C$ in place of $X$, and the form of the kernels, $(e^{tX/2})_*\mu_I = \mu_{e^{tX}} = \mu_I * \mu_{I,e^{tX}}$; applying
+$(e^{-tX/2})_*$, $\mu_I = (e^{-tB})_*\mu_I * (e^{-tB})_*\mu_{I,e^{tX}}$ with $B := X/2$, so $\mu_I$ is
+$B$-self-decomposable in the sense of \ref{prop:stable-exponent-cone}. $B$ is positive definite, so
+$e^{-tB} \to 0$, and $\mu_I$ is rotation invariant and not Gaussian; \ref{prop:anisotropy-budget}(1) gives
+$\tr B < (d+2)\lambda_{\min}(B)$, that is $f(X) < 2$. As the largest value of $f$ is attained, $\beta(C) < 2$.
+If $\beta(C) \ge 2$, then every family has a Gaussian $\mu_I$. Its image under $x \mapsto \langle e_1, x\rangle$
+is a Gaussian law on $\RR$, of some variance $v \ge 0$, so $e^{-g(t^2)} = |\widehat\mu_I(te_1)| = e^{-vt^2/2}$ and
+$g(u) = bu$ with $b := v/2$, and $b > 0$ as $g \not\equiv 0$; the end of (2)(b) shows that the
+family is the restricted affine Gaussian scale space; these exist, by the converse there, which used only
+$C \subseteq \PSD(d)$.
+
+% CHANGED Q-0281 wave 2: entry-free route (the author's decision on W2F-1). The ray order is read
+% through prop:stable-order-generated(1) and the definition of the order on PSD(d), in place of
+% thm:cone-orders(4).
+\emph{(3).} By \ref{prop:stable-order-generated}(1), $\Sigma \preceq_{C_0} \Sigma'$ on $\PD(d)$ means $\Sigma' = c\Sigma$
+with $c \ge 1$, so by the definition of $\preceq^+$ the order $\preceq^+_{C_0}$ is the ray order, and
+\ref{prop:gw-ray-families}(3) is the description of $\mathfrak F_0$. For $\alpha \le \beta$,
+$\preceq^+_{C_\alpha} \subseteq \preceq^+_{C_\beta}$ by (1), and a family restricts; so
+$\mathfrak F_\beta \subseteq \mathfrak F_\alpha$. For $0 \le \alpha < \infty$, $C_\alpha$ satisfies the
+hypotheses of (2)(c), as its nonzero members are definite by (1), and $\beta(C_\alpha) = \alpha$, since
+$f \le \alpha$ on $C_\alpha$ with equality at $\diag(1, \dots, 1, 1+\alpha)$. The clauses of (3) follow,
+range by range.
+\begin{itemize}
+\item $\alpha = 0$: $\mathfrak F_0$ is described above.
+\item $0 < \alpha < 2$: the stable clause is (2)(c), and the profile clause is
+\ref{prop:similarity-stable-order-families}(2), its order $\le_\alpha$ being $\preceq^+_{C_\alpha}$.
+\item $2 \le \alpha < \infty$: (2)(c) with $\beta(C_\alpha) \ge 2$ gives the Gaussians.
+\item $\alpha = \infty$: $C_\infty = \PSD(d)$ contains $e_1e_1^{\tp}$, so (2)(b) gives the Gaussians.
+\end{itemize}
+Strictness for $\alpha < \beta \le 2$: let $\gamma := \alpha$ if $\alpha > 0$ and $\gamma := \beta/2$ if
+$\alpha = 0$, so $0 < \gamma < \beta$ and $\gamma \ge \alpha$. By (2)(c) with $\beta(C_\alpha) = \alpha$,
+$S_\gamma(I) \in \mathfrak F_\alpha$; and $S_\gamma(I) \notin \mathfrak F_\beta$, by (2)(c) with $\beta(C_\beta) =
+\beta > \gamma$ if $\beta < 2$, and because $\mathfrak F_2$ contains only Gaussian laws if $\beta = 2$.
+\end{proof}
+
+% CHANGED Q-0281: split from thm:wedge-axis (ADR-0025; records/formalization/PRICING.md): clauses
+% (1), (2)(a) and (2)(b), copied verbatim with the parent's clause numbers and the preamble of (2). They
+% spend nothing, where the parent's (2)(c) and (3) spend A5 and A3; the parent \uses this node, and its
+% text and numbering are unchanged.
+% CHANGED Q-0281 wave 2: entry-free route (the author's decision on W2F-1). \uses re-pointed to what
+% the proof reads: thm:cone-orders, lem:cone-orders-psd and prop:invariant-orders dropped.
+% CHANGED Q-0281 wave 2: blind review W2H-1: the wedge datum that (2) presupposes is the parent's
+% paragraph on the orders, which now proves the antisymmetry without ledger A9; \uses gains
+% lem:spectral-cones, whose last sentence of (4) that paragraph reads and which spends nothing, and the
+% annotation and the proof say so. The Lean is unaffected (IsGWCascadeFamily takes any relation).
+% CHANGED Q-0281 wave 2: blind review W2H-2: \uses gains def:cone-orders-curves, the vocabulary of the
+% statement; the text is unchanged.
+\begin{lemma}[the chain of cones, and the cones that carry only the Gaussian]
+\label{lem:wedge-axis-chain}
+\uses{def:cone-orders-curves,lem:spectral-cones,prop:stable-order-generated,def:affine-cascade-family,lem:affine-gaussian-transform,def:gw-cascade-family,lem:gw-kernels-from-origin,prop:gw-ray-families,thm:rank-deficient-step,thm:affine-rigidity}
+\lean{AffineHemigroup.wedge_axis_chain, AffineHemigroup.wedge_axis_not_psd,
+AffineHemigroup.wedge_axis_singular}\leanok
+Let $d \ge 2$, and let $C_\alpha$, $\preceq_\alpha$ be as in \ref{prop:stable-order-generated} and
+$\preceq^+_C$ as in \ref{thm:cone-orders}(4).
+\begin{enumerate}
+\item[(1)] \emph{(The chain.)} For $0 \le \alpha < \beta \le \infty$, $C_\alpha \subsetneq C_\beta$ and
+$\preceq_\alpha \subsetneq \preceq_\beta$. For $\alpha < \infty$ every nonzero member of $C_\alpha$ is positive
+definite, while $C_\infty = \PSD(d)$ contains every nonzero singular positive semidefinite matrix. The union of
+the $C_\alpha$, $0 \le \alpha < 2$, is $\{0\} \cup \{X \in \Sym(d) : (d+2)\lambda_{\min}(X) > \tr X\}$, a proper
+subset of $C_2$.
+\item[(2)] \emph{(Which cones carry general linear families.)} Let $C \subseteq \Sym(d)$ be an $\Orth(d)$-invariant
+closed convex cone with $I \in C$ and $C \cap (-C) = \{0\}$, and consider the
+$(\GL(d), \preceq^+_C)$-cascade families of kernels (\ref{def:gw-cascade-family}(2)).
+\begin{enumerate}
+\item[(a)] If $C \not\subseteq \PSD(d)$, there is none.
+\item[(b)] If $C \subseteq \PSD(d)$ and $C$ contains a nonzero singular matrix, they are exactly the
+restrictions to the pairs $\Sigma \preceq^+_C \Sigma'$ of the affine Gaussian scale spaces
+\ref{eq:affine-gaussian}, $b > 0$.
+\end{enumerate}
+\end{enumerate}
+\statusT\quad\emph{(Cites nothing beyond the spectral theorem and the uniqueness of the Fourier
+transform: (b) is \ref{thm:rank-deficient-step}. That $(\GL(d), \preceq^+_C)$ is a wedge datum, which (2)
+presupposes, is proved in the parent's paragraph on the orders without entry A9, reading only the last
+sentence of \ref{lem:spectral-cones}(4), which spends nothing. Clauses (1), (2)(a) and (2)(b) of
+\ref{thm:wedge-axis}, split off on 2026-10-04 (Q-0281, ADR-0025); the numbering stays the parent's.)}
+\end{lemma}
+
+\begin{proof}
+\leanok
+% CHANGED Q-0281 wave 2: entry-free route (the author's decision on W2F-1): the parent's proof gains
+% the paragraph on the orders, which this part reads.
+% CHANGED Q-0281 wave 2: blind review W2H-1: the pointer names the wedge datum of (2).
+% CHANGED writing-rules pass (2026-10-14): the parent's paragraph is now headed "The orders".
+This is the part of the proof of \ref{thm:wedge-axis} headed the orders, (1), (2)
+the kernels from scale zero, (2)(a) and (2)(b). The first of these proves that $\preceq^+_C$ is a partial
+order and $(\GL(d), \preceq^+_C)$ a wedge datum, the one whose cascade families (2) considers.
+\end{proof}
+
+% not in the draft: round 3 of the external review, report E, section 3.1 and required change 1
+% (records/affine/reviews/review-content-review-3-E-section-4.9-5-appendices-D-F-I-claude-fable-5.1.md;
+% VERIFY-round3-smaller-groups-paper.md section 1, and VERIFY-round3-landscape-orbits-paper.md section 12
+% for report C's laws with a Gaussian part), the author's decision D10 (PLAN-review-response-paper.md
+% R3.0, 2026-11-03; option (b) of R3.1 item 1): the converse of the profile clauses of
+% prop:similarity-stable-order-families(2) and thm:wedge-axis(3)(c), with any Gaussian part, the same
+% along a cone order, and with the polar criterion (ledger A2) the whole cell. A new node, so that the
+% two green nodes keep a Lean that covers all of them (ADR-0025); they point here in their annotations.
+% What writing it down found: (i) the "open converse of prop:orbit-step-cone" that those annotations
+% named is the single-step converse; for a cascade family it is not needed, the increments being
+% infinitely divisible (thm:cascade-infinitely-divisible(2)) and an infinitely divisible increment
+% ordering the Levy densities (prop:similarity-orbit-family(1)); (ii) the cone version needs no path
+% condition for the whole order, only the chain s -> e^{stX} for one X attaining beta(C); (iii) the
+% whole cell applies the polar criterion (A2) and A3(i) directly to mu_I, already infinitely
+% divisible, so entry A4, which the forward direction of prop:isotropic-polar-reading(1) spends to
+% make a self-decomposable law infinitely divisible, is not needed (round 3: the proof first read
+% that node, whose uses-edge brought A4 into the trust base, and was rewritten to the direct route,
+% with the sphere mean in place of its radial-image uniqueness; the edge and def:isotropic-origin-datum
+% left the uses list); (iv) right-continuity is the hypothesis
+% of prop:similarity-orbit-family(1), and the whole cell takes the right-continuous representative of
+% the polar profile. Priced at writing, beside the statement: clause (1), an assembly of
+% stable_order_gl_row, gw_kernels_from_origin_converse (the Gaussian factor), chain_infinitelyDivisible,
+% sim_orbit_id_increment at h = id and C(Sigma) = a Sigma, wedge_axis_index and dilRatio_exponents,
+% about 120-180 Lean lines; clause (2), a form of polar_reading_forward that takes infinite
+% divisibility as a hypothesis (about 20 lines), the right-continuous modification of a monotone
+% profile and the identification of the laws, about 150-250 lines. The \lean tag names the two
+% declarations to be written in the desktop session; until then the node is \notready, proved in print.
+% CHANGED the author's decision D14 (2026-11-04; PLAN-review-response-paper.md R3.0, the round-3
+% referee's finding 1): a widening, the author's, not a safe-direction change. The profile k of the
+% statement's preamble, which clause (1) reads, is no longer assumed right-continuous; clause (2) keeps
+% "right-continuous" on its own bound k, where it picks one profile for each law (without it the set of
+% laws would be the same). The proof gains the paragraph "(1), the right-continuous modification": the
+% modification k(r+) has the same law and the same lower exponent, so the necessity may take k
+% right-continuous, as prop:similarity-orbit-family(1) asks. Remark (iv) above now concerns the
+% necessity of (1) and the cell. The "Not claimed" sentence on profiles that are not right-continuous is
+% dropped. Price added to clause (1): the modification is a profile with the same law and the same
+% lower exponent, about 60-100 Lean lines, shared with clause (2)'s modification of the polar profile.
+% CHANGED round 3, the node's Lean: the two clauses are proved, in WedgeAxisProfiles.lean (490 lines,
+% priced 240-380 with the modification) and WedgeAxisCell.lean (479 lines, priced 170-270), headers
+% included. The tag names the four declarations that state the node and rowLaws_coe_eq_coneLaws, for
+% F_alpha = F(C_alpha). What writing it down found: (i) the chain lemma asks for a partial order, and
+% for C inside PSD(d) the antisymmetry of the cone order is read from the Loewner order, so A9 stays
+% unspent; (ii) the Gaussian part goes through one orbit, of N(0, aI) * nu_I, so that (a)-(c) of the
+% kernels from the origin are those of an orbit of a rotation-invariant law; (iii) the guard prints
+% A3(iii) in the necessity half too, so the Assignment says so; (iv) the hypotheses alpha < 2 of the
+% cell and beta(C) < 2 of the cones are not read: the form of mu_I and clause (1) exclude every profile
+% once the number is at least 2, since beta_-(k) < 2. So those Gaussian ends hold on A2, A3 and A6, where
+% the Not claimed sentence reaches them through A5. The statement keeps the hypotheses: dropping them
+% would be a widening, the author's. Route: the proof's "(2), the form of mu_I" no longer proves the mean
+% k right-continuous by monotone convergence; the Lean takes the right-continuous modification of the
+% first paragraph on it, so the proof says that. Nothing else in the proof moved: the Lean's packaging
+% of (ii) and (i) reads the same conditions, which the printed sufficiency and first paragraph also prove.
+% CHANGED the author's decision D16 (2026-11-04; PLAN-review-response-paper.md R3.0): a widening, the
+% author's. Clause (2) drops alpha < 2 and beta(C) < 2, which neither proof read (item (iv) above). The
+% cell now runs over 0 < alpha < infinity, and the statement says what is left from alpha = 2 on, as
+% beta_-(k) < 2; so the sets of laws of thm:wedge-axis(2)(c) and (3)(d), for finite alpha, also hold on A6,
+% A3 and A2, without A5, and the end of its (2)(b), which spends nothing, then gives the families. That
+% theorem's own proof is not rerouted: prop:anisotropy-budget(1) spends A5 in any case, so the entry stays
+% in the paper, and A2 and A6 are no lighter a route. Two declarations for the Gaussian ends. The blind
+% referee (records/affine/REFEREE-lean-round3.md, "D16") corrected the first wording of these sentences.
+\begin{proposition}[the general linear row along the chain: the profiles, and the whole cell]
+\label{prop:wedge-axis-profiles}
+\uses{thm:wedge-axis,def:gw-cascade-family,lem:gw-kernels-from-origin,thm:cascade-infinitely-divisible,prop:stable-order-generated,prop:similarity-stable-order-families,lem:stable-order-psd,prop:orbit-step-cone,lem:dilation-ratio,prop:similarity-orbit-family,prop:gw-ray-families,thm:affine-rigidity,thm:cited-A2,thm:cited-A3,thm:cited-A6}
+\lean{AffineHemigroup.wedge_axis_profiles, AffineHemigroup.wedge_axis_profiles_stable,
+AffineHemigroup.rowLaws_coe_eq_coneLaws, AffineHemigroup.wedge_axis_cell,
+AffineHemigroup.wedge_axis_cell_gaussian, AffineHemigroup.wedge_axis_cone_laws,
+AffineHemigroup.wedge_axis_cone_laws_gaussian}\leanok
+Let $d \ge 2$, and let $C_\alpha$, $\preceq^+_C$, the number $\beta(C)$ and $\mathfrak F_\alpha$ be as in
+\ref{thm:wedge-axis}. For a cone $C$ as in \ref{thm:wedge-axis}(2) with $C \subseteq \PSD(d)$ and no nonzero
+singular member, the case (2)(c) there, write $\mathfrak F(C)$ for the set of laws $\mu_I$ of
+$(\GL(d), \preceq^+_C)$-cascade families of kernels, so that $\mathfrak F_\alpha = \mathfrak F(C_\alpha)$ for
+$0 \le \alpha < \infty$. Let $k$ be a profile as in \ref{prop:orbit-step-cone}, with dilation
+ratio $R$ and lower exponent $\beta_-(k)$ (\ref{lem:dilation-ratio}(3)), let $\nu_I$ be its law
+(\ref{prop:orbit-step-cone}(1)), and for $a \ge 0$ write $N(0, aI)$ for the centred Gaussian law with
+covariance $aI$.
+\begin{enumerate}
+\item \emph{(The profiles.)} Let $C$ be such a cone, with $\beta(C) > 0$. Then $N(0, aI) * \nu_I \in \mathfrak F(C)$
+if and only if $\beta(C) \le \beta_-(k)$. In particular, for $0 < \alpha < 2$, $N(0, aI) * \nu_I \in \mathfrak F_\alpha$
+if and only if $R(\lambda) \ge \lambda^\alpha$ for every $\lambda \ge 1$, and then
+$\Sigma \mapsto N(0, a\Sigma) * (\Sigma^{1/2})_*\nu_I$, $\Sigma \in \PSD(d)$, is the family of kernels from scale
+zero of a $(\GL(d), \preceq^+_{C_\alpha})$-cascade family of kernels.
+\item \emph{(The whole cell.)} For $0 < \alpha < \infty$, $\mathfrak F_\alpha$ consists of the laws $N(0, aI)$, $a > 0$,
+and the laws $N(0, aI) * \nu_I$, $a \ge 0$, of the right-continuous profiles $k$ with $\beta_-(k) \ge \alpha$.
+From $\alpha = 2$ on there is no such profile, so $\mathfrak F_\alpha$ consists of the laws $N(0, aI)$, $a > 0$.
+For a cone $C$ as above, $\mathfrak F(C) = \mathfrak F_{\beta(C)}$: the laws $\mu_I$ of the families
+along $\preceq^+_C$ depend on $C$ only through $\beta(C)$.
+\end{enumerate}
+\statusA\quad\ledger{A6}\quad\ledger{A3}\quad\ledger{A2}\quad\emph{(\textbf{Assignment.} \ledger{A6},
+Khintchine's theorem, through \ref{thm:cascade-infinitely-divisible}(2): in (1) for the infinitely divisible
+increment of one step joined by a chain, and in (2) for the infinite divisibility of $\mu_I$.
+\ledger{A3}(i)--(ii) through \ref{prop:similarity-orbit-family}(1), in the necessity half of (1), which reads
+the ordering of the \Levy{} densities off an infinitely divisible increment; \ledger{A3}(iii) through
+\ref{prop:orbit-step-cone}(1) and \ref{prop:similarity-stable-order-families}(2), in the sufficiency half, for
+the law of the profile and its increments, and through \ref{prop:similarity-orbit-family}(1), in the necessity
+half, which reads the rotation invariance of that law from \ref{prop:orbit-step-cone}(1); \ledger{A3}(i) again in
+(2), for the generating triplet of $\mu_I$, and \ledger{A3}(iii) for the law of the profile it produces.
+\ledger{A2}, the polar criterion, in (2) only, applied directly to $\mu_I$, which is infinitely divisible by
+\ledger{A6}. The isotropic paper's polar reading (its Proposition~3.11) is not read: its forward direction
+spends entry A4 to make a self-decomposable law infinitely divisible, and here $\mu_I$ is so already, so A4
+is not needed. Of \ref{thm:wedge-axis} the node reads only what spends nothing:
+the number $\beta(C)$ and $C \subseteq C_{\beta(C)}$ in (2)(c), the paragraph on the orders of its proof
+(the orders, their causal curves, the restriction of a family to a smaller order), and
+$\beta(C_\alpha) = \alpha$; not the anisotropy budget, entry A5. \textbf{What it is worth.} It completes the
+profile clause of \ref{thm:wedge-axis}(3)(c) and the converse of \ref{prop:similarity-stable-order-families}(2):
+along the stable order of index $\alpha$ the orbits of the profiles that are general linear families are
+exactly those whose lower exponent is at least $\alpha$, with any Gaussian part, and with the polar
+criterion the cell $(\GL(d), \le_\alpha)$ is described completely. Along a cone order the same holds with
+$\beta(C)$ in place of $\alpha$, so two cones with the same $\beta(C)$ carry the same laws $\mu_I$. From
+$\alpha = 2$ on no profile qualifies, as $\beta_-(k) < 2$, so (2) gives the sets of laws of
+\ref{thm:wedge-axis}(2)(c) at $\beta(C) \ge 2$ and of (3)(d) for finite $\alpha$ on \ledger{A6}, \ledger{A3} and
+\ledger{A2}, without entry A5, and the end of (2)(b) of that theorem, which spends nothing, then gives the
+families. That theorem keeps its own route through the anisotropy budget; the Lean states the laws here. The
+single-step converse of \ref{prop:orbit-step-cone} is not used: a step of a cascade has an infinitely
+divisible increment, and only such an increment is known to order the densities (a positive increment
+need not be infinitely divisible: the Gaussian--\Matern{} step in the annotation of
+\ref{prop:similarity-orbit-family}). For $C = C_\alpha$ the step $e^{tX}$ of the proof, with
+$X = \diag(1, \dots, 1, 1 + \alpha)$, is the step of the proof of \ref{lem:dilation-ratio}(4).
+\textbf{Not claimed}: the single-step converse; any cell of a smaller group; the cones of
+\ref{thm:wedge-axis}(2)(a)--(b).
+\textbf{Right-continuity.} Clause (1) holds for every profile: the right-continuous modification
+$r \mapsto k(r{+})$ has the same law and the same lower exponent (the proof), and the necessity reads
+\ref{prop:similarity-orbit-family}(1), which asks for a right-continuous profile, only for the modification.
+Clause (2) keeps the word: without it the set of laws is the same, by the same step, and with it each law
+$N(0, aI) * \nu_I$ has one profile, its \Levy{} measure fixing $k$ almost everywhere and right-continuity
+then everywhere.)}
+\end{proposition}
+
+\begin{proof}
+\leanok
+\emph{The orders.} For $0 < \gamma < 2$, $\preceq^+_{C_\gamma}$ is the order $\le_\gamma$ of
+\ref{prop:similarity-stable-order-families}(1): on $\PD(d)$ both are $\preceq_\gamma$
+(\ref{prop:stable-order-generated}(1)), and both add the origin and the rays. Let $C$ be a cone as in the
+statement. By \ref{thm:wedge-axis}(2)(c) the largest value $\beta(C)$ of $\tr X/\lambda_{\min}(X) - d$ over
+$X \in C \setminus \{0\}$ is attained and $C \subseteq C_{\beta(C)}$. So $\preceq^+_C$ is contained in
+$\preceq^+_{C_{\beta(C)}}$, a $C$-causal curve being $C_{\beta(C)}$-causal, and a
+$(\GL(d), \preceq^+_{C_{\beta(C)}})$-cascade family restricts to a $(\GL(d), \preceq^+_C)$-cascade family with the
+same $\mu_I$ (the proof of \ref{thm:wedge-axis}, the orders). For $X \in C$ and $t \ge 0$ the curve
+$\zeta(s) := e^{stX}$, $s \in [0,1]$, is a chain from $I$ to $e^{tX}$ for $\preceq^+_C$ as in
+\ref{thm:cascade-infinitely-divisible}(2). It is continuous, and for $s \le s'$, $I \preceq^+_C e^{(s'-s)tX}$
+as $(s'-s)tX \in C$ (the proof of \ref{thm:wedge-axis}, the orders). The matrix $A := e^{stX/2}$ carries
+$I$ to $\zeta(s)$ and $e^{(s'-s)tX}$ to $\zeta(s')$, so $\zeta(s) \preceq^+_C \zeta(s')$ by the
+$\GL(d)$-invariance of the order.
+
+\emph{(1), sufficiency.} Let $\beta(C) \le \beta_-(k)$ and put $\gamma := \beta(C)$. Then $0 < \gamma < 2$, as
+$\beta_-(k) < 2$, and $R(\lambda) \ge \lambda^\gamma$ for every $\lambda \ge 1$ (\ref{lem:dilation-ratio}(3)). By
+\ref{prop:similarity-stable-order-families}(2) the laws $\nu_\Sigma := (\Sigma^{1/2})_*\nu_I$, $\Sigma \in \PSD(d)$,
+are the kernels from scale zero of a $(\GL(d), \le_\gamma)$-cascade family $(\nu_{\Sigma,\Sigma'})$. Put
+$\mu_\Sigma := N(0, a\Sigma) * \nu_\Sigma$. Its transform $e^{-a\langle\omega,\Sigma\omega\rangle/2}\,\widehat\nu_\Sigma(\omega)$
+has no zero, as $\widehat\nu_\Sigma(\omega) = e^{-\psi_I(\Sigma^{1/2}\omega)}$ (\ref{prop:orbit-step-cone}(1)). The
+conditions (a)--(d) of \ref{lem:gw-kernels-from-origin}(2) hold for $G = \GL(d)$ and the order $\le_\gamma$, as
+they hold for each factor.
+\begin{itemize}
+\item (a): $\mu_0 = \delta_0$, and $\mu_I \ne \delta_0$, as $\widehat\mu_I = e^{-a|\omega|^2/2 - \psi_I}$ and $\psi_I$
+is not identically $0$, $k$ being positive near $0$.
+\item (b): $A_*N(0, a\Sigma) = N(0, aA\Sigma A^{\tp})$ and $A_*\nu_\Sigma = \nu_{A\cdot\Sigma}$ for $A \in \GL(d)$.
+\item (c): both transforms are continuous in $\Sigma$.
+\item (d): for $\Sigma \le_\gamma \Sigma'$, $\Sigma' - \Sigma \ge 0$ (\ref{prop:similarity-stable-order-families}(1)), so
+$\rho := N(0, a(\Sigma' - \Sigma)) * \nu_{\Sigma,\Sigma'}$ is a probability measure, and $\mu_{\Sigma'} = \mu_\Sigma * \rho$.
+\end{itemize}
+By \ref{lem:gw-kernels-from-origin}(3) the $\mu_\Sigma$ are the kernels from scale zero of a
+$(\GL(d), \le_\gamma)$-cascade family, whose law at $I$ is $N(0, aI) * \nu_I$, and it restricts to $\preceq^+_C$.
+
+\emph{(1), the right-continuous modification.} Put $\tilde k(r) := k(r{+}) = \lim_{s \downarrow r}k(s)$ for $r > 0$.
+It is nonincreasing and right-continuous, and $\tilde k \le k$, so $\tilde k$ satisfies the
+integrability conditions that $k$ does. If $k(r_0) > 0$, then $\tilde k \ge k(r_0)$ on
+$(0, r_0)$, so $\tilde k$ is a profile as in \ref{prop:orbit-step-cone}. A monotone function has at most
+countably many discontinuities, so $\tilde k = k$ off a countable subset of $(0, \infty)$, and the densities
+$k(|x|)|x|^{-d}$ and $\tilde k(|x|)|x|^{-d}$ agree off the set of the $x$ with $|x|$ in that countable set,
+a null set of $\RR^d$. So the two profiles have the same
+$\psi_I$ and the same law $\nu_I$. They also have the same lower exponent. Let $\tilde R$ be the dilation ratio of
+$\tilde k$ and $\lambda \ge 1$. Every $s > 0$ has $k(s/\lambda) \ge R(\lambda)k(s)$, by the definition of $R$ when
+$k(s) > 0$ and trivially otherwise. Letting $s$ decrease to $r$ gives $\tilde k(r/\lambda) \ge R(\lambda)\tilde k(r)$,
+so $\tilde R(\lambda) \ge R(\lambda)$. Conversely, let $\alpha \ge 0$ with $\tilde R(\tau) \ge \tau^\alpha$ for every
+$\tau \ge 1$, let $\lambda > 1$, and let $k(r) > 0$. For $r/\lambda < s < r$, $\tilde k(s) \ge k(r) > 0$, as
+$k \ge k(r)$ on $(s, r)$, and $\tau := s\lambda/r > 1$. So
+$k(r/\lambda) \ge \tilde k(r/\lambda) = \tilde k(s/\tau) \ge \tau^\alpha\tilde k(s) \ge (s\lambda/r)^\alpha k(r)$, and
+letting $s$ increase to $r$ gives $k(r/\lambda) \ge \lambda^\alpha k(r)$. So $R(\lambda) \ge \lambda^\alpha$, which
+holds at $\lambda = 1$ as well. By \ref{lem:dilation-ratio}(3), applied to $k$ and to $\tilde k$, the numbers
+$\alpha \ge 0$ with $\alpha \le \beta_-(k)$ are those with $\alpha \le \beta_-(\tilde k)$, and
+$\beta_-(k) = \beta_-(\tilde k)$. Both sides of the equivalence in (1) are therefore the same for $k$ and $\tilde k$.
+In the necessity $k$ may be replaced by $\tilde k$, and so taken right-continuous.
+
+\emph{(1), necessity.} By the modification we may take $k$ right-continuous. Let $\mu_I := N(0, aI) * \nu_I$ be the law at $I$ of a $(\GL(d), \preceq^+_C)$-cascade
+family $(\mu_{\Sigma,\Sigma'})$. For $\Sigma \in \PD(d)$, (K3) with $A = \Sigma^{1/2}$ at the pair $(0, I)$ gives
+$\mu_\Sigma = (\Sigma^{1/2})_*\mu_I = N(0, a\Sigma) * (\Sigma^{1/2})_*\nu_I$. Let $X \in C \setminus \{0\}$ attain
+$\beta(C)$, so that $\tr X = (d + \beta(C))\lambda$ with $\lambda := \lambda_{\min}(X) > 0$, $X$ being positive definite. Let $t > 0$ and $M := e^{tX}$. By the chain of the first paragraph and
+\ref{thm:cascade-infinitely-divisible}(2) the increment $\rho := \mu_{I,M}$ is infinitely divisible, and (K1) at
+$0 \preceq^+_C I \preceq^+_C M$ gives $\mu_M = \mu_I * \rho$. So \ref{prop:similarity-orbit-family}(1), with $h$ the
+identity and the Gaussian covariance $\Sigma \mapsto a\Sigma$, puts the step $I \to M$ in the step set of
+\ref{prop:orbit-step-cone}(2): $\det M \le \lambda_{\min}(M)^dR(\lambda_{\min}(M)^{1/2})^2$. Here
+$\lambda_{\min}(M) = e^{t\lambda}$ and $\det M = e^{t\tr X} = e^{t(d+\beta(C))\lambda}$, so with $u := e^{t\lambda/2}$ the
+inequality reads $u^{2(d+\beta(C))} \le u^{2d}R(u)^2$, that is $R(u) \ge u^{\beta(C)}$. As $t$ ranges over
+$(0, \infty)$, $u$ ranges over $(1, \infty)$, and $R(1) = 1$. So $\beta(C) \le \beta_-(k)$ by
+\ref{lem:dilation-ratio}(3). For $C = C_\alpha$ one may take $X = \diag(1, \dots, 1, 1 + \alpha)$, and $M$ is the
+step of the proof of \ref{lem:dilation-ratio}(4).
+
+\emph{(1), the stable orders.} For $0 < \alpha < 2$, $C_\alpha$ is a cone as in the statement with
+$\beta(C_\alpha) = \alpha$ (the proof of \ref{thm:wedge-axis}, (3)), and $\mathfrak F_\alpha = \mathfrak F(C_\alpha)$. By
+\ref{lem:dilation-ratio}(3), $\alpha \le \beta_-(k)$ if and only if $R(\lambda) \ge \lambda^\alpha$ for every
+$\lambda \ge 1$, and the family is the one built in the sufficiency with $\gamma = \alpha$, along
+$\le_\alpha = \preceq^+_{C_\alpha}$.
+
+\emph{(2), the form of $\mu_I$.} Let $C$ be a cone as in the statement and $\mu_I \in \mathfrak F(C)$. The ray order
+is contained in $\preceq^+_C$, so the family restricts to a $(\GL(d), \text{rays})$-cascade family with the same
+$\mu_I$, and by \ref{prop:gw-ray-families}(3) and (1), $\mu_I$ is rotation invariant, self-decomposable and not
+$\delta_0$, and $\widehat\mu_I$ has no zero. The pair $0 \preceq^+_C I$ is joined by the chain $s \mapsto sI$, so
+$\mu_I = \mu_{0,I}$ is infinitely divisible (\ref{thm:cascade-infinitely-divisible}(2)). Its transform is radial,
+and real as $\mu_I$ is invariant under $-I$. Having no zero, it is $\widehat\mu_I(\omega) = e^{-F(|\omega|)}$ with
+$F(r) := -\log\widehat\mu_I(re_1) \ge 0$. By \ledger{A3}(i), $\mu_I$ has a generating triplet $(A, \nu, \gamma)$.
+The real part of $e^{i\theta} - 1 - i\theta\mathbf 1_{\{|x| \le 1\}}$ is $\cos\theta - 1$, so taking moduli in the
+representation,
+\[
+  F(|\omega|) = \tfrac12\langle\omega, A\omega\rangle + \int_{\RR^d}\bigl(1 - \cos\langle\omega,x\rangle\bigr)\,\nu(dx) ,
+  \qquad \omega \in \RR^d .
+\]
+As $\mu_I$ is self-decomposable, the polar criterion \ledger{A2} gives
+$\nu(B) = \int_S\lambda(d\xi)\int_0^\infty\mathbf 1_B(r\xi)\,k_\xi(r)\,dr/r$ for Borel $B$, with $\lambda$ a finite
+measure on $S = S^{d-1}$ and $k_\xi(r) \ge 0$ measurable in $\xi$ and nonincreasing in $r$. A nonincreasing $k_\xi$
+differs from its right limit $k_\xi(r+) = \sup\{k_\xi(q) : q \in \mathbb Q,\ q > r\}$ at countably many $r$ only,
+so replacing $k_\xi(r)$ by $k_\xi(r+)$ changes no inner integral, and it makes the kernel jointly measurable in
+$(\xi, r)$, as a countable supremum of measurable functions. Let $\sigma_{d-1}$ be the surface measure of $S$, with total
+$|S^{d-1}| = \sigma_{d-1}(S)$, and put
+\[
+  k(r) := \frac{1}{|S^{d-1}|}\int_S k_\xi(r+)\,\lambda(d\xi) \in [0, \infty] , \qquad r > 0 .
+\]
+It is nonincreasing. Exchanging the integrals (the integrands are nonnegative) and passing to polar coordinates
+$x = r\eta$, $dx = r^{d-1}\,dr\,\sigma_{d-1}(d\eta)$,
+\[
+  \int_{\RR^d}(|x|^2 \wedge 1)\,\nu(dx) = |S^{d-1}|\int_0^\infty(r^2 \wedge 1)\,k(r)\,\frac{dr}{r}
+  = \int_{\RR^d}(|x|^2 \wedge 1)\,k(|x|)\,|x|^{-d}\,dx ,
+\]
+which is finite by \ledger{A3}(i). So $k$ is finite: a nonincreasing function infinite at some $r_0$ is infinite
+on $(0, r_0]$, and the integral would diverge. The left side of the display for $F$ depends on $\omega$ only
+through $|\omega|$, so it equals the mean of the right side at the points $|\omega|\theta$, $\theta \in S$, against
+$\sigma_{d-1}/|S^{d-1}|$. The Gaussian term has the mean $\tfrac12 a|\omega|^2$ with $a := \tr A/d \ge 0$, as
+$\int_S\theta_i\theta_j\,\sigma_{d-1}(d\theta) = \delta_{ij}|S^{d-1}|/d$. For the other term let
+$c(s) := |S^{d-1}|^{-1}\int_S(1 - \cos(s\langle\theta,\xi\rangle))\,\sigma_{d-1}(d\theta)$ for $s \ge 0$ and a unit vector $\xi$. It does not depend on $\xi$, since $\sigma_{d-1}$ is invariant under a rotation carrying one unit vector to
+another. Exchanging the integrals as before and then passing to polar coordinates, with
+$c(r|\omega|) = |S^{d-1}|^{-1}\int_S(1 - \cos\langle\omega, r\eta\rangle)\,\sigma_{d-1}(d\eta)$ (take $\xi = \omega/|\omega|$
+when $\omega \ne 0$),
+\[
+  F(|\omega|) = \tfrac12 a|\omega|^2 + |S^{d-1}|\int_0^\infty c(r|\omega|)\,k(r)\,\frac{dr}{r}
+  = \tfrac12 a|\omega|^2 + \int_{\RR^d}\bigl(1 - \cos\langle\omega,x\rangle\bigr)\,k(|x|)\,|x|^{-d}\,dx ,
+  \qquad \omega \in \RR^d .
+\]
+If $k \equiv 0$, then $\widehat\mu_I(\omega) = e^{-a|\omega|^2/2}$ and
+$\mu_I = N(0, aI)$, with $a > 0$ as $\mu_I \ne \delta_0$. Otherwise $k$ is a profile as in
+\ref{prop:orbit-step-cone}, and so is its right-continuous modification $\tilde k$, with the same exponent (the paragraph
+on the modification). So $\widehat\mu_I = e^{-a|\omega|^2/2}\,\widehat\nu_I$ for the law $\nu_I$ of $\tilde k$, and
+$\mu_I = N(0, aI) * \nu_I$ by the uniqueness of the transform.
+
+\emph{(2), the equality.} If $\beta(C) = 0$, then $C \subseteq C_0 = \{cI : c \ge 0\}$
+(\ref{prop:stable-order-generated}(1)), and $C_0 \subseteq C$ as $I \in C$. So $C = C_0$, and there is nothing to prove. Let $\beta(C) > 0$. By the first paragraph, $\mathfrak F_{\beta(C)} \subseteq \mathfrak F(C)$.
+Conversely let $\mu_I \in \mathfrak F(C)$, of one of the two forms above. A law $N(0, aI)$, $a > 0$, is the law
+at $I$ of the affine Gaussian scale space with constant $a/2$, an affine cascade family
+(\ref{thm:affine-rigidity}), and so of its restriction to the pairs of $\preceq^+_{C_{\beta(C)}}$, which are
+Loewner pairs, $C_{\beta(C)}$ being contained in $\PSD(d)$ (the proof of \ref{thm:wedge-axis}, the orders). So it lies in $\mathfrak F_{\beta(C)}$. A law $N(0, aI) * \nu_I$ has $\beta(C) \le \beta_-(k)$ by (1) for $C$, and so
+lies in $\mathfrak F(C_{\beta(C)}) = \mathfrak F_{\beta(C)}$ by (1) for $C_{\beta(C)}$, whose number is $\beta(C)$. Hence
+$\mathfrak F(C) = \mathfrak F_{\beta(C)}$. For $C = C_\alpha$, $0 < \alpha < \infty$, a cone as in the statement with
+$\beta(C_\alpha) = \alpha$ (the proof of \ref{thm:wedge-axis}, (3)), the same two cases describe
+$\mathfrak F_\alpha$: each member has one of the two forms, each $N(0, aI)$ with $a > 0$ lies in it, and
+$N(0, aI) * \nu_I$ lies in it exactly when $\beta_-(k) \ge \alpha$, by (1). For $\alpha \ge 2$ the second case does
+not occur, as $\beta_-(k) < 2$ for every profile (\ref{lem:dilation-ratio}(3)).
+\end{proof}

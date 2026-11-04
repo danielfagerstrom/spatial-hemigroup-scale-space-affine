@@ -1,0 +1,44 @@
+h(Sigma) = [3.6 2.9]  h(Sigma') = [4.85 4.65]  side 60*sqrt(lmax h(Sigma')) = 132.14
+n = 1024: spatial spacing 0.1290, largest frequency pi/dx = 24.35
+n = 2048: spatial spacing 0.0645, largest frequency pi/dx = 48.69
+
+(1) the remark's step
+  b = 2.0, n = 1024: min/max -1.48e-17, negative mass 1.13e-16
+  b = 2.0, n = 2048: min/max -1.47e-17, negative mass 1.19e-16
+  b = 2.0, n = 4096: min/max -1.55e-17, negative mass 1.25e-16
+  b = 0.1, n = 1024: min/max -1.01e-02, negative mass 1.28e-02
+  b = 0.1, n = 2048: min/max -9.60e-03, negative mass 1.40e-02
+  b = 0.1, n = 4096: min/max -9.60e-03, negative mass 1.38e-02
+
+(2) ray calibration Sigma -> c Sigma
+  c = 1.4, b = 0.1, n = 1024: min/max -1.43e-07, negative mass 6.13e-06
+  c = 1.4, b = 0.1, n = 2048: min/max -1.01e-16, negative mass 1.68e-15
+  c = 1.4, b = 2.0, n = 1024: min/max -2.29e-17, negative mass 1.83e-16
+  c = 1.4, b = 2.0, n = 2048: min/max -2.22e-17, negative mass 1.85e-16
+  c = 2.0, b = 0.1, n = 1024: min/max -8.92e-10, negative mass 2.32e-08
+  c = 2.0, b = 0.1, n = 2048: min/max -1.26e-17, negative mass 3.65e-16
+  c = 2.0, b = 2.0, n = 1024: min/max -3.29e-17, negative mass 1.18e-16
+  c = 2.0, b = 2.0, n = 2048: min/max -2.35e-17, negative mass 1.16e-16
+
+(3) Gaussian factor exp(-b P11 w1^2) at the largest frequency, b = 0.1
+  n = 1024: w1 = 24.35, factor 0.0516
+  n = 2048: w1 = 48.69, factor 7.11e-06
+
+(4) sub-steps Sigma + tau0 P -> Sigma + tau1 P at b = 2 (Gaussian part 2b times the segment)
+  tau 0 -> 0.5, n = 1024: min/max -1.27e-17, negative mass 2.45e-16
+  tau 0 -> 0.5, n = 2048: min/max -1.67e-17, negative mass 2.24e-16
+  tau 0.5 -> 1, n = 1024: min/max -1.19e-17, negative mass 2.63e-16
+  tau 0.5 -> 1, n = 2048: min/max -1.48e-17, negative mass 2.72e-16
+  tau 0 -> 0.25, n = 1024: min/max -1.30e-04, negative mass 9.31e-06
+  tau 0 -> 0.25, n = 2048: min/max -1.30e-04, negative mass 8.23e-06
+  tau 0 -> 0.1, n = 1024: min/max -7.88e-04, negative mass 1.03e-03
+  tau 0 -> 0.1, n = 2048: min/max -8.28e-04, negative mass 9.97e-04
+  tau 0 -> 0.02, n = 1024: min/max -2.16e-02, negative mass 4.87e-02
+  tau 0 -> 0.02, n = 2048: min/max -3.96e-04, negative mass 1.14e-03
+
+(5) full step, b between 0.1 and 2
+  b = 0.2: min/max -6.25e-03, negative mass 4.80e-03
+  b = 0.3: min/max -3.64e-03, negative mass 1.44e-03
+  b = 0.4: min/max -1.49e-03, negative mass 2.15e-04
+  b = 0.5: min/max -8.62e-18, negative mass 2.39e-16
+  b = 1.0: min/max -1.41e-17, negative mass 2.03e-16

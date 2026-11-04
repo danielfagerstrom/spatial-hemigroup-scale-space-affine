@@ -1,0 +1,53 @@
+p49 y= 405.47 | Proof. (1). The least eigenvalue λ min (M ) = min |x|=1 ⟨x, M x⟩ is the least eigenvalue of M and
+p49 y= 419.02 | is attained at a unit eigenvector v. So ⟨x, (M − I)x⟩ ≥ 0 for every x, that is, M − I is
+p49 y= 432.57 | positive semidefinite, and M v = v. Then P = w(M − I) is positive semidefinite, λ min (wM ) =
+p49 y= 446.12 | wλ min (M ) = w, and P x = 0 exactly when M x = x, as w &gt; 0: the kernel of P is the eigenspace
+p49 y= 455.14 | E 1 of M for 1. For the range: if M x = cx with c &gt; 1 then x = P (w(c − 1)) −1 x  , so every
+p49 y= 473.22 | eigenspace E c , c &gt; 1, lies in the range, and so does their span K. The range is orthogonal to
+p49 y= 486.77 | E 1 : P is symmetric, so ⟨z, P x⟩ = ⟨P z, x⟩ = 0 for z ∈ E 1 . The eigenspaces of the symmetric
+p49 y= 495.79 | matrix M span d , and E c = 0 for c &lt; 1, since 0 ≤ ⟨x, (M − I)x⟩ = (c − 1)|x| 2 on E c . So every
+p49 y= 502.02 | R
+p49 y= 513.87 | y is a + k with a ∈ E 1 and k ∈ K. If y is in the range, then a = y − k is in the range as well
+p49 y= 527.42 | as in E 1 , so ⟨a, a⟩ = 0, and y = k ∈ K: the range is K. By rank–nullity the rank of P is d
+p49 y= 540.97 | minus the dimension of its kernel, which contains v = ̸ 0, so rank P ≤ d − 1. It is 0 exactly when
+p49 y= 554.52 | P = 0, that is M = I. For d = 2 and M = ̸ I it is therefore 1.
+p49 y= 563.54 | (2). By Proposition 4.4(1), µ Σ (ω) = e −g(⟨ω,Σω⟩) . If µ Σ = µ wI ∗ ρ, taking transforms
+p49 y= 569.79 | b w
+p49 y= 577.08 | gives e −g(⟨ω,(wI+P )ω⟩) = e −g(⟨ω,wIω⟩) ρ (ω), which is (3.2) with Σ = wI ∈ PD(d) and P positive
+p49 y= 586.04 | b
+p49 y= 595.16 | semidefinite with 0 &lt; rank P &lt; d by (1), and g is continuous with g(0) = 0 and g ≥ 0.
+p49 y= 608.71 | Theorem 3.7 gives g(u) = bu with b = g(1) ≥ 0 and ρ the centred Gaussian law with covariance
+p49 y= 617.73 | 2bP , which is carried by the range of P , the law of (2bP ) 1/2 Z with Z standard normal. Then
+p49 y= 628.08 | −b|ω| 2
+p49 y= 635.81 | µ b I (ω) = e , the transform of the centred Gaussian law with covariance 2bI. Conversely, if
+p49 y= 649.36 | g(u) = bu with b ≥ 0, the converse half of Theorem 3.7 gives (3.2) for Σ = wI and this P with
+p49 y= 662.91 | that Gaussian ρ, and the transforms of µ Σ w and µ wI ∗ ρ agree.
+p49 y= 675.06 | (3). Let (µ Σ,Σ ′ ) be a (GL(d), W )-cascade family of kernels, with kernels from scale zero
+p49 y= 690.01 | µ Σ . W contains the rays, so the ray order is contained in it, and Lemma 3.3(1) restricts the
+p49 y= 703.56 | family to (GL(d), rays) with the same kernels from scale zero. By Proposition 3.4(3), µ Σ =
+p49 y= 712.58 | (Σ 1/2 ) ∗ µ I with µ I rotation invariant, self-decomposable and not δ 0 , and µ Σ (ω) = F (⟨ω, Σω⟩)
+p49 y= 721.53 | √ b
+p49 y= 730.65 | with F (u) := µ b I ( u e 1 ) continuous and F (0) = 1. By Proposition 3.4(1), F has no zero. It
+p49 y= 744.20 | is real, as µ I is invariant under −I, and 2 |F | ≤ 1, so F &gt; 0, and g := − log F is continuous,
+p49 y= 753.22 | nonnegative, with g(0) = 0 and e −g(|ω| ) = µ I (ω): the hypotheses of Proposition 4.4 hold,
+p49 y= 762.18 | b
+p49 y= 771.30 | and the µ Σ , Σ ∈ PD(d), are the orbit of µ I . (K1) of Definition 3.1 at 0 ≤ W wI ≤ W wM
+p50 y=  85.08 | gives µ wM = µ wI ∗ µ wI,wM , so (2) gives g(u) = bu, and b &gt; 0 because µ I = ̸ δ 0 . Then
+p50 y=  94.10 | µ Σ (ω) = e −b⟨ω,Σω⟩ for every Σ ∈ PSD(d), by the form above. These transforms have no zero,
+p50 y= 103.05 | b ′ −b⟨ω,(Σ ′ −Σ)ω⟩
+p50 y= 110.78 | and (K1) at 0 ≤ W Σ ≤ W Σ gives µ b Σ ′ = µ b Σ,Σ ′ µ b Σ , so µ b Σ,Σ ′ (ω) = e .
+--- 38 clustered lines, vertical extent 419 pt = 30.9 body-line heights
+p49 y= 405.47 | Proof. (1). The least eigenvalue λ min (M ) = min |x|=1 ⟨x, M x⟩ is the least eigenvalue of M and
+p49 y= 419.02 | is attained at a unit eigenvector v. So ⟨x, (M − I)x⟩ ≥ 0 for every x, that is, M − I is
+p49 y= 432.57 | positive semidefinite, and M v = v. Then P = w(M − I) is positive semidefinite, λ min (wM ) =
+p49 y= 446.12 | wλ min (M ) = w, and P x = 0 exactly when M x = x, as w &gt; 0: the kernel of P is the eigenspace
+p49 y= 455.14 | E 1 of M for 1. For the range: if M x = cx with c &gt; 1 then x = P (w(c − 1)) −1 x  , so every
+p49 y= 473.22 | eigenspace E c , c &gt; 1, lies in the range, and so does their span K. The range is orthogonal to
+p49 y= 486.77 | E 1 : P is symmetric, so ⟨z, P x⟩ = ⟨P z, x⟩ = 0 for z ∈ E 1 . The eigenspaces of the symmetric
+p49 y= 495.79 | matrix M span d , and E c = 0 for c &lt; 1, since 0 ≤ ⟨x, (M − I)x⟩ = (c − 1)|x| 2 on E c . So every
+p49 y= 502.02 | R
+p49 y= 513.87 | y is a + k with a ∈ E 1 and k ∈ K. If y is in the range, then a = y − k is in the range as well
+p49 y= 527.42 | as in E 1 , so ⟨a, a⟩ = 0, and y = k ∈ K: the range is K. By rank–nullity the rank of P is d
+p49 y= 540.97 | minus the dimension of its kernel, which contains v = ̸ 0, so rank P ≤ d − 1. It is 0 exactly when
+p49 y= 554.52 | P = 0, that is M = I. For d = 2 and M = ̸ I it is therefore 1.
+--- 13 clustered lines, vertical extent 163 pt = 12.0 body-line heights

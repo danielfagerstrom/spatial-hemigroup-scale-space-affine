@@ -1,0 +1,109 @@
+% Paper-side notation. Mirrors the notation half of blueprint/src/macros.tex (below its rule) so
+% that statements shared verbatim with the blueprint compile here unchanged; Paper V's paper/ is
+% the model (its macros.tex). Keep the two files in sync by hand: a drifted macro shows up as a
+% compile error or a visibly different rendering, never silently. The notation is the programme's
+% (hub RELEASES.md rule 3; ADR-0002 of the line repository), extended for d dimensions.
+%
+% \sscite is the blueprint's citation macro (framework-owned there); here it is plain \cite.
+
+\newcommand{\sscite}[1]{\cite{#1}}
+
+% -- Notation (mirrored from blueprint/src/macros.tex) -------------------------------------
+\newcommand{\RR}{\mathbb{R}}
+\newcommand{\CC}{\mathbb{C}}
+\newcommand{\NN}{\mathbb{N}}
+\newcommand{\ZZ}{\mathbb{Z}}
+\newcommand{\Cin}{\operatorname{Cin}}   % the entire cosine integral, as in module B
+\newcommand{\Levy}{L\'evy}              % the name, accented through one macro
+\newcommand{\Matern}{Mat\'ern}          % the same device for the second member's name
+\newcommand{\PD}{\mathrm{PD}}           % positive definite d x d matrices
+\newcommand{\PSD}{\mathrm{PSD}}         % positive semidefinite d x d matrices
+\newcommand{\GL}{\mathrm{GL}}
+\newcommand{\Orth}{\mathrm{O}}          % the orthogonal group O(d)
+\newcommand{\tp}{\mathsf{T}}            % transpose, written A^{\tp}
+\newcommand{\tr}{\operatorname{tr}}
+\newcommand{\rank}{\operatorname{rank}}
+\newcommand{\diag}{\operatorname{diag}}
+\newcommand{\Sym}{\mathrm{Sym}}         % real symmetric d x d matrices
+\newcommand{\gl}{\mathfrak{gl}}         % all real d x d matrices, as a Lie algebra
+
+% -- Paper-only convenience ----------------------------------------------------------------
+% The blueprint's \ledger{A2} names a ledger entry. The comparison key of `linkage check`
+% strips the macro with its argument on both sides, so the paper may render it as it likes; it
+% prints the cited fact's name, as section 2.6 states them. Q-0377: the names C1-C4 of the ledger's
+% A6, A3, A5 and A9, as the isotropic paper's macros.tex maps its own, so that section 1.1 can name
+% the cited facts through \ledger, which `linkage check` reads as ledger entries (LINKAGE.md rule 13).
+\makeatletter
+\@namedef{ledgerC@A6}{C1}
+\@namedef{ledgerC@A3}{C2}
+\@namedef{ledgerC@A5}{C3}
+\@namedef{ledgerC@A9}{C4}
+% Round 3 (the author's decision D10): C5 is the ledger's A2, the polar criterion.
+\@namedef{ledgerC@A2}{C5}
+\newcommand{\ledger}[1]{\@ifundefined{ledgerC@#1}{cited fact~#1}{\@nameuse{ledgerC@#1}}}
+\makeatother
+
+% The blueprint writes the programme's internal labels through two macros, \prog{V}{Thm.~7.3} and
+% \progpaper{B}, and prints them as [V, Thm.~7.3] and [B] (blueprint/src/macros.tex). A reader of a
+% paper is given the citation instead (Q-0344, the author's review of the isotropic paper: the
+% labels mean nothing to a reader): V is the line paper, fagerstrom2026spatial (tag v0.1), B its
+% cone module, fagerstrom2026cone (tag cone-v0.1). The comparison key of `linkage check` reads the
+% macro source on both sides, so a shared statement stays verbatim. Robust, so that a statement's
+% optional title may carry one (inside braces, as any \cite there).
+\makeatletter
+\@namedef{progkey@V}{fagerstrom2026spatial}
+\@namedef{progkey@B}{fagerstrom2026cone}
+% Q-0457: Iso is the isotropic paper, fagerstrom2026isotropic (tag iso-v0.1), released 2026-10-14.
+% The blueprint has no such label (chapter 3 is that paper's own text); the affine paper writes
+% \prog{Iso}{Thm.~3.6} in the titles of its restatements (section 2.3), where a bracketed \cite
+% inside the title would end the optional argument for the comparison key of `linkage check`.
+\@namedef{progkey@Iso}{fagerstrom2026isotropic}
+\newcommand{\prog@key}[1]{\@ifundefined{progkey@#1}{\PackageError{macros}{No citation for the
+  programme label #1}{}}{}\edef\prog@thekey{\csname progkey@#1\endcsname}}
+\newcommand{\prog@cite}[2]{\cite[#2]{#1}}
+\DeclareRobustCommand{\prog}[2]{\prog@key{#1}\expandafter\prog@cite\expandafter{\prog@thekey}{#2}}
+\DeclareRobustCommand{\progpaper}[1]{\prog@key{#1}\expandafter\cite\expandafter{\prog@thekey}}
+\makeatother
+
+% \restated{V}{Def.~3.1}{def:line-family} and \restatedp (Q-0406, the author's review of the
+% isotropic paper's section 3): a numbered place of the line paper or the cone paper that the
+% isotropic paper restates in its section 2. The blueprint prints the located citation, as \prog
+% does. A paper that carries the restatement under the label of the third argument sends its reader
+% there ("Definition 2.1", "(2.1)", "section 2.3"), where the restatement carries the released number;
+% a paper without that label prints the located citation. \restatedp is the same place cited as an
+% aside, in parentheses. The kind word is read off the label's prefix. The two papers use this one
+% definition; records/affine/check-restated-labels.py lists which uses resolve in which paper, and
+% fails if one in the isotropic paper does not. The reference itself goes through \paperOrigRef,
+% the copy of the kernel's reference command that the wrapper below takes at \begin{document},
+% with the wrapper's rule for an equation label written out here. The reason is `linkage paper`:
+% it reads a literal reference command whose argument is a macro parameter as a reference to a
+% label of that name, and fails its lint on it. For the same reader the section sign is written
+% \textsection: the one-letter command in a definition is reported as a bare section pointer.
+\makeatletter
+\newcommand{\restated@ref}[1]{%
+  \IfBeginWith{#1}{eq:}{\textup{(\paperOrigRef{#1})}}{%
+  \IfBeginWith{#1}{def:}{Definition~}{%
+  \IfBeginWith{#1}{lem:}{Lemma~}{%
+  \IfBeginWith{#1}{thm:}{Theorem~}{%
+  \IfBeginWith{#1}{prop:}{Proposition~}{%
+  \IfBeginWith{#1}{cor:}{Corollary~}{%
+  \IfBeginWith{#1}{sec:}{\textsection}{}}}}}}\paperOrigRef{#1}}}
+\DeclareRobustCommand{\restated}[3]{\@ifundefined{r@#3}{\prog{#1}{#2}}{\restated@ref{#3}}}
+\DeclareRobustCommand{\restatedp}[3]{\@ifundefined{r@#3}{\prog{#1}{#2}}{%
+  \IfBeginWith{#3}{eq:}{\restated@ref{#3}}{(\restated@ref{#3})}}}
+% \restatedc: a clause, as (source clause)(restatement clause) in its last two arguments.
+\DeclareRobustCommand{\restatedc}[5]{\@ifundefined{r@#3}{\prog{#1}{#2#4}}{\restated@ref{#3}#5}}
+\makeatother
+
+% Equations are cited with \ref in the blueprint (its render allowlist has no \eqref), and a
+% statement shared verbatim must cite them the same way. So the paper wraps \ref, as Paper V's
+% paper does: a label beginning `eq:` prints in parentheses, as \eqref would have; every other
+% label is untouched. Installed at \begin{document}, after hyperref has finished redefining
+% \ref. Use \ref for equations throughout the paper, never \eqref (double parentheses).
+% The original is copied with \NewCommandCopy, not \let: the kernel's \ref is itself robust, so
+% \let would copy only the wrapper and \DeclareRobustCommand would then loop (Paper V's lesson).
+\usepackage{xstring}
+\AtBeginDocument{%
+  \NewCommandCopy{\paperOrigRef}{\ref}%
+  \DeclareRobustCommand{\ref}[1]{\IfBeginWith{#1}{eq:}{\textup{(\paperOrigRef{#1})}}{\paperOrigRef{#1}}}%
+}

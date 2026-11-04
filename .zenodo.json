@@ -1,0 +1,47 @@
+{
+  "title": "Spatial scale space from hemigroup axioms: affine covariance and shape adaptation",
+  "upload_type": "publication",
+  "publication_type": "preprint",
+  "description": "<p>In dimension d ≥ 2 an aperture has a shape, which shape-adapted smoothing fits to the image. For the affine Gaussian scale space neither kernel nor cascade is a choice. Under hemigroup axioms both are: a family is given by a group G of linear maps it respects and an order W on scale matrices along which coarser records further smooth finer ones. The main result describes the families of three groups (general linear, similarities, positive diagonal) along the ray, stable and Loewner orders, completely in some cases, by bounds or examples in others. For the general linear group, an order with one step from a positive definite matrix that widens the aperture in some directions and leaves it unchanged in others admits only Gaussian families. Shape-adapted apertures at fixed least smoothing are such steps from the first stage. Among linear images of rotation-invariant laws with a positive transform only the Gaussian reaches them by further smoothing. Every other such kernel measures the image afresh there, as the iteration of shape adaptation does anyway. Along a chain of orders from the rays (α = 0) to the Loewner order (α = ∞), which allow faster changes of shape as α grows, a non-Gaussian kernel pays in speed of shape change. For 0 &lt; α, γ &lt; 2 linear images of the isotropic γ-stable law cascade along the order of index α exactly when γ ≥ α; from α = 2 on only the Gaussian does. Linear images of a Matérn law, or of a law with a zero-free decaying rational transform in |ω|^2, cascade at most along rays. With the similarities, non-Gaussian families cascade along the Loewner order. The results are machine-checked in Lean 4, assuming five published theorems.</p><p>This deposit is the article's verification export: the PDF, its LaTeX source, the Lean 4 modules its statements rest on, the trust boundary with the ledger of cited facts, the blueprint chapters, the process account and the external reviews.</p>",
+  "creators": [
+    {
+      "name": "Fagerström, Daniel",
+      "orcid": "0009-0001-0165-1978"
+    }
+  ],
+  "version": "0.1",
+  "publication_date": "2026-11-04",
+  "license": "cc-by-4.0",
+  "keywords": [
+    "scale space",
+    "hemigroup",
+    "affine covariance",
+    "shape adaptation",
+    "self-decomposable laws",
+    "Loewner order",
+    "Lean 4",
+    "formal verification"
+  ],
+  "related_identifiers": [
+    {
+      "identifier": "10.5281/zenodo.23357467",
+      "relation": "continues",
+      "scheme": "doi"
+    },
+    {
+      "identifier": "10.5281/zenodo.22761631",
+      "relation": "continues",
+      "scheme": "doi"
+    },
+    {
+      "identifier": "10.5281/zenodo.22864169",
+      "relation": "continues",
+      "scheme": "doi"
+    },
+    {
+      "identifier": "https://github.com/danielfagerstrom/spatial-hemigroup-scale-space-affine",
+      "relation": "isSupplementedBy",
+      "scheme": "url"
+    }
+  ]
+}

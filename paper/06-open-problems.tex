@@ -1,0 +1,196 @@
+% §6 Open problems, and what is elsewhere --- paper-only (Q-0292, 2026-10-04), from the draft's §6
+% (draft/spatial-hemigroup-affine.md) and the "Later" list of notes/HANDOFF.md. Each problem is
+% stated with the statement it would complete; no statement of the paper depends on an answer.
+% Stated as open, never promised (hub RELEASES.md rule 1). Paper VI (spatial-hemigroup-pyramids)
+% is unreleased: prose about further work with a TODO(module) comment, never a \ref, and none of
+% its results is stated here.
+%
+% After the blind review (Q-0293; records/affine/REVIEW-paper-sections-1-6.md): the opening restates
+% the contribution and points to the trust base instead of certifying the statements; the claim
+% that every problem is named in sections 3-5 is dropped (problem 2 is not); problem 4 carries the
+% hypothesis "no Gaussian part" of thm:origin-boundedness-d(4) and the logarithmic form at c = d;
+% problem 6(c) is put as a question and 6(d) marks its numerical ground; problem 7 is the computed
+% index 2 only; the draft's problem 8 (shape selection, singularity theory) is a paragraph of scope,
+% not a problem, since no statement of the paper would be completed by it; the third copy of the
+% scope disclaimer on the line theory is cut (section 1 "Scope" and rem:isotropic-line keep it).
+%
+% Not listed, and why: the converses of lem:operators-to-kernels, which were a statement of scope,
+% not a problem, and since Q-0314 are lem:kernels-to-operators (section 1, "Scope"). The novelty of
+% K_alpha, the budget and the step cone is no longer a gap: Hudson-Mason (1981) and Jurek (1992) were
+% acquired and read (Q-0308), and section 4.6's "Prior art" states the claims against them.
+%
+% Q-0309: "Stated on kernels" dropped (its content is section 1's "Scope"); "Not treated" is the one
+% home of singularity theory; problem 7 is the former appendix remark rem:no-covariance (review flag
+% 38); the opening narrowed to what the statements give (flag 5) and followed by a short discussion
+% of the main theorems (flag 7).
+%
+% Q-0307 (the split at §3 | §4, adr/0001): problem 4, the origin in dimension d, moved to the
+% isotropic paper (paper-iso/04-open-problems.tex) with the theorem it would complete; the opening's
+% "carried the isotropic theory of the line to R^d" went with it. The other problems are unchanged.
+
+% Writing-rules pass, group s47 (rule 11; the isotropic paper's section 4 is the model): the
+% section is a conclusion, in the order of the questions of section 1, with what it means for shape
+% adaptation and the limitations in the section proper (the former "Limits", "Not treated" and "What
+% is elsewhere"), and the open problems as its subsection. The file keeps its name.
+\section{Conclusion}\label{sec:conclusion}
+
+This paper asked which positive scale spaces indexed by covariance matrices exist, for a covariance
+group $G$ and an order $W$, and what each can do for shape adaptation. For the general linear group
+the answer runs from the rays, where every rotation-invariant self-decomposable law keeps its affine
+orbit (Proposition~\ref{prop:ray-families}), to the Loewner order, where for $d \ge 2$ the Gaussian is
+alone and one step of shape-adapted smoothing already forces it (Theorem~\ref{thm:affine-rigidity} and
+Proposition~\ref{prop:shape-adapted-apertures}(3)). Between the two a stable law keeps a cascade at a
+price in speed of shape change (Theorem~\ref{thm:wedge-axis}(3)), and the orbits whose transform decays
+like a power of the frequency, the \Matern{} orbits among them, cascade at most along rays
+(Propositions~\ref{prop:log-orbit-rays} and~\ref{prop:matern-steps}). A smaller group admits more
+families. With the similarities, non-Gaussian families survive along the Loewner order, with an exponent
+% Round 3 (content review), E item 6: the quantity Table 2 bounds, named.
+spread of the non-Gaussian part at most four times the eccentricity of the aperture (Propositions~\ref{prop:similarity-stable-family}(3)
+and~\ref{prop:similarity-stable-order-kernels}(2)).
+% Round-1 external review (Gemini; PLAN-review-response-paper.md, D3): the summary shortened; the
+% statements it repeated are in section 1 and Table 2.
+
+\paragraph{What this means for shape adaptation.} The normalization of Lindeberg and G\aa{}rding,
+which holds the least smoothing fixed (\sscite{lindeberg1997shape}, \S\S6.1--6.2), is what places the
+adapted apertures where the rigidity acts: on the boundary of the Loewner cone of the first stage,
+where one step leaves the Gaussian alone. For the Gaussian the adapted record is a further smoothing
+of the first stage, whether or not it is computed that way. For every other kernel it is a new
+measurement of the image, which the iteration makes anyway, since each round convolves the original
+image (\S\ref{sec:landscape-uses}). So, as far as the apertures are concerned, a non-Gaussian kernel
+loses nothing the practice uses, and it loses the cascade between its stages. If the cascade is
+wanted, the order must shrink, and Theorem~\ref{thm:wedge-axis} prices the shrinking: a stable kernel
+keeps a cascade only at a lower speed of shape change (Table~\ref{tab:speed-limit}), and from
+$\alpha = 2$ on no non-Gaussian kernel keeps one. The affine orbits whose symbol in the shape's operator is
+a decaying rational function without zeros on $[0, \infty)$, the same for every shape, keep none
+across shapes, although finitely many elliptic solves in that operator compute them: they cascade at most along rays
+(Proposition~\ref{prop:rational-symbols}). A smaller group admits more families, at the price of
+% Round 3 (content review), E item 7.
+shape selection that transforms with the image, which needs a group that carries every shape to every
+other.
+
+The paper has four limitations. Its results concern families of kernels, and through
+Lemma~\ref{lem:kernels-to-operators} the operators they define, with exact cascades, and it makes no
+statement about images. It treats the apertures a family offers, not how a shape is chosen. In
+shape-adapted smoothing the shape at a point is selected through a second-moment matrix at an
+integration scale (\S\ref{sec:landscape-uses}), Proposition~\ref{prop:shape-adapted-apertures} reads
+only the apertures that this selection produces, and how the selection and its iteration behave for
+the non-Gaussian orbits is not treated. It does not treat the fourth use of
+\S\ref{sec:landscape-uses}, singularity theory over the larger group. Along shape directions at
+fixed volume there is no order (Lemma~\ref{lem:loewner-scale-shape}(2)), so the singularities met
+there are bifurcations of a parametrized family; which monotonicity statements hold along the step
+set of a family in dimension $d$, and how extrema behave along the shape directions, are not stated
+here. And, apart from the measurement of Remark~\ref{rem:matern-grid}, it does not compute the families
+on a grid. What it keeps of computation is
+Proposition~\ref{prop:rational-symbols}; the computation by recursive filters and in a pyramid is
+left to a further paper by the author, on scale-space pyramids, in preparation.
+% TODO(module VI): cite spatial-hemigroup-pyramids (Paper VI) when released.
+% Round 3 (content review), E i (the author's decision D10): the general linear cell along the stable
+% orders is complete (Proposition 4.22), so three cells are complete and three stop short.
+Within these limits the three cells of the general linear group in Table~\ref{tab:landscape} are
+complete. Along the stable orders the orbit of a profile, with any Gaussian part, is a
+family exactly when the lower exponent of the profile is at least the index of the order
+(Proposition~\ref{prop:wedge-axis-profiles}). Three cells stop short of a classification. The
+similarities along the stable and Loewner orders are described through bounds on the shape of their
+kernels. For the diagonal group along the stable orders the condition on the frame's shapes is
+necessary, and whether it is sufficient for a family is open (problems~\ref{prob:continuous-fields}
+and~\ref{prob:similarity-shape} below). Three more are classified on part of their parameters: the ray
+cells of the two smaller groups up to which kernels extend to a continuous field over the shapes, and
+the diagonal group with the Loewner order on the frame's shapes (problem~\ref{prob:continuous-fields}).
+
+\subsection{Open problems}\label{sec:open-problems}
+
+Each problem names the statement it would complete.
+\begin{enumerate}
+% Round 3 (content review), E i (the author's decision D10): the converse inside a family is
+% Proposition 4.22; what stays open is the single step. D-R6: "steps" for "cone".
+\item \emph{The single-step converse of the ordered-density steps.}\label{prob:ordered-density-converse} Proposition~\ref{prop:orbit-step-cone} gives
+a positive increment for every step whose \Levy{} densities are ordered, $n_\Sigma \le n_{\Sigma'}$.
+Inside a family along a stable order or a cone order the converse holds for every profile,
+since there the increments are infinitely divisible (Proposition~\ref{prop:wedge-axis-profiles}). For a single step, that a
+positive increment forces ordered densities is proved for the stable profiles
+(Proposition~\ref{prop:stable-step-cone}) and for the profiles bounded at the origin
+(Proposition~\ref{prop:bounded-profile-rays}). For the other profiles it is open, the tempered
+profiles $r^{-\alpha}j$ of Proposition~\ref{prop:tempered-step-cone} included. The positivity of an
+increment does not by itself exclude a signed \Levy{} measure. The converse would make exact the rows
+of Table~\ref{tab:speed-limit} that read ``at least''.
+
+\item \emph{The step set of a general orbit.} The step set of an affine orbit is a step set in the
+sense of Proposition~\ref{prop:invariant-orders} (\S\ref{sec:affine-stable-cone}). Whether its relation
+is a closed partial order whose steps
+are closed under the fractional powers $M \mapsto M^\tau$, $0 \le \tau \le 1$, so that by
+Theorem~\ref{thm:cone-orders}(2) it is generated by a cone, is open for a general orbit.
+% CHANGED Q-0281 wave 2: blind review W2C-1. The obstruction named here, that Levy's continuity theorem
+% on R^d is not among the cited facts, is gone: the paper uses that theorem as a standard one (Mathlib,
+% the author's decision of 2026-10-05). Closedness is still unproved, and the fractional powers have
+% no route, so the problem stays; proving closedness would be a new statement, the author's call.
+Closedness asks that a limit of increments be an increment, and \Levy's continuity theorem on
+$\RR^d$, in its form for a pointwise limit of transforms continuous at the origin, is the natural
+tool for it. The fractional powers have no such route.
+
+\item \emph{Orders that no cone generates.} Theorem~\ref{thm:wedge-axis} describes the general linear
+row along the orders of invariant cones. Along a closed invariant order with no cone, of the kind of
+Theorem~\ref{thm:cone-orders}(3), the row is not described.
+% Round 3 (content review), E i: the second question of this problem is answered by Proposition 4.22(2).
+Along the orders of the cones of Theorem~\ref{thm:wedge-axis}(2)(c) the laws $\mu_I$ of the families
+depend on the cone only through the number
+$\beta(C)$ of Theorem~\ref{thm:wedge-axis}(2)(c) (Proposition~\ref{prop:wedge-axis-profiles}(2)).
+
+\item \emph{Continuous fields over the shapes.}\label{prob:continuous-fields} A family of the similarities with the ray order is
+determined by its kernels at the diagonal matrices with nonincreasing nonnegative entries and trace $1$,
+one for each orbit of the similarities (Proposition~\ref{prop:similarity-ray-families}(1)--(2)). Which choices of those kernels extend to a
+continuous field on $\PSD(d)$ is open. So is the same question over the correlation matrices for the
+positive diagonal group (Proposition~\ref{prop:diagonal-ray-families}). Along the stable order the
+% Round 3 (content review), E item 10: "the converse" said as what it asks.
+families of the diagonal group off the frame's shapes are not described, and whether every law of
+Proposition~\ref{prop:diagonal-stable-order-families}(2) is the isotropic member of a family is open. The groups that contain
+$\mathrm{SO}(d)$ but not $\Orth(d)$ and are not transitive on $\PD(d)$, such as the
+orientation-preserving similarities, are open as well (Appendix~\ref{app:orientation}).
+
+\item \emph{The shape of the similarity families.}\label{prob:similarity-shape} Four questions remain.
+(a) For the similarities along the stable order of index $\alpha$, the exponent spread of the
+non-Gaussian part of a kernel is at most $4\operatorname{ecc}(\Sigma)^{(d+\alpha)/\alpha}$
+(Proposition~\ref{prop:similarity-stable-order-kernels}(2)). The stable orbit has the spread
+$\operatorname{ecc}(\Sigma)^{\alpha/2}$, and the sharp exponent is open.
+(b) The comparability hypotheses of Proposition~\ref{prop:similarity-general-bounded-shape} are
+sufficient and not necessary, and a necessary condition for a bounded shape is open.
+(c) Hypothesis (D) of Proposition~\ref{prop:similarity-general-index-zero}(3), for a general part
+whose polar profiles are bounded at the origin, asks for the second term of the exponent's
+expansion, and it is open. Clause (1) of that proposition gives the index at the origin direction by
+direction for infinitely divisible increments. Whether it holds when the increments are only known to
+be positive is not known; clause (2) does hold then, when there is no Gaussian part.
+(d) For families of kernels that are not cascades, with a Gaussian part and positive increments
+only, the infinite divisibility that Proposition~\ref{prop:similarity-orbit-family}(1)--(3) asks
+for need not hold: the computation of Remark~\ref{rem:gaussian-matern-step} finds a positive
+increment that is not infinitely divisible, a numerical observation. Whether
+the shape of such families is bounded is open.
+
+\item \emph{How much the \Matern{} orbit fails.} The mechanism of the failure off the rays, and its
+negative mass diverging like a logarithm at the origin, are proved for the \Matern{} orbit of
+index $1$ (Remark~\ref{rem:matern-mechanism} and Proposition~\ref{prop:matern-negative-mass}). The
+growth that the computation of Remark~\ref{rem:matern-grid} measures on a grid, linear in the
+logarithm of the aperture, is not proved on the lattice.
+% Round 3 (content review), D-R3 (VERIFY-round3-landscape-orbits-paper.md item 5): the index-2 rate
+% is computable; it stays a numerical finding (PLAN-review-response-paper.md R3.1).
+At index $2$, the other index computed, the grid follows within 4\,\% the rate that the same
+heuristic reads off the degree-$0$ limit of the increment's transform, as at index $1$
+(Remark~\ref{rem:matern-grid}). That rate is computed and not proved.
+
+\item \emph{A form of the rigidity without covariance.}\label{prob:no-covariance} The core of
+Theorem~\ref{thm:affine-rigidity} that Remark~\ref{rem:kelker} isolates suggests a form without any
+covariance group, which is not proved. Its hypotheses are these. A
+kernel is reached from scale zero along two decompositions into rank-one steps; the step
+directions of each decomposition form a basis of $\RR^d$; the two bases differ; and each increment
+is a law carried by the line of its step. Each decomposition writes the kernel as the law of a sum
+of independent one-dimensional components along its basis. These are the hypotheses of the
+theorem of Darmois and Skitovich and of its matrix form in Comon, with one step missing: the two decompositions
+must be read as one vector written twice as a linear image of independent components, and which pairs
+of bases count as mixing must be settled. The expected conclusion is that the Darmois--Skitovich
+theorem makes Gaussian every non-degenerate component that the two bases mix: in Skitovich's form
+(\sscite{skitovich1954linear}, Thm.~2, p.~190, with Thm.~1, p.~185, for the case in which every
+component is mixed), and in Darmois's as Comon states it (\sscite{comon1994independent}, Thm.~19,
+p.~306), with its matrix form, Thm.~10, p.~294. It would
+extend Theorem~\ref{thm:rank-deficient-step} to families with no group.
+\end{enumerate}
+
+% The former paragraphs "Not treated" and "What is elsewhere" are the limitations of the section
+% proper (group s47).

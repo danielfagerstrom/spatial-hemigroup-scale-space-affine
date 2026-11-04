@@ -1,0 +1,263 @@
+% §5 The affine landscape --- blueprint chapter 5 (blueprint/src/parts/05-*.tex). Written from the
+% draft's §5 (Q-0288, 2026-10-04) on the template of sections 2 and 3 (spatial-hemigroup-affine #43).
+% Every statement is transcribed verbatim from its node under a `% shared with blueprint` marker,
+% with the paper statement's \label equal to the blueprint label (records/affine/
+% transcribe-shared-statements.py), so that `linkage check` reports it `verbatim`. The drafting gate
+% is records/affine/GATE-section-5.md.
+%
+% Files. The section is long, so it is split into parts: this file (the opening, 5.1 and 5.2),
+% 05-table.tex (5.3, the overview table and the statement of thm:wedge-axis), 05-wedges.tex (5.4),
+% 05-orbits.tex (5.5, 5.6), 05-smaller-groups.tex (5.7), 05-wedge-axis.tex (5.8, the proof of
+% thm:wedge-axis) and 05-shape-adapted.tex (5.9, with the section's relation remark).
+%
+% Order (Q-0290, after the blind review records/affine/REVIEW-paper-section-5.md). The blueprint's,
+% which follows the plan (notes/PLAN-article-structure.md, "§5"), with two changes: the overview
+% table and the statement of thm:wedge-axis come right after 5.2, as the section's destination, with
+% forward references (flag S4), the proof staying after every node it reads (5.8); and
+% prop:stable-order-generated sits in 5.6 after prop:stable-exponent-cone, whose cone it reads (flag
+% S12). 5.2 names the orbit sets of the smaller groups, proved in 5.7.
+%
+% Figure (Q-0290, review flag V1): fig-shape-plane.png in 5.2, from records/affine/fig-shape-plane.py
+% with its output saved (fig-shape-plane-output.txt); no statement uses it.
+%
+% Appendices (Q-0290, the author's decision of 2026-10-04 to shorten by moving material, never
+% deleting a statement): appendix-orders.tex (A), appendix-matern-cross-shape.tex (B),
+% appendix-linear-flow.tex (C), appendix-similarity-loewner.tex (D), appendix-proofs.tex (E). A
+% statement moved there goes whole, with its marker; the main text keeps a sentence naming it. A
+% proof moved there leaves its statement here, followed by a pointer.
+%
+% Proofs. The proofs of record are the blueprint's. Short ones are transcribed; long ones are
+% shortened to their decisive steps and headed "Sketch", which section 1.1 explains (the full proofs
+% are in the deposited blueprint sources). Each proof cites the statements its node uses. The cited
+% facts of section 2.6 an [A] node rests on are named, by number and \ref, before the node or, where
+% a subsection has several such nodes on the same fact, once at the subsection's start (5.6, 5.7).
+%
+% Section 4 is written in parallel (Q-0287); its labels (def:gw-cascade-family,
+% def:affine-cascade-family, eq:affine-gaussian, lem:operators-to-kernels, lem:affine-gauge,
+% lem:parameter-space, thm:cascade-infinitely-divisible, lem:charfn-one-on-subspace,
+% lem:single-ratio-cauchy, thm:rank-deficient-step, eq:one-step, thm:affine-rigidity) resolve once
+% both sections are merged. Sections 5.1 and 5.8 take their reading of shape-adapted smoothing from
+% lindeberg1994shape and lindeberg1997shape, read at the page (records/affine/READING-*.md; the
+% stored copy of the 1997 article is the authors' report version, so it is cited by section only).
+% The hub's experiments with a stable replacement are not used (the author, 2026-10-04).
+
+\section{The affine landscape}\label{sec:landscape}
+
+Theorem~\ref{thm:affine-rigidity} closes the classical corner of the axiom scheme: for $d \ge 2$, a
+family covariant under the whole general linear group that cascades along every step of the Loewner order is an affine
+Gaussian scale space. A user who wants another kernel at elliptical apertures, the Poisson kernel or a
+\Matern{} kernel, has to give something up, and there are two things to give up. One is covariance, a
+smaller group of linear maps of the image. The other is the cascade, an order smaller than the Loewner
+order: fewer pairs of apertures $\Sigma, \Sigma'$ along which the record at $\Sigma'$ is a further
+smoothing of the record at $\Sigma$. This section maps the families for each choice of the two
+(Table~\ref{tab:landscape}). Every order used here is invariant under all of $\GL(d)$, so it pairs
+with every group. Along the general linear row the families run from the affine orbits of all
+rotation-invariant self-decomposable laws, each a round kernel stretched to every elliptical aperture,
+on the rays (Proposition~\ref{prop:ray-families}), to the Gaussian alone, on the Loewner order. In
+between, the orbit of the isotropic $\gamma$-stable law, $0 < \gamma < 2$, is a family along the
+stable order of index $\alpha$ exactly when $\gamma \ge \alpha$ (Theorem~\ref{thm:wedge-axis}(3)), and
+a \Matern{} orbit cascades along the rays and along no other step
+(Proposition~\ref{prop:matern-steps}). What turns on the order is how fast an adapted aperture may
+change its shape between two scales while the record stays a further smoothing
+(\S\ref{sec:landscape-uses}). A smaller group admits more families in every column.
+
+\S\ref{sec:landscape-uses} says what an affine scale space is used for, and what each
+use asks of the axioms. \S\ref{sec:scale-shape} lists the groups and reads the Loewner order in volume
+and shape. \S\ref{sec:landscape-table} gives the destination first: the overview table of the
+families of each group along each order, with forward references. The rest fills it in. \S\ref{sec:invariant-wedges}
+describes the invariant orders on positive definite matrices through their cones, which index the
+chain of orders along which the general linear row is read. \S\ref{sec:affine-orbits} treats the base of the general linear row, the rays, and
+\S\ref{sec:affine-stable-cone} the steps each orbit survives beyond them, up to the stable order on
+$\PSD(d)$. \S\ref{sec:wedge-axis-proof} states and proves the theorem on the general linear row.
+\S\ref{sec:shape-adapted} reads the practice of shape-adapted smoothing against the families, and
+\S\ref{sec:smaller-groups} summarizes the rows of the smaller groups.
+Appendices~\ref{app:classical}--\ref{app:wedge-axis} hold the proofs that \S\ref{sec:classical} and
+this section defer, Appendix~\ref{app:wedge-axis} the complete proof of the theorem on the general
+linear row. Appendices~\ref{app:orientation}--\ref{app:similarity} hold further results that the table
+cites.
+
+\subsection{What an affine scale space is for}\label{sec:landscape-uses}
+
+The use of an affine scale space considered here is shape adaptation. An aperture whose shape
+fits the local image structure measures the same thing in every affine image of a pattern. The
+standard form of this is the iteration of Lindeberg and G\aa{}rding \sscite{lindeberg1994shape}. An
+uncommitted, rotationally symmetric first stage, of variance $w$, fixes a point and an integration
+scale.
+The second-moment matrix of the image at that point then fixes the shape of the next aperture. The
+image is smoothed again with the new covariance, and the step is repeated until the shape no longer
+changes (\sscite{lindeberg1994shape}, p.~396, steps 1--4; \sscite{lindeberg1997shape}, \S6.2). The
+iteration is the basis of the affine-invariant features of wide-baseline matching. Baumberg runs a
+simplified form of it in the warped image with circular kernels at a fixed local scale, and scales
+the warp to determinant $1$ (\sscite{baumberg2000reliable}, \S4.2, pp.~777--778). Mikolajczyk and
+Schmid run it in the warped image too, normalizing the warp so that the patch is enlarged and never
+shrunk (\sscite{mikolajczyk2004scale}, \S3.3, p.~72).
+% Q-0314: Baumberg read at the page (READING-baumberg2000reliable.md); the TODO(source) is closed.
+Each round convolves the original image. The affine scale-space representation is defined by one
+convolution of the image for each covariance matrix (\sscite{lindeberg1994shape}, eq.~(15), p.~394),
+and every round evaluates it at the new covariance. The second of the four steps divides the shape
+matrix of the round by its least eigenvalue, so the local scale matrix, $w$ times that normalized
+shape, keeps its least eigenvalue at $w$. The least amount of smoothing, and with it the suppression of noise, stays that of
+the first stage (\sscite{lindeberg1997shape}, \S\S6.1--6.2).
+
+Four uses can be read off this practice, and each asks something different of the axioms.
+\begin{enumerate}
+\item \emph{Shape selection.} At a point, choose the shape of the aperture that fits the local
+structure. The selected shape must transform with the image, which needs the covariance group.
+Lindeberg and G\aa{}rding select at fixed least smoothing. Selection at fixed volume, with
+$\det\Sigma$ held constant, is the other natural normalization, and they reject it because it
+overestimates the anisotropy (\sscite{lindeberg1997shape}, \S6.1). Baumberg's warp of determinant $1$
+is this normalization. At fixed volume no Loewner step leads from the isotropic first stage to another
+shape: if $\Sigma \le \Sigma'$ and $\det\Sigma = \det\Sigma'$, the relative step
+$\Sigma^{-1/2}\Sigma'\Sigma^{-1/2}$ has eigenvalues at least $1$ with product $1$, so
+$\Sigma' = \Sigma$. Under that normalization even the Gaussian reaches an adapted aperture only by
+measuring the image afresh.
+\item \emph{Following a shape across scale.} Between stages the adapted aperture grows. Along a ray
+$\Sigma \to \lambda^2\Sigma$ the coarser record is a further smoothing of the finer one only if the
+rays belong to the order.
+\item \emph{Changing shape.} When the shape is re-estimated as the scale grows, the adapted apertures trace
+a curve in scale and shape, not a ray. The curve is a cascade only if each of its steps lies in the
+order, and each family limits how fast the shape may change along it.
+\item \emph{Singularity theory over the larger group.} A larger covariance group gives more to take
+the quotient by, and a larger parameter space $(x, \Sigma)$ in which to study the deep structure of
+the image. This use is not treated here (\S\ref{sec:conclusion}).
+\end{enumerate}
+
+So the question splits into a choice of group and a choice of order.
+% Round 3 (content review), C-R6 and E-R7: shape selection in the sense used here.
+Shape selection, in the sense used here, transports a shape with the image under every linear map, so
+it needs a group that carries every shape to every other, as $\GL(d)$ does on $\PD(d)$. Among the families covariant under $\GL(d)$, what differs is the order. A family cascades
+along a step $\Sigma \to \Sigma'$ when its kernel at $\Sigma'$ is its kernel at $\Sigma$ convolved with
+a probability measure, the \emph{increment}. The coarser record is then a further smoothing of the
+finer one. That the increment is a probability measure carries weight
+(Remark~\ref{rem:positivity}).
+% Round 3 (content review), C-R5 and A.R4: the name for a change with no probability increment.
+Off the order the axioms ask for no increment. A change of aperture with no increment that is a
+probability measure is called a \emph{re-measurement} of the original image. The coarser record is then
+not a further smoothing of the finer one.
+\S\ref{sec:shape-adapted} returns to the four uses with the results in hand.
+
+\subsection{The groups, and the Loewner order in volume and shape}\label{sec:scale-shape}
+
+The landscape has two axes, and this subsection sets out both. Its rows are groups, and the list below
+says which shapes each group carries to which. Its columns are the rays, the stable orders and the
+Loewner order. Each contains the rays and is contained in the Loewner order
+(Proposition~\ref{prop:similarity-stable-order-families}(1) for the stable orders), so every step of
+every column is a Loewner step. Read in coordinates of volume and shape, the Loewner order says two
+things a user of shape adaptation needs (Lemma~\ref{lem:loewner-scale-shape}). Two distinct apertures
+of the same volume are never ordered, so a change of shape at fixed volume is never a further
+smoothing, for the Gaussian either. And one step can change the shape only within a limit set by the
+growth of the volume. Figure~\ref{fig:shape-plane} draws that limit in the plane.
+
+A group of the scheme is a closed subgroup of $\GL(d)$ that contains the dilations, acting on
+$\PSD(d)$ by $A \cdot \Sigma = A\Sigma A^{\tp}$ (Definition~\ref{def:gw-cascade-family}). The
+landscape uses these groups:
+\begin{itemize}
+\item $\GL(d)$ and its orientation-preserving subgroup $\GL^+(d)$, which act transitively on
+$\PD(d)$, with stabilizers of $I$ the orthogonal group $\Orth(d)$ and the rotation group
+$\mathrm{SO}(d)$;
+\item the similarities $\mathrm S(d) = \{cQ : c > 0,\ Q \in \Orth(d)\}$, whose orbits in
+$\PSD(d) \setminus \{0\}$ are indexed by the normalized spectrum
+(Proposition~\ref{prop:similarity-ray-families}(1));
+\item the diagonal matrices with positive entries, $\mathrm D_+(d)$, whose orbits in $\PD(d)$ are
+indexed by the correlation matrices (Proposition~\ref{prop:diagonal-ray-families}(1));
+\item the dilations $\{\lambda I : \lambda > 0\}$, which each of them contains.
+\end{itemize}
+The special linear group and $\Orth(d)$ contain no dilations, so neither is the group of a wedge
+datum. They enter as the shape part of $\GL(d)$ and as the stabilizer of $I$. A
+\emph{one-parameter group} is the set $\{e^{sB} : s \in \RR\}$ of the linear maps generated by one real
+$d \times d$ matrix $B$, with $e^{sB}$ the matrix exponential, so that $e^{sB}e^{s'B} = e^{(s+s')B}$.
+For $B = I$ it is the group of dilations $e^s I$, for a skew-symmetric $B$ a group of rotations, and
+for $B = \diag(1, 0, \dots, 0)$ the stretchings $\diag(e^s, 1, \dots, 1)$ of the first axis. Such a
+group moves an aperture $\Sigma_0$ along the curve $e^{sB}\Sigma_0e^{sB^{\tp}}$, which is not an order
+on $\PSD(d)$, and its families are treated on their own in Appendix~\ref{app:linear-flow}.
+
+\paragraph{Orientation.} For $d \ge 2$ the orientation-preserving group gives no row of its own. An
+order invariant under $\GL^+(d)$ is invariant under $\GL(d)$, and the $(\GL^+(d), W)$-cascade families
+of kernels and of operators are the $(\GL(d), W)$-cascade families
+(Proposition~\ref{prop:glplus-families}, stated and proved in Appendix~\ref{app:orientation}). So for
+$d \ge 2$ every statement made below for $(\GL(d), W)$ holds verbatim for $(\GL^+(d), W)$.
+
+The space $\PD(d) = \GL(d)/\Orth(d)$ has natural coordinates of volume and shape, and the Loewner
+order of Definition~\ref{def:affine-cascade-family} reads simply in them. The reading tells a vision
+application which comparisons across scale and shape exist at all.
+
+% shared with blueprint lem:loewner-scale-shape
+\begin{lemma}[the Loewner order in scale--shape coordinates]\label{lem:loewner-scale-shape}
+For $\Sigma \in \PD(d)$ put $t(\Sigma) := (\det\Sigma)^{1/2d}$, the \emph{volume scale}, and
+$S(\Sigma) := t(\Sigma)^{-2}\Sigma$, the \emph{shape}, so that $\det S(\Sigma) = 1$. Let
+$\Sigma_1, \Sigma_2 \in \PD(d)$, $t_k := t(\Sigma_k)$, $S_k := S(\Sigma_k)$, and let
+$n_1 \le \dots \le n_d$ be the eigenvalues of the \emph{relative shape}
+$N := S_1^{-1/2}S_2S_1^{-1/2}$, so that $n_1 \cdots n_d = 1$.
+\begin{enumerate}
+\item $\Sigma_1 \le \Sigma_2$ if and only if $n_1 \ge (t_1/t_2)^2$.
+\item \emph{(No order within a scale.)} If $\Sigma_1 \le \Sigma_2$ then $t_1 \le t_2$, with
+equality only if $\Sigma_1 = \Sigma_2$; and $\Sigma_1 \le \Sigma_2$ with $S_1 = S_2$ holds exactly
+when $\Sigma_2 = \lambda^2\Sigma_1$ with $\lambda \ge 1$.
+\item \emph{(A speed limit on shape.)} If $\Sigma_1 \le \Sigma_2$ then
+$(t_1/t_2)^2 \le n_1 \le n_d \le (t_2/t_1)^{2(d-1)}$, so the anisotropy gained,
+$\sqrt{n_d/n_1}$, is at most $(t_2/t_1)^d$. Conversely, for every $t_2 \ge t_1$ and every
+$N \in \PD(d)$ with $\det N = 1$ and least eigenvalue at least $(t_1/t_2)^2$,
+$\Sigma_2 := t_2^2\,S_1^{1/2}NS_1^{1/2}$ satisfies $\Sigma_1 \le \Sigma_2$, $t(\Sigma_2) = t_2$, and
+has relative shape $N$.
+\item \emph{(The plane.)} Let $d = 2$ and
+$\delta(S_1,S_2) := \bigl((\log n_1)^2 + (\log n_2)^2\bigr)^{1/2}$. For $t_2 \ge t_1$, the shapes
+$S(\Sigma_2)$ of the $\Sigma_2 \ge \Sigma_1$ with $t(\Sigma_2) = t_2$ are exactly the shapes $S$
+with $\det S = 1$ and $\delta(S_1,S) \le 2\sqrt2\,\log(t_2/t_1)$.
+\end{enumerate}
+\end{lemma}
+
+Clause (2) says that a selection of shape at fixed volume is a re-measurement for every family, the
+Gaussian included. No two distinct apertures of the same volume are comparable, so no cascade axiom
+bears on such a selection. Clause (3) is a speed limit on the anisotropy gained per step, and it is
+the Gaussian's, since the Gaussian cascades along the whole Loewner order. The stable orders of
+\S\ref{sec:affine-stable-cone} have narrower limits of the same form
+(Proposition~\ref{prop:stable-step-cone}(3)). Figure~\ref{fig:shape-plane} draws both in the plane:
+the shapes one step can reach form discs around the starting shape, nested by the order, and the
+apertures of shape-adapted smoothing lie on the edge of the Loewner disc. The number
+$\delta(S_1,S_2)$, the norm $(\tr(\log N)^2)^{1/2}$ of the logarithm of the relative shape, is the
+distance between $S_1$ and $S_2$ in the affine-invariant Riemannian metric on the positive definite
+matrices, the metric invariant under $\Sigma \mapsto A\Sigma A^{\tp}$ (\sscite{pennec2006riemannian},
+\S\S3.2--3.3, pp.~46--47; \sscite{bhatia2007positive}, Thm.~6.1.6 and (6.13), p.~205).
+% Q-0314: Bhatia ch. 6 and Pennec-Fillard-Ayache read at the page (READING-bhatia2007positive.md,
+% READING-pennec2006riemannian.md); the TODO(source) is closed. Neither source states the
+% hyperbolic-plane reading in the pages read, so it stays unproved and unused.
+Clauses (1) and (2) rest on textbook facts about the Loewner order. For
+$\Sigma_1, \Sigma_2 \in \PD(d)$, $\Sigma_1 \le \Sigma_2$ exactly when every eigenvalue of
+$\Sigma_1^{-1/2}\Sigma_2\Sigma_1^{-1/2}$ is at least $1$ (\sscite{horn2012matrix}, Thm.~7.7.3(a),
+p.~494). The eigenvalues and the determinant increase along the order (Cor.~7.7.4(c) and~(e),
+p.~495).
+The proof of the lemma, from the congruence $M = \Sigma_1^{-1/2}\Sigma_2\Sigma_1^{-1/2} =
+(t_2/t_1)^2N$, is in Appendix~\ref{app:proofs}.
+
+\begin{figure}[!tbp]
+\centering
+\includegraphics[width=\textwidth]{fig-shape-plane.png}
+\caption{The plane, $d = 2$: one step from the isotropic aperture $\Sigma_1 = t_1^2I$. (a) The shapes
+$S(\Sigma_2)$, $\det S = 1$, reachable at volume scale $t_2 = 2t_1$, in a chart whose radius is the
+distance $\delta(I, S)$ of Lemma~\ref{lem:loewner-scale-shape}(4) and whose angle is twice the
+orientation of the major axis.
+% Round 2 (presentation review), item 10 (VERIFY-round2-structure-paper.md § 10.4): why the angle is
+% doubled (det S = 1, so log S is trace-free), and the dashed arrow of panel (b), checked against
+% section 4.8 and records/affine/fig-shape-plane-output.txt (y = log 2, x from 0.3466 to 1.0397).
+Rotating the aperture through $\theta$ turns $\log S$, a point of the plane of trace-free symmetric
+matrices, through $2\theta$, so orthogonal orientations lie at opposite points. The Loewner order reaches the disc of radius $2\sqrt2\log(t_2/t_1)$
+(Lemma~\ref{lem:loewner-scale-shape}(4)); the stable order of index $\alpha$ the disc of radius
+$2\sqrt2\,\frac{\alpha}{2+\alpha}\log(t_2/t_1)$ (Proposition~\ref{prop:stable-step-cone}(3)); the rays
+only the centre. The ellipses are apertures on the Loewner edge in three orientations. (b) The same
+orders in the logarithm of the anisotropy gained, $\sqrt{n_2/n_1}$, against the logarithm of the scale
+ratio: slopes $d$, $d\alpha/(d+\alpha)$ and $0$. The crosses are the apertures of shape-adapted smoothing
+at anisotropy $n_2/n_1 = 2$, $4$, $8$, $16$, reached from the
+isotropic first stage (Proposition~\ref{prop:shape-adapted-apertures}), which lie on the Loewner edge.
+The dashed arrow is the step for the surface at slant $60^\circ$ of \S\ref{sec:shape-adapted}, at
+log-anisotropy $\log 2$. It runs from the aperture of shape-adapted smoothing on the Loewner edge to the edge of the stable order of
+index $\alpha = 1$, which reaches that shape only at twice the volume scale. Computed, with the
+discs checked against the two orders on random steps, by a script deposited with the paper.}
+\label{fig:shape-plane}
+\end{figure}
+
+\input{05-table}
+\input{05-wedges}
+\input{05-orbits}
+\input{05-wedge-axis}
+\input{05-shape-adapted}
+\input{05-smaller-groups}

@@ -1,0 +1,621 @@
+% §2 What is used from the earlier papers --- the recap of the two released modules of Paper V and
+% of the isotropic paper this paper rests on, and the cited facts it spends (CHANGED Q-0281 wave 2: blind review W2F-2).
+% Five since round 3 (C5).
+% Written from the
+% draft's §2 (Q-0285, 2026-10-04), on Paper V's model (paper-b/02-line-paper.tex,
+% paper-c/02-earlier-modules.tex): the paper is read on its own, so what the later sections read is
+% RESTATED here, cited by released version.
+%
+% Q-0307 (the split at §3 | §4, adr/0001). The single article's section 2 served its section 3 as
+% well; that part went with the isotropic paper (paper-iso/02-line-papers.tex): the causal bridge,
+% the dimension filtration, the extreme rays, the origin on the line, the two facts of the line used
+% in proofs, and the cited facts A1, A2 and A4. Kept here: the notation, the axioms and the
+% classification on the line (2.1, 2.2), and A3, A5 and A6 (2.4), verbatim. New: 2.3, the four (six since Q-0317, with the two marginal lemmas)
+% statements of the isotropic paper that sections 3-4 and the appendices use, RESTATED as Paper V's
+% modules restate the line paper (paper-b/02-line-paper.tex): verbatim from the blueprint under the
+% same `% shared with blueprint` marker, so that `linkage check` guards them too, with [Iso]'s
+% statement number in the title and the proof left there (`% proof omitted`). The statement lives in
+% the isotropic paper, which proves it; here it is a restatement (article-kit LINKAGE.md, "A label,
+% once per module"). Q-0457: [Iso] is released (iso-v0.1, 2026-10-14, version DOI
+% 10.5281/zenodo.23357468, concept DOI 10.5281/zenodo.23357467) and cited through the librarian's
+% citekey fagerstrom2026isotropic by its printed numbers, read from the released PDF (the export
+% github.com/danielfagerstrom/spatial-hemigroup-scale-space-isotropic, tag v0.1): Definition 3.2,
+% Lemmas 3.4 and 3.5, Theorem 3.6, Definition 3.10 and Lemma A.2, which are all in the paper and none
+% in its supplement. Until then it was cited by the name of the statement (Q-0312, review flag 2),
+% with a release marker at each pointer (records/affine/NODES-q0457.md lists them).
+%
+% No blueprint node in 2.2 and 2.4: this repository's blueprint has no node for a statement of [V]
+% or [B] (repo CLAUDE.md: no \uses edge crosses into another repository's blueprint), so every such
+% statement below carries a `% no blueprint node:` opt-out naming what it restates (article-kit
+% LINKAGE.md rule 12). Each restatement was checked against the released source at its tag (v0.1:
+% paper/02, 04, 06, 07), not against the draft. Theorem 2.3 is [V, Thm. 7.3] as released (with its
+% uniqueness clause); the draft's last sentence ("the admissible exponents are exactly the exponents
+% of the symmetric self-decomposable laws") is [V, Prop. 2.13], and is prose after the theorem. The
+% cited facts are shared with their blueprint interface nodes thm:cited-A<N> (the author's decision
+% of 2026-10-06), verbatim or pinned; those nodes are the ledger's "statement as used"
+% (blueprint/AXIOMS.md), which was read at the page, and the page anchors are the ledger's. Module C is not cited (the author, 2026-10-04).
+
+% Round 2 (presentation review), item 1: the sentence that re-described the three earlier papers is
+% cut, since section 1's paragraph "The axioms" introduces them
+% (records/affine/reviews/VERIFY-round2-front-paper.md, item 1, the safe part).
+\section{What is used from the earlier papers}\label{sec:line}
+
+This section restates, without proof, the statements of the line paper
+\sscite{fagerstrom2026spatial} and of the isotropic paper \sscite{fagerstrom2026isotropic} that the
+later sections use in their statements or in more than one proof, with the notions of the cone
+paper \sscite{fagerstrom2026cone} that they read, and states the five theorems of the literature
+that the proofs cite. The three papers are cited in their released
+version~0.1, by the statement numbers of that version. A restated statement carries its released
+number in its title, and its proof is at that number; a statement used once, inside one proof, is
+restated in that proof. With the restatements the statements of this paper can be read without
+the earlier papers, and its proofs rest on theirs. A reader who knows the earlier papers can go to
+\S\ref{sec:cited-facts}.
+
+\subsection{Notation}\label{sec:notation}
+
+% Round 2 (presentation review), item 1: the vocabulary sentences, which repeated section 1's
+% paragraph "The axioms", are cut to one sentence and the formula. Item 15's "or as a stage" belongs
+% to the sentence on "kernel" that remains in section 1 only.
+As in \S\ref{sec:introduction}, a probability measure is a \emph{law}, and its transform is its
+characteristic function, $\widehat\mu(\xi) = \int e^{i\langle\xi,x\rangle}\,\mu(dx)$ for a law $\mu$
+on $\RR^d$. For $A \in \GL(d)$, $A_*\mu := \mu \circ A^{-1}$ is the image measure, with
+$\widehat{A_*\mu}(\xi) = \widehat\mu(A^{\tp}\xi)$. On functions $A$ acts by
+$D_Af := |\det A|^{-1}f(A^{-1}\,\cdot)$, which preserves the integral, so that
+$D_A(\mu * f) = (A_*\mu) * D_Af$. On the line the dilation by $\lambda > 0$ is
+$D_\lambda f = \lambda^{-1}f(\cdot/\lambda)$, the translation by $a$ is $\tau_af = f(\cdot - a)$ and
+the reflection is $Rf = f(-\,\cdot)$. $\Sym(d)$ is the space of real symmetric $d \times d$
+matrices, $\PSD(d)$ and $\PD(d)$ the positive semidefinite and the positive definite ones, and
+$\Sigma \le \Sigma'$ the Loewner order, $\Sigma' - \Sigma \in \PSD(d)$. $\Orth(d)$ is the
+orthogonal group, $S^{d-1}$ the unit sphere, $\sigma_{d-1}$ its surface measure and
+$|S^{d-1}| = \sigma_{d-1}(S^{d-1})$ its surface area. The frequency has three letters, each
+following its source. From \S\ref{sec:classical} on, $\omega$ is the frequency on $\RR^d$, and a
+proof that needs a second frequency writes it $\xi$. The
+statements of the isotropic paper restated in \S\ref{sec:iso-recap} write it $\xi$, as that paper does,
+and the frequency on the line $\omega$. The cited fact C2 writes it $z$, as its source does.
+Table~\ref{tab:notation}, at the end of this section, collects the symbols of
+\S\S\ref{sec:classical}--\ref{sec:landscape}, each with the statement that defines it, and the list
+after it names the letters that keep a second meaning.
+
+\subsection{The axioms and the classification on the line}\label{sec:line-axioms}
+
+The line paper's object is a family of operators on $L^1(\RR)$ indexed by pairs of scales
+$s \le t$. The operator $\Phi_{s,t}$ takes the record of a signal at scale $s$ to its record at the
+coarser scale $t$. The axioms are these.
+
+% no blueprint node: restates Definition 3.1 of [V] (fagerstrom2026spatial, v0.1)
+\begin{definition}[symmetric cascade measurement family, {\prog{V}{Def.~3.1}}]\label{def:line-family}
+A family $(\Phi_{s,t})_{0 \le s \le t}$ of linear operators on $L^1(\RR)$ is a \emph{symmetric
+cascade measurement family} if:
+\begin{enumerate}
+\item[(A1)] each $\Phi_{s,t}$ is a bounded operator on $L^1(\RR)$;
+\item[(A2)] $\Phi_{s,t}\tau_a = \tau_a\Phi_{s,t}$ for every $a \in \RR$;
+\item[(A3)] $\Phi_{s,t}R = R\,\Phi_{s,t}$;
+\item[(A4)] $\Phi_{s,t}$ maps nonnegative functions to nonnegative functions;
+\item[(A5)] $\int\Phi_{s,t}f = \int f$ for every nonnegative $f \in L^1(\RR)$;
+\item[(A6)] $\Phi_{t,t} = \mathrm{Id}$, and $\Phi_{s,t}\Phi_{r,s} = \Phi_{r,t}$ whenever
+$r \le s \le t$;
+\item[(A7)] for every $f \in L^1(\RR)$ the map $(s,t) \mapsto \Phi_{s,t}f$ is continuous from
+$\{0 \le s \le t\}$ to $L^1(\RR)$;
+\item[(A8)] there is a family $(S_\lambda)_{\lambda > 0}$ of increasing bijections of
+$[0,\infty)$ with $D_\lambda\Phi_{s,t} = \Phi_{S_\lambda s,\,S_\lambda t}D_\lambda$ for all
+$0 \le s \le t$ and all $\lambda > 0$;
+\item[(ND)] $\Phi_{s,t} \ne \mathrm{Id}$ whenever $s < t$.
+\end{enumerate}
+\end{definition}
+
+Axiom (A6), the \emph{cascade}, requires
+that the stages compose, and leaves free how the stage from $s$ to $t$ depends on the two scales:
+the family need not be a semigroup in any scale parameter. Axiom (A8) is the scale invariance of
+the theory. Dilating the signal changes which scale a stage belongs to, and (A8) requires only that it
+relabel the scales by an increasing bijection $S_\lambda$, without fixing in advance how. Axiom (ND)
+excludes stages that do nothing. The first consequence of the axioms is that every stage is a
+convolution.
+
+% no blueprint node: restates Lemma 4.1 of [V] (fagerstrom2026spatial, v0.1)
+\begin{lemma}[from operators to kernels on the line, {\prog{V}{Lem.~4.1}}]\label{lem:line-representation}
+Under (A1), (A2), (A4) and (A5), for each pair $0 \le s \le t$ there is a unique probability
+measure $\nu_{s,t}$ on $\RR$ with $\Phi_{s,t}f = \nu_{s,t} * f$ for every $f \in L^1(\RR)$; under
+(A3) it is symmetric. Conversely every symmetric probability measure on $\RR$ defines an operator
+satisfying (A1)--(A5).
+\end{lemma}
+
+The same passage in dimension $d$, for every group and order of the scheme of
+\S\ref{sec:classical}, is Lemma~\ref{lem:operators-to-kernels}, and its converse is
+Lemma~\ref{lem:kernels-to-operators}; both are proved in Appendix~\ref{app:classical}.
+
+A \emph{gauge} is an increasing bijection $\chi$ of $[0,\infty)$, hence continuous, with
+$\chi(0) = 0$. It labels the scales: the classification below describes a family by a gauge
+and an exponent, and in a family with gauge $\chi$ axiom (A8) holds with
+$S_\lambda = \chi^{-1}(\lambda\,\chi(\cdot))$, so that a dilation by $\lambda$ multiplies $\chi$ by
+$\lambda$. A function
+$F : [0,\infty) \to [0,\infty)$ is \emph{admissible} if it has the form \prog{V}{(2.3)}
+\begin{equation}\label{eq:admissible-line}
+  F(r) = a_{\mathrm V}\,r^2 + \int_0^\infty \bigl(1 - \cos rx\bigr)\,k(x)\,\frac{dx}{x},
+\end{equation}
+with $a_{\mathrm V} \ge 0$ and $k : (0,\infty) \to [0,\infty)$ nonincreasing,
+$\int_0^1 x\,k(x)\,dx < \infty$ and $\int_1^\infty k(x)\,x^{-1}dx < \infty$. The number
+$a_{\mathrm V}$ is the \emph{Gaussian coefficient} and $k$ the \emph{folded profile}. A subscript
+$\mathrm V$ marks an object of the line, and an upright subscript $\mathrm I$, in
+\S\ref{sec:iso-recap}, one of the time-causal theory; the italic $I$ of $\mu_I$ is the identity
+matrix. A law is
+\emph{infinitely divisible} when, for every $n$, it is the $n$-fold convolution of some law $\mu_n$
+with itself. An admissible $F$ is the exponent of a symmetric infinitely divisible law, and the
+measure $k(x)\,dx/x$ on $(0,\infty)$ is that law's \emph{\Levy{} measure} folded onto the half-line.
+Displacements of size about $x$ arrive at rate $k(x)\,dx/x$, the two directions counted together. The two integrability conditions are
+those of \prog{V}{Lem.~2.15}.
+
+% no blueprint node: restates Theorem 7.3 of [V] (fagerstrom2026spatial, v0.1)
+\begin{theorem}[the classification on the line, {\prog{V}{Thm.~7.3}}]\label{thm:line-classification}
+A family $(\Phi_{s,t})_{0 \le s \le t}$ of operators on $L^1(\RR)$ satisfies (A1)--(A8) and (ND)
+if and only if there are a gauge $\chi$ and an admissible $F \not\equiv 0$ such that
+$\Phi_{s,t}f = \nu_{s,t} * f$ with symmetric probability measures $\nu_{s,t}$ on $\RR$,
+\[
+  \widehat\nu_{s,t}(\omega) = \exp\bigl[-\bigl(F(\chi(t)\,\omega) - F(\chi(s)\,\omega)\bigr)\bigr] .
+\]
+The pair $(\chi, F)$ is unique up to the normalization $\chi(1) = 1$.
+\end{theorem}
+
+The uniqueness says that $(c\,\chi, F(c^{-1}\,\cdot))$ gives the same family for every $c > 0$, and
+nothing else does; the normalization $\chi(1) = 1$ fixes $c$. In the \emph{canonical gauge}, $\chi$
+the identity, the kernel from scale zero at scale $t$ has
+transform $e^{-F(t\omega)}$: it is the dilation by $t$ of one law. A law
+$\mu$ on $\RR^d$ is \emph{self-decomposable} if for every $c \in (0,1)$ there is a law $\rho_c$, the
+\emph{residual}, with
+\begin{equation}\label{eq:self-decomposable}
+  \widehat\mu(\xi) = \widehat\mu(c\,\xi)\,\widehat\rho_c(\xi), \qquad \xi \in \RR^d
+\end{equation}
+(\sscite{sato1999levy}, Def.~15.1, p.~90; on the line \prog{V}{Def.~2.12}). In words, the law is a
+contracted copy of itself convolved with an independent remainder, for every contraction ratio.
+This is what makes a cascade along one scale direction possible: the residuals are the stages.
+The admissible functions are exactly the exponents of the symmetric self-decomposable laws on the
+line \prog{V}{Prop.~2.13}.
+
+\subsection{What is used from the isotropic paper}\label{sec:iso-recap}
+
+The isotropic paper measures an image on $\RR^d$ with apertures that have a size and no shape and
+no preferred direction. In this paper its theory is the isotropic corner of the scheme
+(Proposition~\ref{prop:isotropic-corner}), and the isotropic member $\mu_I$ of an affine orbit is
+described in its terms (\S\ref{sec:affine-stable-cone}). The later sections use six of its
+statements: the axioms, the classification with the two lemmas that reduce it to the line, the
+description of a law by its polar profile, and one estimate of the exponent. The isotropic paper
+states its axioms on operators, as the line's with $\RR^d$ in place of $\RR$ and the orthogonal
+group in place of the reflection \prog{Iso}{Def.~3.1}, and on kernels, the form restated here; in
+this paper's scheme Lemmas~\ref{lem:operators-to-kernels} and~\ref{lem:kernels-to-operators} join
+the two.
+
+% shared with blueprint def:isotropic-kernel-family
+\begin{definition}[isotropic cascade family, {\prog{Iso}{Def.~3.2}}]\label{def:isotropic-kernel-family}
+Fix an integer $d \ge 1$. For $A \in \GL(d)$ write $A_*\mu := \mu \circ A^{-1}$ for the image of a
+measure $\mu$ on $\RR^d$, and $\widehat\mu(\xi) = \int e^{i\langle\xi,x\rangle}\mu(dx)$, so that
+$\widehat{A_*\mu}(\xi) = \widehat\mu(A^{\tp}\xi)$. An \emph{isotropic cascade family in dimension
+$d$} is a family $(\mu_{s,t})_{0 \le s \le t}$ of probability measures on $\RR^d$ such that
+\begin{enumerate}
+\item[(I1)] \emph{(cascade)} $\mu_{t,t} = \delta_0$, and $\mu_{r,t} = \mu_{s,t} * \mu_{r,s}$
+whenever $r \le s \le t$;
+\item[(I2)] \emph{(continuity)} for every $\xi \in \RR^d$ the map
+$(s,t) \mapsto \widehat\mu_{s,t}(\xi)$ is continuous on $\{0 \le s \le t\}$;
+\item[(I3)] \emph{(rotation invariance)} $Q_*\mu_{s,t} = \mu_{s,t}$ for every $Q \in \Orth(d)$
+and every pair;
+\item[(I4)] \emph{(dilation covariance)} there is a family $(S_\lambda)_{\lambda > 0}$ of
+increasing bijections of $[0,\infty)$ with $(\lambda I)_*\mu_{s,t} = \mu_{S_\lambda s,\,S_\lambda t}$
+for every $\lambda > 0$ and every pair;
+\item[(ND)] \emph{(nondegeneracy)} $\mu_{s,t} \ne \delta_0$ whenever $s < t$.
+\end{enumerate}
+\end{definition}
+
+The cone paper names the class $\mathcal{A}_d$ of the admissible $F$ of \ref{eq:admissible-line}
+for which $\xi \mapsto F(|\xi|)$, $\xi \in \RR^d$, is the exponent of a self-decomposable law on
+$\RR^d$ \prog{B}{Prop.~4.9}. By the next theorem its members other than $0$ are the exponents of
+the isotropic families in $\RR^d$. The Gaussian exponent $a_{\mathrm V}r^2$ lies in every
+$\mathcal A_d$.
+
+% shared with blueprint thm:isotropic-classification
+\begin{theorem}[the isotropic classification in dimension $d$, {\prog{Iso}{Thm.~3.6}}]\label{thm:isotropic-classification}
+% Q-0281 wave 1 (group E): proved. Round 2 (presentation review), item 12: this comment is brought
+% up to date (it described the include line that Q-0365 removed). Since Q-0365 (2026-10-08)
+% AffineHemigroup.isotropic_classification prints, besides Lean core, this module's ledger
+% A3(ii)-(iii) (AffineHemigroup.levy_khintchine_unique and levy_khintchine_converse), through the
+% necessity direction: ScaleSpaceCore's ScaleSpace.main_analysis with its hypothesis SymLevyUnique
+% discharged by AffineHemigroup.line_levy_unique (prop:line-levy-unique). It prints no interface of
+% Paper V's, and blueprint/trust-boundary.txt has no include line. The node is [A] on ledger A3. The
+% declaration is guarded in CIAxiomGuard.lean; the other declarations of the tag, and the
+% sufficiency direction, are Lean core and guarded.
+Let $d \ge 1$. A family $(\mu_{s,t})_{0 \le s \le t}$ of probability measures on $\RR^d$ is an
+isotropic cascade family in dimension $d$ if and only if there are a gauge $\chi$ and an
+$F \in \mathcal{A}_d$ with $F \not\equiv 0$ such that
+\begin{equation}\label{eq:isotropic-classification}
+  \widehat\mu_{s,t}(\xi) = \exp\bigl[-\bigl(F(\chi(t)|\xi|) - F(\chi(s)|\xi|)\bigr)\bigr],
+  \qquad 0 \le s \le t,\ \xi \in \RR^d .
+\end{equation}
+In particular the kernels from scale zero are $\widehat\mu_{0,t}(\xi) = e^{-F(\chi(t)|\xi|)}$. The
+pair is unique up to $(\chi,F) \mapsto (c\,\chi,\,F(c^{-1}\,\cdot))$ with $c > 0$, in the sense that if a gauge $\chi'$
+and a real function $F'$ on $[0,\infty)$ with $F'(0) = 0$ also satisfy
+\ref{eq:isotropic-classification}, then
+$\chi' = c\,\chi$ and $F' = F(c^{-1}\,\cdot)$ for some $c > 0$, and $c = 1$ when
+$\chi(1) = \chi'(1) = 1$.
+\end{theorem}
+% proof omitted: proved in the isotropic paper, the necessity in its section 3.2, the rest in A.2
+
+The classification reduces to the line through the marginals of a family along a line. Two lemmas
+of the isotropic paper carry the reduction, and the proof of Proposition~\ref{prop:isotropic-corner}
+uses them too.
+
+% shared with blueprint lem:radial-marginal
+\begin{lemma}[a rotation-invariant law is determined by its marginal, {\prog{Iso}{Lem.~3.4}}]\label{lem:radial-marginal}
+Let $d \ge 1$, let $e \in \RR^d$ be a unit vector and $\pi(x) := \langle e, x\rangle$, and for a
+probability measure $\mu$ on $\RR^d$ write $\pi_*\mu$ for its image on $\RR$.
+\begin{enumerate}
+\item If $Q_*\mu = \mu$ for every $Q \in \Orth(d)$, then $\kappa := \pi_*\mu$ is a symmetric
+probability measure on $\RR$, and
+\[
+  \widehat\mu(\xi) = \widehat\kappa(|\xi|), \qquad \xi \in \RR^d .
+\]
+In particular $\widehat\mu$ is real and radial, and $\kappa$ does not depend on $e$.
+\item Under the hypothesis of (1), $\pi_*\mu = \delta_0$ if and only if $\mu = \delta_0$.
+\item For all probability measures $\mu, \mu'$ on $\RR^d$ and every $\lambda > 0$,
+$\pi_*(\mu * \mu') = \pi_*\mu * \pi_*\mu'$, $\pi_*\bigl((\lambda I)_*\mu\bigr) =
+(\lambda I)_*(\pi_*\mu)$ on $\RR$, and $\pi_*\delta_0 = \delta_0$.
+\end{enumerate}
+\end{lemma}
+% proof omitted: proved in the isotropic paper, its section A.2
+
+% shared with blueprint lem:isotropic-marginal-family@e81ae6e86684+f75ee0c4dd9e
+\begin{lemma}[the marginals of an isotropic family form a family on the line, {\prog{Iso}{Lem.~3.5}}]\label{lem:isotropic-marginal-family}
+Let $(\mu_{s,t})$ be an isotropic cascade family in dimension $d$ with dilation action
+$(S_\lambda)$, let $e$ and $\pi$ be as in Lemma~\ref{lem:radial-marginal}, and put
+\[
+  \kappa_{s,t} := \pi_*\mu_{s,t}, \qquad \Phi_{s,t}f := \kappa_{s,t} * f
+  \quad (f \in L^1(\RR)), \qquad 0 \le s \le t .
+\]
+Then $\widehat\mu_{s,t}(\xi) = \widehat\kappa_{s,t}(|\xi|)$ for every $\xi \in \RR^d$, each
+$\kappa_{s,t}$ is a symmetric probability measure, and $(\Phi_{s,t})$ is a symmetric cascade
+measurement family in the sense of \restated{V}{Def.~3.1}{def:line-family}, with the same $(S_\lambda)$.
+\end{lemma}
+% proof omitted: proved in the isotropic paper's supplement, its section S3.2
+
+The origin data below describe the laws of the class $\mathcal A_d$ through their \Levy{} measures.
+The \Levy{} measure of a rotation-invariant self-decomposable law is described by one function of
+the radius, by the polar criterion of self-decomposability (\sscite{sato1999levy}, Thm.~15.10,
+p.~95), and \S\ref{sec:affine-stable-cone} reads its statements through that function.
+
+% WR s2 (F3): the label sec:line-bridge below is the one that the shared definition's citation of
+% the cone paper's Def. 4.11 reads, so that the definition sends the reader to this subsection,
+% where the delay datum is restated.
+Some of these laws come from \emph{subordination}, which builds kernels from the Gaussian. Blur
+with a Gaussian whose variance is drawn at random, and average over the draws. The result is a
+\emph{Gaussian variance mixture}, the law of a Brownian motion at a random time (Bochner's
+subordination, \sscite{sato1999levy}, \S30, p.~197). The \Matern{} kernel with transform
+$(1 + t^2|\xi|^2/2)^{-\gamma}$ is one: its variance is drawn from the gamma law with Laplace
+transform $(1+t^2\sigma)^{-\gamma}$ \prog{Iso}{Prop.~3.12(2)}. The cone paper draws the variance
+from the delay laws of the time-causal theory, and describes the law of the variance by a
+\emph{delay datum} \prog{B}{Def.~4.11}\label{sec:line-bridge}: a pair $(b_0, k_{\mathrm I})$ with
+$b_0 \ge 0$ and $k_{\mathrm I} : (0,\infty) \to [0,\infty)$ measurable, subject to
+$\int_0^1 k_{\mathrm I}(u)\,du < \infty$ and $\int_1^\infty k_{\mathrm I}(u)\,u^{-1}du < \infty$,
+with exponent
+\[
+  F_{\mathrm I}(\sigma) = b_0\,\sigma + \int_0^\infty\bigl(1 - e^{-\sigma u}\bigr)\,k_{\mathrm I}(u)\,\frac{du}{u},
+  \qquad \sigma \ge 0 .
+\]
+Its polar profile in dimension $d$ is the integral of \ref{eq:polar-profile-d} below, which is
+\prog{B}{(4.6)}, and in Definition~\ref{def:isotropic-origin-datum} the drift $b_0$ is written $a$.
+This paper uses the subordinated data as examples of profiles bounded at the origin
+(\S\ref{sec:affine-stable-cone}). The isotropic paper names the function of the radius, and the
+data that subordination gives, as follows.
+
+% shared with blueprint def:isotropic-origin-datum
+\begin{definition}[isotropic origin data in dimension $d$, and the polar profile, {\prog{Iso}{Def.~3.10}}]\label{def:isotropic-origin-datum}
+Fix an integer $d \ge 1$ and write $\sigma_{d-1}$ for the surface measure of the unit sphere
+$S^{d-1} \subset \RR^d$ and $|S^{d-1}| = \sigma_{d-1}(S^{d-1})$ for its surface area. An
+\emph{isotropic origin datum in dimension $d$} is a pair
+$(a, k_d)$ with $a \ge 0$ and $k_d : (0,\infty) \to [0,\infty)$ nonincreasing, subject to
+\[
+  \int_0^1 k_d(r)\,r\,dr < \infty
+  \qquad\text{and}\qquad
+  \int_1^\infty k_d(r)\,\frac{dr}{r} < \infty .
+\]
+Its \Levy{} measure is the rotation-invariant measure $\nu_d$ on $\RR^d \setminus \{0\}$ with radial
+density $f_d(r) = k_d(r)\,\bigl(|S^{d-1}|\,r^d\bigr)^{-1}$, so that
+\begin{equation}\label{eq:polar-decomposition}
+  \int_{\RR^d} g \,d\nu_d
+   = \frac{1}{|S^{d-1}|}\int_{S^{d-1}}\!\!\sigma_{d-1}(d\eta)\int_0^\infty g(r\eta)\,k_d(r)\,\frac{dr}{r}
+\end{equation}
+for every nonnegative Borel $g$ vanishing at the origin. Its \emph{exponent} is
+\begin{equation}\label{eq:isotropic-exponent}
+  F_d(\xi) = \tfrac12 a|\xi|^2
+   + \int_{\RR^d}\bigl(1 - \cos\langle \xi, x\rangle\bigr)\,\nu_d(dx), \qquad \xi \in \RR^d ,
+\end{equation}
+and its \emph{law} is the symmetric infinitely divisible law $\mu$ on $\RR^d$ with
+$\widehat\mu = e^{-F_d}$. We call $k_d$ the datum's \emph{polar profile} and
+$c := k_d(0{+}) \in [0,\infty]$ its \emph{profile at the origin}. The datum is
+\emph{subordinated} when there is a delay datum $(a, k_{\mathrm I})$ in the sense of
+\restated{B}{Def.~4.11}{sec:line-bridge}, with $k_{\mathrm I}$ nonincreasing, whose polar profile \prog{B}{(4.6)} is $k_d$:
+\begin{equation}\label{eq:polar-profile-d}
+  k_d(r) = \frac{2}{\Gamma(d/2)}\int_0^\infty v^{d/2-1}e^{-v}\,
+    k_{\mathrm I}\Bigl(\frac{r^2}{2v}\Bigr)\,dv , \qquad r > 0 .
+\end{equation}
+\end{definition}
+
+An origin datum describes its law, a rotation-invariant symmetric infinitely divisible law, through
+the coefficient $a$ of its Gaussian part and the polar profile $k_d$.
+% Round 2 (presentation review), item 5 (records/affine/reviews/VERIFY-round2-notation-paper.md § 5):
+% the link of the class A_d to the origin data, with a pointer to the released statement, [Iso,
+% Prop. 3.11](1)-(2), compared with it (F : [0,inf) -> [0,inf); uniqueness of k_d up to a null set).
+The data describe exactly the class $\mathcal A_d$: a function $F : [0,\infty) \to [0,\infty)$ lies in
+$\mathcal A_d$ if and only if $\xi \mapsto F(|\xi|)$ is the exponent $F_d$ of an isotropic origin
+datum in dimension $d$, and the datum is then unique, $k_d$ up to a Lebesgue-null set
+\prog{Iso}{Prop.~3.11}. In this paper it describes the isotropic member
+$\mu_I$ of an affine orbit by its profile (\S\ref{sec:affine-stable-cone}). The name refers to the
+use the isotropic paper makes of it, at the origin of a kernel.
+
+The later sections use one more statement of the isotropic paper.
+
+% shared with blueprint lem:isotropic-exponent-log
+\begin{lemma}[a profile bounded at the origin gives a logarithmic exponent, {\prog{Iso}{Lem.~A.2}}]\label{lem:isotropic-exponent-log}
+Let $d \ge 1$, let $(0,k_d)$ be an isotropic origin datum in dimension $d$ with Gaussian
+coefficient $0$ and $c = k_d(0{+}) < \infty$, let $F_d$ be its exponent, and put
+$C_k := \int_1^\infty k_d(r)\,dr/r$.
+\begin{enumerate}
+\item \emph{(The exponent grows at most like $c\log|\xi|$.)} For every $\xi$ with $|\xi| \ge 1$,
+\[
+  F_d(\xi) \le c\log|\xi| + \tfrac{13}{4}\,c + 2C_k ,
+  \qquad\text{so}\qquad
+  e^{-F_d(\xi)} \ge e^{-13c/4 - 2C_k}\,|\xi|^{-c} .
+\]
+\item \emph{(The exponent is logarithmic.)} For every $a > 0$,
+$F_d(a\xi) - F_d(\xi) \to c\log a$ as $|\xi| \to \infty$. Equivalently, for a unit vector $e$ the
+function $g(u) := F_d(\sqrt u\,e)$, $u \ge 0$, satisfies $g(au) - g(u) \to \tfrac c2\log a$ as
+$u \to \infty$, for every $a > 0$.
+\end{enumerate}
+\end{lemma}
+% proof omitted: proved in the isotropic paper's supplement, its section S3.3
+
+Clause (2) says $e^{-F_d(\xi)} = |\xi|^{-c}L(|\xi|)$ with $L$ \emph{slowly varying}, that is,
+$L(a\rho)/L(\rho) \to 1$ as $\rho \to \infty$ for every $a > 0$. It is the link from a profile
+bounded at the origin to an exponent of logarithmic growth, which \S\ref{sec:affine-stable-cone}
+uses.
+
+\subsection{The cited facts}\label{sec:cited-facts}
+
+% CHANGED Q-0281 wave 2: blind review W2C-1 (the author's decision of 2026-10-05: Mathlib's route).
+% CHANGED Q-0281 wave 2, group F: C4 added, ledger A9 (the author's decision of 2026-10-05), which
+% lem:spectral-cones(2) now cites in place of the compound-matrix proof.
+% Round 3 (report E, section 3.1; the author's decision D10, PLAN-review-response-paper.md R3.0): C5
+% added, ledger A2, the interface node thm:cited-A2 transcribed verbatim; it enters with
+% prop:wedge-axis-profiles(2), the whole (GL(d), stable) cell.
+The statements of this paper rest on five theorems of the literature that it cites without proving
+them, four of probability theory and one of matrix analysis. Each is stated below as it is used,
+with the page of its source, and named C1 to C5, C for cited, to keep them apart from the axioms
+(A1)--(A8); from here on a cited fact is referred to by its name alone. Inside a cited fact the
+letters are its source's: $A$ is a matrix, $\nu$ a \Levy{} measure and $\gamma$ a drift vector, and in
+C5 $B$ is a Borel set and $\lambda$ a measure on the unit sphere.
+
+A \emph{null array} is a triangular array of laws in which, for every $\varepsilon > 0$, the largest
+mass that an entry of row $n$ puts outside the ball of radius $\varepsilon$ tends to $0$ as $n$ grows. Khintchine's theorem says that the row products of such an array can
+only converge to an infinitely divisible law. It is what makes the increments of a cascade
+infinitely divisible in \S\ref{sec:classical}.
+
+% shared with blueprint thm:cited-A6
+\begin{theorem}[C1: Khintchine's theorem, {\sscite{sato1999levy}, Thm.~9.3, p.~47}]\label{thm:cited-A6}
+Let $r_n \ge 1$ be integers and $\mu_{n,k}$, $1 \le k \le r_n$, $n = 1, 2, \dots$, probability
+measures on $\RR^d$ with $\lim_{n\to\infty}\max_{1\le k\le r_n}\mu_{n,k}(\{|x| > \varepsilon\}) = 0$ for every
+$\varepsilon > 0$. If $\mu_{n,1} * \dots * \mu_{n,r_n} * \delta_{-b_n}$ converges weakly to a
+probability measure $\mu$ for some $b_n \in \RR^d$, then $\mu$ is infinitely divisible.
+\end{theorem}
+
+Theorem~\ref{thm:cited-A6} is stated in the source for the row sums of independent random
+variables. The form above restates it through the law of a sum of independent variables, which is
+the convolution of their laws (\sscite{sato1999levy}, p.~8).
+
+The \emph{generating triplet} of an infinitely divisible law is the triple of its
+\Levy--Khintchine representation: a Gaussian covariance matrix $A$, a \Levy{} measure $\nu$ and a
+drift $\gamma$. The paper compares the kernels of an affine orbit through their \Levy{} measures
+(\S\ref{sec:affine-stable-cone}), and C2 is what lets a law and its triplet stand for each other.
+
+% shared with blueprint thm:cited-A3@27418ee4f07a
+\begin{theorem}[C2: the \Levy--Khintchine representation, {\sscite{sato1999levy}, Thm.~8.1, pp.~37--38}]\label{thm:cited-A3}
+On $\RR^d$:
+\begin{enumerate}
+\item[(i)] An infinitely divisible law $\mu$ on $\RR^d$ has
+\[
+  \widehat\mu(z) = \exp\Bigl[-\tfrac12\langle z, Az\rangle + i\langle\gamma, z\rangle
+   + \int_{\RR^d}\bigl(e^{i\langle z,x\rangle} - 1 - i\langle z,x\rangle\mathbf{1}_{\{|x| \le 1\}}\bigr)\,
+     \nu(dx)\Bigr]
+\]
+for a symmetric nonnegative definite $A$, a $\gamma \in \RR^d$ and a measure $\nu$ with
+$\nu(\{0\}) = 0$ and $\int(|x|^2 \wedge 1)\,\nu(dx) < \infty$.
+\item[(ii)] The triplet $(A, \nu, \gamma)$ is unique.
+\item[(iii)] Conversely, every such triplet is the generating triplet of an infinitely divisible
+law.
+\end{enumerate}
+\end{theorem}
+
+A law is \emph{operator-self\-de\-com\-pos\-able} when the contraction in the definition of
+self\-de\-com\-pos\-abil\-ity is replaced by the linear flow $e^{-tB}$ of a matrix $B$: the law is its own
+image under $e^{-tB}$ convolved with a residual, for every $t \ge 0$. The class is Urbanik's
+\sscite{urbanik1972levy}. The fact used of it is that, when the flow contracts, $e^{-tB} \to 0$ as
+$t \to \infty$, the residuals and the law are infinitely divisible. Without that hypothesis the fact
+fails: for $B = 0$ every law is its own image with the residual $\delta_0$.
+
+% shared with blueprint thm:cited-A5
+\begin{theorem}[C3: operator-self-decomposable laws with a contracting exponent are infinitely divisible, {\sscite{jurek1993operator}, Thm.~3.3.5, p.~83, with \S3.4, pp.~89--90; \sscite{urbanik1972levy}, Prop.~5.2, p.~134}]\label{thm:cited-A5}
+Let $B$ be a real $d \times d$ matrix with $e^{-tB} \to 0$ as $t \to \infty$, and let $\mu$ be a
+probability measure on $\RR^d$ such that for every $t \ge 0$ there is a probability measure
+$\rho_t$ with $\mu = (e^{-tB})_*\mu * \rho_t$. Then every $\rho_t$ is infinitely divisible, and so
+is $\mu$.
+\end{theorem}
+
+Jurek and Mason state their Theorem~3.3.5 for \emph{full} laws, whose support lies in no proper
+hyperplane (\sscite{jurek1993operator}, p.~46). The opening paragraph of their \S3.4 notes that fullness is used only in the other half of
+that theorem and drops it, and adds that the law itself is then infinitely divisible. C3 is the last
+sentence of the theorem read with that paragraph. Urbanik's Proposition~5.2 states the same without
+fullness. Beyond the letter of the two passages, C3 reads two things. A measure is a probability
+measure, which is the book's convention. And the passages say that each residual of one family is
+infinitely divisible, where C3 says it of every probability measure that is a residual at some
+$t \ge 0$; this is their sentence applied to a family completed around that measure, the hypothesis
+supplying the residuals at the other $t$.
+
+The fourth fact is of matrix analysis. The parameter of an aperture in this paper is a positive
+semidefinite matrix, and an order on these matrices invariant under the general linear group is determined by the relative steps
+$\Sigma^{-1/2}\Sigma'\Sigma^{-1/2}$ that it allows (Proposition~\ref{prop:invariant-orders}). The
+composite of two steps depends on how their eigenframes sit relative to each other, and C4 bounds
+its spectrum by the spectra of the two (Lemma~\ref{lem:spectral-cones}(2),
+Appendix~\ref{app:wedge-axis-orders}).
+The eigenvalues of such a product $MN$ are real and positive, being those of $M^{1/2}NM^{1/2}$; write
+$\lambda^\downarrow(A)$ for the eigenvalues of a matrix $A$ with real eigenvalues, in decreasing order and
+with multiplicity.
+
+% Ledger entry A9, the weak form, re-read at the page on 2026-10-06
+% (records/affine/READING-bhatia1997matrix-lidskii.md).
+% shared with blueprint thm:cited-A9@ee60aba37e90
+\begin{theorem}[C4: the eigenvalues of a product of positive definite matrices, {\sscite{bhatia1997matrix}, Cor.~III.4.6, (III.21), p.~73}]\label{thm:cited-A9}
+Let $M$ and $N$ be positive definite $d \times d$ matrices. For $1 \le k \le d$,
+\[
+  \sum_{i \le k}\log\lambda^\downarrow_i(MN) \le \sum_{i \le k}\bigl(\log\lambda^\downarrow_i(M) +
+  \log\lambda^\downarrow_i(N)\bigr) .
+\]
+\end{theorem}
+
+The source states (III.21) for complex positive matrices as a majorization,
+$\log\lambda(AB) \prec \log\lambda^\downarrow(A) + \log\lambda^\downarrow(B)$: the inequalities of C4
+between the partial sums of the $k$ largest entries, with the equality of the totals, which is
+$\det(MN) = \det M\det N$. The same inequality is stated as Exercise~6.5.3, (6.47), p.~228 of
+\sscite{bhatia2007positive}, with a pointer to the page above, as an inequality due to Gel'fand,
+Naimark and Lidskii. The notes to Chapter~III of \sscite{bhatia1997matrix} (p.~80) give their papers
+of 1950.
+% Bhatia's attribution, read at the page images by the librarian on 2026-10-14
+% (records/affine/READING-bhatia1997matrix-lidskii.md, section 4); the primary sources are not held.
+
+The fifth fact describes the self-decomposable laws among the infinitely divisible ones by their
+\Levy{} measures. In polar coordinates the \Levy{} measure of such a law has, in each direction, a
+density with respect to $dr/r$ that does not increase with the radius $r$.
+
+% Ledger entry A2, read at the page (blueprint/AXIOMS.md A2; records/affine/READING-sato1999levy-dimension-d.md).
+% shared with blueprint thm:cited-A2
+\begin{theorem}[C5: the polar criterion, {\sscite{sato1999levy}, Thm.~15.10, p.~95}]\label{thm:cited-A2}
+An infinitely divisible $\mu$ on $\RR^d$ with generating triplet $(A,\nu,\gamma)$ is
+self-decomposable if and only if
+$\nu(B)=\int_S\lambda(d\xi)\int_0^\infty\mathbf 1_B(r\xi)\,k_\xi(r)\,dr/r$ for a finite measure
+$\lambda$ on the unit sphere $S=S^{d-1}$ and a nonnegative $k_\xi(r)$, measurable in $\xi$ and
+nonincreasing in $r>0$.
+\end{theorem}
+
+Theorem~\ref{thm:cited-A2} is the source's formula (15.8) with both directions, and the source adds that self-decomposability puts no
+restriction on $A$ and $\gamma$; its Corollary~15.11, on the same page, is the case $d = 1$.
+Self-decomposability is \ref{eq:self-decomposable}, which is the source's Definition~15.1, and the
+triplet is that of C2. For a rotation-invariant law the isotropic paper reads C5 as the polar form of
+its class (\prog{Iso}{Prop.~3.11}, \S\ref{sec:iso-recap}).
+
+Each enters with a few statements. C1 makes the increments of a cascade infinitely divisible
+(Theorem~\ref{thm:cascade-infinitely-divisible}). C2 enters with the restated classification
+(Theorem~\ref{thm:isotropic-classification}) and with the laws of the affine orbits and their
+\Levy{} measures, from Lemma~\ref{lem:elliptical-stable} on. C3 enters with the anisotropy budget
+(Proposition~\ref{prop:anisotropy-budget}(1)) and through it with the theorem on the general linear group along the chain of cones
+(Theorem~\ref{thm:wedge-axis}). C4 enters with the spectrum of a product
+(Lemma~\ref{lem:spectral-cones}(2)) and through it with the invariant orders
+(Theorem~\ref{thm:cone-orders}). C5 enters once, with the description of the whole general linear cell
+along a cone order (Proposition~\ref{prop:wedge-axis-profiles}(2)). Appendix~\ref{app:verification} lists every statement that rests on each.
+
+% Q-0309 (fix group 4, the whole-paper review's change 3 and its clash map): a notation table for
+% sections 3-4, paper-only. It lists each symbol once, where it is defined; the letters that keep a
+% second meaning inside a shared statement are named after it (their renames are owed at the
+% blueprint, records/affine/GATE-affine.md).
+% WR s2 (S3): the subsection heading is folded into section 2.1, which announces the table.
+
+\begin{table}[ht]
+\centering
+\small
+\setlength{\tabcolsep}{4pt}
+\renewcommand{\arraystretch}{1.1}
+\begin{tabular}{@{}p{0.27\textwidth}p{0.45\textwidth}p{0.24\textwidth}@{}}
+\toprule
+symbol & meaning & defined in \\
+\midrule
+$\Sigma, \Sigma' \in \PSD(d)$; $\PD(d)$ & aperture parameters; the positive definite ones &
+Def.~\ref{def:gw-cascade-family} \\
+$(G, W)$, $\le_W$, $P_W$ & wedge datum: covariance group, order, its pairs & Def.~\ref{def:gw-cascade-family} \\
+$A \cdot \Sigma$, $A_*\mu$ & $A\Sigma A^{\tp}$, and the image of a law & Def.~\ref{def:gw-cascade-family} \\
+$\mu_{\Sigma,\Sigma'}$, $\mu_\Sigma$ & kernel of a pair; kernel from scale zero $\mu_{0,\Sigma}$ &
+Def.~\ref{def:gw-cascade-family} \\
+$\mathrm S(d)$, $\mathrm D_+(d)$, $\GL^+(d)$ & similarities, positive diagonal, orientation-preserving
+group & \S\ref{sec:scale-shape} \\
+% Round 2 (presentation review), item 20: rows for D_s, Delta(Sigma), sym B and N(0, C), the symbols
+% of sections 3-4 the table lacked (VERIFY-round2-structure-paper.md § 20); D_s and Delta(Sigma) are
+% defined in Table 2's legend (item 4), sym B in Prop. 4.10, N(0, C) in section 4.9 before its first
+% use in Prop. 4.24.
+$D_s$; $\Delta(\Sigma)$ & $\diag(s_1,\dots,s_d)$; the diagonal of $\Sigma$ & \S\ref{sec:landscape-table} \\
+$g$ & $\widehat\mu_\Sigma(\omega) = e^{-g(\langle\omega,\Sigma\omega\rangle)}$ on an affine orbit &
+Lem.~\ref{lem:affine-reduction}, Prop.~\ref{prop:affine-orbits} \\
+$M$; $\lambda_{\min}(M)$ & relative step $\Sigma^{-1/2}\Sigma'\Sigma^{-1/2}$; its least
+eigenvalue & Prop.~\ref{prop:invariant-orders} \\
+$\mathcal K$, $\le_{\mathcal K}$ & step set in $\PD(d)$, and its relation &
+Prop.~\ref{prop:invariant-orders} \\
+$C$, $\preceq_C$, $\preceq^+_C$ & invariant cone in $\Sym(d)$; its order on $\PD(d)$, on $\PSD(d)$ &
+Thm.~\ref{thm:cone-orders} \\
+$C_\alpha$, $0 \le \alpha \le \infty$ & the chain of cones from the rays to $\PSD(d)$ &
+Prop.~\ref{prop:stable-order-generated} \\
+$\preceq_\alpha$; $\le_\alpha = \preceq^+_{C_\alpha}$ & stable order on $\PD(d)$; on $\PSD(d)$ &
+Props.~\ref{prop:stable-step-cone}, \ref{prop:similarity-stable-order-families} \\
+$\mathcal K_\alpha$ & stable step cone, the step set of $\preceq_\alpha$ &
+Thm.~\ref{thm:cascade-infinitely-divisible} \\
+$\mathfrak k_\alpha \subseteq \gl(d)$ & exponent cone of $S_\alpha(I)$ & Prop.~\ref{prop:stable-exponent-cone} \\
+$\mathrm{sym}\,B$ & $\tfrac12(B + B^{\tp})$, the symmetric part of $B$ & Prop.~\ref{prop:stable-exponent-cone} \\
+$S_\alpha(H)$, $n_H$, $\psi_H$ & elliptical stable law, its \Levy{} density and exponent &
+Lem.~\ref{lem:elliptical-stable} \\
+$k$; $R(\lambda)$; $\beta_-(k)$, $\beta(k)$ & profile, $k = k_d/|S^{d-1}|$; dilation ratio; lower and
+growth exponents & Prop.~\ref{prop:orbit-step-cone}, Lem.~\ref{lem:dilation-ratio} \\
+$k_d$, $k_d(0{+})$ & polar profile and its value at the origin &
+Def.~\ref{def:isotropic-origin-datum} \\
+$t(\Sigma)$, $S(\Sigma)$, $N$, $n_i$ & volume scale, shape, relative shape, its eigenvalues &
+Lem.~\ref{lem:loewner-scale-shape} \\
+$\operatorname{es}$, $\operatorname{ecc}$, $\operatorname{cond}$, $\mathcal M_s$ & exponent spread,
+eccentricity, condition number, moment matrix & Props.~\ref{prop:similarity-stable-order-kernels},
+\ref{prop:similarity-general-bounded-shape} \\
+$N(0, C)$ & the centred Gaussian law of covariance $C$ & \S\ref{sec:smaller-groups} \\
+$\mathcal L_\Sigma$ & the operator $-\nabla\cdot\Sigma\nabla$ & \S\ref{sec:affine-stable-cone} \\
+\bottomrule
+\end{tabular}
+\caption{Notation of \S\S\ref{sec:classical}--\ref{sec:landscape}.}
+\label{tab:notation}
+\end{table}
+
+Some letters keep a second meaning inside a statement, which that statement fixes. They are these.
+\begin{itemize}
+\item $a$: the Gaussian coefficient $a_{\mathrm V}$ of \ref{eq:admissible-line} on the line, and the
+coefficient $a$ of an origin datum, whose exponent has the term $\tfrac12a|\xi|^2$, so that
+$a = 2a_{\mathrm V}$ at $d = 1$. ``Gaussian coefficient $0$'' in
+Lemma~\ref{lem:isotropic-exponent-log} means $a = 0$, and its clause (2) uses $a > 0$ for a dilation
+factor.
+\item $c$: the profile at the origin in Definition~\ref{def:isotropic-origin-datum} and
+Lemma~\ref{lem:isotropic-exponent-log}, and a positive constant elsewhere.
+\item $C$: an invariant cone, with $C(\mathcal K)$ the cone of a step set, and the Gaussian covariance
+$C(\Sigma)$ of a kernel in Proposition~\ref{prop:similarity-stable-order-kernels}; a real matrix in
+Lemma~\ref{lem:stable-tail}. $C_k$ is a
+constant in Lemma~\ref{lem:isotropic-exponent-log}, and C1--C5, upright and without a subscript, are
+the cited facts.
+\item $g$: the function of one variable through which an affine orbit depends on the aperture,
+$\widehat\mu_\Sigma(\omega) = e^{-g(\langle\omega,\Sigma\omega\rangle)}$, in every statement that uses
+it. In Lemma~\ref{lem:isotropic-exponent-log}(2) it is the same function for the orbit of a radial
+exponent.
+\item $\gamma$: a stable or \Matern{} index, and the drift of a triplet in C2.
+\item $k$: the folded profile of \ref{eq:admissible-line} on the line, the polar profile $k_d$ of
+Definition~\ref{def:isotropic-origin-datum}, and the profile $k$ of
+Proposition~\ref{prop:orbit-step-cone}, taken against $r^{-d}dx$, which is $k_d/|S^{d-1}|$. At $d = 1$
+the last is half the folded profile, which counts both directions.
+\item $S$: the similarities $\mathrm S(d)$, the shape $S(\Sigma)$ of an aperture, the elliptical stable
+law $S_\alpha(H)$, the relabelling $S_\lambda$ of the scales in (A8) and (I4), and the unit sphere
+$S^{d-1}$, kept apart by their typeface and arguments.
+\item $\sigma$: the surface measure $\sigma_{d-1}$, the normalized spectrum $\sigma(\Sigma)$ of
+Proposition~\ref{prop:similarity-ray-families}, and, in the prose of \S\ref{sec:shape-adapted}, the
+slant of a surface.
+\item $t$: the volume scale $t(\Sigma)$ of Lemma~\ref{lem:loewner-scale-shape}, the time of a linear flow
+in Proposition~\ref{prop:one-parameter-families}, and the threshold $t_\alpha(\Sigma)$ of
+Proposition~\ref{prop:similarity-stable-order-families}(1). The prose writes $v$ and $w$ for variances
+and $e^{sB}$ for a flow.
+\end{itemize}
+Two objects have several names. The stable order of index $\alpha$ is $\preceq_\alpha$ on $\PD(d)$,
+defined by its step condition in Proposition~\ref{prop:stable-step-cone}(2).
+Proposition~\ref{prop:stable-order-generated}(1) shows that it equals $\preceq_{C_\alpha}$. On
+$\PSD(d)$ it is $\le_\alpha$, which equals $\preceq^+_{C_\alpha}$. Its set of steps is the step cone
+$\mathcal K_\alpha = \exp C_\alpha \subseteq \PD(d)$, a set of relative steps $M$. The exponent cone
+$\mathfrak k_\alpha \subseteq \gl(d)$ is a set of exponents, in fraktur as $\gl(d)$ is, and its
+symmetric part is $C_\alpha$ (Proposition~\ref{prop:stable-order-generated}(2)).

@@ -1,0 +1,126 @@
+1. prop:isotropic-exponent-profile(3): the two-sided bound and the limit
+   (a) the step profile k_d = 1_(0,1): c = 1, K = 1, C_k = 0, Delta(rho) = H_d(rho) - log rho
+  ok   d=1 rho=1: -3.0 <= 0.239811742 <= 3.25
+  ok   d=1 rho=2: -3.0 <= 0.1542348361 <= 3.25
+  ok   d=1 rho=5: -3.0 <= 0.7672454146 <= 3.25
+  ok   d=1 rho=20: -3.0 <= 0.5327958441 <= 3.25
+  ok   d=1 rho=100: -3.0 <= 0.58236449 <= 3.25
+  ok   d=1: Delta(100) = 0.58236449 is within 0.02 of varkappa_d = 0.57721566
+  ok   d=2 rho=1: -3.69315 <= 0.121165247 <= 3.25
+  ok   d=2 rho=2: -3.69315 <= -0.2512277784 <= 3.25
+  ok   d=2 rho=5: -3.69315 <= -0.06909069245 <= 3.25
+  ok   d=2 rho=20: -3.69315 <= -0.1184216657 <= 3.25
+  ok   d=2 rho=100: -3.69315 <= -0.1151563762 <= 3.25
+  ok   d=2: Delta(100) = -0.11515638 is within 0.02 of varkappa_d = -0.11593152
+  ok   d=3 rho=1: -4.0 <= 0.08128272681 <= 3.25
+  ok   d=3 rho=2: -4.0 <= -0.3911164505 <= 3.25
+  ok   d=3 rho=5: -4.0 <= -0.4245394404 <= 3.25
+  ok   d=3 rho=20: -4.0 <= -0.4215568934 <= 3.25
+  ok   d=3 rho=100: -4.0 <= -0.4226991664 <= 3.25
+  ok   d=3: Delta(100) = -0.42269917 is within 0.02 of varkappa_d = -0.42278434
+  ok   d=5 rho=1: -4.33333 <= 0.04911807241 <= 3.25
+  ok   d=5 rho=2: -4.33333 <= -0.5067508963 <= 3.25
+  ok   d=5 rho=5: -4.33333 <= -0.7768906553 <= 3.25
+  ok   d=5 rho=20: -4.33333 <= -0.7557963137 <= 3.25
+  ok   d=5 rho=100: -4.33333 <= -0.756119238 <= 3.25
+  ok   d=5: Delta(100) = -0.75611924 is within 0.02 of varkappa_d = -0.75611767
+   (b) the Matern profile of index g: F = g log(1 + rho^2/2), c = 2g
+  ok   d=1 g=0.3 rho=1: -1.8 <= 0.05339196904 <= 1.95
+  ok   d=1 g=0.3 rho=3: -1.8 <= 0.1538161464 <= 1.95
+  ok   d=1 g=0.3 rho=30: -1.8 <= 0.3190409268 <= 1.95
+  ok   d=1 g=0.3 rho=1000: -1.8 <= 0.3454817707 <= 1.95
+  ok   d=1 g=0.3: Delta(1000) = 0.34548177 is within 2e-3 of c varkappa_d = 0.3463294
+  ok   d=2 g=0.75 rho=1: -5.53972 <= -0.05461448501 <= 4.875
+  ok   d=2 g=0.75 rho=3: -5.53972 <= -0.1818185155 <= 4.875
+  ok   d=2 g=0.75 rho=30: -5.53972 <= -0.1757084593 <= 4.875
+  ok   d=2 g=0.75 rho=1000: -5.53972 <= -0.1739015313 <= 4.875
+  ok   d=2 g=0.75: Delta(1000) = -0.17390153 is within 2e-3 of c varkappa_d = -0.17389727
+  ok   d=3 g=1.25 rho=1: -10.0 <= -0.3853252984 <= 8.125
+  ok   d=3 g=1.25 rho=3: -10.0 <= -0.9194120296 <= 8.125
+  ok   d=3 g=1.25 rho=30: -10.0 <= -1.055546314 <= 8.125
+  ok   d=3 g=1.25 rho=1000: -10.0 <= -1.056959587 <= 8.125
+  ok   d=3 g=1.25: Delta(1000) = -1.0569596 is within 2e-3 of c varkappa_d = -1.0569608
+  ok   d=2 g=2.0 rho=1: -14.7726 <= -0.1456386267 <= 13.0
+  ok   d=2 g=2.0 rho=3: -14.7726 <= -0.4848493746 <= 13.0
+  ok   d=2 g=2.0 rho=30: -14.7726 <= -0.4685558915 <= 13.0
+  ok   d=2 g=2.0 rho=1000: -14.7726 <= -0.4637374169 <= 13.0
+  ok   d=2 g=2.0: Delta(1000) = -0.46373742 is within 2e-3 of c varkappa_d = -0.46372606
+2. prop:radial-dictionary, Step C: the two bounds on H_d
+  ok   d=1 s=0.3: H_d = 0.022415794 <= log^+ s + 13/4
+  ok   d=1 s=1: H_d = 0.23981174 <= log^+ s + 13/4
+  ok   d=1 s=7: H_d = 2.4464305 <= log^+ s + 13/4
+  ok   d=1 s=60: H_d = 4.6763735 <= log^+ s + 13/4
+  ok   d=1: H_d(60)/log 60 = 1.14215 >= 1/2
+  ok   d=2 s=0.3: H_d = 0.011218412 <= log^+ s + 13/4
+  ok   d=2 s=1: H_d = 0.12116525 <= log^+ s + 13/4
+  ok   d=2 s=7: H_d = 1.8414092 <= log^+ s + 13/4
+  ok   d=2 s=60: H_d = 3.9775866 <= log^+ s + 13/4
+  ok   d=2: H_d(60)/log 60 = 0.971483 >= 1/2
+  ok   d=3 s=0.3: H_d = 0.0074831491 <= log^+ s + 13/4
+  ok   d=3 s=1: H_d = 0.081282727 <= log^+ s + 13/4
+  ok   d=3 s=7: H_d = 1.5402858 <= log^+ s + 13/4
+  ok   d=3 s=60: H_d = 3.6712933 <= log^+ s + 13/4
+  ok   d=3: H_d(60)/log 60 = 0.896674 >= 1/2
+  ok   d=4 s=0.3: H_d = 0.0056144663 <= log^+ s + 13/4
+  ok   d=4 s=1: H_d = 0.061215833 <= log^+ s + 13/4
+  ok   d=4 s=7: H_d = 1.3407402 <= log^+ s + 13/4
+  ok   d=4 s=60: H_d = 3.4783632 <= log^+ s + 13/4
+  ok   d=4: H_d(60)/log 60 = 0.849553 >= 1/2
+3. prop:radial-dictionary on the Matern exponent: phi and the tail of the jump size
+  ok   r=0.4: 1 - r F'(r)/c = 0.925925925926 = (1 + r^2/2)^(-1)
+  ok   r=2: 1 - r F'(r)/c = 0.333333333333 = (1 + r^2/2)^(-1)
+  ok   r=9: 1 - r F'(r)/c = 0.0240963855422 = (1 + r^2/2)^(-1)
+  ok   d=1 r=0.5: c Pr(|X| > r) = 0.739603037093 = k_d(r) = 0.739603037093
+  ok   d=1 r=2: c Pr(|X| > r) = 0.0886586198429 = k_d(r) = 0.0886586198429
+  ok   d=2 r=0.5: c Pr(|X| > r) = 1.09787171469 = k_d(r) = 1.09787171469
+  ok   d=2 r=2: c Pr(|X| > r) = 0.209501211023 = k_d(r) = 0.209501211023
+  ok   d=3 r=0.5: c Pr(|X| > r) = 1.26258136001 = k_d(r) = 1.26258136001
+  ok   d=3 r=2: c Pr(|X| > r) = 0.339423065049 = k_d(r) = 0.339423065049
+4. lem:shadow-polar-profile at d = 1: the shadow of the step b 1_(0,tau) of the plane
+  ok   r=0.2: kbar = 2.80869431747 = (2b/pi) arccos(r/tau)
+  ok   r=1: kbar = 2.0 = (2b/pi) arccos(r/tau)
+  ok   r=1.9: kbar = 0.606495744626 = (2b/pi) arccos(r/tau)
+5. prop:origin-rate-profile-d(3): L(s)/log(1/s) -> K(0+), with the two bounds, on the
+   power profile k = c (1 - sqrt r) 1_(0,1), for which K(x) = exp(2c (1 - sqrt x))
+  ok   K by quadrature equals the closed form at x = 0.01
+  ok   s=0.01: 1 <= L/log(1/s) = 7.7864302 <= K(s) = 14.879732 <= K(0+) = 20.085537
+  ok   s=1.0e-8: 1 <= L/log(1/s) = 16.403158 <= K(s) = 20.079512 <= K(0+) = 20.085537
+  ok   s=1.0e-60: 1 <= L/log(1/s) = 19.594466 <= K(s) = 20.085537 <= K(0+) = 20.085537
+  ok   L/log(1/s) at s = 1e-60 is within 5% of K(0+)
+6. prop:separating-family-mixtures
+  ok   beta=0: int exp(-x^2 - beta^2/x^2) = 0.88622692545276 = (sqrt pi/2) e^(-2 beta)
+  ok   beta=0.3: int exp(-x^2 - beta^2/x^2) = 0.48637164890831 = (sqrt pi/2) e^(-2 beta)
+  ok   beta=2: int exp(-x^2 - beta^2/x^2) = 0.016231812340066 = (sqrt pi/2) e^(-2 beta)
+  ok   sigma=0.2: E exp(-sigma 2pi/Z^2) = 0.20487998320977 = exp(-2 sqrt(pi sigma))
+  ok   sigma=1: E exp(-sigma 2pi/Z^2) = 0.02887128715423 = exp(-2 sqrt(pi sigma))
+  ok   sigma=5: E exp(-sigma 2pi/Z^2) = 0.00036099205968272 = exp(-2 sqrt(pi sigma))
+  ok   sigma=0.1: F_I^(w) by definition 1.49249330799 = closed form 1.49249330858
+  ok   sigma=1: F_I^(w) by definition 5.63556272824 = closed form 5.6355627293
+  ok   sigma=7: F_I^(w) by definition 12.1510712134 = closed form 12.1510712176
+  ok   r=0.5: r F'(r) = 2.08288309342 = sqrt(2pi) r + 2w(e^(-r^2/2) - e^(-r^2))
+  ok   r=2: r F'(r) = 5.94941370405 = sqrt(2pi) r + 2w(e^(-r^2/2) - e^(-r^2))
+7. lem:exponent-profile-constant(3), (4)
+  ok   varkappa_1 = gamma_E
+  ok   varkappa_2 = gamma_E - log 2
+  ok   varkappa_3 = gamma_E - 1
+  ok   varkappa_3 = varkappa_1 - 1/1
+  ok   varkappa_1 = (gamma_E - psi(d/2))/2 - log 2
+  ok   varkappa_4 = varkappa_2 - 1/2
+  ok   varkappa_2 = (gamma_E - psi(d/2))/2 - log 2
+  ok   varkappa_5 = varkappa_3 - 1/3
+  ok   varkappa_3 = (gamma_E - psi(d/2))/2 - log 2
+  ok   varkappa_6 = varkappa_4 - 1/4
+  ok   varkappa_4 = (gamma_E - psi(d/2))/2 - log 2
+  ok   varkappa_7 = varkappa_5 - 1/5
+  ok   varkappa_5 = (gamma_E - psi(d/2))/2 - log 2
+  ok   varkappa_8 = varkappa_6 - 1/6
+  ok   varkappa_6 = (gamma_E - psi(d/2))/2 - log 2
+  ok   varkappa_9 = varkappa_7 - 1/7
+  ok   varkappa_7 = (gamma_E - psi(d/2))/2 - log 2
+  ok   varkappa_10 = varkappa_8 - 1/8
+  ok   varkappa_8 = (gamma_E - psi(d/2))/2 - log 2
+  ok   A = 2^c exp(-C - (c/2)(gamma_E - psi(d/2)))
+  ok   R(d,c) A = Gamma((d-c)/2)/(pi^(d/2) Gamma(c/2)) exp(-C - (c/2)(gamma_E - psi(d/2)))
+  ok   (2pi)^(-d) |S^(d-1)| e^(-C - d varkappa_d) = 2/(pi^(d/2) Gamma(d/2)) exp(-C - (d/2)(gamma_E - psi(d/2)))
+
+all checks passed

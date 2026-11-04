@@ -1,0 +1,359 @@
+% Appendix F --- further results on the smaller groups (Q-0312, review flags 4, 12 and 19;
+% records/affine/move-q0312-section-4.py). Section 4.7 of Q-0309 ("Smaller groups") read as a side
+% branch before the theorem on the general linear row; the statements it held move here verbatim,
+% with their `% shared with blueprint` markers and their prose, each followed by its proof, moved
+% from Appendix B. Section 4.9 is now a one-page summary of the smaller groups that points here and
+% to Appendices G and H. prop:similarity-stable-order-families, whose clauses the general linear row
+% spends, moved to section 4.6 instead.
+
+\section{Further results on the smaller groups}\label{app:smaller-groups}
+
+The statements of this appendix fill the rows of the smaller groups in Table~\ref{tab:landscape},
+which \S\ref{sec:smaller-groups} summarizes. They show what a smaller group gains: families tied to
+one frame, a ray column whose isotropic member no longer fixes the family, and a stable order whose
+families lie strictly between their neighbours. The proofs close each subsection.
+
+\subsection{Frames}
+
+The affine image of a product family cascades along its own frame's axes, and only the Gaussian loses
+its frame.
+
+% shared with blueprint prop:frame-families
+\begin{proposition}[frame families]\label{prop:frame-families}
+Let $d \ge 1$ and, for $i = 1,\dots,d$, let $(\nu^{(i)}_{s,s'})_{0 \le s \le s'}$ be probability
+measures on $\RR$ with $\nu^{(i)}_{s,s} = \delta_0$ and
+$\nu^{(i)}_{s,s''} = \nu^{(i)}_{s',s''} * \nu^{(i)}_{s,s'}$ for $s \le s' \le s''$. For
+$s \le s'$ in $[0,\infty)^d$, coordinatewise, put
+$\mu^{\otimes}_{s,s'} := \nu^{(1)}_{s_1,s'_1} \otimes \dots \otimes \nu^{(d)}_{s_d,s'_d}$, and for
+$A \in \GL(d)$ put $\mu_{A;s,s'} := A_*\mu^{\otimes}_{s,s'}$, the \emph{frame family}.
+\begin{enumerate}
+\item \emph{(Cascade in the frame, and covariance.)}
+$\widehat\mu_{A;s,s'}(\omega) = \prod_{i}\widehat\nu^{(i)}_{s_i,s'_i}\bigl((A^{\tp}\omega)_i\bigr)$;
+$\mu_{A;s,s} = \delta_0$ and $\mu_{A;s,s''} = \mu_{A;s',s''} * \mu_{A;s,s'}$ for
+$s \le s' \le s''$; and $B_*\mu_{A;s,s'} = \mu_{BA;s,s'}$ for $B \in \GL(d)$.
+\item \emph{(The Gaussian frame family.)} If $b \ge 0$ and $\nu^{(i)}_{s,s'}$ is the centred
+Gaussian of variance $2b(s'^2 - s^2)$ for every $i$, then $\mu_{A;0,s}$ is the centred Gaussian of
+covariance $2b\,A\diag(s_1^2,\dots,s_d^2)A^{\tp}$, and so depends on $(A,s)$ only through
+$A\diag(s^2)A^{\tp}$.
+\item \emph{(Only the Gaussian loses its frame.)} Let $d \ge 2$, and suppose $\mu_{A;0,s}$ depends
+on $(A,s) \in \GL(d) \times (0,\infty)^d$ only through $A\diag(s^2)A^{\tp}$. Then there is a
+$b \ge 0$ with $\nu^{(i)}_{0,t}$ the centred Gaussian of variance $2bt^2$ for every $i$ and every
+$t > 0$ (the point mass $\delta_0$ when $b = 0$).
+\end{enumerate}
+\end{proposition}
+
+Clauses (2) and (3) say that the frame drops out exactly when every factor is the same Gaussian,
+with one constant $b$ for every axis. The core of (3) is Kelker's lemma (Remark~\ref{rem:kelker};
+\sscite{kelker1970distribution}, Lemma~5, p.~423): with $A$ orthogonal and equal scales, the hypothesis
+makes the product law of the factors rotation invariant.
+
+The converse holds in a fixed frame, under weak hypotheses: covariance under the positive diagonal
+matrices only, with no rotation and no reflection, and steps along one axis at a time.
+
+% shared with blueprint prop:fixed-frame-families
+\begin{proposition}[a fixed frame: the families are products]\label{prop:fixed-frame-families}
+Let $d \ge 1$. For $s \in (0,\infty)^d$ write $D_s := \diag(s_1,\dots,s_d)$, and $\mathbf 1 :=
+(1,\dots,1)$. Let $(\mu_s)_{s\in(0,\infty)^d}$ be probability measures on $\RR^d$ with
+\begin{enumerate}
+\item[(D1)] \emph{(covariance under the diagonal group)} $(D_\delta)_*\mu_s = \mu_{D_\delta s}$ for
+all $\delta, s \in (0,\infty)^d$;
+\item[(D2)] \emph{(a cascade along each axis)} for every $i \le d$ and every $\lambda > 1$ there is
+a probability measure $\rho_{i,\lambda}$ on $\RR^d$ with
+$\mu_{\mathbf 1 + (\lambda - 1)e_i} = \mu_{\mathbf 1} * \rho_{i,\lambda}$.
+\end{enumerate}
+Then there are self-decomposable laws $\nu_1, \dots, \nu_d$ on $\RR$
+(in the sense of \ref{eq:self-decomposable} at $d = 1$) with
+\[
+  \mu_s = (s_1)_*\nu_1 \otimes \dots \otimes (s_d)_*\nu_d \qquad \text{for every } s \in (0,\infty)^d ,
+\]
+where $(s_i)_*$ is the image under $x \mapsto s_ix$ on $\RR$. Conversely, for any self-decomposable
+laws $\nu_1, \dots, \nu_d$ on $\RR$ this family satisfies (D1) and (D2), and it cascades along
+the coordinatewise order: $\mu_{s'} = \mu_s * (\rho^{(1)}_{s_1,s'_1} \otimes \dots \otimes \rho^{(d)}_{s_d,s'_d})$ for $s \le s'$,
+with probability measures $\rho^{(i)}_{s_i,s'_i}$ on $\RR$.
+\end{proposition}
+
+So the non-Gaussian anisotropic families that cascade at a fixed orientation are exactly the
+products of $d$ independent self-decomposable laws, one per axis, and the factors may differ. By
+Proposition~\ref{prop:frame-families}(3) the non-Gaussian factors then fix the frame. A product family
+gains anisotropy along its frame's axes as fast per step as the Gaussian does and cannot turn, while
+the stable orbits turn, with a smaller gain per step (Proposition~\ref{prop:stable-step-cone}). Turning alone therefore does not
+exclude non-Gaussian kernels. The proof of the product form uses the characteristic function of
+Lemma~\ref{lem:charfn-one-on-subspace}.
+
+\begin{proof}[Proof of Proposition~\ref{prop:frame-families}]
+\emph{Clause (1).} The transform of a product measure is the product of the transforms, and
+$\widehat{A_*\mu}(\omega) = \widehat\mu(A^{\tp}\omega)$. The cascade is coordinatewise multiplication
+of transforms, and $(BA)_* = B_*A_*$ gives the covariance.
+
+\emph{Clause (2).} By clause (1),
+$\widehat\mu_{A;0,s}(\omega) = \exp[-b\sum_is_i^2(A^{\tp}\omega)_i^2] =
+\exp[-b\langle\omega, A\diag(s^2)A^{\tp}\omega\rangle]$.
+
+\emph{Clause (3).} For $Q \in \Orth(d)$, $Q\diag(\mathbf 1)Q^{\tp} = I$, so the hypothesis makes the
+product law $\mu^\otimes_{0,\mathbf 1}$ rotation invariant: its transform is $f(|\omega|^2)$ with $f$
+continuous, real and $f(0) = 1$, and each factor has the transform $t \mapsto f(t^2)$. As $d \ge 2$,
+$\omega = \sqrt x\,e_1 + \sqrt y\,e_2$ gives $f(x+y) = f(x)f(y)$. Then $f > 0$, and $G := -\log f$ is
+continuous, nonnegative and additive, so $G(u) = bu$ by the last paragraph of the proof of
+Lemma~\ref{lem:single-ratio-cauchy}, the same Cauchy equation on which
+Theorem~\ref{thm:affine-rigidity} rests. So each $\nu^{(i)}_{0,1}$ is the centred Gaussian of variance
+$2b$, and $A = \diag(s)^{-1}$ in the hypothesis gives the variance $2bs_i^2$ at $s$.
+\end{proof}
+
+\begin{proof}[Proof of Proposition~\ref{prop:fixed-frame-families} (sketch)]
+(D1) gives
+$\mu_s = (D_s)_*\mu_{\mathbf 1}$; put $\varphi := \widehat\mu_{\mathbf 1}$.
+
+\emph{A step along axis $i$ is a blur along axis $i$.} With $H := e_i^\perp$, (D2) gives
+$\varphi(\lambda xe_i + \eta) = \varphi(xe_i + \eta)\,\widehat\rho_{i,\lambda}(xe_i + \eta)$. At $x = 0$,
+$\widehat\rho_{i,\lambda} = 1$ on a neighbourhood of $0$ in $H$, so by
+Lemma~\ref{lem:charfn-one-on-subspace}, in its neighbourhood form, $\widehat\rho_{i,\lambda}(xe_i + \eta)
+= \widehat\rho_{i,\lambda}(xe_i)$. The same identity at $\eta = 0$ eliminates
+$\widehat\rho_{i,\lambda}$:
+\[
+  \varphi(\lambda xe_i + \eta)\,\varphi(xe_i) = \varphi(xe_i + \eta)\,\varphi(\lambda xe_i)
+  \qquad (x \in \RR,\ \eta \in H,\ \lambda > 1).
+\]
+For $x_0 \ne 0$ and $x$ strictly between $0$ and $x_0$ take $\lambda := x_0/x$. Letting $x \to 0$,
+continuity and $\varphi(0) = 1$ give $\varphi(x_0e_i + \eta) = \varphi(\eta)\,\varphi(x_0e_i)$, which splits
+off axis $i$.
+
+\emph{The product.} Repeating over the axes, $\varphi(\omega) = \prod_i\varphi(\omega_ie_i)$, so
+$\mu_{\mathbf 1}$ is the product of its marginals $\nu_i$. The image of (D2) under the $i$-th coordinate
+is $(\lambda)_*\nu_i = \nu_i * \rho'$, which is self-decomposability on the line.
+
+\emph{Converse.} $D_\delta$ acts coordinatewise, and self-decomposability of each factor gives the
+increments, a convolution of product measures being the product of the convolutions. This is
+Proposition~\ref{prop:frame-families}(1) in the standard frame.
+\end{proof}
+
+\subsection{The ray column}
+
+Along rays a family of any group is a continuous covariant field of self-decomposable laws
+(Proposition~\ref{prop:gw-ray-families}(2)), and the bookkeeping of Lemma~\ref{lem:gw-kernels-from-origin}
+serves every cell below. For the similarities the parameter set is a $(d-1)$-parameter set of orbits,
+and the isotropic member no longer determines the family.
+
+% shared with blueprint prop:similarity-ray-families+21f2aac1312b
+\begin{proposition}[similarity covariance along rays: the families, and the parameter set]\label{prop:similarity-ray-families}
+Let $d \ge 1$, let $\mathrm S(d) := \{cQ : c > 0,\ Q \in \Orth(d)\}$ be the similarities, and let $W$ be
+the ray order. For $\Sigma \in \PSD(d) \setminus \{0\}$ write $\sigma(\Sigma) \in \RR^d$ for its
+eigenvalues in nonincreasing order divided by $\tr\Sigma$, and put
+$\Delta_d := \{\sigma \in \RR^d : \sigma_1 \ge \dots \ge \sigma_d \ge 0,\ \sigma_1 + \dots + \sigma_d = 1\}$.
+\begin{enumerate}
+\item \emph{(The parameter set.)} $(\mathrm S(d), W)$ is a wedge datum. Two matrices
+$\Sigma, \Sigma' \in \PSD(d) \setminus \{0\}$ lie in one orbit of $\mathrm S(d)$, acting by
+$A\cdot\Sigma = A\Sigma A^{\tp}$, exactly when $\sigma(\Sigma) = \sigma(\Sigma')$, and each orbit contains
+exactly one matrix $\diag(\sigma)$ with $\sigma \in \Delta_d$; so the orbits in $\PSD(d) \setminus \{0\}$
+are indexed by $\Delta_d$, a simplex of dimension $d - 1$. The stabilizer of $\Sigma \ne 0$ in
+$\mathrm S(d)$ is $\{Q \in \Orth(d) : Q\Sigma = \Sigma Q\}$, and it is $\Orth(d)$ exactly when $\Sigma$ is
+a multiple of $I$.
+\item \emph{(The families.)} The kernels from scale zero of the $(\mathrm S(d), W)$-cascade families of
+kernels are the maps of Proposition~\ref{prop:gw-ray-families}(2) with $G = \mathrm S(d)$. In such a family every
+$\mu_\Sigma$ is symmetric, $(-I)_*\mu_\Sigma = \mu_\Sigma$, and invariant under the stabilizer of
+$\Sigma$, and $\mu_{cQ\diag(\sigma)Q^{\tp}} = (\sqrt c\,Q)_*\mu_{\diag(\sigma)}$ for $c > 0$, $Q \in \Orth(d)$
+and $\sigma \in \Delta_d$: the family is determined by its kernels at the matrices $\diag(\sigma)$,
+$\sigma \in \Delta_d$.
+\item \emph{(The isotropic member does not determine the family.)} In such a family
+$\mu_{sI} = (\sqrt s\,I)_*\mu_I$ for $s \ge 0$, and $\mu_I$ is rotation invariant, self-decomposable and
+not $\delta_0$. Conversely, let $\mu_I$ be such a law. Then (i) $\Sigma \mapsto (\Sigma^{1/2})_*\mu_I$ and
+(ii) $\Sigma \mapsto \nu_\Sigma := ((\det\Sigma)^{1/(2d)}I)_*\mu_I$ are the kernels from scale zero of
+$(\mathrm S(d), W)$-cascade families with isotropic member $\mu_I$, and (ii) is also the family of kernels
+from scale zero of an $(\mathrm S(d), \text{Loewner})$-cascade family. For $d \ge 2$ the two differ at
+every $\Sigma \in \PD(d)$ that is not a multiple of $I$.
+\item \emph{(The isotropic members of the similarity row.)} Let $W'$ be an $\mathrm S(d)$-invariant
+partial order on $\PSD(d)$ that contains the rays and is contained in the Loewner order. The isotropic
+members $\mu_I$ of the $(\mathrm S(d), W')$-cascade families of kernels are exactly the rotation-invariant
+self-decomposable laws other than $\delta_0$.
+\end{enumerate}
+\end{proposition}
+
+So the cell (similarities, rays) is large: a continuous field of symmetric self-decomposable laws over
+the shapes, covariant under similarities. The kernel at a shape is constrained pointwise only by its
+stabilizer, besides self-decomposability and continuity where eigenvalues meet, and it need not be
+elliptical. The isotropic member is any rotation-invariant self-decomposable law other than $\delta_0$,
+as in the general linear row, but for $d \ge 2$ it no longer fixes the family. Clause (4) says that the
+isotropic members are the same in every column of the similarity row, the Loewner column included,
+while in the general linear row the Loewner order leaves the Gaussian alone. Which choices of kernels at
+the matrices $\diag(\sigma)$ extend to a continuous field is problem~\ref{prob:continuous-fields} of
+\S\ref{sec:open-problems}.
+
+For the positive diagonal group the parameter set is larger still: an orbit is one frame's own
+shapes, and the stabilizer of $I$ is trivial, so $\mu_I$ need carry no symmetry.
+
+% shared with blueprint prop:diagonal-ray-families+4ddf66022bc4
+\begin{proposition}[diagonal covariance along rays: the families, and the parameter set]\label{prop:diagonal-ray-families}
+Let $d \ge 1$, let $\mathrm D_+(d)$ be the group of diagonal matrices with positive diagonal entries, and
+let $W$ be the ray order. For $\Sigma \in \PSD(d)$ write $\Delta(\Sigma) := \diag(\Sigma_{11}, \dots,
+\Sigma_{dd})$, for $s \in (0,\infty)^d$ write $D_s := \diag(s_1, \dots, s_d)$, and put
+$\mathrm{Corr}(d) := \{\Theta \in \PD(d) : \Theta_{11} = \dots = \Theta_{dd} = 1\}$.
+\begin{enumerate}
+\item \emph{(The parameter set.)} $(\mathrm D_+(d), W)$ is a wedge datum. Every $\Sigma \in \PD(d)$ has
+the trivial stabilizer in $\mathrm D_+(d)$, and is $D\cdot \Theta = D\Theta D$ for exactly one pair
+$D \in \mathrm D_+(d)$, $\Theta \in \mathrm{Corr}(d)$, namely $D = \Delta(\Sigma)^{1/2}$. So the orbits in
+$\PD(d)$ are indexed by $\mathrm{Corr}(d)$, a nonempty open subset of the affine space of symmetric
+matrices with unit diagonal, of dimension $d(d-1)/2$; the orbit of $I$ is the set of positive definite
+diagonal matrices.
+\item \emph{(The families on the frame's shapes.)} The kernels from scale zero of the
+$(\mathrm D_+(d), W)$-cascade families of kernels are the maps of Proposition~\ref{prop:gw-ray-families}(2) with
+$G = \mathrm D_+(d)$. On the orbit of $I$ they are $\mu_{D_s^2} = (D_s)_*\mu_I$, $s \in (0,\infty)^d$, with
+$\mu_I$ self-decomposable and not $\delta_0$. Conversely, for every self-decomposable $\mu_I \ne \delta_0$
+the map $\Sigma \mapsto (\Delta(\Sigma)^{1/2})_*\mu_I$ is the family of kernels from scale zero of a
+$(\mathrm D_+(d), W)$-cascade family.
+\item \emph{(The Loewner order: products.)} The kernels from scale zero of a
+$(\mathrm D_+(d), \text{Loewner})$-cascade family of kernels are, on the orbit of $I$,
+\[
+  \mu_{D_s^2} = (s_1)_*\nu_1 \otimes \dots \otimes (s_d)_*\nu_d , \qquad s \in (0,\infty)^d ,
+\]
+with self-decomposable laws $\nu_1, \dots, \nu_d$ on $\RR$, not all $\delta_0$. Conversely, for such laws
+the map $\Sigma \mapsto (\Delta(\Sigma)^{1/2})_*(\nu_1 \otimes \dots \otimes \nu_d)$ is the family of kernels
+from scale zero of a $(\mathrm D_+(d), \text{Loewner})$-cascade family.
+\item \emph{(Rays only: no product.)} Let $d \ge 2$ and $\Theta \in \mathrm{Corr}(d)$ not diagonal. The centred
+Gaussian law $N(0,\Theta)$ is self-decomposable and is not of the form $\nu_1 \otimes \dots \otimes \nu_d$. So
+the $(\mathrm D_+(d), W)$-family of (2) with $\mu_I = N(0,\Theta)$ is the restriction of no
+$(\mathrm D_+(d), \text{Loewner})$-family.
+\item \emph{(Off the frame's shapes.)} Let $d \ge 2$ and $\mu_I$ rotation invariant, self-decomposable and
+not $\delta_0$. The maps $\Sigma \mapsto (\Delta(\Sigma)^{1/2})_*\mu_I$ and
+$\Sigma \mapsto (\Sigma^{1/2})_*\mu_I$ are the kernels from scale zero of two
+$(\mathrm D_+(d), W)$-cascade families with the same isotropic member, and they differ at every
+$\Sigma \in \PD(d)$ that is not diagonal.
+\end{enumerate}
+\end{proposition}
+
+So the cell (diagonal, rays) is not empty. On the orbit of $I$ it is Proposition~\ref{prop:ray-families}
+without rotations: the frame images of one self-decomposable law, any such law. Clauses (3) and (4)
+locate the product form of Proposition~\ref{prop:fixed-frame-families}. It is forced by the steps along
+single axes, which the Loewner order has and the ray order lacks, and not by the group. Off the orbit of
+$I$ the ray order links nothing across the correlation matrices. The continuous covariant fields
+over $\mathrm{Corr}(d)$ are part of problem~\ref{prob:continuous-fields} of \S\ref{sec:open-problems}.
+
+\begin{proof}[Proof of Proposition~\ref{prop:similarity-ray-families} (sketch)]
+\emph{(1).} $\mathrm S(d)$ is closed in $\GL(d)$, as $AA^{\tp} = (AA^{\tp})_{11}\,I$ is a closed
+condition and an invertible $A$ satisfying it is a similarity. A
+similarity multiplies the eigenvalues and the trace by the same factor, so $\sigma$ is constant on
+orbits, and the spectral theorem gives the converse. $\Delta_d$ is the convex hull of the affinely
+independent points $k^{-1}(e_1 + \dots + e_k)$, $1 \le k \le d$. A similarity fixing $\Sigma \ne 0$ has $c = 1$ by
+the traces, and a $\Sigma$ commuting with every orthogonal matrix is a multiple of $I$, by the
+reflections and permutations of the proof of Lemma~\ref{lem:affine-gauge}.
+
+\emph{(2)} is Proposition~\ref{prop:gw-ray-families}(2) with (b) of
+Lemma~\ref{lem:gw-kernels-from-origin}(2) at $A = -I$, at the stabilizer, and at $A = \sqrt c\,Q$.
+
+\emph{(3).} $\mu_I$ is invariant under the stabilizer $\Orth(d)$ of $I$, as in
+Lemma~\ref{lem:parameter-space}(5). Family (i) is Proposition~\ref{prop:gw-ray-families}(3) restricted by
+Lemma~\ref{lem:gw-kernels-from-origin}(1). For (ii), $\det$ is monotone along the Loewner order, so with
+$\eta := (\det\Sigma)^{1/(2d)} \le \eta' := (\det\Sigma')^{1/(2d)}$ self-decomposability at
+$\eta/\eta'$ gives the increment, and Lemma~\ref{lem:gw-kernels-from-origin}(3) gives the family.
+For $d \ge 2$, if the two kernels agree at $\Sigma \in \PD(d)$, then with $t := (\det\Sigma)^{1/(2d)}$
+the matrix $t^{-1}\Sigma^{1/2}$ fixes $\mu_I$, which is rotation invariant and not $\delta_0$, so it is
+orthogonal by Lemma~\ref{lem:parameter-space}(2), and $\Sigma = t^2I$.
+% CHANGED Q-0281 wave 2: blind review W2E-4: Lemma lem:parameter-space(2), as in the blueprint proof.
+
+\emph{(4).} A family along $W'$ restricts to the rays, and the family (ii) of (3) restricts to $W'$,
+which is contained in the Loewner order.
+\end{proof}
+
+\begin{proof}[Proof of Proposition~\ref{prop:diagonal-ray-families} (sketch)]
+\emph{(1).} $(D\Sigma D)_{ii} = s_i^2\Sigma_{ii}$ forces $D = I$ on a stabilizer, and
+$\Theta := \Delta(\Sigma)^{-1/2}\Sigma\Delta(\Sigma)^{-1/2}$ is the unique correlation matrix with
+$\Delta(\Sigma)^{1/2}\cdot \Theta = \Sigma$. $\mathrm{Corr}(d)$ is the intersection of the affine space with the
+open set of matrices whose quadratic form is positive on the compact unit sphere.
+
+\emph{(2).} The first sentence is Proposition~\ref{prop:gw-ray-families}(2), and (b) of
+Lemma~\ref{lem:gw-kernels-from-origin}(2) at $A = D_s$ gives $\mu_{D_s^2} = (D_s)_*\mu_I$. Conversely
+$\Delta(D\Sigma D)^{1/2} = D\,\Delta(\Sigma)^{1/2}$ gives (b) for $\Sigma \mapsto (\Delta(\Sigma)^{1/2})_*\mu_I$,
+and (a), (c) and self-decomposability are immediate.
+
+\emph{(3).} On the orbit of $I$ the axis steps $I \le D^2_{\mathbf 1 + (\lambda-1)e_i}$ are Loewner steps,
+so (D1) and (D2) of Proposition~\ref{prop:fixed-frame-families} hold and the product form follows.
+Conversely $\Sigma \le \Sigma'$ gives $\Sigma_{ii} \le \Sigma'_{ii}$, and self-decomposability of each
+factor gives a product increment.
+
+\emph{(4).} $N(0,\Theta)$ is self-decomposable, and a product with unit diagonal would force $\Theta = I$.
+
+\emph{(5).} If the two kernels agree at $\Sigma \in \PD(d)$, then with $D := \Delta(\Sigma)^{1/2}$ the
+matrix $D^{-1}\Sigma^{1/2}$ fixes $\mu_I$, which is rotation invariant and not $\delta_0$, so it is
+orthogonal by Lemma~\ref{lem:parameter-space}(2), and $\Sigma = D^2$ is diagonal.
+% CHANGED Q-0281 wave 2: blind review W2E-4: Lemma lem:parameter-space(2), as in the blueprint proof.
+\end{proof}
+
+\subsection{The diagonal group along the stable order}
+
+On the frame's shapes the stable order's steps are the diagonal exponents of the cone $\mathfrak k_\alpha$, so the
+isotropic member must be operator-self-decomposable for each of them. The axis steps that force products
+along the Loewner order are rank-deficient and absent.
+
+% shared with blueprint prop:diagonal-stable-order-families
+\begin{proposition}[diagonal covariance along the stable order: the families on the frame's shapes]\label{prop:diagonal-stable-order-families}
+Let $d \ge 2$ and $0 < \alpha < 2$. Let $\mathrm D_+(d)$, $D_s$, $\Delta(\Sigma)$ and $\mathrm{Corr}(d)$ be as
+in Proposition~\ref{prop:diagonal-ray-families}, let $\le_\alpha$ be the stable order on $\PSD(d)$ of
+Proposition~\ref{prop:similarity-stable-order-families}(1), and use $B$-self-decomposability as in
+Proposition~\ref{prop:stable-exponent-cone}. Write $\mathcal D_\alpha$ for the set of diagonal matrices $\diag(b)$,
+$b \in \RR^d$, with $(d+\alpha)\min_ib_i \ge b_1 + \dots + b_d$; these are the diagonal matrices of the
+cone $\mathfrak k_\alpha$ of Proposition~\ref{prop:stable-exponent-cone}.
+\begin{enumerate}
+\item \emph{(The datum.)} $(\mathrm D_+(d), \le_\alpha)$ is a wedge datum, and its orbits in $\PD(d)$ are
+those of Proposition~\ref{prop:diagonal-ray-families}(1), indexed by $\mathrm{Corr}(d)$. On the orbit of $I$,
+$D_s^2 \le_\alpha D_{s'}^2$ if and only if $u := (s'_1/s_1, \dots, s'_d/s_d)$ satisfies
+$(\min_iu_i)^{d+\alpha} \ge u_1\cdots u_d$.
+\item \emph{(On the frame's shapes.)} The kernels from scale zero of a
+$(\mathrm D_+(d), \le_\alpha)$-cascade family of kernels are, on the orbit of $I$,
+$\mu_{D_s^2} = (D_s)_*\mu_I$, $s \in (0,\infty)^d$, where $\mu_I \ne \delta_0$ is $B$-self-decomposable for
+every $B \in \mathcal D_\alpha$; in particular $\mu_I$ is self-decomposable.
+\item \emph{(Two sources of families.)} (a) For self-decomposable laws $\nu_1, \dots, \nu_d$ on $\RR$, not
+all $\delta_0$, the map $\Sigma \mapsto (\Delta(\Sigma)^{1/2})_*(\nu_1 \otimes \dots \otimes \nu_d)$ is the
+family of kernels from scale zero of a $(\mathrm D_+(d), \le_\alpha)$-cascade family of kernels.
+(b) For a profile $k$ as in Proposition~\ref{prop:orbit-step-cone} with $R(\lambda) \ge \lambda^\alpha$ for every
+$\lambda \ge 1$, and $\mu_I$ the law of that proposition's clause (1), so is $\Sigma \mapsto (\Sigma^{1/2})_*\mu_I$;
+in particular for $\mu_I = S_\beta(I)$, $\alpha \le \beta < 2$.
+\item \emph{(Strictly between its neighbours.)} (a) Let $|r| < 1$ with $r^2 > 4(1+\alpha)/(2+\alpha)^2$, and
+let $\Theta_r \in \mathrm{Corr}(d)$ have the entries $(\Theta_r)_{12} = (\Theta_r)_{21} = r$ and agree with $I$ elsewhere.
+The centred Gaussian law $N(0, \Theta_r)$ is self-decomposable and is not $B$-self-decomposable for
+$B := I + \alpha\,e_1e_1^{\tp} \in \mathcal D_\alpha$. So the $(\mathrm D_+(d), \text{rays})$-family of
+Proposition~\ref{prop:diagonal-ray-families}(2) with $\mu_I = N(0, \Theta_r)$ is the restriction of no
+$(\mathrm D_+(d), \le_\alpha)$-family.
+(b) $S_\alpha(I)$ is not of the form $\nu_1 \otimes \dots \otimes \nu_d$. So the family of (3)(b) with
+$\mu_I = S_\alpha(I)$ is the restriction of no $(\mathrm D_+(d), \text{Loewner})$-family.
+(c) Let $\sigma_\alpha$ be the law on $\RR$ with transform $e^{-|\tau|^\alpha}$ (Lemma~\ref{lem:elliptical-stable}(2)
+at $d = 1$). The map $\Sigma \mapsto (\Sigma^{1/2})_*S_\alpha(I) * (\Delta(\Sigma)^{1/2})_*(\sigma_\alpha
+\otimes \dots \otimes \sigma_\alpha)$ is the family of kernels from scale zero of a
+$(\mathrm D_+(d), \le_\alpha)$-cascade family that is the restriction neither of a
+$(\GL(d), \le_\alpha)$-family nor of a $(\mathrm D_+(d), \text{Loewner})$-family.
+\end{enumerate}
+\end{proposition}
+
+So on the frame's shapes the cell (diagonal, stable order) lies strictly between its two neighbours in
+the diagonal row: every restricted (diagonal, Loewner) family belongs to it, every family of it
+restricts to the ray cell, neither inclusion is an equality, and the cell is not the union of the
+restrictions of the (diagonal, Loewner) cell and the general linear cell. The condition on the isotropic
+member sits between self-decomposability, which the ray cell requires, and the product form, which the
+Loewner order's axis steps force.
+% Round 3 (content review), E item 10: "its converse" said as what it asks.
+Whether every such law is the isotropic member of a family asks for an extension off the frame's
+shapes, where $\le_\alpha$ relates matrices of different correlation orbits. That question and the
+families off the frame's shapes are part of problem~\ref{prob:continuous-fields} of
+\S\ref{sec:open-problems}.
+
+\begin{proof}[Proof of Proposition~\ref{prop:diagonal-stable-order-families} (sketch)]
+\emph{(1).} Proposition~\ref{prop:similarity-stable-order-families}(1) makes $(\mathrm D_+(d), \le_\alpha)$ a
+wedge datum, and the orbits are those of Proposition~\ref{prop:diagonal-ray-families}(1). The relative step
+of $D_s^2$ and $D_{s'}^2$ is $D_u^2$, and condition (c) of Proposition~\ref{prop:stable-step-cone}(1) is the
+stated inequality squared.
+
+\emph{(2).} (K3) of Definition~\ref{def:gw-cascade-family} with $A = D_s$ gives the frame images. For
+$B = \diag(b) \in \mathcal D_\alpha$ and $u_i := e^{tb_i}$, (1) gives $I \le_\alpha D_u^2 = e^{2tB}$, and (K1)
+at $0 \le_\alpha I \le_\alpha D_u^2$ is $B$-self-decomposability in the sense of
+Proposition~\ref{prop:stable-exponent-cone}; $B = I$ gives self-decomposability.
+
+\emph{(3).} (a) restricts the families of Proposition~\ref{prop:diagonal-ray-families}(3) by
+Lemma~\ref{lem:gw-kernels-from-origin}(1), $\le_\alpha$ being contained in the Loewner order. (b) restricts
+those of Proposition~\ref{prop:similarity-stable-order-families}(2), the profiles of
+Proposition~\ref{prop:orbit-step-cone} included, to $\mathrm D_+(d)$.
+
+\emph{(4).} (a) An increment for $e^{-tB}$ would make $\Theta_r - e^{-tB}\Theta_re^{-tB}$ positive
+semidefinite, hence $B\Theta_r + \Theta_rB$, whose principal $2 \times 2$ block has the negative determinant
+$4(1+\alpha) - (2+\alpha)^2r^2$. (b) $e^{-|\omega|^\alpha} = \prod_ie^{-|\omega_i|^\alpha}$ fails at
+$e_1 + e_2$, the transform being that of Lemma~\ref{lem:elliptical-stable}(2). (c) The convolution of the
+two families of (3) is a family by Lemma~\ref{lem:gw-kernels-from-origin}(3); its $\mu_I$ is not rotation
+invariant, which the isotropic member of a general linear family is (Lemma~\ref{lem:parameter-space}(5)),
+and not a product.
+\end{proof}

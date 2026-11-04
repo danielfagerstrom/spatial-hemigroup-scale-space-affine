@@ -1,0 +1,22 @@
+d=2: 12000 Loewner pairs (7941 with a singular end)
+  (P)  least eigenvalue of any increment covariance: -2.15e-15 (>= -1e-9 is PSD)
+  (K1) max |cov(S,S')+cov(S',S'')-cov(S,S'')|: 3.55e-15
+  (K3) max relative |A cov A^T - cov(A.S, A.S')|: 4.21e-15
+  (K4) cov(0, I) = [1.4 1.4] (not 0)
+  PD pair: |cov - 2b(S'-S)| = 0.00e+00
+  singular kernel from 0: cov(0,P)[0,0] = 0.420 vs (3.1) 1.400
+  (K2) hat mu_(0,diag(1,0.1,..))(e1) = 0.496585
+  (K2) hat mu_(0,diag(1,0.001,..))(e1) = 0.496585
+  (K2) hat mu_(0,diag(1,1e-06,..))(e1) = 0.496585
+  (K2) hat mu_(0,diag(1,0,..))(e1)       = 0.810584   (limit exp(-b) = 0.496585)
+d=3: 12000 Loewner pairs (8526 with a singular end)
+  (P)  least eigenvalue of any increment covariance: -3.68e-15 (>= -1e-9 is PSD)
+  (K1) max |cov(S,S')+cov(S',S'')-cov(S,S'')|: 7.11e-15
+  (K3) max relative |A cov A^T - cov(A.S, A.S')|: 5.25e-15
+  (K4) cov(0, I) = [1.4 1.4 1.4] (not 0)
+  PD pair: |cov - 2b(S'-S)| = 0.00e+00
+  singular kernel from 0: cov(0,P)[0,0] = 0.420 vs (3.1) 1.400
+  (K2) hat mu_(0,diag(1,0.1,..))(e1) = 0.496585
+  (K2) hat mu_(0,diag(1,0.001,..))(e1) = 0.496585
+  (K2) hat mu_(0,diag(1,1e-06,..))(e1) = 0.496585
+  (K2) hat mu_(0,diag(1,0,..))(e1)       = 0.810584   (limit exp(-b) = 0.496585)

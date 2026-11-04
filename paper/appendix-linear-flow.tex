@@ -1,0 +1,111 @@
+% Appendix G --- one linear flow. Moved out of section 5's "Smaller groups" whole (Q-0290, the
+% author's decision of 2026-10-04; the review's length judgement: the row lies outside the scheme):
+% prop:anisotropy-budget and prop:one-parameter-families, with their `% shared with blueprint`
+% markers, verbatim, and the sentences naming the cited facts they rest on. The main text keeps the
+% paragraph "One linear flow" of 5.7; the proof of thm:wedge-axis uses prop:anisotropy-budget(1).
+% Q-0309 (fix group 2, review flag 36): prop:anisotropy-budget, which the proof of thm:wedge-axis
+% spends, moved to 5.6 beside prop:stable-exponent-cone, and its proof to the proof appendix; the
+% sentence on the two obstructions stays here, after the families of one flow.
+
+\section{One linear flow}\label{app:linear-flow}
+
+The families covariant under one group $\{e^{sB}\}$ that cascade along its curve are the
+operator-self-decomposable laws. They lie outside the scheme, the curve not being an order on
+$\PSD(d)$, and they are the row ``One linear flow'' below the others in Table~\ref{tab:landscape}. The anisotropy of the exponents
+$B$ of the rotation-invariant non-Gaussian ones is bounded by Proposition~\ref{prop:anisotropy-budget}
+in \S\ref{sec:affine-stable-cone}.
+
+The families of one flow are characterized as the ray families are.
+
+% shared with blueprint prop:one-parameter-families+7ebf6dc7238b
+\begin{proposition}[the families of one linear flow]\label{prop:one-parameter-families}
+Let $d \ge 1$ and let $B$ be a real $d \times d$ matrix. Let $(\mu_t)_{t\in\RR}$ be probability
+measures on $\RR^d$ with
+\begin{enumerate}
+\item[(F1)] \emph{(covariance under the flow)} $(e^{sB})_*\mu_t = \mu_{t+s}$ for all $s, t \in \RR$;
+\item[(F2)] \emph{(a cascade along the flow)} for every $u > 0$ there is a probability measure
+$\rho_u$ on $\RR^d$ with $\mu_u = \mu_0 * \rho_u$.
+\end{enumerate}
+\begin{enumerate}
+\item \emph{(The characterization.)} Then $\mu_0$ is $B$-self-decomposable
+(Proposition~\ref{prop:stable-exponent-cone}), $\mu_t = (e^{tB})_*\mu_0$ for every $t$, and the family cascades
+between any two of its members: $\mu_t = \mu_s * (e^{sB})_*\rho_{t-s}$ for $s < t$. Conversely, for
+every $B$-self-decomposable law $\mu_0$ the family $\mu_t := (e^{tB})_*\mu_0$ satisfies (F1) and
+(F2).
+\item \emph{(The origin.)} If every eigenvalue of $B$ has positive real part, that is if
+$e^{tB} \to 0$ as $t \to -\infty$, then $\mu_t \to \delta_0$ weakly as $t \to -\infty$.
+\item \emph{(The curve of apertures.)} For $\Sigma_0 \in \PD(d)$ put
+$\Sigma(t) := e^{tB}\Sigma_0e^{tB^{\tp}}$. Then $\Sigma(s) \le \Sigma(t)$ for all $s \le t$ in the
+Loewner order if and only if $B\Sigma_0 + \Sigma_0B^{\tp} \in \PSD(d)$; and $\Sigma(t) \to 0$ as
+$t \to -\infty$ if and only if $e^{tB} \to 0$.
+\item \emph{(The Gaussian rides exactly the monotone curves.)} For $b > 0$ the family
+$\mu_t := N(0, 2b\,\Sigma(t))$ satisfies (F1), and it satisfies (F2) if and only if
+$B\Sigma_0 + \Sigma_0B^{\tp} \in \PSD(d)$.
+\item \emph{(Two kinds of member.)} If $B = \diag(b_1,\dots,b_d)$ with every $b_i > 0$, then every
+product $\nu_1 \otimes \dots \otimes \nu_d$ of self-decomposable laws on $\RR$ is
+$B$-self-decomposable. If $d \ge 2$, $0 < \alpha < 2$ and
+$(d+\alpha)\lambda_{\min}(\mathrm{sym}\,B) \ge \tr B$, then $S_\alpha(I)$ is $B$-self-decomposable
+and is not a product law in any orthonormal frame.
+\end{enumerate}
+\end{proposition}
+
+For contracting $B$ these are Urbanik's operator-self-decomposable laws \sscite{urbanik1972levy}.
+% Round 3 (content review), E suggestion 5 (VERIFY-round3-smaller-groups-paper.md item 12; the
+% author's decision D13): Sato-Yamazato p. 73 and Jurek 1982 p. 385, read at the page
+% (READING-sato1984operator.md, READING-jurek1982integral.md); Jurek-Vervaat 1983 is the scalar case.
+Sato and Yamazato characterize them as the limit laws of the processes of Ornstein--Uhlenbeck type, in
+which a process with independent increments replaces the Brownian motion (\sscite{sato1984operator},
+p.~73). Jurek writes each as the law of $\int_0^\infty e^{-tB}\,dY(t)$ for a process $Y$ with stationary
+independent increments and $\mathbf E\log(1 + |Y(1)|) < \infty$ (\sscite{jurek1982integral}, p.~385).
+Clause (1) for contracting $B$ is close to Hazod and Siebert's characterization of
+self-decomposability along a contracting group by continuous hemigroups
+(\sscite{hazod2001stable}, Thm.~2.14.21, (i)$\Leftrightarrow$(v), p.~383). Their hemigroups are
+indexed by $t \ge 0$ and continuous, which (F1) and (F2) do not ask. By clause (1), clause (4) is
+Jurek's description of the exponents of a centred Gaussian law of covariance $S$, the $B$ with
+$BS + SB^{\tp} \ge 0$ in this paper's sign (\sscite{jurek1992operator}, Example, p.~1057). With $B = I$ the proposition is the ray cascade of
+Proposition~\ref{prop:ray-families} without the rest of the affine group, and so without rotation
+invariance. With $B$ diagonal it contains the products of Proposition~\ref{prop:fixed-frame-families}
+along every curve of the frame at once, and clause (5) shows that it is larger than both: in the plane
+$S_\alpha(I)$ rides the curves of $B = \diag(1, b)$ exactly for $1/(1+\alpha) \le b \le 1 + \alpha$
+(Proposition~\ref{prop:stable-exponent-cone}). For vision the row is
+shape drift locked to scale: the aperture's shape is a fixed function of its scale, set by $B$, and does
+not adapt to the image. Only for the Gaussian is the label $\Sigma(t)$ the kernel's covariance, and then
+a cascade along the curve is exactly a Loewner-monotone curve (clause (4)). With
+Propositions~\ref{prop:fixed-frame-families} and~\ref{prop:anisotropy-budget} this separates two
+obstructions. Frame families take the Gaussian's anisotropy per step and cannot turn.
+Rotation-invariant non-Gaussian laws turn, with the skew part of $B$ free, and have a bounded
+anisotropy budget, while the Gaussian has neither limit.
+
+% proof of prop:one-parameter-families
+\begin{proof}
+\emph{Clause (1)} is the argument of Proposition~\ref{prop:ray-families} with $\lambda I$ replaced by
+$e^{sB}$. (F1) at $t = 0$ gives $\mu_s = (e^{sB})_*\mu_0$. (F2) reads
+$(e^{uB})_*\mu_0 = \mu_0 * \rho_u$, and applying $(e^{-uB})_*$ gives
+$\mu_0 = (e^{-uB})_*\mu_0 * (e^{-uB})_*\rho_u$. For $s < t$,
+$\mu_t = (e^{sB})_*(\mu_0 * \rho_{t-s}) = \mu_s * (e^{sB})_*\rho_{t-s}$. The converse is the same
+computation read backwards.
+
+\emph{Clause (2).} $\int f\,d\mu_t = \int f(e^{tB}x)\,\mu_0(dx) \to f(0)$ by dominated convergence.
+
+\emph{Clause (3).} With $C := B\Sigma_0 + \Sigma_0B^{\tp}$ and $v(t) := e^{tB^{\tp}}\omega$,
+$\tfrac{d}{dt}\langle\omega,\Sigma(t)\omega\rangle = \langle v(t), Cv(t)\rangle$, so $C \in \PSD(d)$ makes
+every $t \mapsto \langle\omega,\Sigma(t)\omega\rangle$ nondecreasing, and conversely their derivatives at
+$0$ are the $\langle\omega,C\omega\rangle$. Also $\Sigma(t) = M(t)M(t)^{\tp}$ with
+$M(t) := e^{tB}\Sigma_0^{1/2}$, whose squared entries are bounded by the diagonal of $\Sigma(t)$, so $\Sigma(t)$
+tends to $0$ exactly when $e^{tB}$ does.
+% CHANGED Q-0281 wave 2: blind review W2E-6: M(t)_{ij}^2 <= Sigma(t)_{ii}.
+
+\emph{Clause (4).} $(e^{sB})_*N(0, 2b\Sigma(t)) = N(0, 2b\Sigma(t+s))$, which is (F1). The Gaussian
+transforms have no zero, so an increment of $N(0,2b\Sigma_0)$ to $N(0,2b\Sigma(u))$ is unique, with the
+transform $e^{-b\langle\omega,(\Sigma(u) - \Sigma_0)\omega\rangle}$. That is a characteristic function exactly
+when $\Sigma(u) \ge \Sigma_0$: a negative eigenvalue of $\Sigma(u) - \Sigma_0$ would give it modulus above
+$1$. So (F2) holds exactly when $\Sigma_0 \le \Sigma(u)$ for every $u > 0$. By (F1)'s transport
+$\Sigma(s+u) = e^{sB}\Sigma(u)e^{sB^{\tp}}$, and as a congruence preserves the Loewner order, that is the
+monotonicity of the whole curve, which clause (3) characterizes.
+
+\emph{Clause (5).} For diagonal $B$, $e^{-uB}$ acts coordinatewise and each factor is self-decomposable.
+The second sentence's first half is Proposition~\ref{prop:stable-exponent-cone}; for the second half,
+$S_\alpha(I)$ is rotation invariant (Lemma~\ref{lem:elliptical-stable}(2)), so a product form in one
+orthonormal frame is one in the standard frame. Its factors then have the transforms $e^{-|t|^\alpha}$,
+and at $e_1 + e_2$ the product gives $e^{-2} = e^{-2^{\alpha/2}}$, which forces $\alpha = 2$.
+\end{proof}

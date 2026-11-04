@@ -1,0 +1,26 @@
+(1),(2) continuum log-rate of the negative mass, int A_- d theta
+  gamma   eps    rate(neg)   rate(pos)   eps/(pi(1+eps))   gamma*eps/(pi(1+eps))   mean h (atom)
+      1  0.01   0.00315     0.00315     0.00315           0.00315               0.99504
+      1  0.10   0.02894     0.02894     0.02894           0.02894               0.95346
+      1  0.50   0.10610     0.10610     0.10610           0.10610               0.81650
+      2  0.01   0.00627     0.00627     0.00315           0.00630               0.99011
+      2  0.10   0.05526     0.05526     0.02894           0.05787               0.91012
+      2  0.50   0.17771     0.17771     0.10610           0.21221               0.68041
+
+(3) grid slopes of the negative mass against ln t (OLS), Remark E.5's construction
+  gamma 1, eps 0.01: slope 4-32 0.0030, slope 8-64 0.0031, per-doubling 0.0029, 0.0031, 0.0031, 0.0031; continuum 0.0032; grid/continuum (4-32) 0.964
+  gamma 1, eps 0.10: slope 4-32 0.0283, slope 8-64 0.0289, per-doubling 0.0269, 0.0287, 0.0290, 0.0290; continuum 0.0289; grid/continuum (4-32) 0.977
+  gamma 1, eps 0.50: slope 4-32 0.1064, slope 8-64 0.1062, per-doubling 0.1062, 0.1068, 0.1059, 0.1061; continuum 0.1061; grid/continuum (4-32) 1.002
+  gamma 2, eps 0.01: slope 4-32 0.0060, slope 8-64 0.0062, per-doubling 0.0059, 0.0061, 0.0062, 0.0063; continuum 0.0063; grid/continuum (4-32) 0.964
+  gamma 2, eps 0.10: slope 4-32 0.0544, slope 8-64 0.0554, per-doubling 0.0522, 0.0552, 0.0556, 0.0555; continuum 0.0553; grid/continuum (4-32) 0.985
+  gamma 2, eps 0.50: slope 4-32 0.1768, slope 8-64 0.1772, per-doubling 0.1769, 0.1762, 0.1775, 0.1777; continuum 0.1777; grid/continuum (4-32) 0.995
+
+(4) angular factor at index 2, eps = 0.5: r^2 * grid increment on circles, against A(theta)
+  r =  128: r^2 rho = +0.1076, +0.0621, +0.0058, -0.0146, -0.0182
+  r =  256: r^2 rho = +0.0520, +0.0300, +0.0053, -0.0022, -0.0032
+  A(theta)  = +0.1191, +0.0565, -0.0253, -0.0583, -0.0650   (theta = 0, pi/8, pi/4, 3pi/8, pi/2)
+  (the |x|^-2 term dominates only for r << t; at r ~ t the Matern tail e^{-r/t} and the
+   lower-order terms are of the same size, so this is a rough check of sign and shape only)
+  r =    4 (grid units, t = 64): r^2 rho = +0.1351, +0.0521, -0.0208, -0.0569, -0.0678
+  r =    8 (grid units, t = 64): r^2 rho = +0.1236, +0.0552, -0.0227, -0.0570, -0.0643
+  r =   16 (grid units, t = 64): r^2 rho = +0.1226, +0.0591, -0.0213, -0.0543, -0.0610

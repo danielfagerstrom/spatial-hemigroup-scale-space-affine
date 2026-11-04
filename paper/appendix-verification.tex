@@ -1,0 +1,209 @@
+% Appendix I --- Verification: the inventory behind section 1.1 (pass 6, the author's review of
+% section 1, 2026-10-26; records/affine/REVIEW-author-paper-affine.md, comment 2), on the isotropic
+% paper's model (paper-iso/appendix-verification.tex; article-kit WRITING.md section 4 and
+% PUBLICATION-TEMPLATE.md B.4). Section 1.1 states the trust base: what is machine-checked, what
+% is assumed, what is computed. This appendix adds detail to that statement and holds no caveat,
+% gap or assumption that 1.1 does not state.
+%
+% Moved here from 01-introduction.tex by records/affine/edits_p6_verification_appendix.py, which
+% copies each paragraph byte for byte and checks that it is identical to the text removed from
+% section 1.1: "What is proved", the statements that rest on each cited fact and those that rest
+% on none, "Standard theorems", "Review" and "Where to look" with the table of the Lean names and
+% the stamped #print axioms block (its stamp and content untouched). New: the opening sentence,
+% the heading of the second paragraph and its first sentence (which had closed "What it rests on"
+% in 1.1), and the first sentence of "Review", which 1.1 keeps, is not repeated.
+%
+% The region between the two "trust base" comment lines is read by `linkage check` (LINKAGE.md
+% rule 13), as the region of section 1.1 is: statuses, the cited facts the region names (by their
+% Lean names in the table and the block) against those its \ref'd statements read, and the stamped
+% block.
+
+\section{Verification}\label{app:verification}
+% trust base: begin
+% Q-0377 (2026-10-08; article-kit PROCESS.md § 7, WRITING.md § 4): rewritten when the
+% formalization closed (125 of 125 blueprint nodes \leanok on main at dfafe99), on Paper V's model
+% (spatial-hemigroup-scale-space, paper/01-introduction.tex, "What is machine-checked"). It replaces
+% "No statement of this version is machine-checked" and the four kinds of statement (proved in full,
+% sketched, restated, cited). The statuses are the blueprint's. The cited facts each statement rests
+% on are what Formalization/CIAxiomGuard.lean prints at dfafe99 (exit code 0, no sorryAx), mapped to
+% the ledger through blueprint/trust-boundary.txt: C1 is A6, C2 is A3, C3 is A5, C4 is A9. The lists
+% by section are the previous version's, checked against that output; the one addition is the
+% isotropic classification, restated in section 2.3, whose formal proof reads C2 (ii)-(iii) at d = 1
+% since Q-0365. No statement of this paper read A1, A2, A4, A8 or A10 then; round 3 added C5, which is
+% A2, for prop:wedge-axis-profiles(2). Everything between the two
+% "trust base" comment lines is read by `linkage check` (LINKAGE.md rule 13): statuses, the ledger
+% entries named against those the \ref'd statements read, and the stamped #print axioms block
+% (`--fresh-axioms` reruns it). The axioms of the line are not written as (A1)-(A8) inside the
+% region, where the checker would read them as ledger entries.
+This appendix gives the detail behind \S\ref{sec:trust-base}: what is proved, which statements rest
+on which cited fact, the standard theorems the proofs take from Mathlib, the review of the formal
+statements, and where the formal development is.
+
+\paragraph{What is proved.} The theorems are machine-checked: the single step and the rigidity, on
+kernels and on operators (Theorems~\ref{thm:rank-deficient-step}, \ref{thm:affine-rigidity}
+and~\ref{thm:affine-rigidity-operators}), the infinitely divisible increments
+(Theorem~\ref{thm:cascade-infinitely-divisible}), the orders of cone fields
+(Theorem~\ref{thm:cone-orders}), and the theorem on the general linear group along the chain of
+cones (Theorem~\ref{thm:wedge-axis}), whose complete proof Appendix~\ref{app:wedge-axis} collects. So is
+every other definition, lemma and proposition of \S\S\ref{sec:classical}--\ref{sec:landscape} and of
+the appendices. A proof
+marked as a sketch shows the decisive steps and leaves routine verifications out. Twenty statements
+have a sketch only: Propositions~\ref{prop:affine-orbits},
+\ref{prop:rational-symbols}, \ref{prop:similarity-stable-order-kernels},
+\ref{prop:isotropic-corner}, \ref{prop:glplus-families}, \ref{prop:tempered-step-cone}(2)--(4),
+\ref{prop:matern-negative-mass}, \ref{prop:fixed-frame-families}, \ref{prop:similarity-ray-families},
+\ref{prop:diagonal-ray-families}, \ref{prop:diagonal-stable-order-families},
+\ref{prop:similarity-stable-family}, \ref{prop:similarity-orbit-family},
+\ref{prop:similarity-general-sandwich}, \ref{prop:similarity-general-bounded-shape},
+\ref{prop:similarity-degenerate-family}, \ref{prop:similarity-line-family} and
+\ref{prop:similarity-general-index-zero}, and Lemmas~\ref{lem:dilation-ratio}
+and~\ref{lem:parameter-space}. Their complete proofs are in the LaTeX sources deposited with this
+version (see the code availability statement at the end), whose index,
+\texttt{records/affine/INDEX-complete-proofs.md}, names, for each statement
+number, the file and the place of its complete proof. A sketched statement is machine-checked like
+every other.
+% Round-1 external review (Gemini, section 5 item 5; PLAN-review-response-paper.md, D2): the sketched
+% statements are listed so that the deposit is a citable address; Propositions 4.15 and 4.19 are
+% printed in full in Appendix B.
+
+\paragraph{The cited facts, statement by statement.} The statements whose formal proofs rest on the
+five cited facts of \S\ref{sec:trust-base} are these, section by section.
+\begin{itemize}
+\item \S\ref{sec:line}. C2, its clauses (ii) and (iii) at $d = 1$: the isotropic classification,
+Theorem~\ref{thm:isotropic-classification}, restated from the isotropic paper.
+\item \S\ref{sec:classical}. C1: Theorem~\ref{thm:cascade-infinitely-divisible}. No other statement
+of \S\ref{sec:classical} or of Appendix~\ref{app:classical} rests on one.
+% CHANGED Q-0281 wave 2, group H: "and through Theorem cone-orders(4) Theorem wedge-axis" dropped
+% from C4 (the entry-free route, the author's decision on W2F-1).
+\item \S\ref{sec:landscape}. C2: in \S\ref{sec:affine-stable-cone},
+% Round 3 (content review), B.S7: only the increments of 4.7 spend C2.
+Lemma~\ref{lem:elliptical-stable}, Proposition~\ref{prop:stable-step-cone}, for the increments of its
+clauses (1) and (2), and Propositions~\ref{prop:stable-exponent-cone}, \ref{prop:anisotropy-budget}, \ref{prop:orbit-step-cone},
+\ref{prop:bounded-profile-rays} and~\ref{prop:similarity-stable-order-families}; in
+\S\ref{sec:smaller-groups}, Proposition~\ref{prop:similarity-stable-order-kernels}; and
+Theorem~\ref{thm:wedge-axis} and Proposition~\ref{prop:wedge-axis-profiles}. C3:
+Proposition~\ref{prop:anisotropy-budget}, for its clause (1), and through it
+Theorem~\ref{thm:wedge-axis}. C1: Proposition~\ref{prop:wedge-axis-profiles}, and
+Proposition~\ref{prop:similarity-stable-order-kernels}, for its clause (1). C5:
+Proposition~\ref{prop:wedge-axis-profiles}(2). C4: in \S\ref{sec:invariant-wedges}, Lemma~\ref{lem:spectral-cones}, for its
+clause (2) and the products in its clause (5); and through it Theorem~\ref{thm:cone-orders}, for its
+clauses (1), (2) and (4).
+\item The supplementary appendices. C2: Proposition~\ref{prop:tempered-step-cone}
+(Appendix~\ref{app:orbits}); Proposition~\ref{prop:diagonal-stable-order-families}
+(Appendix~\ref{app:smaller-groups}); Proposition~\ref{prop:one-parameter-families}
+(Appendix~\ref{app:linear-flow}); and the eight propositions of Appendix~\ref{app:similarity},
+\ref{prop:similarity-stable-family}, \ref{prop:similarity-orbit-family},
+\ref{prop:similarity-general-sandwich}, \ref{prop:similarity-general-bounded-shape},
+\ref{prop:similarity-degenerate-family}, \ref{prop:similarity-line-family},
+\ref{prop:similarity-general-index-zero} and~\ref{prop:similarity-cascade-families}. C1:
+Proposition~\ref{prop:similarity-cascade-families}.
+\end{itemize}
+These are machine-checked on Lean's logical axioms alone, with no cited fact:
+\begin{itemize}
+\item the isotropic families read on the multiples of the identity
+(Proposition~\ref{prop:isotropic-corner});
+\item the passage between operators and kernels (Lemmas~\ref{lem:operators-to-kernels}
+and~\ref{lem:kernels-to-operators});
+\item the rigidity on kernels and on operators (Theorems~\ref{thm:affine-rigidity}
+and~\ref{thm:affine-rigidity-operators}), with the single step and the lemmas behind it, and where
+continuity enters it (Proposition~\ref{prop:affine-rigidity-boundary});
+\item the dictionary between invariant orders and step sets (Proposition~\ref{prop:invariant-orders}),
+and the stable orders read in the Loewner order (Proposition~\ref{prop:stable-order-generated}).
+\end{itemize}
+
+% CHANGED Q-0281 wave 2: blind review W2C-1 (the author's decision of 2026-10-05: Mathlib's route).
+% The proof of thm:cascade-infinitely-divisible(1) now uses Levy's continuity theorem on R^d and the
+% portmanteau theorem; they are named here as standard theorems, apart from C1-C4 and the ledger.
+% The author's decision of 2026-11-03 (notes/HANDOFF.md, "Waiting on the author"): Prokhorov's theorem,
+% used by the proof of lem:operators-to-kernels(1) and taken from Mathlib, is named here too.
+\paragraph{Standard theorems.} The proofs use the standard theorems of measure theory, Fourier
+analysis, weak convergence and elementary analysis (Fekete's lemma on superadditive functions
+among them) without citing them, as they use Fubini's theorem. Three of them are
+named here because they are limit theorems of probability, like the cited facts: Prokhorov's
+theorem, \Levy's continuity theorem on $\RR^d$ and the portmanteau theorem. The proof of
+Lemma~\ref{lem:operators-to-kernels} uses the first, to obtain the kernel of an operator as a weak
+limit. The proof of Theorem~\ref{thm:cascade-infinitely-divisible} uses the other two, to show that
+the small steps of a cascade form a null array. All three are proved in Mathlib, and the formal
+proofs take them from it, whereas they take each cited fact as an assumption.
+
+% Q-0382 (2026-10-11): the verdict of the fidelity review (PROCESS.md § 6, Q-0376;
+% blueprint/REVIEW-fidelity.md, "Verdict" and its findings ledger: 0 claim-changing rows, one
+% statement-tightening row, R1, a \lean tag that no paper prints, 18 note-only), replacing the
+% sentence that said the review was in progress. The witnesses are its section "Witnesses (P1)",
+% each on Lean core. The one rewording is Q-0381's (the review's paper-facing point 6), already in
+% the shared statement.
+\paragraph{Review.} Each formal statement
+was read against the statement printed here, in search of one that is weaker than printed, holds
+vacuously, or is true only by a convention of the proof assistant, and the review found none. It
+found that each cited fact states what its page supports, with the departures recorded in
+\S\ref{sec:cited-facts}. For each theorem named under ``What is proved'', a formal example that rests
+on no cited fact shows that the hypotheses can be met.
+
+\paragraph{Where to look.} The formal development, its ledger of the cited facts with the
+page-verified citation of each, and the LaTeX sources of the statements and their proofs, in which the
+declaration behind each numbered statement is named in a \texttt{\char`\\lean} tag on that statement
+and the complete proof of every sketched statement is given, are in the repository accompanying this
+paper, \url{https://github.com/danielfagerstrom/spatial-hemigroup-scale-space-affine}, at its tag \texttt{v0.1}, as the code availability statement at
+the end says.
+The toolchain is pinned in-tree: Lean~4 \texttt{v4.31.0}, Mathlib \texttt{v4.31.0}, the shared
+library \texttt{ScaleSpaceCore} at its tag \texttt{v0.5.0}. The build configuration requires these
+two packages and no other. \texttt{lake build} in \texttt{Formalization/} reproduces the verification, and
+\texttt{lake env lean CIAxiomGuard.lean} prints the axioms of every named declaration, to be read
+against the file \texttt{blueprint/trust-boundary.txt} beside it. In that file the five cited facts
+are these axioms, each in the namespace \texttt{AffineHemigroup}.
+\begin{center}
+\small
+\begin{tabular}{@{}ll@{\qquad}ll@{}}
+C1 & \texttt{khintchine\_null\_array} & C2(iii) & \texttt{levy\_khintchine\_converse} \\
+C2(i) & \texttt{levy\_khintchine\_exists} & C3 & \texttt{operatorSelfDecomposable\_infinitelyDivisible} \\
+C2(ii) & \texttt{levy\_khintchine\_unique} & C4 & \texttt{gelfand\_naimark\_logMajorized} \\
+& & C5 & \texttt{sato\_polar\_criterion}
+\end{tabular}
+\end{center}
+On the declarations of Theorems~\ref{thm:affine-rigidity}, \ref{thm:affine-rigidity-operators},
+\ref{thm:cascade-infinitely-divisible}, \ref{thm:cone-orders} and~\ref{thm:wedge-axis} and of
+Proposition~\ref{prop:wedge-axis-profiles}, it prints Lean's three logical axioms
+(propositional extensionality, \texttt{propext}; the axiom of choice, \texttt{Classical.choice}; and
+the soundness of quotient types, \texttt{Quot.sound}) and names of the cited facts, and
+nothing else:
+% printed at fdf0c61 (2026-11-04)
+% Q-0382: re-stamped after the fidelity review (Q-0376) and Q-0381, Q-0407 landed. After a full
+% `lake build` at 91f39d8 (the Lean sources of main there), `linkage check --fresh-axioms` reran
+% `#print axioms` on these declarations and found the block equal to Lean's output, so no line
+% of it changes. First printed at dfafe99 (2026-10-08) by `lake env lean CIAxiomGuard.lean`.
+% wedge_axis_cell added when the Lean of prop:wedge-axis-profiles landed (2d7a4a6),
+% `linkage check --fresh-axioms` comparing the whole block with Lean's output again; compared again at
+% fdf0c61, after the author's decision D16 dropped two hypotheses of wedge_axis_cell, and no line changed.
+\begin{verbatim}
+'AffineHemigroup.affine_rigidity' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'AffineHemigroup.affine_rigidity_operators' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'AffineHemigroup.gw_family_infinitelyDivisible' depends on axioms: [propext,
+ AffineHemigroup.khintchine_null_array,
+ Classical.choice,
+ Quot.sound]
+'AffineHemigroup.causalLE_order' depends on axioms: [propext,
+ AffineHemigroup.gelfand_naimark_logMajorized,
+ Classical.choice,
+ Quot.sound]
+'AffineHemigroup.wedge_axis_row' depends on axioms: [propext,
+ AffineHemigroup.levy_khintchine_converse,
+ AffineHemigroup.levy_khintchine_exists,
+ AffineHemigroup.levy_khintchine_unique,
+ AffineHemigroup.operatorSelfDecomposable_infinitelyDivisible,
+ Classical.choice,
+ Quot.sound]
+'AffineHemigroup.wedge_axis_cell' depends on axioms: [propext,
+ AffineHemigroup.khintchine_null_array,
+ AffineHemigroup.levy_khintchine_converse,
+ AffineHemigroup.levy_khintchine_exists,
+ AffineHemigroup.levy_khintchine_unique,
+ AffineHemigroup.sato_polar_criterion,
+ Classical.choice,
+ Quot.sound]
+\end{verbatim}
+% trust base: end
+

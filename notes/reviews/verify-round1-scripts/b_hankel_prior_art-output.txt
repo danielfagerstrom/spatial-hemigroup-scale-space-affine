@@ -1,0 +1,135 @@
+== A. ball inversion as a Hankel transform (Matern law) ==
+PASS  d=2 gamma=0.75 s=0.5: mu(B_s) direct = Hankel   direct 0.364443654854  Hankel 0.364443654854
+PASS  d=3 gamma=0.75 s=0.5: mu(B_s) direct = Hankel   direct 0.249382655738  Hankel 0.249382655738
+PASS  d=2 gamma=0.25 s=0.3333333333333333333333333: mu(B_s) direct = Hankel   direct 0.610639872312  Hankel 0.610639872312
+PASS  d=3 gamma=0.2 s=0.3333333333333333333333333: mu(B_s) direct = Hankel   direct 0.606458671879  Hankel 0.60645867188
+PASS  d=1 gamma=0.25 s=0.5: mu(B_s) direct = Hankel   direct 0.829869183789  Hankel 0.829869183789
+PASS  d=4 gamma=0.75 s=0.5: mu(B_s) direct = Hankel   direct 0.18644266272  Hankel 0.18644266272
+
+== B. the constant of Theorem 1.2 at nu = d/2, rho = (d-3)/2 - c ==
+PASS  d=1 c=0.1: BI constant = paper's ball constant = R(d,c)|S|/c   rho=-1.1 in (-nu-3/2, 0): True
+PASS  d=1 c=0.5: BI constant = paper's ball constant = R(d,c)|S|/c   rho=-1.5 in (-nu-3/2, 0): True
+PASS  d=1 c=0.9: BI constant = paper's ball constant = R(d,c)|S|/c   rho=-1.9 in (-nu-3/2, 0): True
+PASS  d=2 c=0.1: BI constant = paper's ball constant = R(d,c)|S|/c   rho=-0.6 in (-nu-3/2, 0): True
+PASS  d=2 c=0.5: BI constant = paper's ball constant = R(d,c)|S|/c   rho=-1.0 in (-nu-3/2, 0): True
+PASS  d=2 c=0.9: BI constant = paper's ball constant = R(d,c)|S|/c   rho=-1.4 in (-nu-3/2, 0): True
+PASS  d=2 c=1.5: BI constant = paper's ball constant = R(d,c)|S|/c   rho=-2.0 in (-nu-3/2, 0): True
+PASS  d=3 c=0.1: BI constant = paper's ball constant = R(d,c)|S|/c   rho=-0.1 in (-nu-3/2, 0): True
+PASS  d=3 c=0.5: BI constant = paper's ball constant = R(d,c)|S|/c   rho=-0.5 in (-nu-3/2, 0): True
+PASS  d=3 c=0.9: BI constant = paper's ball constant = R(d,c)|S|/c   rho=-0.9 in (-nu-3/2, 0): True
+PASS  d=3 c=1.5: BI constant = paper's ball constant = R(d,c)|S|/c   rho=-1.5 in (-nu-3/2, 0): True
+PASS  d=3 c=2.5: BI constant = paper's ball constant = R(d,c)|S|/c   rho=-2.5 in (-nu-3/2, 0): True
+PASS  d=4 c=0.1: BI constant = paper's ball constant = R(d,c)|S|/c   rho=0.4 in (-nu-3/2, 0): False
+PASS  d=4 c=0.5: BI constant = paper's ball constant = R(d,c)|S|/c   rho=0.0 in (-nu-3/2, 0): False
+PASS  d=4 c=0.9: BI constant = paper's ball constant = R(d,c)|S|/c   rho=-0.4 in (-nu-3/2, 0): True
+PASS  d=4 c=1.5: BI constant = paper's ball constant = R(d,c)|S|/c   rho=-1.0 in (-nu-3/2, 0): True
+PASS  d=4 c=2.5: BI constant = paper's ball constant = R(d,c)|S|/c   rho=-2.0 in (-nu-3/2, 0): True
+PASS  d=5 c=0.1: BI constant = paper's ball constant = R(d,c)|S|/c   rho=0.9 in (-nu-3/2, 0): False
+PASS  d=5 c=0.5: BI constant = paper's ball constant = R(d,c)|S|/c   rho=0.5 in (-nu-3/2, 0): False
+PASS  d=5 c=0.9: BI constant = paper's ball constant = R(d,c)|S|/c   rho=0.1 in (-nu-3/2, 0): False
+PASS  d=5 c=1.5: BI constant = paper's ball constant = R(d,c)|S|/c   rho=-0.5 in (-nu-3/2, 0): True
+PASS  d=5 c=2.5: BI constant = paper's ball constant = R(d,c)|S|/c   rho=-1.5 in (-nu-3/2, 0): True
+PASS  d=5 c=4.0: BI constant = paper's ball constant = R(d,c)|S|/c   rho=-3.0 in (-nu-3/2, 0): True
+PASS  d=7 c=0.1: BI constant = paper's ball constant = R(d,c)|S|/c   rho=1.9 in (-nu-3/2, 0): False
+PASS  d=7 c=0.5: BI constant = paper's ball constant = R(d,c)|S|/c   rho=1.5 in (-nu-3/2, 0): False
+PASS  d=7 c=0.9: BI constant = paper's ball constant = R(d,c)|S|/c   rho=1.1 in (-nu-3/2, 0): False
+PASS  d=7 c=1.5: BI constant = paper's ball constant = R(d,c)|S|/c   rho=0.5 in (-nu-3/2, 0): False
+PASS  d=7 c=2.5: BI constant = paper's ball constant = R(d,c)|S|/c   rho=-0.5 in (-nu-3/2, 0): True
+PASS  d=7 c=4.0: BI constant = paper's ball constant = R(d,c)|S|/c   rho=-2.0 in (-nu-3/2, 0): True
+   (the identity of the constants is algebraic and holds for every 0 < c < d; the theorem
+    applies only where rho < 0, i.e. c > (d-3)/2.)
+
+   the limit itself, mu(B_s) / (ball_const * chi(1/s)), Matern c = 2 gamma:
+PASS  d=2 gamma=0.75: ratio -> 1   0.91489993  0.9914736  0.99914736
+PASS  d=3 gamma=0.75: ratio -> 1   0.9990627  0.99999885  1.0
+PASS  d=2 gamma=0.25: ratio -> 1   0.99950355  0.99999942  1.0
+PASS  d=3 gamma=0.2: ratio -> 1   1.0000135  1.0  1.0
+   and for the density, q(s) / (R(d,c) s^-d chi(1/s)):
+PASS  d=2 gamma=0.75: ratio -> 1   0.8865095375  0.9886314679  0.9988631446
+PASS  d=3 gamma=0.75: ratio -> 1   0.9980039597  0.9999976893  0.9999999977
+PASS  d=2 gamma=0.25: ratio -> 1   0.9979041743  0.9999976793  0.9999999977
+
+== C. the boundary c = d: Theorem 1.1 and (1.4) ==
+PASS  d=2 x=20.0: (1.4), (Fbar - k0 P)/(x^(nu+3/2) f) -> k0 (log 2 - gamma_E/2 + psi(nu+1)/2)   value 0.30951375  limit 0.30796576
+PASS  d=2 x=200.0: (1.4), (Fbar - k0 P)/(x^(nu+3/2) f) -> k0 (log 2 - gamma_E/2 + psi(nu+1)/2)   value 0.3079884  limit 0.30796576
+PASS  d=2: Theorem 1.1's leading constant 2^(1-d)/(Gamma(d/2)Gamma(d/2+1)) = (2pi)^-d V_d |S|   ball ratio at s=1e-4: 1.0694887 (slow, logarithmic)
+PASS  d=3 x=20.0: (1.4), (Fbar - k0 P)/(x^(nu+3/2) f) -> k0 (log 2 - gamma_E/2 + psi(nu+1)/2)   value 0.20240367  limit 0.2010982
+PASS  d=3 x=200.0: (1.4), (Fbar - k0 P)/(x^(nu+3/2) f) -> k0 (log 2 - gamma_E/2 + psi(nu+1)/2)   value 0.20111582  limit 0.2010982
+PASS  d=3: Theorem 1.1's leading constant 2^(1-d)/(Gamma(d/2)Gamma(d/2+1)) = (2pi)^-d V_d |S|   ball ratio at s=1e-4: 1.0883634 (slow, logarithmic)
+
+== D. the hypotheses for the class ==
+PASS  d=1, step profile: t F'(t)/c = 1 - cos t does not converge   values 0.03503 0.2578 1.163 1.918 1.884 1.084 0.2068 0.05898
+PASS  d=2, step profile: t F'(t)/c = 1 - Omega_d(t) -> 1   values 0.9442 0.8884 0.9353 1.04 1.034 1.027 0.9954 0.9678
+PASS  d=3, step profile: t F'(t)/c = 1 - Omega_d(t) -> 1   values 1.005 0.9869 0.981 0.9925 1.001 1.002 1.001 0.9993
+PASS  d=4, step profile: t F'(t)/c = 1 - Omega_d(t) -> 1   values 1.004 1.0 0.9965 0.9962 1.0 1.0 1.0 1.0
+PASS  d=2: t F'(t) = c (1 - J_0(t)) (numerical derivative at t = 7)   0.69992072948 vs 0.69992072948
+PASS  d=4 c=0.3: f eventually decreasing iff c > (d-3)/2   t f'/f -> 0.2; decreasing: False
+PASS  d=4 c=0.3: the rate of Prop. 3.15 holds all the same (closed form)   0.9999712085  0.9999999971  1.0
+PASS  d=5 c=0.8: f eventually decreasing iff c > (d-3)/2   t f'/f -> 0.2; decreasing: False
+PASS  d=5 c=0.8: the rate of Prop. 3.15 holds all the same (closed form)   1.000034544  1.000000003  1.0
+PASS  d=4 c=1.5: f eventually decreasing iff c > (d-3)/2   t f'/f -> -1.0; decreasing: True
+PASS  d=4 c=1.5: the rate of Prop. 3.15 holds all the same (closed form)   0.9999681524  0.9999999952  1.0
+PASS  d=5 c=1.5: f eventually decreasing iff c > (d-3)/2   t f'/f -> -0.5; decreasing: True
+PASS  d=5 c=1.5: the rate of Prop. 3.15 holds all the same (closed form)   1.000083402  1.000000008  1.0
+
+== E. Aronszajn-Smith (4,1), (4,2), (4,6) against the paper's (3.7) ==
+PASS  d=1 gamma=0.75: p(x) = 2^(d/2) G_(2 gamma)(sqrt2 x)
+PASS  d=2 gamma=0.75: p(x) = 2^(d/2) G_(2 gamma)(sqrt2 x)
+PASS  d=3 gamma=0.75: p(x) = 2^(d/2) G_(2 gamma)(sqrt2 x)
+PASS  d=2 gamma=1.0: p(x) = 2^(d/2) G_(2 gamma)(sqrt2 x)
+PASS  d=3 gamma=2.0: p(x) = 2^(d/2) G_(2 gamma)(sqrt2 x)
+PASS  d=4 gamma=0.3333333333333333333333333: p(x) = 2^(d/2) G_(2 gamma)(sqrt2 x)
+PASS  d=2 gamma=0.75: power regime, (4,2) rescaled = paper's constant
+PASS  d=3 gamma=0.75: power regime, (4,2) rescaled = paper's constant
+PASS  d=2: logarithmic regime, (4,2) rescaled = 2 (2pi)^(-d/2)/Gamma(d/2)   p(r)/(const log(1/r)) at r=1e-12: 0.991653
+PASS  d=3: logarithmic regime, (4,2) rescaled = 2 (2pi)^(-d/2)/Gamma(d/2)   p(r)/(const log(1/r)) at r=1e-12: 0.991653
+PASS  d=1 gamma=3/4: finite regime, 2^(d/2) Gamma((alpha-n)/2)/(2^n pi^(n/2) Gamma(alpha/2)) = p(0)   p(0) = 1.1803406
+
+== F. the map phi -> F and one dimension walk ==
+PASS  (1-t)_+ is not in Phi_2: its plane Hankel transform is negative somewhere   e.g. s=6.0: -0.000915048
+PASS  (1-t)_+ is in Phi_1: int_0^1 (1-t) cos(st) dt = (1 - cos s)/s^2 >= 0
+PASS  phi = (1-t)_+: F(r) = r (r<=1), 1 + log r (r>=1); F(a r) - F(r) -> log a (c = 1)
+PASS  inf Omega_d increases strictly with d (so Omega_d is not in Phi_(d+1))   inf: -1.0 -0.40276 -0.21723 -0.13228 -0.086171 -0.058619 -0.041105
+PASS  cos is not in Phi_2: -1 < inf J_0   inf J_0 = -0.402759
+
+== G. the constants of Cygan-Grzywny-Trojan's Theorems 8-9 and Corollaries 3-4 ==
+PASS  d=3 alpha=0.5: C~ = paper's ball constant, A~ = R(d,alpha)
+PASS  d=3 alpha=2.0: C~ = paper's ball constant, A~ = R(d,alpha)
+PASS  d=5 alpha=1.5: C~ = paper's ball constant, A~ = R(d,alpha)
+
+== H. Leonenko-Olenko 2013: c_1(n,alpha) (Theorems 2, 3) and c_2(n,alpha) (Theorem 4) ==
+PASS  n=1 alpha=0.1: 1/c_1 = R(d,c)|S|/c and 1/c_2 = R(d,c)
+PASS  n=1 alpha=0.3: 1/c_1 = R(d,c)|S|/c and 1/c_2 = R(d,c)
+PASS  n=1 alpha=0.8: 1/c_1 = R(d,c)|S|/c and 1/c_2 = R(d,c)
+PASS  n=2 alpha=0.1: 1/c_1 = R(d,c)|S|/c and 1/c_2 = R(d,c)
+PASS  n=2 alpha=0.3: 1/c_1 = R(d,c)|S|/c and 1/c_2 = R(d,c)
+PASS  n=2 alpha=0.8: 1/c_1 = R(d,c)|S|/c and 1/c_2 = R(d,c)
+PASS  n=2 alpha=1.5: 1/c_1 = R(d,c)|S|/c and 1/c_2 = R(d,c)
+PASS  n=3 alpha=0.1: 1/c_1 = R(d,c)|S|/c and 1/c_2 = R(d,c)
+PASS  n=3 alpha=0.3: 1/c_1 = R(d,c)|S|/c and 1/c_2 = R(d,c)
+PASS  n=3 alpha=0.8: 1/c_1 = R(d,c)|S|/c and 1/c_2 = R(d,c)
+PASS  n=3 alpha=1.5: 1/c_1 = R(d,c)|S|/c and 1/c_2 = R(d,c)
+PASS  n=3 alpha=2.5: 1/c_1 = R(d,c)|S|/c and 1/c_2 = R(d,c)
+PASS  n=4 alpha=0.1: 1/c_1 = R(d,c)|S|/c and 1/c_2 = R(d,c)
+PASS  n=4 alpha=0.3: 1/c_1 = R(d,c)|S|/c and 1/c_2 = R(d,c)
+PASS  n=4 alpha=0.8: 1/c_1 = R(d,c)|S|/c and 1/c_2 = R(d,c)
+PASS  n=4 alpha=1.5: 1/c_1 = R(d,c)|S|/c and 1/c_2 = R(d,c)
+PASS  n=4 alpha=2.5: 1/c_1 = R(d,c)|S|/c and 1/c_2 = R(d,c)
+PASS  n=5 alpha=0.1: 1/c_1 = R(d,c)|S|/c and 1/c_2 = R(d,c)
+PASS  n=5 alpha=0.3: 1/c_1 = R(d,c)|S|/c and 1/c_2 = R(d,c)
+PASS  n=5 alpha=0.8: 1/c_1 = R(d,c)|S|/c and 1/c_2 = R(d,c)
+PASS  n=5 alpha=1.5: 1/c_1 = R(d,c)|S|/c and 1/c_2 = R(d,c)
+PASS  n=5 alpha=2.5: 1/c_1 = R(d,c)|S|/c and 1/c_2 = R(d,c)
+PASS  n=9 alpha=0.1: 1/c_1 = R(d,c)|S|/c and 1/c_2 = R(d,c)
+PASS  n=9 alpha=0.3: 1/c_1 = R(d,c)|S|/c and 1/c_2 = R(d,c)
+PASS  n=9 alpha=0.8: 1/c_1 = R(d,c)|S|/c and 1/c_2 = R(d,c)
+PASS  n=9 alpha=1.5: 1/c_1 = R(d,c)|S|/c and 1/c_2 = R(d,c)
+PASS  n=9 alpha=2.5: 1/c_1 = R(d,c)|S|/c and 1/c_2 = R(d,c)
+PASS  Remark 1: c_1(1,alpha) = Gamma(1+alpha) cos(alpha pi/2)
+PASS  Remark 2: c_2(1,alpha) = 2 Gamma(alpha) cos(alpha pi/2), so 1/c_2(1,c) is the paper's R(1,c)
+PASS  n=4 alpha=0.3 <= (n-3)/2: G(lambda) c_1 / B(1/lambda) -> 1 (Theorem 3 without monotonicity)   1.000022326  1.000000001
+PASS  n=5 alpha=0.8 <= (n-3)/2: G(lambda) c_1 / B(1/lambda) -> 1 (Theorem 3 without monotonicity)   1.000067008  1.000000007
+PASS  n=9 alpha=2.0 <= (n-3)/2: G(lambda) c_1 / B(1/lambda) -> 1 (Theorem 3 without monotonicity)   1.000189998  1.000000019
+PASS  Example 3, (8): the Bessel spectral density is Aronszajn-Smith's G_kappa
+
+ALL PASS

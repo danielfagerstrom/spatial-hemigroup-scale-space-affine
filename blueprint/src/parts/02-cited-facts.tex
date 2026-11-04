@@ -1,0 +1,401 @@
+% !TEX root = ../print.tex
+% Chapter 2 == section 2 of the article, and only its subsection "The cited facts" (2.6 of the
+% isotropic paper, 2.4 of the affine paper). The rest of the article's section 2 restates [V] and
+% [B] and has no node. ADDED 2026-10-06 (the author's decision of that day): one INTERFACE NODE per
+% ledger entry the Lean development spends (A1-A6, A8, A9; A10 since 2026-10-07; A11 since
+% 2026-10-11, Q-0416), and one node for
+% the clause of Paper V that this module's Lean once spent as an interface
+% (SpatialLine.fourier_toolbox_levy_unique), restated with its [V] number because no \uses edge
+% crosses into [V]'s blueprint (CLAUDE.md). Since Q-0365 that node (prop:line-levy-unique, section
+% sec:cited-line) is no longer an interface: it is proved from A3, and the Lean spends no interface
+% of [V].
+% CHANGED Q-0365 (blind review S65-1): the header and the chapter introduction said the chapter
+% holds the one cited interface of [V] that the Lean spends, and that every node is an interface
+% with no proof; both are corrected to the two kinds of node the chapter now holds.
+%
+% Why the nodes exist. leanblueprint paints a node "fully proved" when it and every \uses ancestor
+% has a \leanok proof, definitions exempt. Before this chapter the entries were not nodes, so every
+% proved node rendered fully proved, including the ones whose Lean prints an interface axiom. An
+% interface node has a \leanok STATEMENT (the axiom is declared) and NO proof environment (an axiom
+% is not a proof), which is Paper V's convention for its cited interfaces (prop:fourier-toolbox,
+% prop:sd-exponents in its 02-preliminaries.tex: [A], no proof). So every node that \uses one renders
+% proved but not fully proved, and only the nodes resting on Lean core and Mathlib alone stay fully
+% proved.
+%
+% The edges. A node \uses the interface node of every entry on its status line (the ledger macros
+% right after its status tag), whether it spends the entry directly or through another node; and a
+% node whose Lean spends an interface that no \uses ancestor reaches \uses it too (before Q-0365,
+% thm:isotropic-classification, for Paper V's interface; none now). The spending nodes keep their [A] grade,
+% their ledger tags and their Assignment clauses unchanged: Paper V's [A] nodes that spend an entry
+% that has an interface node do the same (its prop:thorin-subclass is [A] on A3 among others and
+% uses prop:fourier-toolbox, which carries A3).
+%
+% Statements. Each is the entry's "Statement as used" in blueprint/AXIOMS.md, its mathematical
+% sentences only (the source's own wording is blueprint/AXIOMS-verbatim.md); the usage notes of the
+% entry are in the entry, not here. The labels are the papers' (thm:cited-A1, ...), keyed by ledger
+% entry; the papers print their own wording of the cited facts, under opt-out comments, and share no
+% statement with these nodes.
+
+\chapter{The cited facts}
+\label{ch:cited-facts}
+
+This chapter holds the theorems of the literature that the article uses and does not prove, each
+stated as its entry of the axiom ledger \texttt{blueprint/AXIOMS.md} states it, and, in its last
+section, one clause of the released line paper [V], restated and proved here. Each paper prints those of
+the literature it uses in the subsection \emph{The cited facts} of its \S 2, numbered there in its own order; the labels here
+follow the ledger. The rest of the article's \S 2 restates statements of [V] and [B] and has no
+nodes.
+
+A node of \S\ref{sec:cited-literature} is an \emph{interface}. Its \texttt{lean} tag names the axiom
+the Lean development declares for it, in \texttt{Formalization/AffineHemigroup/Interfaces.lean}, and
+it has no proof. The node of \S\ref{sec:cited-line} is not an interface: it restates a clause of [V]
+that [V] admits as one, and proves it from the ledger entry A3, so that the Lean development spends
+no interface of [V]. A node whose proof spends a cited fact uses the fact's node, or a node that
+does, so the dependency graph shows a proved node as fully proved only when it rests on Lean core
+and Mathlib alone; a proved node that rests on a cited fact shows as proved.
+
+\section{Theorems of the literature}
+\label{sec:cited-literature}
+
+\begin{theorem}[Fourier integrability]
+\label{thm:cited-A1}
+\lean{AffineHemigroup.density_of_integrable_charFun}\leanok
+If a probability measure $\mu$ on $\RR^d$ satisfies
+$\int_{\RR^d}|\widehat\mu(z)|\,|z|^n\,dz<\infty$ for some $n\in\ZZ_+$, then $\mu$ has a
+density $g$ of class $C^n$ on $\RR^d$ and the partial derivatives of $g$ of orders
+$0,\dots,n$ tend to $0$ as $|x|\to\infty$.
+\statusA\quad\ledger{A1}\quad\emph{(Cited from \sscite{sato1999levy}, Prop.~28.1, p.~190. An
+interface: the Lean declares it as the axiom \texttt{density\_of\_integrable\_charFun}, at the
+page's letter, the density nonnegative, and proves nothing of it. \textbf{Assignment.}
+\ledger{A1} carries the whole statement. Not carried: any converse, the implication being one-way
+when $\widehat\mu$ changes sign (for a nonnegative transform the converse is
+\ref{lem:positive-transform-origin}, proved here and citing nothing); and anything about the size of
+$g$ near a given point.)}
+\end{theorem}
+
+\begin{theorem}[the polar criterion]
+\label{thm:cited-A2}
+\lean{AffineHemigroup.sato_polar_criterion}\leanok
+An infinitely divisible $\mu$ on $\RR^d$ with generating triplet $(A,\nu,\gamma)$ is
+self-decomposable if and only if
+$\nu(B)=\int_S\lambda(d\xi)\int_0^\infty\mathbf 1_B(r\xi)\,k_\xi(r)\,dr/r$ for a finite measure
+$\lambda$ on the unit sphere $S=S^{d-1}$ and a nonnegative $k_\xi(r)$, measurable in $\xi$ and
+nonincreasing in $r>0$.
+\statusA\quad\ledger{A2}\quad\emph{(Cited from \sscite{sato1999levy}, Thm.~15.10, p.~95, formula
+(15.8), both directions; Cor.~15.11 on the same page is the case $d = 1$. Self-decomposability is
+Sato's Definition~15.1, p.~90, which is \ref{eq:self-decomposable}; the generating triplet is that
+of \ref{thm:cited-A3}. An interface: the Lean declares it as the axiom
+\texttt{sato\_polar\_criterion}. \textbf{Assignment.} \ledger{A2} carries the whole equivalence.
+Not carried: the identification of the article's polar profile $k_d$ with the source's $k_\xi$,
+which is the polar decomposition of a rotation-invariant measure, this module's own arithmetic
+(\ref{def:isotropic-origin-datum}); the rotation averaging, which is Fubini on the compact group;
+and any uniqueness of $(\lambda, k_\xi)$, the statement being used only up to a modification of the
+profile on a Lebesgue-null set.)}
+\end{theorem}
+
+\begin{theorem}[the \Levy--Khintchine representation on $\RR^d$]
+\label{thm:cited-A3}
+\lean{AffineHemigroup.levy_khintchine_exists, AffineHemigroup.levy_khintchine_unique,
+AffineHemigroup.levy_khintchine_converse}\leanok
+\begin{enumerate}
+\item[(i)] An infinitely divisible $\mu$ on $\RR^d$ has
+\[
+  \widehat\mu(z)=\exp\Bigl[-\tfrac12\langle z,Az\rangle+i\langle\gamma,z\rangle
+  +\int\bigl(e^{i\langle z,x\rangle}-1-i\langle z,x\rangle\mathbf 1_D(x)\bigr)\,\nu(dx)\Bigr]
+\]
+for a symmetric nonnegative-definite $A$, a $\gamma\in\RR^d$ and a measure $\nu$ with
+$\nu(\{0\})=0$ and $\int(|x|^2\wedge1)\,\nu(dx)<\infty$, where $D = \{x : |x| \le 1\}$.
+\item[(ii)] The triplet $(A,\nu,\gamma)$ is unique.
+\item[(iii)] Conversely, every such triplet occurs.
+\end{enumerate}
+\statusA\quad\ledger{A3}\quad\emph{(Cited from \sscite{sato1999levy}, Thm.~8.1, pp.~37--38:
+clause (i) with (8.1)--(8.2) on p.~37, the uniqueness (ii) and the converse (iii) on p.~38;
+Definition~8.2, p.~38, for the names \emph{generating triplet}, \emph{Gaussian covariance matrix}
+and \emph{\Levy{} measure}. An interface: the Lean declares one axiom per clause,
+\texttt{levy\_khintchine\_exists} for (i), \texttt{levy\_khintchine\_unique} for (ii) and
+\texttt{levy\_khintchine\_converse} for (iii). A node that spends any clause uses this node; which
+clauses it reads is said in its own annotation and in the ledger. \textbf{Assignment.}
+\ledger{A3} carries the three clauses. Not carried: anything about self-decomposability, which is
+\ref{thm:cited-A2}; anything about images of infinitely divisible laws under linear maps (the
+book's Prop.~11.10 is not used: \ref{thm:no-cin-ray-in-the-plane} restricts the exponent to a line
+and applies (ii) there, and \ref{prop:anisotropy-budget} identifies the \Levy{} measure of the image
+law by a change of compensator and (ii)); and any uniqueness of the polar profile of \ref{thm:cited-A2}.)}
+\end{theorem}
+
+\begin{theorem}[self-decomposable laws are infinitely divisible]
+\label{thm:cited-A4}
+\lean{AffineHemigroup.selfDecomposable_infinitelyDivisible}\leanok
+If a probability measure $\mu$ on $\RR^d$ is self-decomposable, that is if for every $b > 1$ there
+is a probability measure $\rho_b$ on $\RR^d$ with
+$\widehat\mu(z) = \widehat\mu(b^{-1}z)\,\widehat\rho_b(z)$ for every $z$, then $\mu$ is
+infinitely divisible.
+\statusA\quad\ledger{A4}\quad\emph{(Cited from \sscite{sato1999levy}, Prop.~15.5, p.~93, the
+first clause of its first sentence, with Definition~15.1, p.~90, for the word. An interface: the
+Lean declares it as the axiom \texttt{selfDecomposable\_infinitelyDivisible}. \textbf{Assignment.}
+\ledger{A4} carries the statement. Not carried: the rest of the proposition, that the residual
+$\rho_b$ is unique and infinitely divisible, and its semi-self-decomposable clause; nor anything
+the kernel-level classification needs, \ref{thm:isotropic-classification} reading membership in
+$\mathcal{A}_d$ from Definition~15.1 alone.)}
+\end{theorem}
+
+\begin{theorem}[operator-self-decomposable laws are infinitely divisible]
+\label{thm:cited-A5}
+\lean{AffineHemigroup.operatorSelfDecomposable_infinitelyDivisible}\leanok
+Let $B$ be a real $d \times d$ matrix with $e^{-tB} \to 0$ as $t \to \infty$, and let $\mu$ be a
+probability measure on $\RR^d$ such that for every $t \ge 0$ there is a probability measure
+$\rho_t$ with $\mu = (e^{-tB})_*\mu * \rho_t$. Then every $\rho_t$ is infinitely divisible, and so
+is $\mu$.
+\statusA\quad\ledger{A5}\quad\emph{(Cited from \sscite{jurek1993operator}, Thm.~3.3.5, p.~83,
+its last sentence, with the opening of \S 3.4, pp.~89--90, which drops fullness and adds the law
+itself; the original is \sscite{urbanik1972levy}, Prop.~5.2, p.~134. An interface: the Lean
+declares it as the axiom \texttt{operatorSelfDecomposable\_infinitelyDivisible}.
+\textbf{Assignment.} \ledger{A5} carries the whole statement. Not carried: the inequality of
+\Levy{} measures (Jurek and Mason's Prop.~3.4.1(b), p.~90), which
+\ref{prop:anisotropy-budget} derives from \ref{thm:cited-A3} instead; anything for an exponent
+with $e^{-tB}$ not tending to $0$; and nothing about fullness, the Gaussian part or the
+representation theorems of \S 3.4.)}
+\end{theorem}
+
+\begin{theorem}[Khintchine's theorem on null arrays]
+\label{thm:cited-A6}
+\lean{AffineHemigroup.khintchine_null_array}\leanok
+Let $r_n \ge 1$ be integers and $\mu_{n,k}$, $1 \le k \le r_n$, $n = 1, 2, \dots$, probability
+measures on $\RR^d$ with $\lim_{n\to\infty}\max_{1\le k\le r_n}\mu_{n,k}(\{|x| > \varepsilon\}) = 0$ for every
+$\varepsilon > 0$. If $\mu_{n,1} * \dots * \mu_{n,r_n} * \delta_{-b_n}$ converges weakly to a
+probability measure $\mu$ for some $b_n \in \RR^d$, then $\mu$ is infinitely divisible.
+\statusA\quad\ledger{A6}\quad\emph{(Cited from \sscite{sato1999levy}, Thm.~9.3, p.~47, with
+Definition~9.2 and (9.1) on the same page; Definition~2.2, p.~7, for ``converges'', and p.~8 for the
+law of a sum of independent variables. The measure form is the theorem read through a realization
+of the rows by coordinate maps on product spaces, and the rows are nonempty, $r_n \ge 1$, which the
+page's indexing presupposes. An interface: the Lean declares it as the axiom
+\texttt{khintchine\_null\_array}. \textbf{Assignment.} \ledger{A6} carries the whole statement.
+Not carried: the infinitesimality of the array, which \ref{thm:cascade-infinitely-divisible} proves
+from the continuity of the transforms; anything about the triplet of the limit, which is
+\ref{thm:cited-A3}; and no convergence of triplets.)}
+\end{theorem}
+
+\begin{theorem}[Wolfe's unimodality theorem]
+\label{thm:cited-A8}
+\uses{def:isotropic-kernel-family}
+\lean{AffineHemigroup.wolfe_symmetric_unimodal}\leanok
+Let $\mu$ be a probability measure on $\RR^d$ that is symmetric, $\mu(B) = \mu(-B)$ for every
+Borel $B$, and self-decomposable in the sense of \ref{eq:self-decomposable}. Then $\mu$ is
+\emph{symmetric unimodal}: there is a probability measure $\Lambda$ on the set $W_d$ of the uniform
+laws $u_K$ of the nonempty compact convex symmetric sets $K \subset \RR^d$ with
+$\mu(A) = \int_{W_d} u_K(A)\,\Lambda(du_K)$ for every Borel $A$. Precisely, $\Lambda$ is a
+probability measure on the measurable space of the probability measures on $\RR^d$, with the
+$\sigma$-algebra generated by the evaluations $\nu \mapsto \nu(A)$, and it is concentrated on $W_d$:
+$\Lambda$-almost every measure is a $u_K$. Here
+$u_K(A) = \mathrm{Vol}_V(A \cap K)/\mathrm{Vol}_V(K)$, $V$ being the linear span of $K$ and
+$\mathrm{Vol}_V$ the Lebesgue measure of $V$, of dimension $\operatorname{dim} K \in \{0,\dots,d\}$;
+at $\operatorname{dim} K = 0$, $u_{\{0\}} = \delta_0$.
+\statusA\quad\ledger{A8}\quad\emph{(Cited from \sscite{wolfe1978unimodality}, Thm.~2, p.~144,
+with the definition of $U_n$ on the same page and the definitions of ``symmetric'' and of class~L,
+pp.~141--142; \sscite{kanter1977unimodality}, Definition~1.2, p.~66, and Definition~3.1, p.~70,
+for the meaning of ``symmetric unimodal''; \sscite{sato1999levy}, Definition~15.1, p.~90, and
+Thm.~15.3(ii), p.~91, for class~L. The $\sigma$-algebra is the Giry $\sigma$-algebra, which on the
+probability measures of a Polish space is the Borel $\sigma$-algebra of weak convergence, Kanter's
+convention on p.~70; that $W_d$ is a measurable set is not used by the statement, and is proved
+in the proof of \ref{prop:isotropic-radial-monotone}, where it justifies passing from the
+source's mixing measure on $W_d$ to this form. The sources write $\lambda_K$ for
+$u_K$ and $\nu$ (Kanter) or $\eta$ (Wolfe) for $\Lambda$. An interface: the Lean declares it as
+the axiom \texttt{wolfe\_symmetric\_unimodal}. \textbf{Assignment.} \ledger{A8} carries the
+statement, read in Kanter's sense. Not carried: a density, Kanter's class containing laws with none;
+the proof of Wolfe's theorem; anything about laws that are not symmetric; and no pointwise bound on
+any density. \textbf{The Gaussian part.} Wolfe states the theorem for every symmetric law of
+class~L. His proof ends with \sscite{kanter1977unimodality}, Thm.~4.1, p.~78, which is stated for
+laws with no Gaussian part (the convention of p.~77), so it covers those laws. A symmetric
+self-decomposable law with a Gaussian part is the convolution of a centred Gaussian law and a
+symmetric self-decomposable law with none, by the polar criterion and the \Levy--Khintchine
+representation, and two results of Kanter's paper then give the conclusion: a symmetric law with a
+log-concave density on a subspace is symmetric unimodal (Lemma~3.1, p.~70), and the convolution of
+two symmetric unimodal laws is symmetric unimodal (Thm.~3.2, p.~74). So \ledger{A8} is carried by
+printed proofs for every symmetric self-decomposable law. The ledger entry has the argument, and
+the one node that spends the entry for a law with a Gaussian part is
+\ref{prop:isotropic-radial-monotone}.)}
+% CHANGED Q-0424 (2026-10-12; the author's decision D5, route (A), on the external review of the
+% isotropic paper): annotation only. Until now the last paragraph said that for a law with a
+% Gaussian part the entry "is carried by Wolfe's statement and not by a printed proof". Kanter's
+% Lemma 3.1 (p. 70) and Theorem 3.2 (p. 74), read at the page image, supply that case
+% (blueprint/AXIOMS.md, A8, "The Gaussian part"). The sentence on W_d now says where its
+% measurability is proved. The statement and the \lean tag are unchanged.
+\end{theorem}
+
+% CHANGED writing-rules pass (2026-10-14; records/affine/PASS-writing-rules-affine.md, owed item 2):
+% title only, "the inequality of Gel'fand, Naimark and Lidskii, weak form" -> "the eigenvalues of a
+% product of positive definite matrices, weak form". Three names without bibliography entries of their
+% own; the librarian (2026-10-14) found the primary sources unheld (Russian, 1950) and Bhatia's notes
+% citing no paper for the corollary itself, and recommended citing Bhatia's attribution. The attribution
+% is now said once, with its pages, in the annotation below and in the paper's prose after C4. Label,
+% statement, \lean and the ledger entry unchanged.
+\begin{theorem}[the eigenvalues of a product of positive definite matrices, weak form]
+\label{thm:cited-A9}
+\lean{AffineHemigroup.gelfand_naimark_logMajorized}\leanok
+For $M, N \in \PD(d)$ and $1 \le k \le d$,
+\[
+  \sum_{i \le k}\log\lambda^\downarrow_i(MN) \le \sum_{i \le k}\bigl(\log\lambda^\downarrow_i(M) +
+  \log\lambda^\downarrow_i(N)\bigr) ,
+\]
+where $\lambda(MN)$ are the eigenvalues of $MN$ with multiplicity, real and positive because they
+are those of $M^{1/2}NM^{1/2}$, and $\lambda^\downarrow$ is the decreasing arrangement.
+\statusA\quad\ledger{A9}\quad\emph{(Cited from \sscite{bhatia1997matrix}, Cor.~III.4.6 (Lidskii),
+relation (III.21), p.~73, the second half; the parallel is \sscite{bhatia2007positive},
+Exercise~6.5.3, (6.47), p.~228, which calls it an inequality due to Gel'fand, Naimark and Lidskii;
+\sscite{bhatia1997matrix}, p.~80, cites their papers of 1950 for Thm.~III.4.5 and for Lidskii's
+theorem, none for the corollary itself. An interface: the Lean declares it as the axiom
+\texttt{gelfand\_naimark\_logMajorized}. \textbf{Assignment.} \ledger{A9} carries the partial-sum
+inequalities, the weak form, a strict consequence of the full majorization the page states; the
+equality of the totals is $\det(MN) = \det M\det N$ and is proved, in
+\ref{lem:spectral-cones-products}. Not carried: the lower bound, the first half of (III.21); singular
+values of products that are not normal; Horn's inequalities; semidefinite $M, N$, for which a
+logarithm may be $-\infty$; and Ky Fan's minimum principle, which is proved here.)}
+\end{theorem}
+
+% ADDED Q-0281 wave N (2026-10-07): the interface node of ledger A10, admitted by the author on
+% 2026-10-07 ("I admit Schoenberg's radial theorem as a cited interface"). One composite entry,
+% the session's narrowing under the delegation: Thm. 13.14's necessity direction followed by
+% Thm. 3.2's forward direction, without Thm. 3.2's uniqueness clause (lem:bernstein-triplet-unique
+% proves it). The isotropic paper's proof of thm:filtration-strict cites [B, Prop. 4.9(4)] for the
+% identification, as before; since Q-0377 the paper prints this node as its cited fact C6, because
+% the machine-checked clause (3) rests on it (paper-iso section 1.1).
+\begin{theorem}[Schoenberg's radial theorem, with the representation of a Bernstein function]
+\label{thm:cited-A10}
+\lean{AffineHemigroup.schoenberg_radial_bernstein}\leanok
+Let $f$ be a real function on $[0,\infty)$ with $f \ge 0$ on $(0,\infty)$. Suppose that for every
+integer $d \ge 0$ the function $\xi \mapsto f(|\xi|^2)$ on $\RR^d$ is continuous and negative
+definite:
+\[
+  \sum_{j,k=1}^n \bigl(f(|\xi_j|^2) + f(|\xi_k|^2) - f(|\xi_j - \xi_k|^2)\bigr)\,c_j\,\overline{c_k}
+  \ge 0
+\]
+for every $n$, all $\xi_1, \dots, \xi_n \in \RR^d$ and all $c_1, \dots, c_n \in \CC$. Then there
+are $a, b \ge 0$ and a measure $m$ on $(0,\infty)$ with $\int_{(0,\infty)}(1 \wedge t)\,m(dt) <
+\infty$ such that
+\[
+  f(\sigma) = a + b\sigma + \int_{(0,\infty)} \bigl(1 - e^{-\sigma t}\bigr)\,m(dt)
+  \qquad \text{for every } \sigma > 0 .
+\]
+\statusA\quad\ledger{A10}\quad\emph{(Cited from \sscite{schilling2012bernstein}, Thm.~13.14
+(Schoenberg; Bochner), p.~212, its necessity direction (``for all $d \in \mathbb{N}$ the function
+$\xi \mapsto f(|\xi|^2)$ is continuous and negative definite'' implies ``$f$ is a Bernstein
+function''), composed with Thm.~3.2, p.~21, its forward direction (a Bernstein function admits the
+representation (3.2) with $a, b \ge 0$ and $\int(1 \wedge t)\,\mu(dt) < \infty$); Def.~4.3, p.~36,
+for ``negative definite'', whose hermitian condition holds for every real even function and is not
+written. Three readings: $f(0) := f(0+)$, the book's convention, which the continuity hypothesis
+forces; $d$ over every integer $d \ge 0$, a hypothesis equivalent to the book's
+$d \in \mathbb{N} = \{1, 2, \dots\}$ (at $d = 0$ it asks only $f(0) \ge 0$, which the hypothesis
+at $d = 1$ gives, with one point $\xi_1 = 0$ and $c_1 = 1$); and the inequality in
+$\CC$, the sum being real and nonnegative. An interface: the Lean declares it as the axiom
+\texttt{schoenberg\_radial\_bernstein}. \textbf{Assignment.} \ledger{A10} carries the statement,
+which never names the class of Bernstein functions. Not carried: the converse of Thm.~13.14 (its
+Example~13.13); the uniqueness of the triplet, the last sentence of Thm.~3.2, which
+\ref{lem:bernstein-triplet-unique} proves; anything about derivatives; and the negative
+definiteness of any particular function, which \ref{lem:lk-negative-definite} proves where it is
+used.)}
+% CHANGED Q-0424 (2026-10-12): annotation only, one clause. "At least as strong a hypothesis as
+% the book's" is sharpened to "equivalent to the book's", with the reason (the external review of
+% the isotropic paper: the paper said that C6 assumes more than its source; it does not,
+% records/affine/reviews/VERIFY-round1-mathematics.md, item 4). The statement is unchanged.
+\end{theorem}
+
+% ADDED Q-0416 (2026-10-11): the interface node of ledger A11, on the author's decision of
+% 2026-10-11 ("adopt the rate as a proposition", on cited Tauberian theorems). One entry, the
+% session's narrowing under the delegation: Karamata's Tauberian theorem at the origin
+% (Bingham-Goldie-Teugels Thm. 1.7.1', p. 38), its Tauberian direction, for a finite measure on
+% [0, infinity) with c > 0 and rho > 0. The monotone density theorem (Thm. 1.7.2b), which the
+% brief allowed as a second entry, is not admitted: prop:origin-rate-d proves it in the form it
+% needs (its Step 5). The isotropic paper prints this node as its cited fact C7.
+\begin{theorem}[Karamata's Tauberian theorem at the origin]
+\label{thm:cited-A11}
+\lean{AffineHemigroup.karamata_tauberian_zero}\leanok
+Let $\nu$ be a finite measure on $[0,\infty)$, let $\ell$ be a positive measurable function on
+$(0,\infty)$ with $\ell(\lambda x)/\ell(x) \to 1$ as $x \to \infty$ for every $\lambda > 0$, and
+let $c > 0$ and $\rho > 0$. If
+\[
+  \frac{\int_{[0,\infty)} e^{-sx}\,\nu(dx)}{c\,s^{-\rho}\,\ell(s)} \to 1 \quad (s \to \infty),
+  \qquad\text{then}\qquad
+  \frac{\nu([0,x])}{c\,x^{\rho}\,\ell(1/x)/\Gamma(1+\rho)} \to 1 \quad (x \downarrow 0) .
+\]
+\statusA\quad\ledger{A11}\quad\emph{(Cited from \sscite{bingham1987regular}, Thm.~1.7.1$'$, p.~38,
+which the book attributes to Feller: for $U$ non-decreasing on $\RR$ with $U = 0$ on
+$(-\infty,0)$ and Laplace--Stieltjes transform $\widehat U(s) = \int_{[0,\infty)}e^{-sx}\,dU(x)$
+((1.7.0a), p.~37) finite for large $s$, for $\ell$ slowly varying ((1.2.1), p.~6) and $c \ge 0$,
+$\rho \ge 0$, the relations ``$U(x) \sim cx^{\rho}\ell(1/x)/\Gamma(1+\rho)$ $(x \to 0+)$'' and
+``$\widehat U(s) \sim cs^{-\rho}\ell(s)$ $(s \to \infty)$'' are equivalent. The node is the direction
+from the transform to $U$, for $U(x) = \nu((-\infty,x])$. Four narrowings, each inside the page:
+$\nu$ is a finite measure, so that $U$ is right-continuous and $\widehat U$ is finite everywhere;
+$\ell$ is positive on $(0,\infty)$, where the page asks it on a neighbourhood of infinity; $c > 0$,
+where the page reads the case $c = 0$ as $o(\cdot)$; and $\rho > 0$. An interface: the Lean
+declares it as the axiom \texttt{karamata\_tauberian\_zero}, with $U(x)$ the mass of
+$(-\infty,x]$ and $\ell$ measurable on $\RR$. \textbf{Assignment.} \ledger{A11} carries the
+statement. Not carried: the converse direction; the theorem at infinity (Thm.~1.7.1, p.~37); the
+monotone density theorem (Thm.~1.7.2b, pp.~39--40), Potter's bounds (Thm.~1.5.6, p.~25) and
+Prop.~1.5.9a (p.~26) of the same book, each of which \ref{prop:origin-rate-d} replaces by a proof
+for the functions at hand; and the behaviour of any particular transform.)}
+\end{theorem}
+
+% CHANGED Q-0365 (2026-10-07): the Lean development switched to the shared library's v0.3.0
+% declarations, whose line classification (ScaleSpace.main_analysis) takes this clause as a
+% hypothesis (ScaleSpace.SymLevyUnique) instead of spending Paper V's interface
+% SpatialLine.fourier_toolbox_levy_unique. The hypothesis is discharged from this module's A3 at
+% d = 1 (AffineHemigroup.line_levy_unique), so the node below is no longer an interface of [V]: it
+% is proved, [A] on A3, with a proof of record, and the section's prose says so. The statement is
+% unchanged; its \lean tag, its status annotation and the proof are new. The section title moved
+% with the content ("A cited interface of the line paper" before); its label is kept.
+\section{A clause of the line paper, proved from A3}
+\label{sec:cited-line}
+
+The necessity direction of the line's classification [V, Thm.~7.3], which
+\ref{thm:isotropic-classification} applies to the marginals of an isotropic family, rests on the
+uniqueness clause of [V, Prop.~2.3(3)]. It is restated here, as every statement of [V] that a node
+needs is. [V] admits it as a cited interface; this module proves it from its own entry A3 read on
+the line, so that the Lean development spends none of [V]'s interfaces.
+
+\begin{proposition}[uniqueness of the symmetric \Levy{} pair on the line]
+\label{prop:line-levy-unique}
+\lean{AffineHemigroup.line_levy_unique}\leanok
+\uses{thm:cited-A3}
+Two symmetric \Levy{} pairs on the line with the same exponent are equal: if $a, a' \ge 0$ and
+$\nu$, $\nu'$ are measures on $(0,\infty)$ with $\int_{(0,\infty)}(1 \wedge x^2)\,\nu(dx) < \infty$
+and $\int_{(0,\infty)}(1 \wedge x^2)\,\nu'(dx) < \infty$, and
+\[
+  a\,\omega^2 + \int_{(0,\infty)}(1 - \cos\omega x)\,\nu(dx)
+  = a'\,\omega^2 + \int_{(0,\infty)}(1 - \cos\omega x)\,\nu'(dx)
+\]
+for every $\omega \in \RR$, then $a = a'$ and $\nu = \nu'$.
+\statusA\quad\ledger{A3}\quad\emph{(Restated from [V, Prop.~2.3(3)], the clause ``the pair
+$(a,\nu)$ being unique'' of the symmetric \Levy--Khintchine representation, which [V] cites from
+\sscite{sato1999levy}, Thm.~8.1(ii), p.~38, and admits as an interface of its own. Here it is
+proved from this module's entry A3 on $\RR^1$, and the Lean development spends no interface of [V]'s
+(\texttt{Formalization/README.md}, \S~Trust); the shared library's line classification takes the
+clause as a hypothesis, which this proposition discharges. \textbf{Assignment.} \ledger{A3} carries
+clause (iii), a law with a given generating triplet, and clause (ii), the uniqueness of the triplet,
+both at $d = 1$; the passage between a symmetric \Levy{} measure on $\RR$ and its folding onto
+$(0,\infty)$ is proved here. Not carried: clause (i), which the proof does not spend; and any
+centering term, the clause comparing exponents rather than characteristic functions.)}
+\end{proposition}
+
+\begin{proof}
+\uses{thm:cited-A3}
+\leanok
+For a measure $\nu$ on $(0,\infty)$ write $\nu_s(B) = \tfrac12\bigl(\nu(B) + \nu(-B)\bigr)$ for
+Borel sets $B \subseteq \RR$, a symmetric measure on $\RR$ with $\nu_s\{0\} = 0$. Against an even
+function $g \ge 0$, $\int_{\RR} g\,d\nu_s = \int_{(0,\infty)} g\,d\nu$; in particular
+$\int_{\RR}(|y|^2 \wedge 1)\,\nu_s(dy) = \int_{(0,\infty)}(x^2 \wedge 1)\,\nu(dx) < \infty$, so
+$(2a, \nu_s, 0)$ is a generating triplet on $\RR^1$ in the sense of A3, and so is
+$(2a', \nu'_s, 0)$. The exponent of A3's representation for $(2a, \nu_s, 0)$ is
+\[
+  -a z^2 + \int_{\RR}\bigl(e^{izy} - 1 - izy\,1_{[-1,1]}(y)\bigr)\,\nu_s(dy)
+  = -\Bigl(a z^2 + \int_{(0,\infty)}(1 - \cos zx)\,\nu(dx)\Bigr), \qquad z \in \RR ,
+\]
+since the imaginary part of the integrand is odd in $y$ and $\nu_s$ is symmetric, and the real
+part $\cos zy - 1$ is even. By hypothesis the right-hand side is the same for $(a', \nu')$. By
+A3(iii) there is an infinitely divisible law $\mu$ on $\RR$ whose characteristic function is the
+exponential of this exponent; $\mu$ then has both triplets $(2a, \nu_s, 0)$ and
+$(2a', \nu'_s, 0)$, and A3(ii) gives $2a = 2a'$ and $\nu_s = \nu'_s$. For a Borel set
+$B \subseteq (0,\infty)$ the set $-B$ lies in $(-\infty, 0)$, which $\nu$ does not charge, so
+$\nu(B) = 2\nu_s(B) = 2\nu'_s(B) = \nu'(B)$. Hence $a = a'$ and $\nu = \nu'$.
+
+Every step is machine-checked; A3(ii) and A3(iii) are the cited interfaces, and the Lean reads
+$\RR$ as $\RR^1$, on which A3 is stated.
+\end{proof}

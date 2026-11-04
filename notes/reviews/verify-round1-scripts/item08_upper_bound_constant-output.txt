@@ -1,0 +1,19 @@
+(1) the Gaussian integral
+  d = 1, beta = 0.25: 3.07407540572746  3.07407540572746
+  d = 2, beta = 1.0: 7.87480497286121  7.87480497286121
+  d = 3, beta = 1.5: 12.948997904514  12.948997904514
+  d = 5, beta = 4.0: 32.9859059349242  32.9859059349242
+(2) the band {|eta_1| < eps} has normalized measure <= eps sqrt(d)
+  largest band/(eps sqrt d) over d = 1..12, eps = 0.01..0.99: 0.746662
+(3), (4) Matern kernels
+  d = 1, gamma = 0.25, c = 0.5, beta = 0.25: r_beta = 0.20342, C_beta = 6.1228, C'_beta = 2.9956, A_beta = 12.38
+     largest quotient lhs/rhs:  transform 0.176;  blurred centre 0.1323;  ball 0.07926;  density 0.02783
+  d = 2, gamma = 0.75, c = 1.5, beta = 1.0: r_beta = 0.34572, C_beta = 823.62, C'_beta = 164.29, A_beta = 1701.9
+     largest quotient lhs/rhs:  transform 0.001792;  blurred centre 0.0008549;  ball 0.0004183;  density 0.0002339
+  d = 2, gamma = 1.0, c = 2.0, beta = 1.5: r_beta = 0.28085, C_beta = 53286.0, C'_beta = 18283.0, A_beta = 1.8939e+5
+     largest quotient lhs/rhs:  transform 3.539e-5;  blurred centre 1.123e-5;  ball 4.381e-6;  density 3.485e-6
+  d = 3, gamma = 1.0, c = 2.0, beta = 1.5: r_beta = 0.4309, C_beta = 38004.0, C'_beta = 1983.9, A_beta = 51516.0
+     largest quotient lhs/rhs:  transform 4.962e-5;  blurred centre 2.14e-5;  ball 8.148e-6;  density 4.653e-6
+  d = 3, gamma = 1.5, c = 3.0, beta = 2.0: r_beta = 0.51693, C_beta = 4.5293e+5, C'_beta = 28758.0, A_beta = 7.4675e+5
+     largest quotient lhs/rhs:  transform 4.807e-6;  blurred centre 1.188e-6;  ball 3.483e-7;  density 2.588e-7
+all inequalities hold with the explicit constants

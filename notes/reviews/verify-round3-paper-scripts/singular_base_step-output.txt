@@ -1,0 +1,6 @@
+stable index 1.0: case 1, q(w1 e1 + e2) for w1 = 0, .5, 1, 2, 5: [0.367879 0.539003 0.66086  0.789727 0.905725]; spread 5.378e-01 (not invariant: no probability increment)
+   case 2 (ray step): q(w) = 0.748301 = exp(-(2^(a/2)-1)|w1|^a) = 0.748301
+stable index 1.5: case 1, q(w1 e1 + e2) for w1 = 0, .5, 1, 2, 5: [0.367879 0.43665  0.50571  0.597337 0.716225]; spread 3.483e-01 (not invariant: no probability increment)
+   case 2 (ray step): q(w) = 0.670789 = exp(-(2^(a/2)-1)|w1|^a) = 0.670789
+stable index 2.0: case 1, q(w1 e1 + e2) for w1 = 0, .5, 1, 2, 5: [0.367879 0.367879 0.367879 0.367879 0.367879]; spread 0.000e+00 (invariant: Gaussian)
+   case 2 (ray step): q(w) = 0.612626 = exp(-(2^(a/2)-1)|w1|^a) = 0.612626

@@ -1,0 +1,4 @@
+Rank-one Loewner step Sigma = I -> Sigma + P, P = p u u^T, p = 1.5, u at 30 degrees
+  support in direction u (range of P) : Sigma 1.000000   Sigma+P 1.581139
+  support in direction w (ker P)      : Sigma 1.000000   Sigma+P 1.000000
+wrote paper/fig-rank-deficient-step.png

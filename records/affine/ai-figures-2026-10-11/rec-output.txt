@@ -1,0 +1,15 @@
+CORE strict: n=26 act=53.35 span=269.8 typed=2702/87t agent=109021 ratio=40.35 directed=26571 subturns=12080 subtraces=153
+CORE+Lean: n=27 act=117.13 span=366.7 typed=3085/118t agent=137848 ratio=44.68 directed=26571 subturns=23097 subtraces=240
+CEIL strict: n=30 act=113.08 span=529.1 typed=11456/306t agent=220131 ratio=19.22 directed=26571 subturns=12634 subtraces=162
+CEIL+Lean: n=31 act=176.87 span=625.9 typed=11839/337t agent=248958 ratio=21.03 directed=26571 subturns=23651 subtraces=249
+runs only: n=25 act=5.54 span=6.0 typed=0/0t agent=18045 ratio=nan directed=26571 subturns=0 subtraces=0
+runs 10-03 and before: 13
+subagent traces in hub: 153 in a94: 4 lean: 87
+89a0f801 New shift 2026-09-27 2026-09-27
+46d612ec New shift 09-27 pm 2026-09-27 2026-09-28
+47dc0065 Work queue and dispatch implementation 2026-09-21 2026-09-27
+a94448d1 Overnight shift queue review 2026-10-08 2026-10-11
+hub tokens {'cache_read': 4377755588, 'cache_write': 81903424, 'input': 31531, 'output': 4565875, 'thinking': 1513144} lean tokens {'cache_read': 4170000650, 'cache_write': 88308324, 'input': 25086, 'output': 2125575, 'thinking': 546204}
+13 ['2026-09-25', '2026-09-27', '2026-09-28'] ['2026-10-08', '2026-10-10', '2026-10-11']
+calendar days touched 16
+days with a start: 13

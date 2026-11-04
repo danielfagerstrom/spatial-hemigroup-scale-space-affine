@@ -1,0 +1,373 @@
+% Appendix B --- deferred proofs of section 5. Moved out of section 5 (Q-0290, the author's decision of
+% 2026-10-04; the review's length judgement: "frames and (diagonal, stable) keep statements, lose
+% proofs", extended to the routine proofs of the section, so that the main text keeps the proofs that
+% carry its argument: ray-families, stable-tail, stable-step-cone, orbit-step-cone, log-orbit-rays,
+% matern-steps, bounded-profile-rays, similarity-cascade-families, shape-adapted-apertures and
+% wedge-axis). The fifteen proofs here are unchanged but for their headings, in main-text order:
+% lem:loewner-scale-shape (5.2); prop:affine-orbits, lem:elliptical-stable, prop:stable-exponent-cone,
+% prop:stable-order-generated, lem:dilation-ratio, prop:rational-symbols (5.5-5.6);
+% lem:gw-kernels-from-origin, prop:frame-families, prop:fixed-frame-families, prop:gw-ray-families,
+% prop:similarity-ray-families, prop:diagonal-ray-families, prop:similarity-stable-order-families,
+% prop:diagonal-stable-order-families (5.7). Each statement stays in the main text, followed by a
+% pointer here.
+% Q-0309 (fix group 2; records/affine/move-q0309-flow.py): this is Appendix B, the second of the
+% proof appendices (review flag 39: proofs by section first, then the supplementary results). It
+% loses the proofs of lem:gw-kernels-from-origin and prop:gw-ray-families to Appendix A, with their
+% statements' move to 3.1, and gains, from the former appendix-orders.tex and appendix-linear-flow.tex,
+% the proof of prop:invariant-orders, lem:spectral-cones with its proof (a lemma that serves only
+% proofs), the proof of thm:cone-orders (now stated in 4.4) and the proof of prop:anisotropy-budget
+% (now stated in 4.6), each in main-text order.
+% Q-0312 (review flag 3; records/affine/move-q0312-wedge-axis-proofs.py): the sketches of
+% prop:invariant-orders, lem:spectral-cones (with its statement), thm:cone-orders,
+% prop:stable-order-generated, prop:anisotropy-budget(1) and prop:similarity-stable-order-families(1)-(2)
+% are replaced by the complete proofs of Appendix C (appendix-wedge-axis.tex). With the statements
+% of section 4.7 (records/affine/move-q0312-section-4.py), the proofs of prop:frame-families,
+% prop:fixed-frame-families, prop:similarity-ray-families, prop:diagonal-ray-families and
+% prop:diagonal-stable-order-families moved to Appendix F (appendix-smaller-groups.tex); the subsection
+% "Smaller groups" is gone, its last proof (prop:similarity-stable-order-families(3)-(5)) following
+% the statement's move to section 4.6.
+% Round-1 review (Gemini), required change 6, the author's decisions D1 and D2 (2026-11-03;
+% records/affine/PLAN-review-response-paper.md): the complete proofs of record of prop:log-orbit-rays
+% and prop:bounded-profile-rays, verbatim from the blueprint under `% proof of` markers, in place of
+% the sketches the main text printed; the main text keeps a pointer here.
+% Round-2 review (Gemini), item 9, the author's decision D8 (2026-11-03): clauses (3)-(5) of
+% prop:similarity-stable-order-families are the node prop:similarity-stable-order-kernels, printed in
+% section 4.9; its sketch, renumbered (1)-(3), is under a subsection "Smaller groups" again, the last of
+% the main-text order. prop:similarity-stable-order-families is now proved whole in Appendix C.
+
+\section{Deferred proofs for the affine landscape}\label{app:proofs}
+
+This appendix holds the routine proofs of \S\ref{sec:landscape}. The statements are in that section,
+each followed by a pointer here, and the subsections follow their order. The statements whose proofs
+carry the argument of Theorem~\ref{thm:wedge-axis}, the invariant orders of
+\S\ref{sec:invariant-wedges} among them, are proved completely in Appendix~\ref{app:wedge-axis}. For
+one of them, Proposition~\ref{prop:anisotropy-budget}, this appendix proves the remaining clause. It
+also gives the complete proofs of Propositions~\ref{prop:log-orbit-rays}
+and~\ref{prop:bounded-profile-rays}, the rays at index $0$, and the sketch of the proof of
+Proposition~\ref{prop:similarity-stable-order-kernels}.
+
+\subsection{The groups and the Loewner order}
+
+\begin{proof}[Proof of Lemma~\ref{lem:loewner-scale-shape}]
+\emph{Clause (1).} Congruence by an invertible matrix preserves positive semidefiniteness in both
+directions, so $\Sigma_1 \le \Sigma_2$ exactly when $M := \Sigma_1^{-1/2}\Sigma_2\Sigma_1^{-1/2}
+\ge I$ (the Loewner order of Definition~\ref{def:affine-cascade-family}), that is, exactly when
+every eigenvalue of $M$ is at least $1$. Since
+$\Sigma_k^{\pm1/2} = t_k^{\pm1}S_k^{\pm1/2}$, $M = (t_2/t_1)^2N$, whose least eigenvalue is
+$(t_2/t_1)^2n_1$.
+
+\emph{Clause (2).} $\det M = \det\Sigma_2/\det\Sigma_1 = (t_2/t_1)^{2d}$ is the product of the
+eigenvalues of $M$. Under $M \ge I$ each is at least $1$, so $t_2 \ge t_1$, with equality only if all
+are $1$, that is, $M = I$ and $\Sigma_2 = \Sigma_1$. If $S_1 = S_2$ then $N = I$ and
+$\Sigma_2 = (t_2/t_1)^2\Sigma_1$. Conversely $\lambda^2\Sigma_1 - \Sigma_1 \ge 0$ for $\lambda \ge 1$,
+and $S(\lambda^2\Sigma_1) = S_1$.
+
+\emph{Clause (3).} The lower bound on $n_1$ is clause (1). Then
+$n_d = \bigl(\prod_{i<d}n_i\bigr)^{-1} \le (t_2/t_1)^{2(d-1)}$, and
+$n_d/n_1 \le (t_2/t_1)^{2(d-1)}(t_2/t_1)^2$. For the converse,
+$\det\Sigma_2 = t_2^{2d}\det S_1\det N = t_2^{2d}$, so $t(\Sigma_2) = t_2$ and
+$S(\Sigma_2) = S_1^{1/2}NS_1^{1/2}$, whose relative shape is $N$, and clause (1) gives
+$\Sigma_1 \le \Sigma_2$.
+
+\emph{Clause (4).} At $d = 2$, $n_1n_2 = 1$ and $n_1 \le 1$, so
+$\delta(S_1,S_2) = \sqrt2\,\log(1/n_1)$, and $n_1 \ge (t_1/t_2)^2$ is
+$\delta(S_1,S_2) \le 2\sqrt2\log(t_2/t_1)$. By clause (1) every $S(\Sigma_2)$ with
+$\Sigma_2 \ge \Sigma_1$ and $t(\Sigma_2) = t_2$ lies in the set. By clause (3) every $S$ in the set,
+whose relative shape $N = S_1^{-1/2}SS_1^{-1/2}$ has determinant $1$ and least eigenvalue at least
+$(t_1/t_2)^2$, is the shape of $t_2^2S = t_2^2S_1^{1/2}NS_1^{1/2}$.
+\end{proof}
+
+\subsection{The base, and the step set of an orbit}
+
+\begin{proof}[Proof of Proposition~\ref{prop:affine-orbits} (sketch)]
+\emph{(1)} and \emph{(2)} are transport by $\Sigma^{1/2}$:
+$\widehat\mu_\Sigma(\omega) = \widehat\mu_I(\Sigma^{1/2}\omega) = e^{-g(\langle\omega,\Sigma\omega\rangle)}$,
+and the transform of $(\Sigma^{1/2})_*\nu_\lambda$ times $\widehat\mu_\Sigma$ is
+$e^{-g(\lambda^2\langle\omega,\Sigma\omega\rangle)}$.
+
+\emph{(3).} Taking transforms in $\mu_{\Sigma+P} = \mu_\Sigma * \rho$ gives the single-step identity
+\ref{eq:one-step}, and Theorem~\ref{thm:rank-deficient-step} makes $g$ linear. For the last sentence,
+(K1) of an affine cascade family would give $\mu_{I+e_1e_1^{\tp}} = \mu_{I,I+e_1e_1^{\tp}} * \mu_I$,
+which the first sentence excludes; equivalently, Theorem~\ref{thm:affine-rigidity} would make $\mu_I$
+Gaussian.
+
+\emph{(4).} The Gamma integral gives $(1+u)^{-\gamma} = \Gamma(\gamma)^{-1}\int_0^\infty
+v^{\gamma-1}e^{-v}e^{-vu}\,dv$, and conditioning on $V$ gives the law of $\sqrt{2V}Z$. For the ray
+increments, \emph{Frullani's integral} is
+\[
+  \int_0^\infty\bigl(e^{-ax} - e^{-bx}\bigr)\,\frac{dx}{x} = \log\frac ba , \qquad 0 < a < b :
+\]
+on $(\varepsilon, \infty)$ the substitutions $y = ax$ and $y = bx$ turn the left-hand side into
+$\int_{a\varepsilon}^{b\varepsilon}e^{-y}y^{-1}dy$, which lies between $e^{-b\varepsilon}\log(b/a)$ and
+$\log(b/a)$. Put $n(x) := (e^{-x/\lambda^2} - e^{-x})x^{-1}$, of total mass $\log\lambda^2$ by Frullani's
+integral at $(\lambda^{-2}, 1)$. The same integral at $(u + \lambda^{-2}, u + 1)$ gives
+\[
+  \int_0^\infty(1 - e^{-ux})\,n(x)\,dx = \log\frac{1+\lambda^2u}{1+u} ,
+\]
+so the compound Poisson variable $Y$ with \Levy{} measure $\gamma\,n(x)\,dx$ has
+$\mathbb{E}\,e^{-uY} = ((1+u)/(1+\lambda^2u))^\gamma$. Conditioning on $Y$, the law of $\sqrt{2Y}Z$ has
+transform $e^{-g_\gamma(\lambda^2|\omega|^2)}/e^{-g_\gamma(|\omega|^2)}$.
+\end{proof}
+
+\begin{proof}[Proof of Lemma~\ref{lem:elliptical-stable}]
+\emph{The constant.} Since $1 - \cos y_1 \le \min(2, y_1^2/2) \le 2(|y|^2 \wedge 1)$, the integrand is
+at most $2(|y|^2 \wedge 1)|y|^{-d-\alpha}$, whose integral is finite because $0 < \alpha < 2$. The
+integrand is positive off the null set $\{y_1 \in 2\pi\ZZ\}$, so $c_{d,\alpha} > 0$.
+
+\emph{One integral.} Put $J(\omega) := \int(1 - \cos\langle\omega,y\rangle)|y|^{-d-\alpha}dy$. The
+substitutions $y = Qz$, $Q \in \Orth(d)$, and $y = z/s$ give $J(Q\omega) = J(\omega)$ and
+$J(s\omega) = s^\alpha J(\omega)$, so $J(\omega) = c_{d,\alpha}|\omega|^\alpha$.
+
+\emph{Clause (1).} Substitute $x = H^{1/2}y$, so that $dx = (\det H)^{1/2}dy$ and
+$\langle x,H^{-1}x\rangle = |y|^2$: the integral is $c_{d,\alpha}^{-1}J(H^{1/2}\omega) = \psi_H(\omega)$.
+The same substitution bounds the second integral by a multiple of
+$\int(|y|^2 \wedge 1)|y|^{-d-\alpha}dy$.
+
+\emph{Clause (3)} is the pair of identities
+\[
+  \det(AHA^{\tp})^{-1/2} = |\det A|^{-1}(\det H)^{-1/2} ,
+  \qquad
+  \langle x,(AHA^{\tp})^{-1}x\rangle = \langle A^{-1}x,H^{-1}A^{-1}x\rangle .
+\]
+
+\emph{Clause (2).} By clause (1), $\nu := n_H(x)\,dx$ satisfies the conditions of C2, and C2(iii) gives an
+infinitely divisible law with triplet $(0, \nu, 0)$. As $n_H$ is even, the imaginary part of the
+integrand of C2(i) is odd and integrable and integrates to $0$, and clause (1) makes the transform
+$e^{-\psi_H}$. The transform determines the law, and
+$e^{-\psi_H(A^{\tp}\omega)} = e^{-\psi_{AHA^{\tp}}(\omega)}$ gives the covariance.
+
+\emph{The orbit.} $g(u) = u^{\alpha/2}$ is continuous with $g(0) = 0$, and $e^{-|\omega|^\alpha}$ is the
+transform of $S_\alpha(I)$; so the hypothesis of Proposition~\ref{prop:affine-orbits} holds, and
+clause (2) gives $(\Sigma^{1/2})_*S_\alpha(I) = S_\alpha(\Sigma)$.
+\end{proof}
+
+\begin{proof}[Proof of Proposition~\ref{prop:stable-exponent-cone}]
+By Lemma~\ref{lem:elliptical-stable}(2), $(e^{-tB})_*S_\alpha(I) = S_\alpha(\Sigma_t)$ with
+$\Sigma_t := e^{-tB}e^{-tB^{\tp}}$. So $S_\alpha(I)$ is $B$-self-decomposable exactly when
+$\Sigma_t \preceq_\alpha I$ for every $t > 0$, by Proposition~\ref{prop:stable-step-cone}(1). Here
+$M_t = e^{tB^{\tp}}e^{tB}$, whose least eigenvalue is $\min_{|x|=1}|e^{tB}x|^2$ and whose determinant is
+$e^{2t\tr B}$, as $\det e^{tB} = e^{t\tr B}$. So the condition is $|e^{tB}x| \ge e^{t\tr B/(d+\alpha)}$ for all $t > 0$ and all unit
+$x$. Write $\lambda := \lambda_{\min}(\mathrm{sym}\,B)$. If \ref{eq:stable-exponent-cone} holds, then
+$\tfrac{d}{dt}|e^{tB}x|^2 = 2\langle e^{tB}x,(\mathrm{sym}\,B)e^{tB}x\rangle \ge 2\lambda|e^{tB}x|^2$, so
+$|e^{tB}x| \ge e^{t\lambda} \ge e^{t\tr B/(d+\alpha)}$. Conversely, for a unit eigenvector $x$ of
+$\mathrm{sym}\,B$ with eigenvalue $\lambda$, $f(t) := |e^{tB}x|^2$ has $f(0) = 1$ and $f'(0) = 2\lambda$,
+and $f(t) \ge e^{2t\tr B/(d+\alpha)}$ with equality at $t = 0$ gives
+$2\lambda \ge 2\tr B/(d+\alpha)$.
+
+As $\lambda_{\min}(\mathrm{sym}\,B) = \min_{|x|=1}\langle x,Bx\rangle$, $\mathfrak k_\alpha$ is the intersection
+over unit vectors $x$ of the closed half-spaces $\{B : \tr B \le (d+\alpha)\langle x,Bx\rangle\}$, each
+bounded by a hyperplane through $0$; so $\mathfrak k_\alpha$ is a closed convex cone, and conjugation by $Q$
+changes neither side. For skew $B$
+both sides of \ref{eq:stable-exponent-cone} vanish, and for $B = I$ it reads $d + \alpha \ge d$.
+Finally $\tr B \ge d\lambda$, so $B \in \mathfrak k_\alpha$ gives $\lambda \ge 0$, and if $\lambda = 0$ then
+$\mathrm{sym}\,B \ge 0$ has trace at most $0$, so $\mathrm{sym}\,B = 0$.
+\end{proof}
+
+\begin{proof}[Proof of Proposition~\ref{prop:anisotropy-budget}, clause (2)]
+\emph{Clause (2).} $\tr B \ge d\lambda$, so $\tr B < (d+2)\lambda$ forces $\lambda > 0$ and
+$e^{-tB} \to 0$ (for $y := e^{-tB}x$, $\tfrac{d}{dt}|y|^2 \le -2\lambda|y|^2$, so
+$|e^{-tB}x| \le e^{-t\lambda}|x|$), and $(d+\alpha)\lambda \ge \tr B$ for the stated $\alpha$, so
+Proposition~\ref{prop:stable-exponent-cone} applies. $S_\alpha(I)$ is rotation invariant by
+Lemma~\ref{lem:elliptical-stable}(2), and not Gaussian: its marginal along $e_1$ has the transform
+$e^{-|t|^\alpha}$, and a Gaussian marginal has one of modulus $e^{-vt^2/2}$; equality at $t = 1$ and
+$t = 2$ would give $2^\alpha = 4$, so $\alpha = 2$.
+% CHANGED Q-0281 wave 2: blind review W2E-5: the two reasons of the blueprint proof.
+
+\end{proof}
+
+\begin{proof}[Proof of Lemma~\ref{lem:dilation-ratio} (sketch)]
+\emph{(1).} $R(1) = 1$, monotonicity is that of $k$, and
+\[
+  \frac{k(r/(\lambda\nu))}{k(r)} = \frac{k((r/\nu)/\lambda)}{k(r/\nu)}\cdot\frac{k(r/\nu)}{k(r)}
+  \ge R(\lambda)\,R(\nu) .
+\]
+
+\emph{(2).} In polar coordinates the integrability of the \Levy{} density is
+$\int_0^1r\,k(r)\,dr < \infty$. Suppose $R(\lambda_0) \ge \lambda_0^2$ for some $\lambda_0 > 1$, and pick
+$r_0$ with $k(r_0) > 0$. Then $k(r_0\lambda_0^{-n}) \ge \lambda_0^{2n}k(r_0)$ for every $n \ge 0$. For
+$0 < r \le r_0$ choose $n$ with $\lambda_0^n \le r_0/r < \lambda_0^{n+1}$; as $k$ is nonincreasing,
+\[
+  k(r) \ge k(r_0\lambda_0^{-n}) \ge \lambda_0^{2n}k(r_0) \ge \frac{r_0^2\,k(r_0)}{\lambda_0^2\,r^2} ,
+\]
+so $\int_0^{\min(r_0,1)}r\,k(r)\,dr = \infty$, a contradiction.
+
+\emph{(3).} $\phi(s) := \log R(e^s)$ is nonnegative and superadditive by (1), and below $2s$ by (2). Let
+$L := \sup_{s>0}\phi(s)/s$. For $s_0 > 0$ and $s \ge s_0$ let $n$ be the integer with
+$ns_0 \le s < (n+1)s_0$. Superadditivity and $\phi \ge 0$ give $\phi(s) \ge n\,\phi(s_0)$, so
+\[
+  L \ge \frac{\phi(s)}{s} \ge \Bigl(1 - \frac{s_0}{s}\Bigr)\frac{\phi(s_0)}{s_0} .
+\]
+As $s_0$ is arbitrary, $\phi(s)/s \to L$ (Fekete's argument for superadditive functions), so $\beta(k)$
+exists and equals $L$. The displayed bounds are the definitions of infimum and supremum.
+
+\emph{(4).} If $\alpha \le \beta_-(k)$ and $\Sigma \preceq_\alpha \Sigma'$, then with $m := \lambda_{\min}(M)
+\ge 1$, $\det M \le m^{d+\alpha} \le m^dR(m^{1/2})^2$, which puts the step in the step set of
+Proposition~\ref{prop:orbit-step-cone}(2). Conversely, for $\lambda > 1$ the step
+$M := \diag(\lambda^2, \dots, \lambda^2, \lambda^{2(1+\alpha)})$ lies in $\preceq_\alpha$ by condition (c) of
+Proposition~\ref{prop:stable-step-cone}(1), because $d \ge 2$ leaves at least one entry $\lambda^2$, and
+ordered densities for it give $R(\lambda) \ge \lambda^\alpha$.
+
+\emph{(5).} The stable and the bounded profiles are Proposition~\ref{prop:orbit-step-cone}(3). For the
+dyadic profile, $k(r) \le 1/r$ gives the integrability; $r = 1$ in the definition of $R$ gives
+$R(\lambda) \le k(1/\lambda) \le \lambda$, with $R = 1$ on $(1, 2)$ by (1), while a dilation by $2$ moves every
+point one shell inward, so $R(2) = 2$ and the supremum of the quotients is $1$.
+\end{proof}
+
+% proof of prop:log-orbit-rays
+\begin{proof}[Proof of Proposition~\ref{prop:log-orbit-rays}]
+Test functions are the smooth real functions with compact support; for one of them, $\phi$,
+write $\Phi(\xi) := \int e^{-i\langle\xi,x\rangle}\phi(x)\,dx$, a Schwartz function with
+$(2\pi)^{-d}\int\Phi = \phi(0)$ and $\phi(x) = (2\pi)^{-d}\int\Phi(\xi)e^{i\langle\xi,x\rangle}d\xi$.
+
+\emph{The increment's transform.} $\widehat\mu_\Sigma$ has no zero, so
+$\widehat\rho(\omega) = \exp[-(g(\langle\omega,\Sigma'\omega\rangle) - g(\langle\omega,\Sigma\omega\rangle))]$;
+$\widehat\rho(0) = 1$, so $\rho$ is a probability measure, and $|\widehat\rho| \le 1$.
+
+\emph{The blow-up.} For $\omega \ne 0$ and $t > 0$ put $u := t^2\langle\omega,\Sigma\omega\rangle$ and
+$c := \langle\omega,\Sigma'\omega\rangle/\langle\omega,\Sigma\omega\rangle$; as $t \to \infty$, $u \to \infty$ and
+\[
+  \widehat\rho(t\omega) = e^{-(g(cu) - g(u))} \to c^{-\kappa}
+  = h(\omega) := \Bigl(\frac{\langle\omega,\Sigma\omega\rangle}{\langle\omega,\Sigma'\omega\rangle}\Bigr)^{\kappa} ,
+\]
+a function that is even, bounded (by $(\lambda_{\max}(\Sigma)/\lambda_{\min}(\Sigma'))^\kappa$), homogeneous
+of degree $0$ and continuous off $0$. By Fubini and Fourier inversion,
+$\int\phi(x/R)\,\rho(dx) = (2\pi)^{-d}\int\Phi(\xi)\,\widehat\rho(\xi/R)\,d\xi$ for $R > 0$, and dominated
+convergence ($|\Phi\,\widehat\rho| \le |\Phi|$) gives, as $R \downarrow 0$,
+\[
+  \int\phi(x/R)\,\rho(dx) \to \Lambda(\phi) := (2\pi)^{-d}\,\mathrm{Re}\int\Phi(\xi)\,h(\xi)\,d\xi .
+\]
+So $\Lambda$ is a limit of the positive linear functionals
+$\phi \mapsto \int\phi(x/R)\,\rho(dx)$: it is linear, $\Lambda(\phi) \ge 0$ for $\phi \ge 0$, hence
+monotone, and $\Lambda(\phi(\cdot/\lambda)) = \Lambda(\phi)$ for $\lambda > 0$, as
+$\int\phi(x/(\lambda R))\,\rho(dx) \to \Lambda(\phi)$ too.
+
+\emph{$\Lambda$ vanishes on test functions vanishing near $0$.} Let $\phi \ge 0$ vanish on
+$\{|x| < r\}$ and on $\{|x| > R\}$, $0 < r \le R$, with $\phi \le M$, and take
+$\lambda > R/r$. The dilates $\phi(\lambda^nx)$, $n \ge 0$, have disjoint supports (a point
+$x$ with $\phi(\lambda^nx) \ne 0$ has $r \le \lambda^n|x| \le R$, and $\lambda^{n+1}|x| \ge \lambda r > R$),
+so $\sum_{n<N}\phi(\lambda^nx) \le M\chi(x)$, with $\chi$ a smooth bump equal to $1$ on
+$\{|x| \le R\}$ and $0 \le \chi \le 1$. By monotonicity and dilation invariance,
+$N\Lambda(\phi) \le M\Lambda(\chi)$ for every $N$, so $\Lambda(\phi) = 0$. A general $\phi$ vanishing
+near $0$ is $(\phi + M\chi') - M\chi'$, with $\chi' \ge 0$ a smooth bump equal to $1$ on
+$\{r \le |x| \le R\}$ and vanishing near $0$, both terms nonnegative and vanishing near $0$; so
+$\Lambda(\phi) = 0$.
+
+\emph{$\Lambda$ is a multiple of the point mass.} Let $\chi_0$ be a smooth bump with $\chi_0 = 1$ on
+$\{|x| \le 1\}$, $0 \le \chi_0 \le 1$, and put $c_0 := \Lambda(\chi_0) \ge 0$. For a test function $\phi$,
+$\psi := \phi - \phi(0)\chi_0$ has $\psi(0) = 0$. Given $\eta > 0$, take $\delta \le 1/2$ with
+$|\psi| \le \eta$ on $\{|x| < 2\delta\}$ and a smooth bump $b$ with $0 \le b \le 1$, equal to $1$ on
+$\{|x| \le \delta\}$ and vanishing off $\{|x| < 2\delta\}$. Then $\psi(1 - b)$ vanishes near $0$, so $\Lambda(\psi(1 - b)) = 0$, and
+$|\psi b| \le \eta\chi_0$, so $|\Lambda(\psi b)| \le \eta c_0$ by monotonicity. Hence $|\Lambda(\psi)| \le \eta c_0$
+for every $\eta > 0$, $\Lambda(\psi) = 0$, and $\Lambda(\phi) = c_0\phi(0)$.
+
+\emph{$h$ is constant.} Fix $a \ne 0$ and, for $N \ge 1$, the test function
+$\phi_N(x) := \chi_0(x/N)\cos\langle a,x\rangle$, which has $\phi_N(0) = 1$, so $\Lambda(\phi_N) = c_0$.
+Writing $\Phi_0$ for the transform of $\chi_0$, the transform of $\phi_N$ is
+$\frac{N^d}{2}\bigl(\Phi_0(N(\xi - a)) + \Phi_0(N(\xi + a))\bigr)$, and the substitution
+$\xi = \pm a + \eta/N$ gives
+\[
+  c_0 = \Lambda(\phi_N) = (2\pi)^{-d}\,\mathrm{Re}\Bigl[\tfrac12\int\Phi_0(\eta)\,h(a + \eta/N)\,d\eta
+    + \tfrac12\int\Phi_0(\eta)\,h(-a + \eta/N)\,d\eta\Bigr] .
+\]
+As $N \to \infty$, dominated convergence ($h$ bounded, continuous at $\pm a$, $\Phi_0$ integrable) gives
+the limit $\tfrac12(h(a) + h(-a))(2\pi)^{-d}\int\Phi_0 = h(a)\chi_0(0) = h(a)$. So $h(a) = c_0$ for every
+$a \ne 0$.
+
+\emph{The step is a ray.} $h(\omega) = c_0$ for every $\omega \ne 0$ forces $c_0 > 0$ and
+$\langle\omega,\Sigma'\omega\rangle = c_0^{-1/\kappa}\langle\omega,\Sigma\omega\rangle$ for every
+$\omega$; a symmetric matrix is determined by its quadratic form, so $\Sigma' = c_0^{-1/\kappa}\Sigma$.
+For the \Matern{} orbit, $g(u) = \gamma\log(1+u)$ and $g(cu) - g(u) = \gamma\log((1+cu)/(1+u))
+\to \gamma\log c$, so $\kappa = \gamma$.
+\end{proof}
+
+\begin{proof}[Proof of Proposition~\ref{prop:rational-symbols} (sketch)]
+$P$ and $Q$ have one sign on $[0,\infty)$ and agree at $0$, so $g = \log(P/Q)$ is continuous, vanishes
+at $0$, and is nonnegative because a characteristic function has modulus at most $1$: the hypothesis of
+Proposition~\ref{prop:affine-orbits} holds. With $p := \operatorname{deg}P$ and $q := \operatorname{deg}Q$,
+$g(cu) - g(u) \to (p - q)\log c$, which is the hypothesis of Proposition~\ref{prop:log-orbit-rays} with
+$\kappa = p - q \ge 1$. That proposition gives $\Sigma' = c\,\Sigma$, and $\widehat\rho(s\omega) \to
+c^{-\kappa} \le 1$ as $s \to \infty$ gives $c \ge 1$. The examples are products and mixtures of the
+index-$1$ \Matern{} transforms of Proposition~\ref{prop:affine-orbits}(4), and the coefficient of
+% Round 3 (content review), D-S10.
+$u^{n-1}$ in the mixture's $Q$ is positive, and $Q > 0$ on $[0, \infty)$ with
+$Q(0) = \sum_iw_i = 1 = P(0)$.
+\end{proof}
+
+% proof of prop:bounded-profile-rays
+\begin{proof}[Proof of Proposition~\ref{prop:bounded-profile-rays}]
+\emph{The datum.} Put $k_d := |S^{d-1}|\,k$. It is nonincreasing, and
+$\int_{\RR^d}(|x|^2 \wedge 1)\,m(|x|)\,dx = \int_0^1 k_d(r)\,r\,dr + \int_1^\infty k_d(r)\,dr/r$ in
+polar coordinates, finite by hypothesis; so $(0,k_d)$ is an isotropic origin datum in dimension
+$d$ (Definition~\ref{def:isotropic-origin-datum}), whose \Levy{} measure has the radial density
+$k_d(r)\bigl(|S^{d-1}|r^d\bigr)^{-1} = m(r)$ and whose exponent is therefore $\psi_I$. Its profile at
+the origin is $|S^{d-1}|k(0{+})$, finite by hypothesis and positive because $k$ is nonincreasing and
+not identically $0$.
+
+\emph{The hypotheses on $g$.} $\psi_I$ is rotation invariant, so $e^{-g(|\omega|^2)} =
+e^{-\psi_I(\omega)} = \widehat\mu_I(\omega)$, the characteristic function of a probability measure;
+$g(0) = 0$ and $g \ge 0$, as $\psi_I$ is; and $g$ is continuous on $[0,\infty)$, being $-\log$ of
+the continuous positive function
+$u \mapsto \widehat\mu_I(\sqrt u\,e)$. So $g$ satisfies the hypothesis of Proposition~\ref{prop:affine-orbits}, and
+the orbit $(\Sigma^{1/2})_*\mu_I$ of that proposition is the orbit here. By
+Lemma~\ref{lem:isotropic-exponent-log}(2), $g(au) - g(u) \to \tfrac12|S^{d-1}|k(0{+})\log a = \kappa\log a$
+as $u \to \infty$, for every $a > 0$.
+
+\emph{The equivalence.} (2)$\Rightarrow$(1) is Proposition~\ref{prop:orbit-step-cone}(2), with $\rho$ the
+infinitely divisible law named there. (3)$\Rightarrow$(2): $c = \lambda^2$ with $\lambda \ge 1$, and
+Proposition~\ref{prop:orbit-step-cone}(3) puts every ray $\Sigma \le \lambda^2\Sigma$ in the relation of its
+clause (2). (1)$\Rightarrow$(3): Proposition~\ref{prop:log-orbit-rays} gives $\Sigma' = c\,\Sigma$ with $c > 0$.
+Its proof shows that $\rho$ is a probability measure, so $|\widehat\rho| \le 1$; and for
+$\omega \ne 0$ and $s \to \infty$, with $u_s := s^2\langle\omega,\Sigma\omega\rangle \to \infty$,
+$\widehat\rho(s\omega) = \widehat\mu_{\Sigma'}(s\omega)/\widehat\mu_\Sigma(s\omega) =
+e^{-(g(cu_s) - g(u_s))} \to c^{-\kappa}$. So $c^{-\kappa} \le 1$, and $c \ge 1$.
+\end{proof}
+
+\subsection{Smaller groups}
+
+\begin{proof}[Proof of Proposition~\ref{prop:similarity-stable-order-kernels} (sketch)]
+\emph{(1).} By Proposition~\ref{prop:similarity-stable-order-families}(1) and Theorem~\ref{thm:cascade-infinitely-divisible}(2) every increment and kernel is
+infinitely divisible, and the rest is the proof of Proposition~\ref{prop:similarity-cascade-families}(1),
+% Round 3 (content review), C-R7: what the transfer changes.
+with $\le_\alpha$ and Proposition~\ref{prop:similarity-stable-order-families}(1) in place of the Loewner
+order and Theorem~\ref{thm:cascade-infinitely-divisible}(3)(a).
+The last sentence is Proposition~\ref{prop:similarity-ray-families}(4).
+
+\emph{(2).} Proposition~\ref{prop:similarity-general-sandwich}(1) with $c = 1$ and $\Sigma = I$ gives
+$C(I) = Q\,C(I)\,Q^{\tp}$ for every $Q \in \Orth(d)$, so $C(I) = c_0I$ by the argument of the proof of
+Lemma~\ref{lem:affine-gauge}, and $c_0 \ge 0$. With $Q = I$ and $c = s > 0$ it gives $C(sI) = sc_0I$,
+$L_{sI} = (\sqrt s\,I)_*L_I$ and $\psi_{sI}(\omega) = \psi_I(\sqrt s\,\omega)$, and $L_I$ and $\psi_I$ are
+rotation invariant. By Proposition~\ref{prop:similarity-stable-order-families}(1), $\varepsilon I \le_\alpha \Sigma \le_\alpha tI$, and by (1) both steps have
+infinitely divisible increments, so Proposition~\ref{prop:similarity-general-sandwich}(2) gives the
+display. The three bounds follow from it.
+\begin{itemize}
+\item \emph{The Gaussian part.} The eigenvalues of $C(\Sigma)$ lie in $[\varepsilon c_0, tc_0]$, so
+$\operatorname{cond}C(\Sigma) \le t/\varepsilon$.
+\item \emph{The moment matrices.} $\mathcal M_s$ is monotone in the \Levy{} measure,
+$\mathcal M_s((aI)_*L) = a^2\mathcal M_{s/a}(L)$, and $\mathcal M_r(L_I) = d^{-1}T_r(L_I)\,I$ with
+$T_r(L) := \tr\mathcal M_r(L) = \int(|x|^2 \wedge r^2)\,L(dx)$. Hence
+\[
+  \varepsilon\,d^{-1}T_{s/\sqrt\varepsilon}(L_I)\,I \le \mathcal M_s(L_\Sigma) \le t\,d^{-1}T_{s/\sqrt t}(L_I)\,I ,
+\]
+and $T_r(L_I)$ is nondecreasing in $r$ and positive when $L_I \ne 0$, so
+$\operatorname{cond}\mathcal M_s(L_\Sigma) \le t/\varepsilon$.
+\item \emph{The exponent spread.} Put $g(u) := \psi_I(\sqrt u\,e_1)$. It is nondecreasing, the ray steps
+having increments. As $1 - \cos 2\tau \le 4(1 - \cos\tau)$, integrating at $\tau = \langle \omega,x\rangle$
+against $L_I(dx)$ gives $\psi_I(2\omega) \le 4\psi_I(\omega)$, that is $g(4u) \le 4g(u)$, and so $g(cu) \le 4c\,g(u)$ for $c \ge 1$. For $R \in \Orth(d)$,
+\[
+  \psi_\Sigma(R\omega) \le \psi_I(\sqrt t\,R\omega) = g(t|\omega|^2) \le 4\frac{t}{\varepsilon}\,g(\varepsilon|\omega|^2)
+  = 4\frac{t}{\varepsilon}\,\psi_I(\sqrt\varepsilon\,\omega) \le 4\frac{t}{\varepsilon}\,\psi_\Sigma(\omega) .
+\]
+\end{itemize}
+By Proposition~\ref{prop:similarity-stable-order-families}(1), $t/\varepsilon =  \operatorname{ecc}(\Sigma)^{(d+\alpha)/\alpha}$. For the Loewner order,
+$\lambda_{\min}(\Sigma)I \le \Sigma \le \lambda_{\max}(\Sigma)I$, and
+Proposition~\ref{prop:similarity-cascade-families}(1) supplies the increments, with
+$t/\varepsilon = \operatorname{ecc}(\Sigma)$.
+
+\emph{(3).} The kernels have positive transforms, satisfy (a)--(c) of
+Lemma~\ref{lem:gw-kernels-from-origin}(2), and get increments from Proposition~\ref{prop:similarity-stable-order-families}(2) and from
+$P + \kappa\tr(P)I \ge 0$. At $A = (I + e_1e_1^{\tp})^{1/2}$ and $\omega = e_1$ the trace term breaks
+$\GL(d)$-covariance. A
+rank-deficient step from $I$ would give, by Lemma~\ref{lem:stable-tail}, ordered stable densities, which
+Proposition~\ref{prop:stable-step-cone}(3) excludes.
+\end{proof}
+

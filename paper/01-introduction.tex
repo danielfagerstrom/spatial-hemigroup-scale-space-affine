@@ -1,0 +1,497 @@
+% §1 Introduction --- written last (Q-0292, 2026-10-04), from the finished sections 2-5 and the
+% appendices, on Paper V's model (spatial-hemigroup-scale-space, paper-b/01-introduction.tex): the
+% reader's starting point (Gaussian scale space and shape-adapted smoothing), the question, the
+% setting of the line papers, the answer in outline with the two tables, what is classical and what
+% is new, the contributions by statement number, the scope, the plan, and 1.1. The draft's §1
+% (draft/spatial-hemigroup-affine.md) was the starting text. Every sentence that restates a result
+% was compared with its statement (WRITING.md § 5, "a summary drops hypotheses"). Citations: only
+% those of sections 2-5, at the anchors used there (lindeberg1997shape by section only, the stored
+% copy being the report version). Nothing here is shared with the blueprint.
+%
+% 1.1 owns the trust base (article-kit PROCESS.md § 7, WRITING.md § 4): the state of the
+% formalization (the Lean statement skeleton is in progress, Q-0281; no \leanok), the cited facts
+% with the statements that rest on them (the ledger's **Blueprint:** lists, blueprint/AXIOMS.md, and
+% the cited-fact sentences of sections 3-4), the sketched proofs, and the computed remarks and
+% figures.
+%
+% After the blind review (Q-0293; records/affine/REVIEW-paper-sections-1-6.md): the summaries
+% narrowed to their statements (the positive definite base, 0 < alpha, gamma < 2, "other axioms",
+% three exceptions to "proved in the text"); the cited-fact map exhaustive by section from the
+% ledger's Blueprint lines; prior art kept to the sources read (meerschaert2001limit added, its
+% reading note in records/affine/), with TODO(source) comments where a source not held belongs.
+%
+% Q-0294: schoenberg1938metric, bryc1995normal and holmes1982operator read at the page and cited
+% (schoenberg1938positive read, not cited; READING notes in records/affine/). The TODO(source)
+% comments left are Hudson-Mason (1981) and Jurek (1992; cited as 1991 in Jurek–Mason), none held;
+% the Gneiting TODO went with the Schoenberg comparison to the isotropic paper.
+%
+% Q-0307 (the split at §3 | §4, adr/0001): the introduction of the affine paper alone. It leads
+% with shape adaptation, as the whole-paper review asked (records/affine/REVIEW-paper-whole.md, flag
+% 50): the Lindeberg-Garding practice and the answer for it (prop:shape-adapted-apertures, the
+% single article's fifth "answer" paragraph, moved up) and the rational symbols
+% (prop:rational-symbols, from the single article's section 6, "What is elsewhere") come second.
+% The isotropic theory is the isotropic paper's: its "answer" paragraph and contribution 2 went
+% there, and the corner paragraph here keeps one sentence of it. The rest is the single article's
+% text, moved; §1.1 keeps the cited facts this paper spends (A3, A5, A6) and the sections that spend
+% them. The fixes of the review (flags 1-7, 27-29, 42, 48-49) are the next item's, not this one's.
+%
+% Q-0309 (the review's fixes; records/affine/REVIEW-paper-whole-fixes-affine.md): one home per
+% comparison and disclaimer (flags 27-32, 42). "What is classical and what is new" is one positioning
+% paragraph with pointers: Lindeberg's hypotheses live in rem:lindeberg, Kelker and Herschel-Maxwell in
+% rem:kelker, the morphological and alpha-scale-space axiomatics in 3.5, the cone-field frame in 4.4
+% ("Prior art"), Jurek-Mason, Meerschaert-Scheffler and Holmes-Hudson-Mason in 4.6 ("Prior art"),
+% Whittle and Lindgren-Rue-Lindstrom after prop:affine-orbits. "Scope" is the one home of the
+% kernels-only disclaimer (with the operator reading of the rigidity, from section 5's former
+% paragraph "Stated on kernels" and Appendix A); singularity theory is section 5's "Not treated".
+% Table 1 (the corners) is dropped: the corners are cells of tab:landscape (flag 34).
+% Novelty hedges (fix group 5, records/affine/PRIOR-ART-novelty-claims.md): the contributions list
+% carries "against the sources read" for K_alpha, the budget and the step cone (flag 49) and for the
+% single-step form (Kelker, Fang-Kotz-Ng, Bryc, Cambanis-Huang-Simons; flag 46); the stable orders are
+% claimed only as the orders of the stable orbits (flag 47). The TODO(source) on Hudson-Mason and
+% Jurek 1992 is closed: both are read and cited in 4.6.
+%
+% Q-0314: Pedersen-Sato 2003 read and cited (the canonical PSD(d)-parameter semigroup); "Scope" claims
+% the operator form (lem:kernels-to-operators, thm:affine-rigidity-operators; no cited fact added, the
+% converse needing L^1 convergence only, which Gaussian smoothing gives); the ray and Loewner orders
+% taught where first named; three summaries narrowed to their statements
+% (records/affine/SCOPE-AUDIT-affine.md).
+%
+% Q-0377 (the formalization closed: 125 of 125 blueprint nodes \leanok, main at dfafe99): 1.1 is
+% rewritten as "What is machine-checked" on Paper V's model, with the headline #print axioms block
+% and the trust-base markers `linkage check` reads; the contributions end with one clause on the
+% formalization. The fidelity review (Q-0376) is named as pending in 1.1.
+
+% The writing-rules pass (group s1, 2026-10-14; records/affine/edits_wr_s1.py): section 1
+% restructured on the released isotropic paper's model under the author's rules 2, 6 and 12: the
+% reader's starting point, the axioms, the change to the vocabulary of probability, the (G, W)
+% pair, the questions, the answers at the abstract's level with the statement of each, scope, the
+% two relation paragraphs, the plan. The contributions list is folded into the answers and the
+% plan; "corner", "row", "column", "landscape" and "frame" (for a setting) are gone from the
+% section; the claims of novelty against the sources read are gone (the author's direction of
+% 2026-10-12). Every sentence that restates a result was compared with its statement.
+\section{Introduction}\label{sec:introduction}
+
+A scale-space representation measures an image through an aperture whose size is the scale. A
+measurement is convolution with a probability kernel, and the record at a coarser scale is computed
+from the record at a finer one by a further convolution, the \emph{cascade}. In dimension $d \ge 2$
+the aperture also has a shape. The affine Gaussian scale space of Lindeberg and G\aa{}rding makes the
+shape a parameter. Its kernel at the matrix $\Sigma$ is the Gaussian with covariance $\Sigma$, the
+image is smoothed once for each $\Sigma$, and an invertible linear change $B$ of the image coordinates
+moves the parameter by $\Sigma \mapsto B\Sigma B^{\tp}$ (\sscite{lindeberg1994shape},
+eqs.~(12)--(16), pp.~393--394; \sscite{lindeberg1997shape}, \S4). Its use is shape adaptation. The iteration of Lindeberg and
+G\aa{}rding fits the shape of the aperture at a point to the second-moment matrix of the image there,
+so that what is measured is the same for every affine image of a pattern (\sscite{lindeberg1994shape},
+pp.~395--396; \sscite{lindeberg1997shape}, \S\S5.2 and~6.2). The nonlinear filter of Nitzberg and Shiota likewise
+shapes a Gaussian kernel at each point by the gradients of the image around it, to enhance edges and corners
+(\sscite{nitzberg1992nonlinear}, eqs.~(3), (3') and~(4), p.~827). The Gaussian is also what the classical axioms of scale
+space select (``Relation to scale-space theory'' below). This paper asks which affine scale spaces
+exist under other axioms, incomparable with the classical ones (Remark~\ref{rem:lindeberg}), and what
+each of them can do for shape adaptation.
+
+% Pass 6, the author's review of section 1 (2026-10-26; records/affine/REVIEW-author-paper-affine.md,
+% comment 1): the question is posed as the positioning brief posed it (adr/0006, items 2-4; the
+% brief itself is deleted). First why the question arises (the Gaussian cascades along every widening, so
+% neither the kernel nor the order is a choice; under the hemigroup axioms both are), then the two
+% choices defined with what each one is (Sigma carries size and shape, the scale being its part
+% along the dilations; G with the translations is the affine group the family respects; W is the
+% set of stages), then the main result, the classification of Table tab:landscape, read in three
+% parts: the general linear group with the Loewner order (with shape adaptation), the general
+% linear group from the rays to the Loewner order (the headline: the price of a non-Gaussian kernel
+% kernel by kernel), and the smaller groups (the rigidity is a property of the group). The four
+% questions and the four "answers" are gone; the text of the answers is kept, under the three
+% headings. Every new sentence that restates a result was compared with its statement:
+% prop:ray-families, thm:affine-rigidity, prop:stable-step-cone(1)-(2) (the stable order is the
+% step set of the stable orbit), prop:matern-steps, lem:gw-kernels-from-origin(1),
+% prop:similarity-stable-family(3), prop:fixed-frame-families with section 4.9, "Frames".
+% Round 2 of the external review (the presentation review, Gemini; the author's decision D6,
+% 2026-11-03, records/affine/PLAN-review-response-paper.md): "What is an affine scale space?" and
+% "The two choices" come before the axioms, the earlier papers and the vocabulary of probability, so
+% that the organizing idea comes first. The first paragraph uses no term that the vocabulary
+% paragraph teaches: the orbit's hypotheses are "of the kind the axioms below allow", and the
+% stable and Matern sentences, with the name "affine orbit", move to the end of the vocabulary
+% paragraph. "The axioms" is a new paragraph heading.
+\paragraph{What is an affine scale space?} In the affine Gaussian scale space the cascade needs no
+choice. The kernel is the Gaussian, and the Gaussian of covariance $\Sigma'$ is the
+Gaussian of covariance $\Sigma$ convolved with the Gaussian of covariance $\Sigma' - \Sigma$ whenever
+that difference is positive semidefinite. So every widening of the aperture is a further smoothing,
+and there is nothing to choose. Under other axioms the kernel need not be the Gaussian, and then the
+cascade becomes a choice. A rotation-invariant kernel of the kind the axioms below allow, a
+self-decomposable one in the sense defined below, can be carried to every elliptical aperture by the
+linear maps of the image. For $d \ge 2$ and a kernel other
+than the Gaussian, the family it gives cascades along every zoom, a change of size that keeps the
+shape, and never along every change of shape (Propositions~\ref{prop:ray-families}
+and~\ref{prop:affine-orbits}(3)). So the name ``affine scale space'' leaves two things open: which changes of aperture must be further smoothings, and which
+linear maps of the image the family must respect. Several answers are reasonable. The changes of
+aperture can be the zooms alone or every widening, and the maps all invertible linear maps, the
+rotations with the dilations, or the independent rescalings of the axes of a sampling grid. The
+name already has more than one sense in the literature. Lindeberg's affine scale space is the family
+of Gaussians of every covariance matrix, closed under the invertible linear maps of the plane
+(\sscite{lindeberg1994scale}, (15.17), p.~388). Weickert's affine Gaussian scale space is the
+Gaussians of covariance $tD$ for one fixed matrix $D$ (\sscite{weickert1998anisotropic}, \S1.2.6,
+p.~13). The affine invariant scale spaces of Alvarez, Guichard, Lions and Morel and of Sapiro and
+Tannenbaum are nonlinear evolutions with a scalar time (\sscite{alvarez1993axioms}, Thm.~5, p.~229;
+\sscite{sapiro1993affine}, \S6, p.~32). This paper takes the name in Lindeberg's sense with the
+kernel left free, and its question is a classification over the two choices.
+
+\paragraph{The two choices.} In dimension $d$ an aperture is indexed by a positive semidefinite matrix
+$\Sigma$, proportional to its covariance in the Gaussian case, which fixes its size and its shape
+together. A scalar scale is only one part of this parameter. A dilation $x \mapsto \lambda x$
+of the image, $\lambda > 0$, moves $\Sigma$ to $\lambda^2\Sigma$, along its \emph{ray}, and changes
+the size of the aperture alone. The dilations form a subgroup of the invertible linear maps, and a
+general map $A$ moves $\Sigma$ to $A\Sigma A^{\tp}$, changing the shape as well. A family has a kernel
+$\mu_{\Sigma,\Sigma'}$ for each \emph{stage}, from an aperture $\Sigma$ to a wider one $\Sigma'$. The
+two choices fix which stages there are and how they transform.
+\begin{itemize}
+\item The \emph{covariance group} $G$ is a closed group of invertible linear maps of $\RR^d$ that
+contains the dilations. The family is covariant under it: for $A \in G$ the kernel of the stage from
+$A\Sigma A^{\tp}$ to $A\Sigma'A^{\tp}$ is the image under $A$ of the kernel of the stage from $\Sigma$
+to $\Sigma'$. Every family commutes with the translations, so the affine maps of the image that it
+respects are those whose linear part lies in $G$. Covariance lets a measurement made at one shape be
+carried to another by the image's own change of coordinates.
+\item The \emph{cascade order} $W$ is a partial order $\le_W$ on the positive semidefinite matrices
+that is invariant under $G$ and relates each $\Sigma$ to its multiples $c\,\Sigma$, $c \ge 1$, and $0$
+to every matrix. Its pairs $\Sigma \le_W \Sigma'$ are the stages
+of the family, and along them the stages compose,
+$\mu_{\Sigma,\Sigma''} = \mu_{\Sigma',\Sigma''} * \mu_{\Sigma,\Sigma'}$ for
+$\Sigma \le_W \Sigma' \le_W \Sigma''$. So $W$ is the set of the changes of aperture along which the
+record at the coarser aperture is a further smoothing of the record at the finer one. Off $W$ the family
+has no stage, so a change of aperture need not be a further smoothing. A change with no increment that
+is a probability measure is a \emph{re-measurement} of the original image.
+\end{itemize}
+Two orders bound the ones studied here. The \emph{ray order} relates $\Sigma$ only to its multiples
+$c\,\Sigma$, $c \ge 1$, and $0$ to every matrix, so a stage grows the aperture and keeps its shape.
+The \emph{Loewner order} relates $\Sigma$ to $\Sigma'$ whenever $\Sigma' - \Sigma$ is positive
+semidefinite, so a stage shrinks the aperture in no direction. One definition covers every pair, the
+$(G, W)$ cascade scheme of Definition~\ref{def:gw-cascade-family}: kernels $\mu_{\Sigma,\Sigma'}$,
+indexed by the pairs $\Sigma \le_W \Sigma'$, that cascade along $W$, depend continuously on the pair,
+are not trivial from $0$ to $I$, and are covariant under $G$. The aperture at $\Sigma$ is the kernel
+$\mu_\Sigma := \mu_{0,\Sigma}$ of the stage from $0$, the kernel \emph{from scale zero}. The affine Gaussian scale space is a family of the
+largest group, the general linear group $\GL(d)$, along the largest of these orders, the Loewner
+order.
+
+\paragraph{The axioms.} Scale-space axioms usually require the cascade to be a semigroup in one scale parameter, as those of
+Pauwels, Van Gool, Fiddelaers and Moons do \sscite{pauwels1995extended}, so that one parameter indexes
+the stages and the apertures alike. The axioms used here require only that the stages compose. With one
+scale parameter, as on the line, and $\mu_{s,t}$ the kernel of the stage from scale $s$ to scale $t$,
+this is
+$\mu_{r,t} = \mu_{s,t} * \mu_{r,s}$ for $r \le s \le t$, and how a stage depends on its two scales is
+left free. Such a family is a \emph{convolution hemigroup} (\sscite{hazod2001stable}, Def.~2.14.16,
+p.~380). On the line the axioms are those of the author's paper on the line
+\sscite{fagerstrom2026spatial}, the \emph{line paper} below (Definition~\ref{def:line-family}). They
+require positive, mass-preserving stages that cascade, commute with translations and the reflection
+and depend continuously on the scales, and a dilation of the signal may only relabel the scales. Its
+sequel \sscite{fagerstrom2026cone}, the \emph{cone paper}, describes the line's kernels further,
+and the \emph{isotropic paper} \sscite{fagerstrom2026isotropic} carries the theory to $\RR^d$ for
+apertures that have a size and no shape. What is used from the three is restated in
+\S\ref{sec:line}.
+
+A kernel is a probability measure, and the classification on the line, like the study of the
+apertures that follows, rests on the theory of such measures in probability. So from here on the
+paper uses the vocabulary of that theory: a kernel is a \emph{law}, and its Fourier transform, the
+transfer function of the smoothing, is the characteristic function of the law, its \emph{transform}
+for short. Scale, stage and cascade keep their meaning, and ``kernel'' stays in use for a law in its
+role as an aperture or as a stage. On the line the families are known (Theorem~\ref{thm:line-classification}). In
+a suitable parametrization of the scales, the kernels from scale zero are the dilations of one symmetric \emph{self-decomposable} law. For every
+$0 < c < 1$ such a law is the convolution of its own image under $x \mapsto cx$ with another law
+(\sscite{sato1999levy}, Def.~15.1, p.~90). In a cascade this is the relation between two scales: the
+kernel at the finer scale is a contracted copy of the kernel at the coarser one, and the other law is
+the stage between them. Every such law other than the point mass occurs. Among them are the symmetric
+stable laws, with transforms $e^{-a|\omega|^p}$, $a > 0$, $0 < p \le 2$, the Gaussian at $p = 2$
+(\sscite{sato1999levy}, Thm.~14.14, p.~86), and the \Matern{} laws, with transforms
+$(1 + \omega^2)^{-\gamma}$, $\gamma > 0$, which carry the name of the \Matern{} covariances of spatial
+statistics (\sscite{matern1960spatial}, (2.4.5)--(2.4.7), pp.~17--18;
+\sscite{whittle1954stationary}, \S9, pp.~447--448; \sscite{lindgren2011explicit}, \S2.1,
+eqs.~(1)--(2), p.~426). Carried to every elliptical aperture by the linear maps of the image, a
+rotation-invariant self-decomposable law gives the family called its \emph{affine orbit}. The orbits
+of the isotropic stable laws, with transforms $e^{-|\omega|^\alpha}$ of index $0 < \alpha < 2$, cascade
+along the changes of shape that are slow enough for the growth in size, and those of the \Matern{}
+laws along none (Propositions~\ref{prop:stable-step-cone} and~\ref{prop:matern-steps}).
+
+\paragraph{The classification.} The main result of the paper is the classification of the families
+in dimension $d \ge 2$ over the two choices, Table~\ref{tab:landscape} in \S\ref{sec:landscape-table}. It takes three
+groups: $\GL(d)$; the similarities $\mathrm S(d)$, the rotations and reflections composed with the
+dilations; and the positive diagonal group $\mathrm D_+(d)$, which rescales the axes of a sampling
+grid independently. It sets them against three kinds of order: the ray order, the Loewner order and,
+between them, the \emph{stable orders} $\le_\alpha$, $0 < \alpha < 2$. Between positive definite
+matrices the stages of $\le_\alpha$ are exactly the steps along which the isotropic stable law of index $\alpha$, carried to every shape by
+linear maps, cascades (Proposition~\ref{prop:stable-step-cone}). For each group and each order the
+table says what is known of the families, and cites the statements that prove it.
+% Round 3 (content review), A.R1 and C-R2 with E i (VERIFY-round3-front-classical-paper.md A.R1;
+% PLAN-review-response-paper.md R3.1, "taken unless vetoed"): the complete cells named, three since D10.
+For the general linear group the description is complete along the rays, along the stable orders and
+along the Loewner order. In the other cells it is a bound, examples or a partial description
+(\S\ref{sec:conclusion}). The families are monotone
+in both choices. A family of a larger group, or along a larger order, restricts to a family of every
+smaller pair, with the same apertures (Lemma~\ref{lem:gw-kernels-from-origin}(1)). So the families
+grow as the group shrinks and as the order shrinks towards the rays, and several of these inclusions
+are strict. The affine Gaussian scale space is the answer for the largest group with the largest
+order. The rest of the table says what each relaxation buys, a smaller group or a smaller order. For
+shape adaptation its main reading is the price of a kernel other than the Gaussian, kernel by kernel:
+along which changes of shape the record stays a further smoothing, and how fast the shape may change
+along them. The paper reads the table in three parts.
+
+\paragraph{The general linear group with the Loewner order.} For $d \ge 2$ this pair admits the affine
+Gaussian scale spaces alone, on kernels and on operators (Theorems~\ref{thm:affine-rigidity}
+and~\ref{thm:affine-rigidity-operators}). On the line the same axioms admit every symmetric
+self-decomposable law. One step decides it. The axioms make every aperture a linear image of the
+aperture at the identity, which is rotation invariant (Lemma~\ref{lem:affine-reduction}). Call a step
+$\Sigma \to \Sigma'$ from a positive definite $\Sigma$ \emph{rank-deficient} when it widens the
+aperture in some directions and leaves it unchanged in the others, that is, when $\Sigma' - \Sigma$ is
+positive semidefinite, singular and not zero. The increment of one such step is a probability measure
+only for the Gaussian (Theorem~\ref{thm:rank-deficient-step}). A linear map carries such a step to one
+from the identity, so for the general linear group every order of the scheme that contains one
+rank-deficient step admits only Gaussian families
+(Proposition~\ref{prop:shape-adapted-apertures}(3)). The theorem takes a positive definite base, where a rank-deficient step is one with $\Sigma' - \Sigma$ singular.
+The base must not be $0$: from $\Sigma = 0$ every step $0 \to P$ has the increment $\mu_P$.
+
+Shape adaptation takes such a step. In the iteration of Lindeberg and G\aa{}rding the first stage is
+isotropic, at $wI$, and the adapted aperture is $\Sigma_w = wM$, with $M$ the shape matrix that the
+second-moment matrix of the image gives at the current pass, divided by its least eigenvalue (\sscite{lindeberg1994shape}, p.~396, step~2;
+\sscite{lindeberg1997shape}, \S6.2). So $\Sigma_w$ keeps the least eigenvalue $w$, and for $M \ne I$
+the step $\Sigma_w - wI = w(M - I)$ is rank-deficient (Proposition~\ref{prop:shape-adapted-apertures}(1)).
+Among the affine orbits of the rotation-invariant laws with a positive transform only the Gaussian
+reaches $\Sigma_w$ by a further smoothing of the first stage
+(Proposition~\ref{prop:shape-adapted-apertures}(2)). For every other kernel the record at $\Sigma_w$
+is a new convolution of the original image, which each pass of the iteration computes in any case
+(\S\ref{sec:landscape-uses}). A stable orbit reaches the adapted shape by a further smoothing only with
+a wider minor axis, and a \Matern{} orbit not at all (\S\ref{sec:shape-adapted}). So, as far as the apertures of the practice are concerned, a non-Gaussian kernel loses only the
+cascade between the stages of the iteration, which the iteration does not use. How the selection of
+the shape behaves under such a kernel is not treated (\S\ref{sec:conclusion}).
+
+\paragraph{The general linear group from the rays to the Loewner order.} This part carries the reading
+for shape adaptation: the price of a kernel other than the Gaussian, kernel by kernel. Between the rays
+and the Loewner order the kernels that keep a cascade decrease. Along the rays alone the families of
+the general linear group are the affine orbits of the rotation-invariant self-decomposable laws
+% Round 3 (content review), A.S7: Proposition 3.4(3) cited beside 4.5, as Table 2 does.
+(Propositions~\ref{prop:gw-ray-families}(3) and~\ref{prop:ray-families}). Read on the multiples of the identity they are, up to a change
+of the scale coordinate, the isotropic families of the isotropic paper
+(Proposition~\ref{prop:isotropic-corner}). A chain of orders indexed by $0 \le \alpha \le \infty$ runs
+from the rays to the Loewner order, through the stable orders $\le_\alpha$, $0 < \alpha < 2$
+(Proposition~\ref{prop:stable-order-generated}). Along it the families of the general linear group
+shrink from all the affine orbits of the rays to the Gaussian (Theorem~\ref{thm:wedge-axis}). For
+$0 < \alpha, \gamma < 2$ the orbit of the isotropic stable law of index $\gamma$ cascades along the
+order of index $\alpha$ exactly when $\gamma \ge \alpha$, and from $\alpha = 2$ on only the Gaussian does.
+Each order limits how fast the shape may change as the scale grows, and Table~\ref{tab:speed-limit} gives
+% Round 3 (content review), A.S14: Table 3 has "at least" and "not known in general" rows.
+the limit for each family it lists. The orbits whose transform decays like a power of the frequency keep at
+most the rays, so every change of shape is a re-measurement for them
+(Proposition~\ref{prop:log-orbit-rays}). The \Matern{} orbits are among them
+(Proposition~\ref{prop:matern-steps}). So are the orbits of a law whose transform is a decaying
+rational function of $\langle\omega,\Sigma\omega\rangle$ without zeros on $[0,\infty)$
+(Proposition~\ref{prop:rational-symbols}). These are the kernels computed by finitely many elliptic
+solves in the shape's operator $-\nabla\cdot\Sigma\nabla$.
+
+The orders between the rays and the Loewner order are a question of matrix analysis and of the theory
+of Lie semigroups, and from \S\ref{sec:invariant-wedges} on the paper uses their words. An order
+invariant under $\GL(d)$ is read off the set of the relative steps $\Sigma^{-1/2}\Sigma'\Sigma^{-1/2}$
+that it allows (Proposition~\ref{prop:invariant-orders}). A \emph{cone field} assigns to each $\Sigma$
+the cone $\Sigma^{1/2}C\Sigma^{1/2}$ of allowed directions, for a closed convex cone $C$ of symmetric
+matrices invariant under rotations and containing no line. It generates the order in which two
+matrices are related when a curve that moves inside the cones joins them, as in the theory of Lawson
+and of Hilgert, Hofmann and Lawson (\sscite{lawson1989ordered}, Def.~1.6, p.~277, and Thm.~4.9,
+p.~290; \sscite{hilgert1989lie}, Def.~VI.1.7, p.~493, and Thm.~VI.1.16, p.~500). These are exactly the closed invariant partial
+orders whose steps are closed under fractional powers (Theorem~\ref{thm:cone-orders}), and the order of index
+$\alpha$ in the chain above is that of a cone $C_\alpha$ (Proposition~\ref{prop:stable-order-generated}).
+
+\paragraph{Smaller groups.} A smaller group admits more families, and several of the inclusions are
+strict (\S\ref{sec:smaller-groups}). Along the rays the isotropic members of every row are the
+self-decomposable laws its group allows. Along the general linear row they shrink to the Gaussian,
+while the similarity row keeps every rotation-invariant one in every column, the Loewner column included
+% Round 3 (content review), A.R9: the witness of F.3(4), the shape-blind family F.3(3)(ii). A.x: the
+% forward reference for "exponent". E item 6: the "So" sentence cites H.1(3) as well.
+(Proposition~\ref{prop:similarity-ray-families}(4)), by a family that sees only the volume of the
+aperture. For the similarities with the Loewner order non-Gaussian families
+survive (Proposition~\ref{prop:similarity-stable-family}(3)). The exponent (\S\ref{sec:line-axioms}) of their non-Gaussian part
+changes under a rotation by at most a factor of four times the eccentricity of the aperture, the ratio
+of its extreme eigenvalues (Proposition~\ref{prop:similarity-stable-order-kernels}(2)). So the rigidity of the general linear
+group with the Loewner order needs both: the Loewner order alone does not force the Gaussian, and the
+general linear group alone does not either (Proposition~\ref{prop:similarity-stable-family}(3) and
+Theorem~\ref{thm:wedge-axis}(3)). For the positive diagonal group a family that cascades along each axis is, at the diagonal
+apertures, a product of self-decomposable laws on the line, one for each axis
+(Proposition~\ref{prop:fixed-frame-families}). Such families gain anisotropy along the axes as fast as the
+Gaussian does and cannot turn. Along the rays a family of any group is a continuous covariant field of
+self-decomposable laws over the shapes (Proposition~\ref{prop:gw-ray-families}). The price of a smaller
+% Round 3 (content review), E item 7 (VERIFY-round3-smaller-groups-paper.md section 7).
+group is shape selection that transforms with the image, which needs a group that carries every shape
+to every other (\S\ref{sec:landscape-uses}).
+
+\paragraph{Scope.} The axioms are stated on operators and on their kernels, and for every pair
+$(G, W)$ the two forms describe the same families (Lemmas~\ref{lem:operators-to-kernels}
+and~\ref{lem:kernels-to-operators}). So each statement on the kernel families of a pair is one on its
+operator families. The isotropic theory in $\RR^d$ is that of the isotropic paper, used through the
+% Round 3 (content review), A.S5: Props. 3.11, 3.12(2), Thm. 3.13 and Rem. 3.26 of the isotropic paper.
+six statements restated in \S\ref{sec:iso-recap}, and five more cited where they are used. The paper is theory and makes no empirical claim
+about images. How a shape is selected, how the iteration behaves and singularity theory over the
+larger group are not treated, and \S\ref{sec:conclusion} names the limits of the results. The
+computation of these families on grids is left to a further paper, in preparation.
+% TODO(module VI): cite spatial-hemigroup-pyramids (Paper VI) when released.
+
+\paragraph{Relation to scale-space theory.} The affine Gaussian scale space is classical, and so is
+its derivation from axioms. Iijima derived it in 1962 and 1963, as Weickert, Ishikawa and Imiya
+report (\sscite{weickert1999linear}, p.~241). His scale is a positive definite $2 \times 2$ matrix,
+his transformations are linear, translation invariant, positive and closed under every invertible
+linear map, and any two of them compose to a third. Lindeberg obtains the affine Gaussian scale space from a semigroup in a scalar scale with the
+non-enhancement of local extrema (\sscite{lindeberg2011generalized}, Thm.~5, p.~42).
+Theorem~\ref{thm:affine-rigidity} rests on other axioms. Its cascade is asked for only from a matrix to
+a larger one in the Loewner order, and its increments need not belong to the family. It holds for every
+$d \ge 2$, and by Theorem~\ref{thm:rank-deficient-step} one rank-deficient step is enough. Neither
+earlier result implies it, and it implies neither of them (Remark~\ref{rem:lindeberg}). The morphological axiomatics of Alvarez, Guichard, Lions and Morel keeps
+the scale a scalar, and a linear map of the image is absorbed there by a change of that scalar
+(\sscite{alvarez1993axioms}, p.~206). The $\alpha$-scale spaces of Pauwels, Van Gool, Fiddelaers and
+Moons and of Duits, Florack, de Graaf and ter Haar Romeny admit the stable laws
+(\sscite{pauwels1995extended}, p.~694; \sscite{duits2004axioms}, p.~277). The general linear group with
+the Loewner order removes them. For $\gamma < 2$ the orders of the chain up to index $\gamma$ keep the
+stable law of index $\gamma$ (Theorem~\ref{thm:wedge-axis}). \S\ref{sec:classical-prior-art} sets the
+axiomatics side by side.
+
+Anisotropy is often counted among the minor modifications of the Gaussian scale space, those that can
+be ``easily accounted for'' (Duits, Felsberg, Florack and Platel, \sscite{duits2003scale}, p.~494).
+For a kernel other than the Gaussian, \S\ref{sec:landscape} gives the cost of a change of shape.
+In the scale-space and vision work read for this paper, neither the order of a linear family nor its
+group is posed as a choice. Lindeberg states the order as the meaning of a larger matrix scale (\S\ref{sec:affine-covariance}),
+and in feature detection the group follows the application. Tuytelaars and Mikolajczyk choose between
+scale-invariant and affine-invariant detectors by the deformations expected, on experimental evidence
+(\sscite{tuytelaars2008local}, \S7.2, p.~258). For nonlinear evolutions the group is chosen. Olver,
+Sapiro and Tannenbaum classify the evolutions invariant under a prescribed group
+(\sscite{olver1997invariant}, \S4, p.~183), and Sapiro and Tannenbaum note that other groups give other
+scale spaces (\sscite{sapiro1993affine}, p.~36).
+
+% Q-0314: pedersen2003cone read at the page (records/affine/READING-pedersen2003cone.md); the
+% TODO(source) is closed. Q-0317 (the blind register review, section 1 flag 5): the sentence on
+% Barndorff-Nielsen--Pedersen--Sato and the members at a basis of the cone is dropped; the contrast
+% stays.
+\paragraph{Relation to probability and to matrix analysis.} In probability the core of
+Theorem~\ref{thm:affine-rigidity} is Kelker's lemma, that a rotation-invariant law with independent
+coordinates is normal (\sscite{kelker1970distribution}, Lemma~5, p.~423). Through the
+singular matrix $I - e_1e_1^{\tp}$ the cascade makes the first coordinate of $\mu_I$ independent of the
+others. Rotation invariance makes every coordinate so, and Kelker's lemma then makes $\mu_I$ normal
+(Remark~\ref{rem:kelker}). Theorem~\ref{thm:rank-deficient-step} reads one rank-deficient step from a
+positive definite matrix alone. Its increment is any probability measure, and the transforms at its
+two ends need not be those of laws. The affine Gaussian
+scale space is also a convolution semigroup over the cone $\PSD(d)$,
+$\mu_\Sigma * \mu_{\Sigma'} = \mu_{\Sigma+\Sigma'}$. With the covariance $\Sigma$ at $\Sigma$ it is the
+canonical $\PSD(d)$-parameter convolution semigroup of Pedersen and Sato (\sscite{pedersen2003cone},
+Def.~2.1 and the paragraph after it, p.~505; \sscite{pedersen2004relations}, Def.~3.5 and Ex.~3.6,
+p.~546). Their setting assumes additivity and has no covariance
+group. Within it, for $d \ge 2$, finite second moments and a covariance at most $\Sigma$ at each $\Sigma$ force
+Gaussian laws (\sscite{pedersen2004relations}, Prop.~5.4, p.~556), and a covariance equal to $\Sigma$
+leaves only the canonical semigroup, up to drift (Rem.~5.5, p.~557). That is a Gaussian rigidity under
+other hypotheses than those of Theorem~\ref{thm:affine-rigidity}: additivity over the whole cone,
+moments and a covariance bound, in place of covariance under $\GL(d)$ and the cascade. The scheme assumes neither additivity nor a semigroup, and for the general linear group with the
+Loewner order Theorem~\ref{thm:affine-rigidity} derives the additivity, and the Gaussian with it, from
+covariance and the cascade. \S\ref{sec:affine-stable-cone} also uses the operator-self-decomposable
+laws of Urbanik, in which the contraction $x \mapsto cx$ of self-decomposability is replaced by the
+flow $e^{-tB}$ of a matrix $B$ \sscite{urbanik1972levy}. Its cones of such matrices belong to the
+setting of Jurek and Mason (\sscite{jurek1993operator}, p.~85 and Prop.~3.3.6, p.~86). The paragraphs
+headed ``Prior art'' in \S\ref{sec:invariant-wedges} and \S\ref{sec:affine-stable-cone} say what is
+taken from Lawson, from Hilgert, Hofmann and Lawson and from Jurek and Mason. The \Matern{} orbit is
+the anisotropic \Matern{} covariance of spatial statistics, in which the shape matrix is a parameter
+of the covariance (\sscite{lindgren2011explicit}, \S3.4, p.~437). No change of that matrix other than a
+rescaling is a further smoothing (Proposition~\ref{prop:matern-steps}).
+
+\paragraph{Plan of the paper.} \S\ref{sec:line} restates what is used from the line paper, the cone
+paper and the isotropic paper, and the five theorems of the literature that the proofs cite, the
+\emph{cited facts}. \S\ref{sec:classical} states the $(G, W)$ scheme and treats the general linear
+group with the Loewner order.
+On the way it shows that the increments of a continuous cascade along every order with a path condition are
+\emph{infinitely divisible}, each
+the $n$-fold convolution power of a law for every $n$ (Theorem~\ref{thm:cascade-infinitely-divisible}).
+\S\ref{sec:landscape} gives the classification. It says what an affine scale space is for
+(\S\ref{sec:landscape-uses}) and states the table of the families of each group along each order
+(\S\ref{sec:landscape-table}). Then it treats the invariant orders, the steps an orbit survives, the
+general linear group along the chain of cones, shape-adapted smoothing and the smaller groups.
+\S\ref{sec:conclusion} is the conclusion: it reads the results for shape adaptation and names their
+limits, and \S\ref{sec:open-problems} collects the open problems.
+Appendices~\ref{app:classical}--\ref{app:wedge-axis} hold the proofs deferred from
+\S\S\ref{sec:classical} and~\ref{sec:landscape}, and the complete proof of
+Theorem~\ref{thm:wedge-axis}. Appendices~\ref{app:orientation}--\ref{app:similarity} hold further
+results, among them the orientation-preserving group (Proposition~\ref{prop:glplus-families}), the
+stable orbits under a tempering (Proposition~\ref{prop:tempered-step-cone}), the negative mass of a
+\Matern{} step across shapes (Proposition~\ref{prop:matern-negative-mass}) and the families tied to a
+frame of axes (Proposition~\ref{prop:frame-families}). What is machine-checked, and what it assumes, is
+said next, and Appendix~\ref{app:verification} holds the detail.
+
+\subsection{What is machine-checked}\label{sec:trust-base}
+% trust base: begin
+% Pass 6, the author's review of section 1 (2026-10-26; records/affine/REVIEW-author-paper-affine.md,
+% comment 2: "most of 1.1 could be moved to an appendix as we did for the isotropic paper. It is
+% mainly the first paragraph that is interesting in an introduction"). The subsection is the
+% STATEMENT of the trust base (article-kit WRITING.md section 4): what is machine-checked, the four
+% cited facts with what each carries beyond its source, the statements proved in the earlier
+% papers, and what is computed. Its inventory (what is proved, theorem by theorem; the statements
+% that rest on each cited fact and those that rest on none; the standard theorems; the review of the
+% formal statements; where the development is, with the Lean names and the stamped #print axioms
+% block) is Appendix app:verification, appendix-verification.tex, under a second pair of "trust
+% base" markers, moved there verbatim by records/affine/edits_p6_verification_appendix.py. Nothing
+% honesty-critical left this subsection. The text kept here is the former opening paragraph, the
+% former "What it rests on" up to the sentence on C2, "What is taken from the earlier papers" and
+% "What lies outside the formal development", without their headings, and one sentence on the
+% review with the pointer. The cited facts are named here as \ledger{} items and \ref'd through
+% their theorems, so the ledger comparison of `linkage check` (LINKAGE.md rule 13) reads A2, A3, A5,
+% A6 and A9 on both sides.
+% The former header comments of this region (Q-0377; CHANGED Q-0281 wave 2, group F; Q-0381) are
+% kept with the text they explain: Q-0377's in the appendix, the other two here.
+% Round 3 (content review; the author's decisions D10 and D12, PLAN-review-response-paper.md R3.0):
+% prop:affine-rigidity-boundary and prop:wedge-axis-profiles were added, and C5 (ledger A2) for
+% prop:wedge-axis-profiles(2). Their Lean landed afterwards (D15), so the sentences saying that they were
+% proved in print only are gone.
+Every definition, lemma, proposition and theorem of \S\S\ref{sec:classical}--\ref{sec:landscape}
+and of the appendices has been formalized in the Lean~4 proof assistant, on its mathematical library
+Mathlib, and its proof is machine-checked; so have the six statements restated from the isotropic
+paper in \S\ref{sec:iso-recap}. This subsection says what the verified results rest on, and it can be
+read without the formal development. A proof marked as a sketch shows the decisive steps, and its
+complete proof is in the LaTeX sources deposited with this version (Appendix~\ref{app:verification}
+lists these statements).
+
+% CHANGED Q-0281 wave 2, group F: C4 added (ledger A9, the author's decision of 2026-10-05).
+Five theorems of the literature are taken as given rather than
+reproved, four of probability theory and one of matrix analysis. They are the only assumptions of
+the results beyond the logical foundations of the proof assistant, and
+\S\ref{sec:cited-facts} states each with the page where it was read.
+\begin{itemize}
+\item[\ledger{A6}] Khintchine's theorem on the limits of null arrays (Theorem~\ref{thm:cited-A6}).
+\item[\ledger{A3}] The \Levy--Khintchine representation of the infinitely divisible laws on $\RR^d$:
+(i) its existence, (ii) the uniqueness of the triplet and (iii) its converse
+(Theorem~\ref{thm:cited-A3}).
+\item[\ledger{A5}] The infinite divisibility of operator-self-decomposable laws with a contracting
+exponent (Theorem~\ref{thm:cited-A5}).
+\item[\ledger{A9}] An inequality between the eigenvalues of a product of two positive definite
+matrices and those of its factors (Theorem~\ref{thm:cited-A9}).
+\item[\ledger{A2}] The polar criterion, which describes the self-decomposable laws among the
+infinitely divisible ones by their \Levy{} measures (Theorem~\ref{thm:cited-A2}).
+\end{itemize}
+% Q-0381 (the fidelity review's paper-facing point 2, R7 and R18): what C3 carries beyond its pages,
+% said item by item as the review found it at the page images (blueprint/AXIOMS.md A5 and
+% AXIOMS-verbatim.md hold the transcriptions; Prop. 1.8.1(b) re-read at printed p. 29).
+Two of them go beyond the letter of their sources, and \S\ref{sec:cited-facts} says how. C1 is
+stated for laws where its source states it for random variables. C3 joins the last sentence of a
+theorem of Jurek and Mason to the paragraph of their book that drops its hypothesis on the support of
+the law, and it reads two further things beyond those two passages. C4 states less than its source,
+the inequalities without the equality of the totals, which is $\det(MN) = \det M\det N$ and is
+proved. C2 and C5 are stated as their sources state them. Appendix~\ref{app:verification} lists the statements that rest on
+each.
+
+The statements of the line paper restated in
+\S\ref{sec:line-axioms}, and the two restated inside the proof of
+Proposition~\ref{prop:isotropic-corner}, are proved in its released version, which is cited by
+version and says what of it is machine-checked. The formal development
+requires Mathlib and the shared library ScaleSpaceCore, which makes no assumption of its own, and no
+formal development of the line paper. The formal proofs take two statements of the line paper from
+ScaleSpaceCore, where they are proved: the gauge of \prog{V}{Prop.~6.6}, in the proof of
+Proposition~\ref{prop:isotropic-corner}, and the necessity half of
+Theorem~\ref{thm:line-classification}. ScaleSpaceCore states the latter with the uniqueness clause of
+C2 as a hypothesis, which this development discharges by C2(ii). The fact of \prog{V}{Lem.~6.3} is proved inside the proof of
+Proposition~\ref{prop:isotropic-corner}. The six
+statements restated from the isotropic paper are proved in its released version, which says what of
+it is machine-checked, and are machine-checked in the same development, which the two papers share.
+
+Two remarks report computations
+(Remarks~\ref{rem:matern-grid} and~\ref{rem:gaussian-matern-step}), and three figures are drawn by
+scripts (Figures~\ref{fig:rank-deficient-step}, \ref{fig:shape-plane} and~\ref{fig:cones-plane}). Each says that its script is
+deposited with the paper, and the statements are independent of the computed values.
+
+The formal statements were compared with the printed ones by AI agents, in search of one weaker than
+printed, true vacuously or true only by a convention of the proof assistant, and the review found
+none. The statement on the use of AI at the end of the paper says how the work was done, and
+Appendix~\ref{app:verification} says where the formal development is.
+% trust base: end

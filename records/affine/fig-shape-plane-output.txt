@@ -1,0 +1,22 @@
+Shape plane, d = 2, step to volume scale t2 = 2 t1 from Sigma_1 = t1^2 I
+  Loewner disc radius  2 sqrt2 log(t2/t1)                = 1.9605
+  stable alpha = 0.5: radius 2 sqrt2 a/(2+a) log(t2/t1) = 0.3921   max anisotropy (t2/t1)^(2a/(2+a)) = 1.3195
+  stable alpha = 1.0: radius 2 sqrt2 a/(2+a) log(t2/t1) = 0.6535   max anisotropy (t2/t1)^(2a/(2+a)) = 1.5874
+  stable alpha = 1.5: radius 2 sqrt2 a/(2+a) log(t2/t1) = 0.8402   max anisotropy (t2/t1)^(2a/(2+a)) = 1.8114
+  Loewner max anisotropy (t2/t1)^d = 4.0000
+
+Check on 20000 random steps (ratio in [1, e^1.2], log-anisotropy u in [0, 2]):
+  Loewner order <=> inside the Loewner disc: 20000 agree, 0 disagree
+  stable order a = 0.5 <=> inside its disc:     20000 agree, 0 disagree
+  stable order a = 1.0 <=> inside its disc:     20000 agree, 0 disagree
+  stable order a = 1.5 <=> inside its disc:     20000 agree, 0 disagree
+
+Shape-adapted apertures t diag(1, m) from t I (slope 2 is the Loewner edge):
+  m =    2: log(t2/t1) = 0.1733, log anisotropy = 0.3466, ratio = 2.0000
+  m =    4: log(t2/t1) = 0.3466, log anisotropy = 0.6931, ratio = 2.0000
+  m =    8: log(t2/t1) = 0.5199, log anisotropy = 1.0397, ratio = 2.0000
+  m =   16: log(t2/t1) = 0.6931, log anisotropy = 1.3863, ratio = 2.0000
+
+Slanted-surface arrow at log anisotropy 0.6931: from x = 0.3466 to x = 1.0397
+
+wrote paper/fig-shape-plane.png

@@ -1,0 +1,5 @@
+abstract as built: 257
+2.1 covariance matrices: 6 -> 7 words (+1)
+2.2 alpha (variant): 9 -> 22 words (+13)
+2.3 re-measurement: 8 -> 23 words (+15)
+reviewer's item 2 replacement: 87 -> 171 words (+84); abstract would be 341

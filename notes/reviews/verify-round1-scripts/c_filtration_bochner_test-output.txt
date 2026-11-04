@@ -1,0 +1,16 @@
+Bochner test of the residual: T(W) = int W d rho if the residual is a law; T < 0 excludes it
+
+1-2. phi = sin u/u.  D = 4 needs k_4 = (2 - r^2)/(2 sqrt(1 - r^2)) on (0,1); D = 3 has k_3 = 1_(0,1)
+  lambda = 0.9, shell p = 4, s0 = 0.55:  D = 4: T = -0.0097561557  (first order P1 = -0.0099554147)   D = 3: T = 0.0024405123  (P1 = 0.0020636132)
+  lambda = 0.9, shell p = 8, s0 = 0.6:  D = 4: T = -0.010752733  (first order P1 = -0.010939597)   D = 3: T = 0.0012242135  (P1 = 0.00086366733)
+  lambda = 0.97, shell p = 4, s0 = 0.55:  D = 4: T = -0.0025214885  (first order P1 = -0.0025379093)   D = 3: T = 0.00034849293  (P1 = 0.00031752488)
+  lambda = 0.97, shell p = 8, s0 = 0.6:  D = 4: T = -0.0025058406  (first order P1 = -0.0025212284)   D = 3: T = 0.00011544183  (P1 = 8.5839965e-5)
+  D = 4: T < 0, the residual is not a law on R^4: F_phi is not in A_4.  D = 3: T > 0 (control).
+
+3-4. phi = (1-u)_+ (Euclid's hat h_1).  The plane needs k_2(s) = (1/s) int_0^s J_0(u) du
+  lambda = 0.98: k_2(s/lambda) - k_2(s) is positive for s in (5.85, 8.0), largest 0.0033133 at s = 6.85
+  shell p = 60, s0 = 6.85 (width 0.442):  D = 2: T = -8.8824972e-6  (first order P1 = -9.0831463e-6)   D = 1: T = 3.5975801e-5
+  shell p = 120, s0 = 6.85 (width 0.313):  D = 2: T = -9.8292941e-6  (first order P1 = -1.0027608e-5)   D = 1: T = 3.2313043e-5
+  D = 2: T < 0, the residual is not a law on the plane: F_phi is not in A_2.  D = 1: T > 0 (control).
+
+done

@@ -1,0 +1,87 @@
+(A) Omega_d = Omega_{d+2} + (t/d) Omega_{d+2}', and G_d = G_{d+2} + (b/d)(1 - Omega_{d+2}(tau rho))
+  d = 1, rho = 0.4: G_d = 0.09071641454068008   G_(d+2) + (b/d)(1 - Omega_(d+2)) = 0.09071641454068008
+  d = 1, rho = 2.0: G_d = 1.444407339563512   G_(d+2) + (b/d)(1 - Omega_(d+2)) = 1.444407339563512
+  d = 1, rho = 9.0: G_d = 2.620416780142628   G_(d+2) + (b/d)(1 - Omega_(d+2)) = 2.620416780142628
+  d = 2, rho = 0.4: G_d = 0.04557752260885201   G_(d+2) + (b/d)(1 - Omega_(d+2)) = 0.04557752260885201
+  d = 2, rho = 2.0: G_d = 0.8167314273666956   G_(d+2) + (b/d)(1 - Omega_(d+2)) = 0.8167314273666956
+  d = 2, rho = 9.0: G_d = 2.079383694539307   G_(d+2) + (b/d)(1 - Omega_(d+2)) = 2.079383694539307
+  d = 3, rho = 0.4: G_d = 0.03047291338593715   G_(d+2) + (b/d)(1 - Omega_(d+2)) = 0.03047291338593715
+  d = 3, rho = 2.0: G_d = 0.5842800214395521   G_(d+2) + (b/d)(1 - Omega_(d+2)) = 0.5842800214395521
+  d = 3, rho = 9.0: G_d = 1.84116138527364   G_(d+2) + (b/d)(1 - Omega_(d+2)) = 1.84116138527364
+  d = 4, rho = 0.4: G_d = 0.02289870152619016   G_(d+2) + (b/d)(1 - Omega_(d+2)) = 0.02289870152619016
+  d = 4, rho = 2.0: G_d = 0.4589022159976384   G_(d+2) + (b/d)(1 - Omega_(d+2)) = 0.4589022159976384
+  d = 4, rho = 9.0: G_d = 1.689207456622044   G_(d+2) + (b/d)(1 - Omega_(d+2)) = 1.689207456622044
+  d = 5, rho = 0.4: G_d = 0.01834414430688884   G_(d+2) + (b/d)(1 - Omega_(d+2)) = 0.01834414430688884
+  d = 5, rho = 2.0: G_d = 0.3793184789891145   G_(d+2) + (b/d)(1 - Omega_(d+2)) = 0.3793184789891145
+  d = 5, rho = 9.0: G_d = 1.577720355026566   G_(d+2) + (b/d)(1 - Omega_(d+2)) = 1.577720355026566
+(B) dimension d+1: the profile k', closed forms, positivity, monotonicity, integrability
+  s = 0.1: d = 1: 1.0050378152592 = tau/sqrt(tau^2 - s^2) = 1.0050378152592;  d = 2: 1.0002141336586 = (2/pi)[arccos s + s/sqrt(1 - s^2)] = 1.0002141336586
+  s = 0.5: d = 1: 1.1547005383793 = tau/sqrt(tau^2 - s^2) = 1.1547005383793;  d = 2: 1.0342192636145 = (2/pi)[arccos s + s/sqrt(1 - s^2)] = 1.0342192636145
+  s = 0.9: d = 1: 2.2941573387056 = tau/sqrt(tau^2 - s^2) = 2.2941573387056;  d = 2: 1.6015879167254 = (2/pi)[arccos s + s/sqrt(1 - s^2)] = 1.6015879167254
+  s = 0.999: d = 1: 22.366272042129 = tau/sqrt(tau^2 - s^2) = 22.366272042129;  d = 2: 14.253045079968 = (2/pi)[arccos s + s/sqrt(1 - s^2)] = 14.253045079968
+  d = 1: k' > 0 and nondecreasing on (0, tau); k'(0+) = 1.0 (b = 1); int_0^tau k'(s) s ds = 1.0 < infinity
+  d = 2: k' > 0 and nondecreasing on (0, tau); k'(0+) = 1.0 (b = 1); int_0^tau k'(s) s ds = 0.75 < infinity
+  d = 3: k' > 0 and nondecreasing on (0, tau); k'(0+) = 1.0 (b = 1); int_0^tau k'(s) s ds = 0.6666666667 < infinity
+  d = 4: k' > 0 and nondecreasing on (0, tau); k'(0+) = 1.0 (b = 1); int_0^tau k'(s) s ds = 0.625 < infinity
+  d = 5: k' > 0 and nondecreasing on (0, tau); k'(0+) = 1.0 (b = 1); int_0^tau k'(s) s ds = 0.6 < infinity
+    the shadow of k' in dimension d (Lemma A.8's formula) against the step b = 1 on (0, tau = 1)
+  d = 1: shadow at r = 0.05, 0.3, 0.7, 0.97: ['1.0', '1.0', '1.0', '1.0']
+  d = 2: shadow at r = 0.05, 0.3, 0.7, 0.97: ['1.0', '1.0', '1.0', '1.0']
+  d = 3: shadow at r = 0.05, 0.3, 0.7, 0.97: ['1.0', '1.0', '1.0', '1.0']
+  d = 4: shadow at r = 0.05, 0.3, 0.7, 0.97: ['1.0', '1.0', '1.0', '1.0']
+    the exponent of k' in dimension d+1 against G_d
+  d = 1, rho = 0.5: int (1 - Omega_(d+1)(s rho)) k'(s) ds/s = 0.0618525631482   G_d = 0.0618525631482
+  d = 1, rho = 3.0: int (1 - Omega_(d+1)(s rho)) k'(s) ds/s = 1.5561981675616   G_d = 1.5561981675616
+  d = 1, rho = 12.0: int (1 - Omega_(d+1)(s rho)) k'(s) ds/s = 3.1119023215736   G_d = 3.1119023215736
+  d = 2, rho = 0.5: int (1 - Omega_(d+1)(s rho)) k'(s) ds/s = 0.031006986350915   G_d = 0.031006986350915
+  d = 2, rho = 3.0: int (1 - Omega_(d+1)(s rho)) k'(s) ds/s = 0.85614668744519   G_d = 0.85614668744519
+  d = 2, rho = 12.0: int (1 - Omega_(d+1)(s rho)) k'(s) ds/s = 2.3877558936736   G_d = 2.3877558936736
+  d = 3, rho = 0.5: int (1 - Omega_(d+1)(s rho)) k'(s) ds/s = 0.020703640356606   G_d = 0.020703640356606
+  d = 3, rho = 3.0: int (1 - Omega_(d+1)(s rho)) k'(s) ds/s = 0.60323817024826   G_d = 0.60323817024826
+  d = 3, rho = 12.0: int (1 - Omega_(d+1)(s rho)) k'(s) ds/s = 2.0671879117403   G_d = 2.0671879117403
+    k' as the shadow of the measure of (A): shadow of the step of dimension d+2, plus the sphere
+  d = 1, s = 0.2: shadow of step 0.979795897113 + sphere 0.0408248290464 = 1.02062072616   k' = 1.02062072616
+  d = 1, s = 0.6: shadow of step 0.8 + sphere 0.45 = 1.25   k' = 1.25
+  d = 1, s = 0.95: shadow of step 0.31224989992 + sphere 2.89031317618 = 3.202563076102   k' = 3.202563076102
+  d = 2, s = 0.2: shadow of step 0.996563054499 + sphere 0.00519797867489 = 1.001761033174   k' = 1.001761033174
+  d = 2, s = 0.6: shadow of step 0.895911961338 + sphere 0.171887338539 = 1.067799299877   k' = 1.067799299877
+  d = 2, s = 0.95: shadow of step 0.391010485407 + sphere 1.74802899048 = 2.139039475884   k' = 2.139039475884
+  d = 3, s = 0.2: shadow of step 0.999391815056 + sphere 0.000816496580928 = 1.000208311636   k' = 1.000208311636
+  d = 3, s = 0.6: shadow of step 0.944 + sphere 0.081 = 1.025   k' = 1.025
+  d = 3, s = 0.95: shadow of step 0.453152667259 + sphere 1.30425382075 = 1.757406488011   k' = 1.757406488011
+(C) |M_D(sigma + i y)| / M_D(sigma), sigma = 1: at most 1 for a positive measure
+  d = 1, D = 2: y = 1, 10, 100, 1000, 10000: ['0.764119', '0.252313', '0.0797885', '0.0252313', '0.00797885']   sup on [0, 10^4]: 1.0  (bounded by 1)
+  d = 1, D = 3: y = 1, 10, 100, 1000, 10000: ['0.790569', '0.507371', '0.500075', '0.500001', '0.5']   sup on [0, 10^4]: 1.0  (bounded by 1)
+  d = 1, D = 4: y = 1, 10, 100, 1000, 10000: ['0.805452', '0.878076', '2.66081', '8.41048', '26.5962']   sup on [0, 10^4]: 26.5955  (EXCEEDS 1: no positive measure)
+  d = 1, D = 5: y = 1, 10, 100, 1000, 10000: ['0.8149', '1.36614', '12.5119', '125.001', '1250.0']   sup on [0, 10^4]: 1249.94  (EXCEEDS 1: no positive measure)
+    d = 1: int_0^1 s^z k'(s) ds/s = (0.617816824406 - 0.56270230288j)   M_(d+1)(z) = (0.617816824406 - 0.56270230288j);  1/z + 1/d = (1.12110726644 - 0.397923875433j)   M_(d+2)(z) = (1.12110726644 - 0.397923875433j)
+  d = 2, D = 3: y = 1, 10, 100, 1000, 10000: ['0.731584', '0.20009', '0.062672', '0.0198167', '0.00626657']   sup on [0, 10^4]: 1.0  (bounded by 1)
+  d = 2, D = 4: y = 1, 10, 100, 1000, 10000: ['0.745356', '0.346283', '0.333467', '0.333335', '0.333333']   sup on [0, 10^4]: 1.0  (bounded by 1)
+  d = 2, D = 5: y = 1, 10, 100, 1000, 10000: ['0.7541', '0.538759', '1.56805', '4.9542', '15.6664']   sup on [0, 10^4]: 15.666  (EXCEEDS 1: no positive measure)
+  d = 2, D = 6: y = 1, 10, 100, 1000, 10000: ['0.760117', '0.774313', '6.67766', '66.6678', '666.667']   sup on [0, 10^4]: 666.633  (EXCEEDS 1: no positive measure)
+    d = 2: int_0^1 s^z k'(s) ds/s = (0.378336029706 - 0.455501136816j)   M_(d+1)(z) = (0.378336029706 - 0.455501136816j);  1/z + 1/d = (0.621107266436 - 0.397923875433j)   M_(d+2)(z) = (0.621107266436 - 0.397923875433j)
+  d = 3, D = 4: y = 1, 10, 100, 1000, 10000: ['0.720418', '0.172205', '0.0532056', '0.0168209', '0.00531923']   sup on [0, 10^4]: 1.0  (bounded by 1)
+  d = 3, D = 5: y = 1, 10, 100, 1000, 10000: ['0.728869', '0.267922', '0.250187', '0.250002', '0.25']   sup on [0, 10^4]: 1.0  (bounded by 1)
+  d = 3, D = 6: y = 1, 10, 100, 1000, 10000: ['0.734685', '0.385062', '1.06544', '3.36423', '10.6385']   sup on [0, 10^4]: 10.6382  (EXCEEDS 1: no positive measure)
+  d = 3, D = 7: y = 1, 10, 100, 1000, 10000: ['0.738923', '0.520747', '4.17729', '41.6677', '416.667']   sup on [0, 10^4]: 416.646  (EXCEEDS 1: no positive measure)
+    d = 3: int_0^1 s^z k'(s) ds/s = (0.293998467513 - 0.426679550647j)   M_(d+1)(z) = (0.293998467513 - 0.426679550647j);  1/z + 1/d = (0.454440599769 - 0.397923875433j)   M_(d+2)(z) = (0.454440599769 - 0.397923875433j)
+(D) the certificate: int G_d hhat over R^D, h = |x|^(2p) e^(-a(|x|^2 - 1)); a Levy exponent needs <= 0
+  d = 1, D = 2, p = 30, a = 40: int G_d hhat = -78.8510775716  (<= 0, as a Levy exponent requires);  -(2 pi)^D x (radial functional 1.997321128) = -78.8510775716
+  d = 1, D = 3, p = 30, a = 40: int G_d hhat = -462.258424101  (<= 0, as a Levy exponent requires);  -(2 pi)^D x (radial functional 1.863567935) = -462.258424101
+  d = 1, D = 4, p = 30, a = 40: int G_d hhat = 1242.02916078  (> 0: NOT a Levy exponent on R^D);  -(2 pi)^D x (radial functional -0.7969155828) = 1242.02916078
+  d = 2, D = 3, p = 30, a = 40: int G_d hhat = -350.253005669  (<= 0, as a Levy exponent requires);  -(2 pi)^D x (radial functional 1.412024609) = -350.253005669
+  d = 2, D = 4, p = 30, a = 40: int G_d hhat = -2125.18261016  (<= 0, as a Levy exponent requires);  -(2 pi)^D x (radial functional 1.363567935) = -2125.18261016
+  d = 2, D = 5, p = 30, a = 40: int G_d hhat = -3935.74251817  (<= 0, as a Levy exponent requires);  -(2 pi)^D x (radial functional 0.4019086347) = -3935.74251817
+    (at d = 2, D = 5 this h is not a certificate: the functional is positive on it; block (E) has one)
+(E) the same pairing in double precision for a narrower h, p = 361, a = 400 (peak at r = 0.95)
+  check of the routine: d = 1, D = 4, p = 30, a = 40: 1242.02916 (double) against 1242.02916 (mpmath)
+  d = 1, D = 2: int G_d hhat = -66.636365  (<= 0);  -(2 pi)^D x (radial functional 1.687919) = -66.636365
+  d = 1, D = 3: int G_d hhat = -362.30916  (<= 0);  -(2 pi)^D x (radial functional 1.460628) = -362.30916
+  d = 1, D = 4: int G_d hhat = 11794.298  (> 0: NOT a Levy exponent on R^D);  -(2 pi)^D x (radial functional -7.567503) = 11794.298
+  d = 2, D = 3: int G_d hhat = -277.82028  (<= 0);  -(2 pi)^D x (radial functional 1.120016) = -277.82028
+  d = 2, D = 4: int G_d hhat = -1497.1828  (<= 0);  -(2 pi)^D x (radial functional 0.9606283) = -1497.1828
+  d = 2, D = 5: int G_d hhat = 25857.314  (> 0: NOT a Levy exponent on R^D);  -(2 pi)^D x (radial functional -2.640487) = 25857.314
+  d = 3, D = 4: int G_d hhat = -1425.5644  (<= 0);  -(2 pi)^D x (radial functional 0.9146762) = -1425.5644
+  d = 3, D = 5: int G_d hhat = -7774.9723  (<= 0);  -(2 pi)^D x (radial functional 0.7939616) = -7774.9723
+  d = 3, D = 6: int G_d hhat = 74195.78  (> 0: NOT a Levy exponent on R^D);  -(2 pi)^D x (radial functional -1.205869) = 74195.78
+all assertions passed

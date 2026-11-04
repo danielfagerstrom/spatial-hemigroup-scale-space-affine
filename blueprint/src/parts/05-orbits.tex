@@ -1,0 +1,2062 @@
+% !TEX root = ../print.tex
+% Chapter 5, continued: sections 5.4 and 5.5 of the article. 5.4 (sec:affine-orbits) is the base of
+% the landscape, (GL(d), rays): the affine orbits of the isotropic laws, the draft's Proposition 2.10,
+% and their characterization. 5.5 (sec:affine-stable-cone) is the wedge an orbit survives beyond the
+% rays: the stable rung (Q-0241, P-0019, not in the draft), the dilation ratio of a general profile,
+% tempered profiles, index 0, and at its end the draft's Proposition 2.15 on the Matern orbit's
+% full-rank steps (prop:matern-cross-shape, prop:matern-negative-mass), which until Q-0278 opened a
+% section of their own before the stable orbits. Until Q-0278 (2026-10-04) all of these were in
+% 02-affine.tex; no label, statement or proof changed in the move. What the nodes spend is in
+% 05-landscape.tex's header.
+
+\section{The base: the general linear group along rays}
+\label{sec:affine-orbits}
+
+This section is the draft's \S 2.3 as far as the whole affine group goes. The affine orbit of one
+isotropic law cascades along rays (\ref{prop:affine-orbits}), and the structure is characterized: a
+family covariant under the whole affine group that cascades along rays is the orbit of a
+rotation-invariant self-decomposable law (\ref{prop:ray-families}). Some orbits keep more, a set of
+steps across shapes (\S\ref{sec:affine-stable-cone}).
+
+% draft: section 2.3, Proposition 2.10, with its hypotheses made explicit. The draft starts from an
+% admissible F of its Theorem 2.2 (a port); the node starts from the law mu_I and asks, for the ray
+% cascade, for the one increment it uses. The Matern clause is new in form: the draft names the
+% anisotropic Matern of spatial statistics, and the node proves that its index-gamma member is an
+% orbit in the sense of the proposition, by the Gamma mixture, and cites nobody for it.
+% CHANGED Q-0281: typed (the statement skeleton). Clause (4), the Matern orbits, is split to
+% prop:affine-orbits-matern (ADR-0025; records/formalization/PRICING.md: compound Poisson laws and
+% Frullani's integral are most of the node's cost); the text is unchanged and the \lean tag names the
+% child's declaration too.
+% Q-0281 wave 1: proved, Lean core only. Clauses (1)-(3) in group C (AffineHemigroup.Orbits:
+% affine_orbit_covariance, affine_orbit_ray_cascade, affine_orbit_no_cross_shape; the last sentence of
+% (3) by the proof's second route, through thm:affine-rigidity); clause (4), the split child's
+% matern_orbit and maternRay_W_nonneg, in group E (AffineHemigroup.MaternOrbit; the laws are the
+% constructions gammaGaussLaw and maternRayLaw, so A3(iii) is not spent). The paragraph of the proof
+% headed clause (4) is rewritten to the Lean route. Blind review of group E: W1E-7 merged the two
+% wave comments into this one; W1E-4 added maternRay_W_nonneg ("W >= 0") to the tag.
+\begin{proposition}[affine orbits of isotropic laws]
+\label{prop:affine-orbits}
+\uses{thm:rank-deficient-step,thm:affine-rigidity}
+\lean{AffineHemigroup.affine_orbit_covariance, AffineHemigroup.affine_orbit_ray_cascade,
+AffineHemigroup.affine_orbit_no_cross_shape, AffineHemigroup.matern_orbit,
+AffineHemigroup.maternRay_W_nonneg}\leanok
+Let $d \ge 1$ and let $g : [0,\infty) \to [0,\infty)$ be continuous with $g(0) = 0$ and such that
+$\omega \mapsto e^{-g(|\omega|^2)}$ is the characteristic function of a probability measure
+$\mu_I$ on $\RR^d$. For $\Sigma \in \PD(d)$ put $\mu_\Sigma := (\Sigma^{1/2})_*\mu_I$, the
+\emph{affine orbit} of $\mu_I$.
+\begin{enumerate}
+\item \emph{(Covariance.)} $\widehat\mu_\Sigma(\omega) = e^{-g(\langle\omega,\Sigma\omega\rangle)}$,
+and $A_*\mu_\Sigma = \mu_{A\Sigma A^{\tp}}$ for every $A \in \GL(d)$ and $\Sigma \in \PD(d)$.
+\item \emph{(Cascade along rays.)} If for some $\lambda > 1$ there is a probability measure
+$\nu_\lambda$ on $\RR^d$ with $e^{-g(\lambda^2|\omega|^2)} = e^{-g(|\omega|^2)}\,\widehat\nu_\lambda(\omega)$,
+then $\mu_{\lambda^2\Sigma} = \mu_\Sigma * (\Sigma^{1/2})_*\nu_\lambda$ for every
+$\Sigma \in \PD(d)$.
+\item \emph{(No cascade across shapes.)} If $d \ge 2$ and $g$ is not linear, then for no
+$\Sigma \in \PD(d)$ and no $P \in \PSD(d)$ with $0 < \rank P < d$ is
+$\mu_{\Sigma+P} = \mu_\Sigma * \rho$ with $\rho$ a probability measure. In particular the orbit is
+not the family of kernels from scale zero of any affine cascade family.
+\item \emph{(The \Matern{} orbits.)} For $\gamma > 0$, $g_\gamma(u) := \gamma\log(1+u)$ satisfies
+the hypothesis in every dimension: $(1+|\omega|^2)^{-\gamma}$ is the characteristic function of
+the law of $\sqrt{2V}\,Z$, with $V$ Gamma distributed of shape $\gamma$ and scale $1$ and $Z$
+standard normal on $\RR^d$, independent. Its orbit has
+$\widehat\mu_\Sigma(\omega) = (1 + \langle\omega,\Sigma\omega\rangle)^{-\gamma}$; clause (3)
+applies to it, $g_\gamma$ not being linear; and the hypothesis of clause (2) holds for every
+$\gamma > 0$ and every $\lambda > 1$, with $\nu_\lambda$ the law of $\sqrt{2Y}\,Z$, where $Z$ is
+standard normal on $\RR^d$ and $Y \ge 0$, independent of $Z$, is compound Poisson with \Levy{}
+measure $\gamma\,(e^{-x/\lambda^2} - e^{-x})\,x^{-1}dx$ on $(0,\infty)$, of total mass
+$2\gamma\log\lambda$.
+\end{enumerate}
+\statusT\quad\emph{(Cites nothing beyond the uniqueness of the Fourier transform; clause (4)'s
+ray increments for every $\gamma$ use Frullani's integral and the compound Poisson law, both
+written out (Q-0209 item 4; until then the clause was stated for integer $\gamma$ only, with the
+$\gamma$-fold convolution). The mechanism is the self-decomposability of the Gamma law of $V$,
+read here as an explicit residual and not cited.
+\textbf{Not claimed}: that the orbit of every isotropic cascade family of
+\ref{thm:isotropic-classification} satisfies clause (2) for every $\lambda$ --- true of the
+kernels from scale zero of such a family, by the self-decomposability \ref{thm:isotropic-classification}
+gives them, and not needed here, this proposition's proof not using that node; and the identification of the elliptical Student-t with an orbit, which the
+draft asserts and no source reading here supports. Clause (4)'s family \emph{is}, by the draft's
+check item~6, the anisotropic \Matern{} of spatial statistics: Whittle 1954 derives the isotropic
+Bessel-K covariance from a stochastic Laplace-type equation on $\RR^2$ and Lindgren--Rue--Lindstr\"om
+2011 give the general SPDE $(\kappa^2-\Delta)^{\alpha/2}x = W$ with the exact correspondence
+$\alpha = \nu + d/2$ (their eq.~(2), crediting it to Whittle 1954, 1963) and a homogeneous
+anisotropic extension $(\kappa^2-\nabla^{\tp}H\nabla)^{\alpha/2}$ with $H$ a free positive-definite
+matrix (their \S3.4, App.~C.4) --- geometric anisotropy, $H = \Sigma$, matching clause (4) exactly,
+read at the page (records/affine/READING-whittle1954stationary.md,
+records/affine/READING-lindgren2011explicit.md). The identification is a naming, not a fact this
+clause's proof rests on, so no ledger entry follows. The draft's Remark~2.13 says the stable orbit
+$e^{-(\langle\omega,\Sigma\omega\rangle)^{\alpha/2}}$ is a Loewner semigroup only for
+$\alpha = 2$; that is clause (3) with $g(u) = u^{\alpha/2}$, since $e^{-|\omega|^\alpha}$ is a
+characteristic function on $\RR^d$ for $0 < \alpha < 2$ by \ref{lem:elliptical-stable}, and the
+remark stays prose.
+\textbf{What it is worth.} Clause (3) is stronger than the draft's Proposition~2.10, which excludes
+a Loewner cascade: here a single step that leaves some directional variance unchanged is already
+impossible.)}
+\end{proposition}
+
+\begin{proof}
+\leanok
+\emph{Clause (1).} $\widehat\mu_\Sigma(\omega) = \widehat\mu_I(\Sigma^{1/2}\omega)
+= e^{-g(\langle\omega,\Sigma\omega\rangle)}$, and
+$\widehat{A_*\mu_\Sigma}(\omega) = \widehat\mu_\Sigma(A^{\tp}\omega)
+= e^{-g(\langle\omega,A\Sigma A^{\tp}\omega\rangle)} = \widehat\mu_{A\Sigma A^{\tp}}(\omega)$; the
+transform determines the law.
+
+\emph{Clause (2).} The transform of $(\Sigma^{1/2})_*\nu_\lambda$ at $\omega$ is
+$\widehat\nu_\lambda(\Sigma^{1/2}\omega) = \exp[-g(\lambda^2\langle\omega,\Sigma\omega\rangle) +
+g(\langle\omega,\Sigma\omega\rangle)]$, and its product with $\widehat\mu_\Sigma(\omega)$ is
+$e^{-g(\langle\omega,\lambda^2\Sigma\omega\rangle)} = \widehat\mu_{\lambda^2\Sigma}(\omega)$.
+
+\emph{Clause (3).} If $\mu_{\Sigma+P} = \mu_\Sigma * \rho$, taking transforms and using clause (1)
+gives \ref{eq:one-step}, and \ref{thm:rank-deficient-step} makes $g$ linear. For the last
+sentence: if $(\mu_\Sigma)$ were the kernels from scale zero of an affine cascade family, (K1)
+would give $\mu_{I + e_1e_1^{\tp}} = \mu_{I,I+e_1e_1^{\tp}} * \mu_I$ with the first factor a
+probability measure, which the first sentence excludes (or: \ref{thm:affine-rigidity} would make
+$\mu_I$ Gaussian and $g$ linear).
+
+\emph{Clause (4).} For $u \ge 0$,
+$(1+u)^{-\gamma} = \Gamma(\gamma)^{-1}\int_0^\infty v^{\gamma-1}e^{-v}e^{-vu}\,dv$, by the
+substitution $v(1+u) = s$ in the Gamma integral; and $e^{-v|\omega|^2}$ is the characteristic
+function of $\sqrt{2v}\,Z$. Conditioning on $V$ (Fubini) gives the characteristic function of
+$\sqrt{2V}Z$ as $(1+|\omega|^2)^{-\gamma}$; $g_\gamma$ is continuous, nonnegative, vanishes at $0$
+and is not linear. For clause (2) at $\gamma = 1$,
+\[
+  \frac{1+u}{1+\lambda^2u} = \lambda^{-2} + \bigl(1 - \lambda^{-2}\bigr)\frac{1}{1+\lambda^2u} ,
+\]
+so at $u = |\omega|^2$ the ratio is the transform of the probability measure
+$\lambda^{-2}\delta_0 + (1-\lambda^{-2})\,\mu^{(1)}_{\lambda^2 I}$, $\lambda^{-2} \in (0,1)$, with
+$\mu^{(1)}$ the orbit of index $1$; for integer $\gamma$ the ratio for index $\gamma$ is the
+$\gamma$-th power of this one, the transform of the $\gamma$-fold convolution of that measure.
+
+% CHANGED Q-0281 wave 1: the paragraph on clause (2) at every gamma rewritten to the Lean route:
+% Frullani's integral by Tonelli rather than by substitution and a squeeze, and the Laplace transform of
+% the compound Poisson law as e^{-l(0,infty)} sum_n hat(l)(u)^n/n!, with hat(l)(u) from Frullani at
+% (lambda^{-2}+u, 1+u) and the total mass from Frullani at (lambda^{-2}, 1), so the difference
+% int (1 - e^{-ux}) n(x) dx is never formed. The integer-gamma aside above is not used.
+For clause (2) at every $\gamma > 0$, Frullani's integral: for $0 < a < b$,
+\[
+  \int_0^\infty\bigl(e^{-ax} - e^{-bx}\bigr)\,x^{-1}dx = \log(b/a) ,
+\]
+because $(e^{-ax} - e^{-bx})\,x^{-1} = \int_a^b e^{-tx}\,dt$ for $x > 0$, and by Tonelli the
+left-hand side is $\int_a^b\int_0^\infty e^{-tx}\,dx\,dt = \int_a^b t^{-1}\,dt$. Let $\ell$ be the
+measure $\gamma\,n(x)\,dx$ on $(0,\infty)$, where $n(x) := (e^{-x/\lambda^2} - e^{-x})\,x^{-1}$ is
+positive for $x > 0$ as $\lambda > 1$. For $u \ge 0$, Frullani's integral at
+$(\lambda^{-2} + u,\, 1 + u)$ gives
+\[
+  \widehat\ell(u) := \int_0^\infty e^{-ux}\,\ell(dx) = \gamma\log\frac{1+u}{\lambda^{-2}+u} ,
+\]
+and at $u = 0$ the total mass $\ell(0,\infty) = \gamma\log\lambda^2 = 2\gamma\log\lambda$. Let $Y$ have
+the compound Poisson law $\pi := e^{-\ell(0,\infty)}\sum_{n \ge 0}\ell^{*n}/n!$, with
+$\ell^{*0} := \delta_0$: the law of $X_1 + \dots + X_N$ with $N$ Poisson of mean $\ell(0,\infty)$ and
+$X_1, X_2, \dots$ independent of $N$ and of each other, each of law $\ell/\ell(0,\infty)$. It is
+carried by $[0,\infty)$, as $\ell$ is. The Laplace transform of $\ell^{*n}$ is $\widehat\ell(u)^n$,
+the transform of a convolution being the product of the transforms, so
+\[
+  \mathbb{E}\,e^{-uY} = e^{-\ell(0,\infty)}\sum_{n \ge 0}\frac{\widehat\ell(u)^n}{n!}
+  = \exp\bigl[\widehat\ell(u) - \ell(0,\infty)\bigr]
+  = \Bigl(\frac{1+u}{\lambda^2(\lambda^{-2}+u)}\Bigr)^\gamma
+  = \Bigl(\frac{1+u}{1+\lambda^2u}\Bigr)^\gamma ;
+\]
+at $u = 0$ this says that $\pi$ is a probability measure.
+With $Z$ standard normal and independent of $Y$, conditioning on $Y$ gives
+$\mathbb{E}\,e^{i\langle\omega,\sqrt{2Y}Z\rangle} = \mathbb{E}\,e^{-Y|\omega|^2}
+= e^{-g_\gamma(\lambda^2|\omega|^2)}/e^{-g_\gamma(|\omega|^2)}$, which is the hypothesis of clause (2)
+with $\nu_\lambda$ the law of $\sqrt{2Y}Z$.
+\end{proof}
+
+% CHANGED Q-0281: split from prop:affine-orbits (ADR-0025; records/formalization/PRICING.md): clause
+% (4), copied verbatim. Its compound Poisson law and Frullani's integral are most of the parent's cost,
+% where clauses (1)-(3) are transforms and two cited nodes; the parent's text and numbering are
+% unchanged.
+% CHANGED Q-0281 wave 1: blind review W1E-4: "W >= 0" (the compound Poisson law is a probability
+% measure carried by [0,infty)) is the tagged maternRay_W_nonneg, Lean core, guarded.
+\begin{proposition}[the \Matern{} orbits]
+\label{prop:affine-orbits-matern}
+\uses{prop:affine-orbits}
+\lean{AffineHemigroup.matern_orbit, AffineHemigroup.maternRay_W_nonneg}\leanok
+Let $d \ge 1$, and use the notation of \ref{prop:affine-orbits}. For $\gamma > 0$,
+$g_\gamma(u) := \gamma\log(1+u)$ satisfies the hypothesis of \ref{prop:affine-orbits} in every
+dimension: $(1+|\omega|^2)^{-\gamma}$ is the characteristic function of the law of $\sqrt{2V}\,Z$, with
+$V$ Gamma distributed of shape $\gamma$ and scale $1$ and $Z$ standard normal on $\RR^d$, independent.
+Its orbit has $\widehat\mu_\Sigma(\omega) = (1 + \langle\omega,\Sigma\omega\rangle)^{-\gamma}$;
+\ref{prop:affine-orbits}(3) applies to it, $g_\gamma$ not being linear; and the hypothesis of
+\ref{prop:affine-orbits}(2) holds for every $\gamma > 0$ and every $\lambda > 1$, with $\nu_\lambda$
+the law of $\sqrt{2Y}\,Z$, where $Z$ is standard normal on $\RR^d$ and $Y \ge 0$, independent of $Z$,
+is compound Poisson with \Levy{} measure $\gamma\,(e^{-x/\lambda^2} - e^{-x})\,x^{-1}dx$ on
+$(0,\infty)$, of total mass $2\gamma\log\lambda$.
+\statusT\quad\emph{(Cites nothing beyond the uniqueness of the Fourier transform; Frullani's integral
+and the compound Poisson law are written out in the parent's proof. Clause (4) of
+\ref{prop:affine-orbits}, split off on 2026-10-04 (Q-0281, ADR-0025); the numbering stays the
+parent's.)}
+\end{proposition}
+
+\begin{proof}
+\leanok
+This is the part of the proof of \ref{prop:affine-orbits} headed clause (4).
+\end{proof}
+
+% not in the draft: the author's question after the skeptical pass (Q-0206, 2026-09-30), which
+% weakenings of the affine axioms keep non-Gaussian families (hub RESEARCH.md, under Paper VII).
+% The row "GL(d), rays only": the converse of prop:affine-orbits(1)-(2), placed after it.
+% CHANGED Q-0281 wave 1: blind check (the survey's cleanup, filed with KS-1): the stale remark that the
+% zero-freeness of a self-decomposable transform comes through \ledger{A4} and infinite divisibility now
+% points to prop:gw-ray-families(1), which spends nothing; uniqueness of the increments stays not claimed.
+\begin{proposition}[the ray families are the orbits of the self-decomposable isotropic laws]
+\label{prop:ray-families}
+\uses{def:affine-cascade-family,def:isotropic-kernel-family,prop:affine-orbits}
+\lean{AffineHemigroup.ray_families, AffineHemigroup.ray_families_converse}\leanok
+Let $d \ge 1$ and let $(\mu_\Sigma)_{\Sigma\in\PD(d)}$ be probability measures on $\RR^d$ with
+\begin{enumerate}
+\item[(R1)] \emph{(affine covariance)} $A_*\mu_\Sigma = \mu_{A\Sigma A^{\tp}}$ for every
+$A \in \GL(d)$ and $\Sigma \in \PD(d)$;
+\item[(R2)] \emph{(a cascade along the ray of $I$)} for every $\lambda > 1$ there is a probability
+measure $\rho_\lambda$ on $\RR^d$ with $\mu_{\lambda^2I} = \mu_I * \rho_\lambda$.
+\end{enumerate}
+Then $\mu_I$ is rotation invariant and self-decomposable \ref{eq:self-decomposable},
+$\mu_\Sigma = (\Sigma^{1/2})_*\mu_I$ for every $\Sigma$, and the family cascades along every ray:
+$\mu_{\lambda^2\Sigma} = \mu_\Sigma * (\Sigma^{1/2})_*\rho_\lambda$ for every $\Sigma \in \PD(d)$
+and $\lambda > 1$. Conversely, for every rotation-invariant self-decomposable law $\mu_I$ on
+$\RR^d$ the family $\mu_\Sigma := (\Sigma^{1/2})_*\mu_I$ satisfies (R1) and (R2).
+\statusT\quad\emph{(Cites nothing: pushforward and convolution only, not even the Fourier
+transform. \textbf{What it is worth.} With \ref{thm:affine-rigidity} it places the obstruction:
+covariance under the whole affine group costs nothing beyond rotation invariance and
+self-decomposability as long as only steps along rays are asked to cascade, so every
+non-Gaussian isotropic law of the line's theory in dimension $d$ keeps an anisotropic orbit;
+the Gaussian alone survives every step across shapes. Which steps across shapes an orbit
+survives depends on the law: none but the rays for the \Matern{} orbit of every index
+(\ref{prop:matern-steps}), none of rank below $d$ for any orbit
+(\ref{prop:affine-orbits}(3)), but for the isotropic $\alpha$-stable orbit a cone of full-rank
+steps, those with $\lambda_{\min}(M)^{d+\alpha} \ge \det M$ for $M = \Sigma^{-1/2}\Sigma'\Sigma^{-1/2}$,
+where the \Levy{} densities are ordered (\ref{prop:stable-step-cone}). At $d = 1$ every step is a ray
+and the statement is the definition of self-decomposability. \textbf{Reading, not used}: through
+\ref{lem:radial-marginal} and \ref{thm:isotropic-classification} (the kernels from scale zero of an
+isotropic cascade family are rotation invariant and self-decomposable) and
+\ref{lem:isotropic-realisation} (the law of every $F \in \mathcal{A}_d$ with $F \not\equiv 0$ is
+such a kernel, at $t = \chi^{-1}(1)$; that the exponent of every rotation-invariant
+self-decomposable law other than $\delta_0$ is such an $F$ is the line's reading of its marginal,
+not written out here), the rotation-invariant self-decomposable laws are the kernels from scale zero of the isotropic cascade families, so the
+ray families are the affine orbits of the isotropic theory of \S\ref{sec:isotropic-classification}.
+\textbf{Not stated}: uniqueness of the increments, which follows from
+\ref{prop:gw-ray-families}(1) (no zeros, without any entry of the ledger) with the uniqueness of the
+Fourier transform. \textbf{Not claimed}:
+continuity in $\Sigma$, which is not asked for and not needed.)}
+\end{proposition}
+
+\begin{proof}
+\leanok
+\emph{Covariance determines the orbit.} (R1) with $A = Q \in \Orth(d)$ and $\Sigma = I$ gives
+$Q_*\mu_I = \mu_{QQ^{\tp}} = \mu_I$, and with $A = \Sigma^{1/2}$ it gives
+$(\Sigma^{1/2})_*\mu_I = \mu_\Sigma$.
+
+\emph{Self-decomposability.} By (R1) with $A = \lambda I$, $\mu_{\lambda^2I} = (\lambda I)_*\mu_I$,
+so (R2) reads $(\lambda I)_*\mu_I = \mu_I * \rho_\lambda$. The image of a convolution under a
+linear map is the convolution of the images, so applying $(\lambda^{-1}I)_*$ gives
+$\mu_I = (cI)_*\mu_I * (cI)_*\rho_\lambda$ with $c := \lambda^{-1}$. In transforms,
+$\widehat\mu_I(\xi) = \widehat\mu_I(c\xi)\,\widehat\rho_\lambda(c\xi)$, which is
+\ref{eq:self-decomposable} with the residual $(cI)_*\rho_\lambda$; every $c \in (0,1)$ is
+$\lambda^{-1}$ for some $\lambda > 1$.
+
+\emph{Every ray.} $\mu_{\lambda^2\Sigma} = (\Sigma^{1/2})_*\mu_{\lambda^2I}
+= (\Sigma^{1/2})_*(\mu_I * \rho_\lambda) = \mu_\Sigma * (\Sigma^{1/2})_*\rho_\lambda$, by (R1) with
+$A = \Sigma^{1/2}$ at the pair's two ends.
+
+\emph{Converse.} Let $\mu_I$ be rotation invariant and self-decomposable, and
+$\mu_\Sigma := (\Sigma^{1/2})_*\mu_I$. For (R1), let $A \in \GL(d)$, $\Sigma \in \PD(d)$, and
+$B := A\Sigma^{1/2}$, so that $BB^{\tp} = A\Sigma A^{\tp} =: \Sigma'$. Then
+$Q := \Sigma'^{-1/2}B$ has $QQ^{\tp} = \Sigma'^{-1/2}BB^{\tp}\Sigma'^{-1/2} = I$, so $Q$ is
+orthogonal and $B = \Sigma'^{1/2}Q$; hence
+$A_*\mu_\Sigma = B_*\mu_I = (\Sigma'^{1/2})_*Q_*\mu_I = (\Sigma'^{1/2})_*\mu_I = \mu_{\Sigma'}$.
+For (R2), let $\lambda > 1$ and $c := \lambda^{-1}$. Self-decomposability gives a probability
+measure $\rho_c$ with $\widehat\mu_I(\xi) = \widehat\mu_I(c\xi)\,\widehat\rho_c(\xi)$, that is
+$\mu_I = (cI)_*\mu_I * \rho_c$; applying $(\lambda I)_*$,
+$\mu_{\lambda^2I} = (\lambda I)_*\mu_I = \mu_I * (\lambda I)_*\rho_c$.
+\end{proof}
+
+\section{The wedge of an orbit}
+\label{sec:affine-stable-cone}
+
+This section is mostly not in the draft; it answers the end of the draft's \S 2.4, which conjectures
+that every step off the rays fails for every non-Gaussian orbit. The conjecture is false. The orbit
+of the isotropic $\alpha$-stable law, $0 < \alpha < 2$, has an increment that is a probability
+measure exactly for the steps $\Sigma \to \Sigma'$ whose \Levy{} densities are ordered, and these
+form a cone of full-rank steps of every orientation, narrower than the Loewner order
+(\ref{prop:stable-step-cone}). The proof of necessity reads the increment's tail, and for a single
+linear flow $e^{tB}$ the same computation gives the set of exponents of the stable law
+(\ref{prop:stable-exponent-cone}). For a general orbit the cone of ordered \Levy{} densities is read
+off one function of the profile (\ref{prop:orbit-step-cone}). A profile that is stable at the origin
+keeps the stable cone however it is tempered at large radii, so a family with exponential tails can
+have it (\ref{prop:tempered-step-cone}); an orbit of logarithmic exponent keeps only the rays
+(\ref{prop:log-orbit-rays}), and among those are the \Matern{} orbits (\ref{prop:matern-steps}), all
+the orbits whose symbol is rational, the ones that finitely many elliptic solves implement
+(\ref{prop:rational-symbols}), and all the orbits whose profile is bounded at the origin
+(\ref{prop:bounded-profile-rays}). The section ends with the rest of the draft's \S 2.4. A step of
+full rank widens every direction and escapes the subspace argument of \ref{thm:rank-deficient-step}.
+For the \Matern{} orbit of index $1$ it fails anyway, off the rays (\ref{prop:matern-cross-shape}),
+and a sign computation at the origin, from the Hessian of the \Matern{} kernel
+(\ref{lem:matern-kernel-hessian}), shows why and says by how much: the would-be
+increment has a negative mass that diverges like a logarithm at the origin
+(\ref{prop:matern-negative-mass}).
+% CHANGED Q-0281 wave 2: blind review W2I-6: the sign computation is pointed at
+% lem:matern-kernel-hessian, where the kernel and its Hessian now stand, not at the remark.
+
+% not in the draft: P-0019 (the postdoc, 2026-09-30), queue Q-0241. The elliptical stable laws, built
+% from their Levy densities. The existence of the law is A3(iii); the identity between the exponent
+% and the Levy density is a substitution. Sato Thm. 14.14 (p. 86) is the same law, read at the page
+% (records/affine/READING-sato1999levy-stable-laws.md) and not cited by the proof.
+% CHANGED Q-0281: typed (the statement skeleton). The arithmetic -- the constant, clause (1) and
+% clause (3) -- is split to lem:elliptical-stable-density, placed after this node (ADR-0025;
+% records/formalization/PRICING.md: [T], read by lem:stable-tail without A3), and \uses gains it; the
+% text is unchanged and the \lean tag names the child's declarations too.
+\begin{lemma}[the elliptical stable laws]
+\label{lem:elliptical-stable}
+\uses{prop:affine-orbits,lem:elliptical-stable-density,thm:cited-A3}
+\lean{AffineHemigroup.stableConst_pos_finite, AffineHemigroup.stableExp_eq_lintegral,
+AffineHemigroup.stableDensity_act, AffineHemigroup.ellipticalStable_exists_unique,
+AffineHemigroup.ellipticalStable_props, AffineHemigroup.ellipticalStable_orbit}\leanok
+Let $d \ge 1$ and $0 < \alpha < 2$, and put
+\[
+  c_{d,\alpha} := \int_{\RR^d}(1 - \cos y_1)\,|y|^{-d-\alpha}\,dy .
+\]
+Then $0 < c_{d,\alpha} < \infty$. For $H \in \PD(d)$ and $x \in \RR^d \setminus \{0\}$ put
+\begin{equation}\label{eq:stable-levy-density}
+  n_H(x) := c_{d,\alpha}^{-1}(\det H)^{-1/2}\langle x,H^{-1}x\rangle^{-(d+\alpha)/2} ,
+  \qquad \psi_H(\omega) := \langle\omega,H\omega\rangle^{\alpha/2} .
+\end{equation}
+\begin{enumerate}
+\item For every $H \in \PD(d)$ and $\omega \in \RR^d$,
+$\psi_H(\omega) = \int_{\RR^d\setminus\{0\}}(1 - \cos\langle\omega,x\rangle)\,n_H(x)\,dx$, and
+$\int_{\RR^d\setminus\{0\}}(|x|^2 \wedge 1)\,n_H(x)\,dx < \infty$.
+\item For every $H \in \PD(d)$ there is a unique probability measure $S_\alpha(H)$ on $\RR^d$ with
+$\widehat{S_\alpha(H)} = e^{-\psi_H}$. It is infinitely divisible with generating triplet
+$(0, n_H(x)\,dx, 0)$, and $A_*S_\alpha(H) = S_\alpha(AHA^{\tp})$ for every $A \in \GL(d)$.
+\item $n_{AHA^{\tp}}(x) = |\det A|^{-1}\,n_H(A^{-1}x)$ for $A \in \GL(d)$, $H \in \PD(d)$ and
+$x \ne 0$.
+\end{enumerate}
+In particular $g(u) := u^{\alpha/2}$ satisfies the hypothesis of \ref{prop:affine-orbits}, with
+$\mu_I = S_\alpha(I)$, and the affine orbit of $S_\alpha(I)$ is $\mu_\Sigma = S_\alpha(\Sigma)$, the
+\emph{stable orbit}.
+\statusA\quad\ledger{A3}\quad\emph{(\textbf{Assignment.} \ledger{A3}, \sscite{sato1999levy}
+Thm.~8.1(iii), p.~38, is spent once, in clause (2): it supplies an infinitely divisible law with the
+triplet $(0, n_H(x)\,dx, 0)$. Everything else is this module's arithmetic: a substitution, rotation
+invariance and homogeneity of one integral, and the uniqueness of the Fourier transform, which names
+the law. The law is the rotation-invariant $\alpha$-stable law of \sscite{sato1999levy} Thm.~14.14,
+p.~86, transported by $H^{1/2}$; that theorem is read at the page and not used, and its constant
+$c$ is normalised to $1$ here. \textbf{What it is worth.} It supplies the fact the annotation of
+\ref{prop:affine-orbits} and the draft's Remark~2.13 lacked, that $e^{-|\omega|^\alpha}$ is a
+characteristic function on $\RR^d$; with it \ref{prop:affine-orbits}(3) is Remark~2.13's claim that
+the stable orbit has no rank-deficient step, hence is no Loewner semigroup. \textbf{Not claimed}:
+the value of $c_{d,\alpha}$, which no node needs; stable laws with a spectral measure other than
+the uniform one.)}
+\end{lemma}
+
+% CHANGED Q-0281 wave 2: proved (AffineHemigroup.EllipticalStable, with the child's declarations;
+% clause (2) prints A3(iii), guarded). The Lean follows this proof.
+\begin{proof}
+\leanok
+\emph{The constant.} Since $1 - \cos y_1 \le \min(2, y_1^2/2) \le 2(|y|^2 \wedge 1)$, the integrand is
+at most $2(|y|^2 \wedge 1)|y|^{-d-\alpha}$, whose integral is a multiple of
+$\int_0^1 r^{1-\alpha}dr + \int_1^\infty r^{-1-\alpha}dr$ in polar coordinates, finite because
+$0 < \alpha < 2$. The integrand is positive off the null set $\{y_1 \in 2\pi\ZZ\}$, so
+$c_{d,\alpha} > 0$.
+
+\emph{One integral.} Put $J(\omega) := \int(1 - \cos\langle\omega,y\rangle)|y|^{-d-\alpha}dy$. For
+$Q \in \Orth(d)$ the substitution $y = Qz$ gives $J(Q\omega) = J(\omega)$, and for $s > 0$ the
+substitution $y = z/s$ gives $J(s\omega) = s^\alpha J(\omega)$. For $\omega \ne 0$ take $Q$ with
+$Qe_1 = \omega/|\omega|$: then $J(\omega) = |\omega|^\alpha J(e_1) = c_{d,\alpha}|\omega|^\alpha$, which
+holds at $\omega = 0$ as well.
+
+\emph{Clause (1).} Substitute $x = H^{1/2}y$, so that $dx = (\det H)^{1/2}dy$,
+$\langle x,H^{-1}x\rangle = |y|^2$ and $\langle\omega,x\rangle = \langle H^{1/2}\omega,y\rangle$:
+the integral is $c_{d,\alpha}^{-1}J(H^{1/2}\omega) = |H^{1/2}\omega|^\alpha = \psi_H(\omega)$. The
+same substitution, with $|x|^2 \wedge 1 \le \max(1,\lambda_{\max}(H))(|y|^2 \wedge 1)$, bounds the
+second integral by a multiple of $\int(|y|^2 \wedge 1)|y|^{-d-\alpha}dy < \infty$.
+
+\emph{Clause (3).} $\det(AHA^{\tp})^{-1/2} = |\det A|^{-1}(\det H)^{-1/2}$ and
+$\langle x,(AHA^{\tp})^{-1}x\rangle = \langle A^{-1}x,H^{-1}A^{-1}x\rangle$.
+
+\emph{Clause (2).} By clause (1) the measure $\nu := n_H(x)\,dx$ satisfies $\nu(\{0\}) = 0$ and
+$\int(|x|^2 \wedge 1)\,d\nu < \infty$, so \ledger{A3}(iii) gives an infinitely divisible law with
+characteristic function $\exp\int(e^{i\langle\omega,x\rangle} - 1 - i\langle\omega,x\rangle\mathbf
+1_D(x))\,\nu(dx)$, $D$ the closed unit ball. As $n_H$ is even, the imaginary part of the integrand,
+$\sin\langle\omega,x\rangle - \langle\omega,x\rangle\mathbf 1_D(x)$, is odd and $\nu$-integrable
+(it is at most $|\omega|^3|x|^2/6$ on $D$ and at most $1$ off it), so it integrates to $0$; the real
+part is $-(1 - \cos\langle\omega,x\rangle)$, and clause (1) makes the characteristic function
+$e^{-\psi_H}$. The law is unique because a probability measure is determined by its transform. For
+$A \in \GL(d)$ the transform of $A_*S_\alpha(H)$ at $\omega$ is
+$e^{-\psi_H(A^{\tp}\omega)} = e^{-\psi_{AHA^{\tp}}(\omega)}$.
+
+\emph{The orbit.} $g(u) = u^{\alpha/2}$ is continuous with $g(0) = 0$, and
+$e^{-g(|\omega|^2)} = e^{-|\omega|^\alpha}$ is the transform of $S_\alpha(I)$. The orbit is
+$(\Sigma^{1/2})_*S_\alpha(I) = S_\alpha(\Sigma)$ by clause (2).
+\end{proof}
+
+% CHANGED Q-0281: split from lem:elliptical-stable (ADR-0025; records/formalization/PRICING.md): the
+% constant c_{d,alpha}, the density n_H and clauses (1) and (3), copied verbatim. They are this
+% module's arithmetic and spend nothing, where the parent's clause (2) spends A3(iii); the parent
+% \uses this node, and its text and numbering are unchanged.
+\begin{lemma}[the elliptical stable \Levy{} densities]
+\label{lem:elliptical-stable-density}
+\lean{AffineHemigroup.stableConst_pos_finite, AffineHemigroup.stableExp_eq_lintegral,
+AffineHemigroup.stableDensity_act}\leanok
+Let $d \ge 1$ and $0 < \alpha < 2$, and put
+$c_{d,\alpha} := \int_{\RR^d}(1 - \cos y_1)\,|y|^{-d-\alpha}\,dy$. Then $0 < c_{d,\alpha} < \infty$.
+For $H \in \PD(d)$ and $x \in \RR^d \setminus \{0\}$ put
+$n_H(x) := c_{d,\alpha}^{-1}(\det H)^{-1/2}\langle x,H^{-1}x\rangle^{-(d+\alpha)/2}$ and
+$\psi_H(\omega) := \langle\omega,H\omega\rangle^{\alpha/2}$.
+\begin{enumerate}
+\item[(1)] For every $H \in \PD(d)$ and $\omega \in \RR^d$,
+$\psi_H(\omega) = \int_{\RR^d\setminus\{0\}}(1 - \cos\langle\omega,x\rangle)\,n_H(x)\,dx$, and
+$\int_{\RR^d\setminus\{0\}}(|x|^2 \wedge 1)\,n_H(x)\,dx < \infty$.
+\item[(3)] $n_{AHA^{\tp}}(x) = |\det A|^{-1}\,n_H(A^{-1}x)$ for $A \in \GL(d)$, $H \in \PD(d)$ and
+$x \ne 0$.
+\end{enumerate}
+\statusT\quad\emph{(Cites nothing: a substitution, rotation invariance and homogeneity of one
+integral. The constant and clauses (1) and (3) of \ref{lem:elliptical-stable}, split off on
+2026-10-04 (Q-0281, ADR-0025), with the parent's clause numbers; only the parent's clause (2)
+spends a ledger entry, and the numbering stays the parent's.)}
+\end{lemma}
+
+\begin{proof}
+\leanok
+This is the part of the proof of \ref{lem:elliptical-stable} headed the constant, one integral,
+clause (1) and clause (3).
+\end{proof}
+
+% not in the draft: P-0019, Q-0241. The proposal's route to necessity was the tail of the increment's
+% density, which it expected to need a Tauberian argument. Positivity is tested against functions
+% supported at a large scale R, so only the weak form of the tail is needed, and homogeneity of the
+% exponent gives it by Fourier inversion and a two-term Taylor bound. The Gaussian factor G is there
+% for prop:similarity-stable-family.
+% CHANGED Q-0281: \uses re-pointed to the split child it reads (lem:elliptical-stable(1) only).
+% CHANGED Q-0281 wave 1: the symmetry of G dropped from the hypotheses, unused (the author's
+% decision, 2026-10-04; a widening). The proof bounds <omega, G omega> by the operator norm of G and
+% reads nothing else of it; E is real and even for every real G. Also (referee finding W1D-4) the two
+% references to lem:elliptical-stable(1), in the annotation and in "Back to x", re-pointed to the
+% split child lem:elliptical-stable-density(1), which the node \uses.
+% CHANGED Q-0327: notation only (whole-paper review flag 23): the matrix of the Gaussian factor is
+% $C$, as $C(\Sigma)$ in prop:similarity-general-sandwich, no longer $G$, the covariance group.
+\begin{lemma}[the tail of an increment is the difference of the \Levy{} densities]
+\label{lem:stable-tail}
+\uses{lem:elliptical-stable-density}
+\lean{AffineHemigroup.stable_tail}\leanok
+Let $d \ge 1$, $0 < \alpha < 2$, $H, H' \in \PD(d)$, and $C$ a real $d \times d$ matrix.
+Suppose $\rho$ is a positive finite measure on $\RR^d$ with
+\begin{equation}\label{eq:stable-tail-transform}
+  \widehat\rho(\omega) = \exp\bigl[-\langle\omega,C\omega\rangle - \psi_{H'}(\omega) + \psi_H(\omega)\bigr]
+  \qquad (\omega \in \RR^d),
+\end{equation}
+with $\psi_H$ and $n_H$ as in \ref{eq:stable-levy-density}. Then $\rho$ is a probability measure,
+and for every smooth $\phi$ with compact support in $\RR^d \setminus \{0\}$
+\begin{equation}\label{eq:stable-tail}
+  \lim_{R\to\infty} R^\alpha\int\phi(x/R)\,\rho(dx) = \int\phi(x)\,\bigl(n_{H'}(x) - n_H(x)\bigr)\,dx .
+\end{equation}
+Consequently $n_H(x) \le n_{H'}(x)$ for every $x \ne 0$.
+\statusT\quad\emph{(Cites nothing: Fourier inversion for a Schwartz function, Fubini, and
+\ref{lem:elliptical-stable-density}(1), which is arithmetic; the existence clause of the lemma it was
+split from, the one place that lemma spends \ledger{A3}, is not read here. Since $n_{H'} - n_H$ is homogeneous of degree $-d-\alpha$,
+the right-hand side of \ref{eq:stable-tail} equals $R^\alpha\int\phi(x/R)(n_{H'} - n_H)(x)\,dx$
+for every $R$: the increment's mass at scale $R$ is asymptotically that of the signed \Levy{}
+difference, which is P-0019's tail heuristic in the weak form positivity needs. \textbf{Not
+claimed}: a pointwise tail of a density of $\rho$, which would need more than this; nor that $\rho$ is
+infinitely divisible.)}
+\end{lemma}
+
+\begin{proof}
+\leanok
+\emph{Normalisation.} Write $E(\omega)$ for the bracket in \ref{eq:stable-tail-transform} with its
+sign reversed, so $\widehat\rho = e^{-E}$, and $E$ is real and even. Then $\rho(\RR^d) =
+\widehat\rho(0) = 1$, and $|\widehat\rho| \le \rho(\RR^d) = 1$ gives $E \ge 0$. Put
+$D := \psi_{H'} - \psi_H$, homogeneous of degree $\alpha$, so that
+$E(\omega/R) = R^{-2}\langle\omega,C\omega\rangle + R^{-\alpha}D(\omega)$ for $R > 0$.
+
+\emph{Fourier side.} Let $\phi$ be smooth with compact support in $\RR^d \setminus \{0\}$, real,
+and $\widehat\phi(\omega) := \int e^{i\langle\omega,x\rangle}\phi(x)\,dx$, a Schwartz function, so
+that $\phi(x) = (2\pi)^{-d}\int\widehat\phi(\omega)e^{-i\langle\omega,x\rangle}d\omega$. Put
+$\phi_R(x) := \phi(x/R)$, with $\widehat{\phi_R}(\omega) = R^d\widehat\phi(R\omega)$. Integrating
+the inversion formula against $\rho$ (Fubini, $\widehat\phi$ integrable and $\rho$ finite) and using
+that $\widehat\rho$ is even,
+\[
+  \int\phi_R\,d\rho = (2\pi)^{-d}\int\widehat{\phi_R}(\omega)\,\widehat\rho(\omega)\,d\omega
+  = (2\pi)^{-d}\int\widehat\phi(\zeta)\,e^{-E(\zeta/R)}\,d\zeta .
+\]
+Since $\int\widehat\phi = (2\pi)^d\phi(0) = 0$, the factor $e^{-E(\zeta/R)}$ may be replaced by
+$e^{-E(\zeta/R)} - 1$.
+
+% CHANGED Q-0281 wave 1: the paragraph "The limit" rewritten to the Lean route: dominated convergence
+% with the first-order bound 1 - e^{-s} <= s as the domination and the second-order bound used only
+% pointwise, in place of the bound by R^{-alpha}F^2. The other paragraphs are the Lean's route; the Lean
+% writes the Fourier transform with Mathlib's normalisation, Phi(xi) = \widehat\phi(-2 pi xi).
+\emph{The limit.} Let $R \ge 1$ and $s := E(\zeta/R) \ge 0$. Since $0 \le 1 - e^{-s} \le s$ and
+$R^\alpha E(\zeta/R) = R^{\alpha-2}\langle\zeta,C\zeta\rangle + D(\zeta)$ with $R^{\alpha-2} \le 1$,
+\[
+  R^\alpha\bigl|e^{-E(\zeta/R)} - 1\bigr| \le R^\alpha E(\zeta/R) \le F(\zeta)
+  := \|C\|\,|\zeta|^2 + |D(\zeta)| ,
+\]
+$\|C\|$ the operator norm. As $|D(\zeta)| \le (\|H'\|^{\alpha/2} + \|H\|^{\alpha/2})|\zeta|^\alpha \le
+(\|H'\|^{\alpha/2} + \|H\|^{\alpha/2})(1 + |\zeta|^2)$ and $\widehat\phi$ is a Schwartz function,
+$|\widehat\phi|F$ is integrable, and it dominates
+$R^\alpha\widehat\phi(\zeta)(e^{-E(\zeta/R)} - 1)$ for $R \ge 1$. Pointwise, since $\alpha < 2$,
+$R^\alpha E(\zeta/R) \to D(\zeta)$ and $E(\zeta/R) \to 0$, and $|e^{-s} - 1 + s| \le s^2$ for
+$|s| \le 1$ gives
+$R^\alpha\bigl|e^{-E(\zeta/R)} - 1 + E(\zeta/R)\bigr| \le R^\alpha E(\zeta/R)\cdot E(\zeta/R) \to 0$;
+so $R^\alpha(e^{-E(\zeta/R)} - 1) \to -D(\zeta)$, and dominated convergence gives
+\[
+  \lim_{R\to\infty}R^\alpha\int\phi_R\,d\rho = -(2\pi)^{-d}\int\widehat\phi(\zeta)\,D(\zeta)\,d\zeta .
+\]
+
+\emph{Back to $x$.} Put $f := n_{H'} - n_H$, even and continuous on $\RR^d \setminus \{0\}$. By
+\ref{lem:elliptical-stable-density}(1), applied to $H'$ and to $H$,
+$D(\zeta) = \int(1 - \cos\langle\zeta,x\rangle)f(x)\,dx$, and
+$\iint|\widehat\phi(\zeta)|(1 - \cos\langle\zeta,x\rangle)(n_{H'} + n_H)(x)\,dx\,d\zeta
+= \int|\widehat\phi|(\psi_{H'} + \psi_H) < \infty$ by Tonelli. So Fubini applies, and the inversion
+formula at $x$ and at $-x$ gives
+$\int\widehat\phi(\zeta)(1 - \cos\langle\zeta,x\rangle)\,d\zeta = (2\pi)^d\bigl[\phi(0) -
+\tfrac12(\phi(x) + \phi(-x))\bigr] = -(2\pi)^d\tfrac12(\phi(x) + \phi(-x))$. Hence
+\[
+  -(2\pi)^{-d}\int\widehat\phi\,D = \int f(x)\,\tfrac12\bigl(\phi(x) + \phi(-x)\bigr)\,dx
+  = \int f\phi\,dx ,
+\]
+$f$ being even. This is \ref{eq:stable-tail}.
+
+\emph{The sign.} If $\phi \ge 0$, the left-hand side of \ref{eq:stable-tail} is a limit of
+nonnegative numbers, so $\int f\phi \ge 0$. If $f(x_0) < 0$ for some $x_0 \ne 0$, then $f < 0$ on a
+ball around $x_0$ not containing $0$, and a smooth $\phi \ge 0$, not identically $0$, supported in
+that ball gives $\int f\phi < 0$. So $f \ge 0$.
+\end{proof}
+
+% not in the draft: P-0019, Q-0241. The step cone. It refutes the draft's conjecture at the end of
+% section 2.4. Checked independently by the postdoc's numerics at alpha = 1, d = 2 (hub,
+% offices/postdoc/experiments/affine_weakenings.py): the boundary step diag(1.2, 1.44) has a
+% positive increment density to 1e-9, and diag(1.2, 1.6), outside, a negative one.
+% CHANGED Q-0281: typed (the statement skeleton). The matrix analysis -- (b)<=>(c) and "then
+% Sigma <= Sigma'" of (1), the order of (2), and (3) -- is split to lem:stable-step-order, placed after
+% this node (ADR-0025; records/formalization/PRICING.md: [T], and what
+% thm:cascade-infinitely-divisible, prop:stable-order-generated and
+% prop:similarity-stable-order-families read), and \uses gains it; the text is unchanged and the
+% \lean tag names the child's declarations too.
+% CHANGED Q-0281: \uses re-pointed to the split child it reads (lem:elliptical-stable (1), (3) beside (2)).
+\begin{proposition}[the stable orbit cascades on a cone of full-rank steps]
+\label{prop:stable-step-cone}
+\uses{lem:elliptical-stable,lem:stable-tail,lem:loewner-scale-shape,lem:stable-step-order,lem:elliptical-stable-density,thm:cited-A3}
+\lean{AffineHemigroup.stable_step_cone_tfae, AffineHemigroup.stable_step_cone_increment,
+AffineHemigroup.stable_step_increments, AffineHemigroup.stable_density_order_iff,
+AffineHemigroup.stableLE_partialOrder, AffineHemigroup.stableLE_rays_not_rank_deficient,
+AffineHemigroup.stableLE_scale_shape, AffineHemigroup.stableLE_scale_shape_converse,
+AffineHemigroup.stableLE_any_eigenframe}\leanok
+Let $d \ge 1$, $0 < \alpha < 2$, and let $\mu_\Sigma = S_\alpha(\Sigma)$, $\Sigma \in \PD(d)$, be the
+stable orbit (\ref{lem:elliptical-stable}). For $\Sigma, \Sigma' \in \PD(d)$ put
+$M := \Sigma^{-1/2}\Sigma'\Sigma^{-1/2}$ and let $\lambda_{\min}(M)$ be its least eigenvalue.
+\begin{enumerate}
+\item \emph{(The step cone.)} The following are equivalent:
+(a) there is a positive finite measure $\rho$ with $\mu_{\Sigma'} = \mu_\Sigma * \rho$;
+(b) $n_\Sigma(x) \le n_{\Sigma'}(x)$ for every $x \ne 0$;
+(c) $\lambda_{\min}(M)^{d+\alpha} \ge \det M$.
+When they hold, $\Sigma \le \Sigma'$, and $\rho$ is unique: it is the infinitely divisible probability
+measure $\rho_{\Sigma,\Sigma'}$ with generating triplet $(0, (n_{\Sigma'} - n_\Sigma)(x)\,dx, 0)$.
+\item \emph{(The order.)} Write $\Sigma \preceq_\alpha \Sigma'$ when (c) holds. This is a partial order
+on $\PD(d)$, contained in the Loewner order, and $\Sigma \preceq_\alpha \Sigma'$ if and only if
+$A\Sigma A^{\tp} \preceq_\alpha A\Sigma'A^{\tp}$, for every $A \in \GL(d)$. The increments satisfy
+$\rho_{\Sigma,\Sigma} = \delta_0$, $\rho_{\Sigma,\Sigma''} = \rho_{\Sigma',\Sigma''} * \rho_{\Sigma,\Sigma'}$
+whenever $\Sigma \preceq_\alpha \Sigma' \preceq_\alpha \Sigma''$, and
+$A_*\rho_{\Sigma,\Sigma'} = \rho_{A\Sigma A^{\tp},A\Sigma'A^{\tp}}$.
+\item \emph{(Which steps.)} Every ray, $\Sigma' = \lambda^2\Sigma$ with $\lambda \ge 1$, satisfies
+$\Sigma \preceq_\alpha \Sigma'$, and no step $\Sigma' = \Sigma + P$ with $P \in \PSD(d)$ and
+$0 < \rank P < d$ does. In the coordinates of \ref{lem:loewner-scale-shape} (volume scales $t_1, t_2$,
+the eigenvalues $n_1 \le \dots \le n_d$ of the relative shape $N$),
+\[
+  \Sigma_1 \preceq_\alpha \Sigma_2 \Longleftrightarrow n_1 \ge (t_1/t_2)^{2\alpha/(d+\alpha)} ,
+\]
+so the anisotropy gained, $\sqrt{n_d/n_1}$, is at most $(t_2/t_1)^{d\alpha/(d+\alpha)}$; and for
+every $t_2 \ge t_1$ and every $N \in \PD(d)$ with $\det N = 1$ and least eigenvalue at least
+$(t_1/t_2)^{2\alpha/(d+\alpha)}$, the matrix $\Sigma_2 := t_2^2S_1^{1/2}NS_1^{1/2}$ satisfies
+$\Sigma_1 \preceq_\alpha \Sigma_2$. In particular, for $d \ge 2$ and $t_2 > t_1$ the relative shape
+of a step in the cone may be any $N \ne I$ in that range, with any eigenvectors.
+\end{enumerate}
+\statusA\quad\ledger{A3}\quad\emph{(\textbf{Assignment.} \ledger{A3}(iii) is spent through
+\ref{lem:elliptical-stable}(2), for the orbit itself, and once more in (b)$\Rightarrow$(a), for the
+increment. The necessity direction (a)$\Rightarrow$(b) is \ref{lem:stable-tail} and spends nothing
+beyond the existence of the orbit; nor do (b)$\Leftrightarrow$(c), clause (2) and clause (3).
+\textbf{What it is worth.} It refutes the draft's conjecture at the end of its \S 2.4, restated in
+the annotations of \ref{thm:rank-deficient-step} and \ref{prop:matern-cross-shape} before this node
+existed, that every step off the rays fails for every non-Gaussian orbit. The stable orbit cascades
+on a $\GL(d)$-invariant order with interior, containing full-rank steps of every orientation; what
+limits a step is its relative anisotropy, the gap between $\lambda_{\min}(M)$ and the geometric mean
+$(\det M)^{1/d}$, and not its orientation. The cone lies between the rays and the Loewner order:
+the Loewner order is $n_1 \ge (t_1/t_2)^2$ (\ref{lem:loewner-scale-shape}(1)), and read formally at
+$\alpha = 0$ condition (c) admits the rays only, which is what \ref{prop:matern-cross-shape} proves,
+by another argument, for the \Matern{} orbit of index $1$; that reading is an analogy, not a
+statement. It is consistent with \ref{thm:rank-deficient-step}: clause (3)'s exclusion of
+rank-deficient steps is read off (c) directly, and is that theorem's conclusion for
+$g(u) = u^{\alpha/2}$. \textbf{The route.} P-0019 proposed necessity through the tail of the
+increment, expecting a Tauberian argument; testing positivity against functions supported at a
+large scale needs only the weak tail \ref{eq:stable-tail}, which homogeneity gives. \textbf{Not
+claimed}: the step cones of other non-Gaussian orbits (the \Matern{} orbits of index
+$\gamma \ge 2$, the Student-t, orbits of laws whose \Levy{} density is not homogeneous), where the
+tail and the origin need not carry the same information; the elliptical stable laws with a
+non-uniform spectral measure. A statement of this cone in the literature has not been found: it is
+not in the parts of \sscite{jurek1993operator} read at the page (records/affine/READING-jurek1993operator.md),
+which has the general frame of exponent cones but no stable example.)}
+\end{proposition}
+
+% CHANGED Q-0281 wave 2: proved (AffineHemigroup.EllipticalStable, with the child's declarations;
+% (b)=>(a) and the increment print A3(iii), guarded). The Lean follows this proof; the cascade and
+% the covariance of the increments are read by uniqueness of the increment, the transform of
+% mu_Sigma having no zero.
+% CHANGED writing-rules pass (2026-10-14; the blind check of records/affine/PASS-writing-rules-affine.md):
+% notation only, "with G = 0" -> "with C = 0" in (a)=>(b), the matrix of the Gaussian factor of
+% lem:stable-tail being C since Q-0327.
+\begin{proof}
+\leanok
+\emph{(b)$\Leftrightarrow$(c).} Substitute $x = \Sigma^{1/2}y$. Then
+$\langle x,\Sigma^{-1}x\rangle = |y|^2$, $\langle x,\Sigma'^{-1}x\rangle = \langle y,M^{-1}y\rangle$ and
+$\det\Sigma'/\det\Sigma = \det M$, so (b) says
+$(\det M)^{-1/2}\langle y,M^{-1}y\rangle^{-(d+\alpha)/2} \ge |y|^{-(d+\alpha)}$ for every $y \ne 0$, that
+is $\langle y,M^{-1}y\rangle/|y|^2 \le (\det M)^{-1/(d+\alpha)}$. The supremum of the left-hand side
+over $y \ne 0$ is $1/\lambda_{\min}(M)$, so (b) is $\lambda_{\min}(M)^{-1} \le (\det M)^{-1/(d+\alpha)}$, which
+is (c).
+
+\emph{(c) gives $\Sigma \le \Sigma'$.} $\det M \ge \lambda_{\min}(M)^d$, so (c) gives
+$\lambda_{\min}(M)^{d+\alpha} \ge \lambda_{\min}(M)^d$, hence $\lambda_{\min}(M) \ge 1$, $M \ge I$, and
+$\Sigma' - \Sigma = \Sigma^{1/2}(M - I)\Sigma^{1/2} \ge 0$.
+
+\emph{(a)$\Rightarrow$(b).} Taking transforms, $e^{-\psi_{\Sigma'}} = e^{-\psi_\Sigma}\widehat\rho$, and
+$e^{-\psi_\Sigma}$ has no zero, so $\widehat\rho = e^{-\psi_{\Sigma'} + \psi_\Sigma}$. That is
+\ref{eq:stable-tail-transform} with $C = 0$, $H = \Sigma$, $H' = \Sigma'$, and
+\ref{lem:stable-tail} gives (b). The same identity shows that $\rho$ is determined by its transform,
+hence unique.
+
+\emph{(b)$\Rightarrow$(a).} $f := n_{\Sigma'} - n_\Sigma$ is nonnegative, even, and at most
+$n_{\Sigma'}$, so $f(x)\,dx$ satisfies the conditions of \ledger{A3} by
+\ref{lem:elliptical-stable}(1). By \ledger{A3}(iii) there is an infinitely divisible $\rho$ with
+generating triplet $(0, f(x)\,dx, 0)$. As $f$ is even, the odd part
+$i(\sin\langle\omega,x\rangle - \langle\omega,x\rangle\mathbf 1_{\{|x| \le 1\}})$ of the integrand of
+\ledger{A3}(i) integrates to $0$, as in the proof of \ref{lem:elliptical-stable}(2), and
+$\widehat\rho(\omega) = \exp[-\int(1 - \cos\langle\omega,x\rangle)f(x)\,dx]
+= e^{-\psi_{\Sigma'}(\omega) + \psi_\Sigma(\omega)}$, the last step by \ref{lem:elliptical-stable}(1)
+for $\Sigma'$ and for $\Sigma$, both integrals being finite. So $\mu_\Sigma * \rho$ and
+$\mu_{\Sigma'}$ have the same transform and are equal.
+
+\emph{Clause (2).} Reflexivity is $M = I$; transitivity is that of (b); antisymmetry is that of the
+Loewner order, which contains $\preceq_\alpha$. By \ref{lem:elliptical-stable}(3), (b) for the pair
+$(A\Sigma A^{\tp}, A\Sigma'A^{\tp})$ is (b) for $(\Sigma,\Sigma')$ evaluated at $A^{-1}x$ and
+multiplied by $|\det A|^{-1}$. The transform of $\rho_{\Sigma,\Sigma'}$ is
+$e^{-\psi_{\Sigma'} + \psi_\Sigma}$; these telescope, which gives the cascade, and
+$\psi_{\Sigma}(A^{\tp}\omega) = \psi_{A\Sigma A^{\tp}}(\omega)$ gives the covariance, each time by
+uniqueness of the transform.
+
+\emph{Clause (3).} For $\Sigma' = \lambda^2\Sigma$, $M = \lambda^2I$ and (c) reads
+$\lambda^{2(d+\alpha)} \ge \lambda^{2d}$, true for $\lambda \ge 1$. For $\Sigma' = \Sigma + P$ with
+$0 < \rank P < d$, $M = I + \Sigma^{-1/2}P\Sigma^{-1/2}$ has the eigenvalue $1$ (on the kernel of
+$P\Sigma^{-1/2}$, which is nonzero) and an eigenvalue above $1$, all of them at least $1$; so
+$\lambda_{\min}(M) = 1 < \det M$ and (c) fails. In the coordinates of \ref{lem:loewner-scale-shape},
+$\Sigma_k^{\pm 1/2} = t_k^{\pm1}S_k^{\pm1/2}$ gives $M = (t_2/t_1)^2N$, so
+$\lambda_{\min}(M) = (t_2/t_1)^2n_1$ and $\det M = (t_2/t_1)^{2d}$, and (c) is
+$n_1^{d+\alpha} \ge (t_1/t_2)^{2\alpha}$. Then $n_d = (n_1\cdots n_{d-1})^{-1} \le
+n_1^{-(d-1)}$, so $n_d/n_1 \le n_1^{-d} \le (t_2/t_1)^{2d\alpha/(d+\alpha)}$. The converse is
+\ref{lem:loewner-scale-shape}(3), which gives $t(\Sigma_2) = t_2$ and relative shape $N$, followed by
+the equivalence just proved. For the last sentence take $N = Q\diag(a, a^{-1/(d-1)}, \dots,
+a^{-1/(d-1)})Q^{\tp}$ with $Q \in \Orth(d)$ arbitrary and $(t_1/t_2)^{2\alpha/(d+\alpha)} \le a < 1$.
+\end{proof}
+
+% CHANGED Q-0281: split from prop:stable-step-cone (ADR-0025; records/formalization/PRICING.md):
+% (b)<=>(c) and "then Sigma <= Sigma'" of clause (1), the order of clause (2), and clause (3), copied
+% verbatim with the parent's clause numbers. They are matrix analysis and spend nothing, where the
+% parent's (a) and its increments spend A3(iii); the parent \uses this node, and its text and
+% numbering are unchanged.
+\begin{lemma}[the stable step order]
+\label{lem:stable-step-order}
+\uses{lem:elliptical-stable-density,lem:loewner-scale-shape}
+\lean{AffineHemigroup.stable_density_order_iff, AffineHemigroup.stableLE_partialOrder,
+AffineHemigroup.stableLE_rays_not_rank_deficient, AffineHemigroup.stableLE_scale_shape,
+AffineHemigroup.stableLE_scale_shape_converse, AffineHemigroup.stableLE_any_eigenframe}\leanok
+Let $d \ge 1$ and $0 < \alpha < 2$, and let $n_\Sigma$ be the density of
+\ref{lem:elliptical-stable-density}. For $\Sigma, \Sigma' \in \PD(d)$ put
+$M := \Sigma^{-1/2}\Sigma'\Sigma^{-1/2}$ and let $\lambda_{\min}(M)$ be its least eigenvalue.
+\begin{enumerate}
+\item[(1)] The following are equivalent: (b) $n_\Sigma(x) \le n_{\Sigma'}(x)$ for every $x \ne 0$;
+(c) $\lambda_{\min}(M)^{d+\alpha} \ge \det M$. When they hold, $\Sigma \le \Sigma'$.
+\item[(2)] \emph{(The order.)} Write $\Sigma \preceq_\alpha \Sigma'$ when (c) holds. This is a partial
+order on $\PD(d)$, contained in the Loewner order, and $\Sigma \preceq_\alpha \Sigma'$ if and only if
+$A\Sigma A^{\tp} \preceq_\alpha A\Sigma'A^{\tp}$, for every $A \in \GL(d)$.
+\item[(3)] \emph{(Which steps.)} Every ray, $\Sigma' = \lambda^2\Sigma$ with $\lambda \ge 1$, satisfies
+$\Sigma \preceq_\alpha \Sigma'$, and no step $\Sigma' = \Sigma + P$ with $P \in \PSD(d)$ and
+$0 < \rank P < d$ does. In the coordinates of \ref{lem:loewner-scale-shape} (volume scales $t_1, t_2$,
+the eigenvalues $n_1 \le \dots \le n_d$ of the relative shape $N$),
+\[
+  \Sigma_1 \preceq_\alpha \Sigma_2 \Longleftrightarrow n_1 \ge (t_1/t_2)^{2\alpha/(d+\alpha)} ,
+\]
+so the anisotropy gained, $\sqrt{n_d/n_1}$, is at most $(t_2/t_1)^{d\alpha/(d+\alpha)}$; and for
+every $t_2 \ge t_1$ and every $N \in \PD(d)$ with $\det N = 1$ and least eigenvalue at least
+$(t_1/t_2)^{2\alpha/(d+\alpha)}$, the matrix $\Sigma_2 := t_2^2S_1^{1/2}NS_1^{1/2}$ satisfies
+$\Sigma_1 \preceq_\alpha \Sigma_2$. In particular, for $d \ge 2$ and $t_2 > t_1$ the relative shape
+of a step in the cone may be any $N \ne I$ in that range, with any eigenvectors.
+\end{enumerate}
+\statusT\quad\emph{(Cites nothing beyond the spectral theorem. The matrix analysis of
+\ref{prop:stable-step-cone}, split off on 2026-10-04 (Q-0281, ADR-0025), with the parent's clause
+numbers; the transitivity in (2) is read here from (b), the pointwise order of the densities, which
+spends nothing, and the numbering stays the parent's.)}
+\end{lemma}
+
+\begin{proof}
+\leanok
+This is the part of the proof of \ref{prop:stable-step-cone} headed (b)$\Leftrightarrow$(c), (c)
+gives $\Sigma \le \Sigma'$, clause (2) as far as the order goes, and clause (3).
+\end{proof}
+
+% not in the draft: P-0019 (ii), Q-0241. The one-parameter row with the isotropic stable law:
+% its exponent set. The name and the definition are Sato-Yamazato's (sato1984operator p. 76, (2.1))
+% and Jurek-Mason's ((3.4.1), p. 89, "exp(-tQ)-decomposable"), both read at the page; neither
+% source is needed for the statement, which reads the step cone.
+% CHANGED Q-0281: \uses re-pointed to the split child it reads (the order of prop:stable-step-cone(2) beside (1)(a)).
+% CHANGED Q-0281: blind review R5-4: \uses gains lem:elliptical-stable, whose clause (2) the proof
+% opens with (an edge missing before Q-0281).
+% CHANGED round-2 review (Gemini), item 12, the author's decision D7 (2026-11-03): the exponent cone K_alpha
+% is written frak k_alpha (a subset of gl(d), in fraktur as gl(d) is), apart from the step cone
+% cal K_alpha. Notation only; no claim, \uses or \lean changes.
+\begin{proposition}[the exponent cone of the isotropic stable law]
+\label{prop:stable-exponent-cone}
+\uses{prop:stable-step-cone,lem:stable-step-order,lem:elliptical-stable,thm:cited-A3}
+\lean{AffineHemigroup.stable_exponent_cone, AffineHemigroup.stableExpCone_props}\leanok
+Let $d \ge 1$ and $B$ a real $d \times d$ matrix, and write $\mathrm{sym}\,B := \tfrac12(B + B^{\tp})$.
+Call a probability measure $\mu$ on $\RR^d$ \emph{$B$-self-decomposable} if for every $t > 0$ there is a
+probability measure $\rho_t$ with $\mu = (e^{-tB})_*\mu * \rho_t$. For $0 < \alpha < 2$, $S_\alpha(I)$
+is $B$-self-decomposable if and only if
+\begin{equation}\label{eq:stable-exponent-cone}
+  (d+\alpha)\,\lambda_{\min}(\mathrm{sym}\,B) \ge \tr B .
+\end{equation}
+The set $\mathfrak k_\alpha$ of such $B$ is a closed convex cone, invariant under $B \mapsto QBQ^{\tp}$ for
+$Q \in \Orth(d)$; it contains every skew-symmetric matrix and $I$, and every $B \in \mathfrak k_\alpha$ has
+$\mathrm{sym}\,B \ge 0$, with $\lambda_{\min}(\mathrm{sym}\,B) > 0$ unless $B$ is skew-symmetric.
+\statusA\quad\ledger{A3}\quad\emph{(\textbf{Assignment.} \ledger{A3}(iii), through
+\ref{prop:stable-step-cone} in both directions, for the law and its residuals; nothing further. \textbf{What it is worth.} The one-parameter row of the weakened
+axioms, with rotations: the stable orbit cascades along the curve $\Sigma(t) = e^{tB}e^{tB^{\tp}}$
+exactly when $B \in \mathfrak k_\alpha$, by \ref{prop:stable-step-cone}(2). Only $\mathrm{sym}\,B$ enters, so
+the skew part, the turning of the curve, is free; the anisotropy of $\mathrm{sym}\,B$ is what is
+limited. $B = I$ is ordinary self-decomposability (\ref{eq:self-decomposable}). The cone grows with
+$\alpha$. By the last sentence of the statement, $B$ lies in some $\mathfrak k_\alpha$, $0 < \alpha < 2$,
+exactly when $B$ is skew-symmetric or $\tr B < (d+2)\lambda_{\min}(\mathrm{sym}\,B)$. So the closure of the
+union of the $\mathfrak k_\alpha$ is the cone $\{(d+2)\lambda_{\min}(\mathrm{sym}\,B) \ge \tr B\}$ that
+\ref{eq:stable-exponent-cone} defines at $\alpha = 2$. For $d \ge 2$ this is smaller than the Gaussian's cone
+$\{\mathrm{sym}\,B \ge 0\}$, which is \sscite{jurek1993operator} Prop.~3.3.10(a), p.~88 (read, not used; the
+page states the Gaussian's cone and says nothing of a union). The matrix $\diag(1, 0.2, \dots, 0.2)$ lies in
+the Gaussian's cone and not in the closure, as $0.2(d+2) < 1 + 0.2(d-1)$. The Gaussian's cone is the closure
+of the union of the cones that \ref{eq:stable-exponent-cone} defines for every $\alpha > 0$, the cones
+$C_\alpha$ of \ref{prop:stable-order-generated} plus the skew matrices, $0 < \alpha < \infty$. That union
+holds only the $B$ with $\lambda_{\min}(\mathrm{sym}\,B) > 0$ and the skew matrices. So
+$B = \diag(1, 0, \dots, 0)$, an exponent of the standard Gaussian, lies in none of these cones, while
+$B + \eta I$, $\eta > 0$, lies in the cone of every $\alpha \ge 1/\eta$, and in $\mathfrak k_\alpha$ for
+$1/\eta \le \alpha < 2$, so in some $\mathfrak k_\alpha$ only when $\eta > 1/2$. In that book's terms
+$\mathfrak k_\alpha$ is the set of U-exponents of $S_\alpha(I)$ (Def., p.~85; that it is a closed convex cone is
+its Prop.~3.3.6, p.~86). \textbf{Not claimed}: a statement of $\mathfrak k_\alpha$ in the literature; the
+parts of Jurek--Mason read at the page do not contain it, and Jurek (1992; cited as 1991 in Jurek–Mason), where the U-exponents
+originate, and Hudson--Mason, cited by \sscite{sato1984operator} p.~76 for overlapping classes of
+exponents, are not held.)}
+\end{proposition}
+
+% CHANGED Q-0281 wave 2: proved (AffineHemigroup.StableExponentCone; stable_exponent_cone prints
+% A3(iii), the cone's properties Lean core; guarded). The Lean follows this proof; it writes out
+% det e^{tB} = e^{t tr B}, which Mathlib lacks, and reads K_alpha as an intersection of half-spaces.
+\begin{proof}
+\leanok
+By \ref{lem:elliptical-stable}(2), $(e^{-tB})_*S_\alpha(I) = S_\alpha(\Sigma_t)$ with
+$\Sigma_t := e^{-tB}e^{-tB^{\tp}}$. So $S_\alpha(I)$ is $B$-self-decomposable exactly when
+$\Sigma_t \preceq_\alpha I$ for every $t > 0$, by \ref{prop:stable-step-cone}(1), the increment of
+(a) being a probability measure. Here $M_t = \Sigma_t^{-1} = e^{tB^{\tp}}e^{tB}$, whose least eigenvalue
+is $\min_{|x|=1}|e^{tB}x|^2$ and whose determinant is $e^{2t\tr B}$. (That
+$\det e^{tB} = e^{t\tr B}$: by the Leibniz formula $\frac{d}{dt}\det e^{tB}$ at $t = 0$ is $\tr B$, every
+permutation other than the identity moving two points; $\det e^{(s+t)B} = \det e^{sB}\det e^{tB}$
+then gives $\frac{d}{dt}\det e^{tB} = (\tr B)\det e^{tB}$, so $e^{-t\tr B}\det e^{tB}$ is constant.)
+So the condition is
+\[
+  |e^{tB}x| \ge e^{t\tr B/(d+\alpha)} \qquad \text{for all } t > 0 \text{ and all unit } x .
+\]
+Write $\lambda := \lambda_{\min}(\mathrm{sym}\,B)$. If \ref{eq:stable-exponent-cone} holds, then
+$\tfrac{d}{dt}|e^{tB}x|^2 = 2\langle e^{tB}x,(\mathrm{sym}\,B)e^{tB}x\rangle \ge 2\lambda|e^{tB}x|^2$,
+so $e^{-2t\lambda}|e^{tB}x|^2$ is nondecreasing and $|e^{tB}x| \ge e^{t\lambda} \ge
+e^{t\tr B/(d+\alpha)}$. Conversely, for a unit eigenvector $x$ of $\mathrm{sym}\,B$ with eigenvalue
+$\lambda$, $f(t) := |e^{tB}x|^2$ has $f(0) = 1$ and $f'(0) = 2\lambda$, and
+$f(t) \ge e^{2t\tr B/(d+\alpha)}$ for $t > 0$ with equality at $t = 0$ gives
+$2\lambda \ge 2\tr B/(d+\alpha)$.
+
+As $\lambda_{\min}(\mathrm{sym}\,B) = \min_{|x|=1}\langle x,Bx\rangle$, $\mathfrak k_\alpha$ is the intersection
+over unit vectors $x$ of the closed half-spaces $\{B : \tr B \le (d+\alpha)\langle x,Bx\rangle\}$, each
+cut out by a linear inequality, and $\lambda_{\min}(c\,\mathrm{sym}\,B) = c\,\lambda_{\min}(\mathrm{sym}\,B)$
+for $c \ge 0$; so $\mathfrak k_\alpha$ is a closed convex cone. Conjugation by
+$Q$ leaves the spectrum of $\mathrm{sym}\,B$ and $\tr B$ unchanged. For skew $B$ both sides of
+\ref{eq:stable-exponent-cone} vanish, and for $B = I$ it reads $d + \alpha \ge d$. Finally
+$\tr B = \tr\mathrm{sym}\,B \ge d\lambda$, so $B \in \mathfrak k_\alpha$ gives $(d+\alpha)\lambda \ge d\lambda$, that
+is $\lambda \ge 0$; and if $\lambda = 0$ then $\tr\mathrm{sym}\,B \le 0$ with $\mathrm{sym}\,B \ge 0$,
+so $\mathrm{sym}\,B = 0$.
+\end{proof}
+
+% not in the draft: Q-0246 item 2, the step cone of a general affine orbit. Sufficiency for every
+% radial Levy profile, by the ordering of the Levy densities as in prop:stable-step-cone; the cone
+% is read off one function of the profile, its dilation ratio. Necessity is the next node at
+% Levy index 0, and prop:stable-step-cone for the stable profiles; in general it is open.
+% CHANGED Q-0281: \uses re-pointed to the split child it reads (the cone (c) and the proof of (3) of prop:stable-step-cone only).
+% CHANGED round-3 review (report D, item 5; records/affine/reviews/VERIFY-round3-landscape-orbits-paper.md
+% section 9; PLAN-review-response-paper.md R3.1, taken unless vetoed): "the ordered-density cone" is
+% "the ordered-density step set" (title), clause (2) is headed "(The steps.)", and clause (3) says "its
+% step set" where it said "the cone". A dyadic profile gives a member of the set whose square root is
+% not in it, so no cone generates the set in general (the annotation's new sentence; orders_checks.py
+% (b)). Wording only: the label, \lean, \uses and the proof are unchanged.
+% CHANGED D14 (2026-11-04; the author's decision, PLAN-review-response-paper.md R3.0): the annotation's
+% pointer to prop:wedge-axis-profiles(1) drops "right-continuous", which that clause no longer assumes.
+% Annotation only.
+\begin{proposition}[the ordered-density step set of an affine orbit]
+\label{prop:orbit-step-cone}
+\uses{lem:stable-step-order,lem:elliptical-stable,thm:cited-A3}
+\lean{AffineHemigroup.dilRatio_mem, AffineHemigroup.profileLaw_exists_unique,
+AffineHemigroup.profileLaw_props, AffineHemigroup.orbit_density_order_iff,
+AffineHemigroup.orbit_density_order_increment, AffineHemigroup.orbit_density_order_props,
+AffineHemigroup.orbit_density_order_stable, AffineHemigroup.orbit_density_order_bounded}\leanok
+Let $d \ge 1$ and let $k : (0,\infty) \to [0,\infty)$ be nonincreasing, not identically $0$, and put
+$m(r) := k(r)\,r^{-d}$, with $\int_{\RR^d}(|x|^2 \wedge 1)\,m(|x|)\,dx < \infty$. For $\lambda \ge 1$ put
+\[
+  R(\lambda) := \inf\{k(r/\lambda)/k(r) : r > 0,\ k(r) > 0\} \in [1, \infty) .
+\]
+\begin{enumerate}
+\item \emph{(The orbit.)} There is a unique probability measure $\mu_I$ on $\RR^d$ with
+$\widehat\mu_I(\omega) = e^{-\psi_I(\omega)}$, $\psi_I(\omega) := \int(1 - \cos\langle\omega,x\rangle)\,
+m(|x|)\,dx$; it is rotation invariant and infinitely divisible with generating triplet
+$(0, m(|x|)\,dx, 0)$. For $\Sigma \in \PD(d)$ its orbit $\mu_\Sigma := (\Sigma^{1/2})_*\mu_I$ has
+$\widehat\mu_\Sigma(\omega) = \exp[-\int(1 - \cos\langle\omega,x\rangle)\,n_\Sigma(x)\,dx]$ with
+$n_\Sigma(x) := (\det\Sigma)^{-1/2}m(|\Sigma^{-1/2}x|)$.
+\item \emph{(The steps.)} For $\Sigma, \Sigma' \in \PD(d)$ put $M := \Sigma^{-1/2}\Sigma'\Sigma^{-1/2}$.
+Then $n_\Sigma \le n_{\Sigma'}$ everywhere if and only if $\lambda_{\min}(M) \ge 1$ and
+\[
+  \det M \le \lambda_{\min}(M)^d\,R\bigl(\lambda_{\min}(M)^{1/2}\bigr)^2 ;
+\]
+and then $\Sigma \le \Sigma'$, and $\mu_{\Sigma'} = \mu_\Sigma * \rho$ with $\rho$ the infinitely
+divisible probability measure with generating triplet $(0, (n_{\Sigma'} - n_\Sigma)(x)\,dx, 0)$.
+\item \emph{(Which steps.)} The relation of (2) is a partial order on $\PD(d)$, invariant under
+$\Sigma \mapsto A\Sigma A^{\tp}$ for $A \in \GL(d)$; it contains every ray $\Sigma \le \lambda^2\Sigma$,
+$\lambda \ge 1$, and no step $\Sigma \to \Sigma + P$ with $0 < \rank P < d$. If
+$k(r) = c\,r^{-\alpha}$, $0 < \alpha < 2$, then $R(\lambda) = \lambda^\alpha$ and its step set is the cone of
+\ref{prop:stable-step-cone}. If $k(0{+}) := \lim_{r\downarrow0}k(r)$ is finite, then $R \equiv 1$ and
+its step set is the rays.
+\end{enumerate}
+\statusA\quad\ledger{A3}\quad\emph{(\textbf{Assignment.} \ledger{A3}(iii) gives $\mu_I$ and the
+increment $\rho$ their existence, as in \ref{lem:elliptical-stable}(2) and
+\ref{prop:stable-step-cone}; the rest is a substitution and the monotonicity of $m$.
+\textbf{Scope.} A nonincreasing $k$ is the polar criterion of self-decomposability (\ledger{A2}):
+the laws of (1) are the rotation-invariant self-decomposable laws without Gaussian part whose \Levy{}
+measure has a density, so (2) applies to the orbit of every such member of the isotropic class; this
+reading is not used. The hypothesis is the one that makes the rays ordered, $R \ge 1$. \textbf{What it is worth.}
+One function of the profile, its dilation ratio $R$, decides which steps across shapes the orbit
+survives by ordered \Levy{} densities: the least eigenvalue of $M$ fixes how far the step may widen
+its narrowest direction, $R$ how much volume that buys. $R$ is nondecreasing and supermultiplicative,
+and for $d \ge 2$ the stable rung whose order the cone contains is read off its lower exponent, not
+its growth exponent (\ref{lem:dilation-ratio}); every profile $r^{-\alpha}j(r)$ with $j$ nonincreasing and
+$0 < j(0{+}) < \infty$ has exactly the stable ratio (\ref{prop:tempered-step-cone}). \textbf{Not claimed}: the converse, that a positive increment forces ordered densities.
+For the stable profiles it is \ref{lem:stable-tail}, which uses the homogeneity of $k$; for the
+profiles of logarithmic exponent it is \ref{prop:log-orbit-rays}, which reads the origin, and that
+includes every profile bounded at the origin (\ref{prop:bounded-profile-rays}); for a
+general profile neither argument applies, the positivity of $\rho$ alone not excluding a signed
+\Levy{} measure, and a regular-variation form of \ref{lem:stable-tail} is what would close it. For the increments of a cascade family along a stable order or a cone order the converse holds, since those
+increments are infinitely divisible (\ref{prop:wedge-axis-profiles}); what stays open is the single step.
+\textbf{A step set, not a cone.} The set $\mathcal K_R$ of the relative steps $M$ of (2) is a step set in the
+sense of \ref{prop:invariant-orders}, and for the stable profiles and the profiles bounded at the origin it is
+$\exp C$ for a cone $C$ (clause (3)). It need not be. For the dyadic profile of \ref{lem:dilation-ratio}(5),
+$R = 1$ on $[1, 2)$ and $R(2) = 2$; for $d \ge 2$, $M := \diag(4, \dots, 4, 16)$ has
+$\det M = 4^d\cdot 4 = \lambda_{\min}(M)^dR(2)^2$, so $M \in \mathcal K_R$, while
+$M^{1/2} = \diag(2, \dots, 2, 4)$ has $\det M^{1/2} = 2^d\cdot 2 > 2^d = \lambda_{\min}(M^{1/2})^dR(\sqrt2)^2$.
+A set $\exp C$ contains $e^{X/2}$ with $e^X$, so $\mathcal K_R$ is $\exp C$ for no cone $C$, and the chain
+of \ref{thm:cascade-infinitely-divisible}(3)(c) is not available for it
+(\texttt{records/affine/reviews/verify-round3-paper-scripts/orders\_checks.py}, (b)).)}
+\end{proposition}
+
+% CHANGED Q-0281 wave 2: proved (AffineHemigroup.OrbitStepCone; the law and the increment print
+% A3(iii), the rest Lean core; guarded). The Lean follows this proof; the divergence of
+% int_r^infty k(s) s^{-1} ds is read in polar coordinates.
+\begin{proof}
+\leanok
+\emph{Clause (1).} By \ledger{A3}(iii) there is an infinitely divisible $\mu_I$ with triplet
+$(0, m(|x|)\,dx, 0)$. The density is even, so the odd part
+$i(\sin\langle\omega,x\rangle - \langle\omega,x\rangle\mathbf 1_{\{|x| \le 1\}})$ of the integrand of
+\ledger{A3}(i), which is integrable, integrates to $0$, and $\widehat\mu_I = e^{-\psi_I}$. The transform
+determines the law, and it is radial, so $\mu_I$ is rotation invariant. The transform of $\mu_\Sigma$ at $\omega$ is
+$e^{-\psi_I(\Sigma^{1/2}\omega)}$, and the substitution $x = \Sigma^{1/2}y$ gives
+$\psi_I(\Sigma^{1/2}\omega) = \int(1 - \cos\langle\omega,x\rangle)\,n_\Sigma(x)\,dx$. Also
+$|\Sigma^{1/2}y|^2 \wedge 1 \le \max(1, \|\Sigma\|)(|y|^2 \wedge 1)$, so
+$\int(|x|^2 \wedge 1)\,n_\Sigma(x)\,dx < \infty$.
+
+\emph{Clause (2): reduction to one direction.} Substitute $x = \Sigma^{1/2}y$:
+\[
+  n_\Sigma(\Sigma^{1/2}y) = (\det\Sigma)^{-1/2}m(|y|) , \qquad
+  n_{\Sigma'}(\Sigma^{1/2}y) = (\det\Sigma')^{-1/2}m(\langle y,M^{-1}y\rangle^{1/2}) ,
+\] so the ordering
+says $m(|y|) \le (\det M)^{-1/2}m(\langle y,M^{-1}y\rangle^{1/2})$ for every $y \ne 0$. Put
+$\lambda := \lambda_{\min}(M)^{1/2}$, $D := (\det M)^{1/2}$, and let $v$ be a unit eigenvector of $M$ for
+$\lambda_{\min}(M)$. On the sphere $|y| = r$, $\langle y,M^{-1}y\rangle \le r^2/\lambda^2$, with equality at
+$y = rv$; as $m$ is nonincreasing, the right-hand side is least there. So the ordering is
+$D\,m(r) \le m(r/\lambda)$ for every $r > 0$, that is, multiplying by $r^d$,
+\[
+  k(r/\lambda) \ge (D/\lambda^d)\,k(r) \qquad (r > 0).
+\]
+\emph{The least eigenvalue is at least $1$.} $D \ge \lambda^d$, since $\det M \ge \lambda_{\min}(M)^d$.
+Suppose $\lambda < 1$ and pick $r$ with $k(r) > 0$. The display gives $k(r/\lambda) \ge k(r)$ with
+$r/\lambda > r$, so, $k$ being nonincreasing, $k(r/\lambda) = k(r)$, and by iteration
+$k(r\lambda^{-n}) = k(r)$ for every $n \ge 1$. As $r\lambda^{-n} \to \infty$ and $k$ is nonincreasing,
+$k = k(r) > 0$ on $[r,\infty)$, and then $\int_{|x| > r}m(|x|)\,dx = |S^{d-1}|\int_r^\infty k(s)\,s^{-1}ds
+= \infty$, against the integrability of $m$. So $\lambda \ge 1$, and the display is $D/\lambda^d \le R(\lambda)$, which is the stated
+inequality; $M \ge I$ gives $\Sigma' - \Sigma = \Sigma^{1/2}(M - I)\Sigma^{1/2} \ge 0$.
+
+\emph{The increment.} $f := n_{\Sigma'} - n_\Sigma \ge 0$ is even and at most $n_{\Sigma'}$, so
+$f(x)\,dx$ satisfies the conditions of \ledger{A3} by clause (1). \ledger{A3}(iii) gives an infinitely
+divisible $\rho$ with triplet $(0, f(x)\,dx, 0)$, and the odd part of the integrand vanishing as in
+clause (1), $\widehat\rho = \exp[-\int(1 - \cos\langle\omega,x\rangle)f(x)\,dx] =
+\widehat\mu_{\Sigma'}/\widehat\mu_\Sigma$, both integrals being finite.
+
+\emph{Clause (3).} Reflexivity, transitivity and antisymmetry are those of the pointwise order of
+the densities and of the Loewner order, which contains the relation. Covariance: $|(A\Sigma A^{\tp})^{-1/2}x|
+= |\Sigma^{-1/2}A^{-1}x|$, so $n_{A\Sigma A^{\tp}}(x) = |\det A|^{-1}n_\Sigma(A^{-1}x)$, and the
+ordering of the pair $(A\Sigma A^{\tp}, A\Sigma'A^{\tp})$ is that of $(\Sigma,\Sigma')$ at $A^{-1}x$.
+A ray has $M = \lambda^2I$, $\det M = \lambda^{2d} \le \lambda^{2d}R(\lambda)^2$. A rank-deficient step
+has $\lambda_{\min}(M) = 1 < \det M$, $M = I + \Sigma^{-1/2}P\Sigma^{-1/2}$ having the eigenvalue $1$
+and one above $1$, while the
+inequality at $\lambda = 1$ reads $\det M \le R(1)^2 = 1$. For $k = c\,r^{-\alpha}$,
+$k(r/\lambda)/k(r) = \lambda^\alpha$ for every $r$. If $k(0{+})$ is finite, it is positive, $k$ being
+nonincreasing and not $0$. Then $R(\lambda) \le \lim_{r\downarrow0}k(r/\lambda)/k(r) = k(0{+})/k(0{+})
+= 1$, while $R \ge 1$ because $k(r/\lambda) \ge k(r)$ for $\lambda \ge 1$. So $R \equiv 1$, and the inequality
+becomes $\det M \le \lambda_{\min}(M)^d$. It holds only when every eigenvalue of $M$ equals $\lambda_{\min}(M)$, that
+is $M = \lambda_{\min}(M)I$, a ray.
+\end{proof}
+
+% not in the draft: Q-0282 item 2, the draft rewrite's gap in its 5.5 (Q-0279): the annotation of
+% prop:orbit-step-cone said that R is nondecreasing and supermultiplicative with a growth exponent,
+% and no clause stated it. What writing it down found: the growth exponent lim log R / log lambda is
+% the supremum of log R / log lambda (Fekete), so R lies BELOW lambda^beta, and the condition
+% R(lambda) >= lambda^alpha of thm:wedge-axis(3) and prop:similarity-stable-order-families(2) is a
+% condition on the infimum instead; the two exponents differ for a dyadic step profile (clause (5)).
+% So the rung of a profile is its lower exponent, and clause (4) says it exactly.
+% CHANGED Q-0281: \uses re-pointed to the split child it reads (prop:stable-step-cone (1)(c), "then Sigma <= Sigma'" and the order (2) only).
+% CHANGED D14 (2026-11-04; the author's decision, PLAN-review-response-paper.md R3.0): the annotation's
+% pointer to prop:wedge-axis-profiles(1) drops "right-continuous", which that clause no longer assumes.
+% Annotation only.
+\begin{lemma}[the dilation ratio: monotonicity and two exponents]
+\label{lem:dilation-ratio}
+\uses{prop:orbit-step-cone,lem:stable-step-order}
+\lean{AffineHemigroup.dilRatio_monotone, AffineHemigroup.dilRatio_lt_sq,
+AffineHemigroup.dilRatio_exponents, AffineHemigroup.dilRatio_rung,
+AffineHemigroup.dilRatio_exponents_stable, AffineHemigroup.dilRatio_exponents_bounded,
+AffineHemigroup.dilRatio_dyadic}\leanok
+Let $d \ge 1$, let $k$ be a profile as in \ref{prop:orbit-step-cone}, and let $R$ be its dilation ratio,
+$R(\lambda) = \inf\{k(r/\lambda)/k(r) : r > 0,\ k(r) > 0\}$ for $\lambda \ge 1$.
+\begin{enumerate}
+\item \emph{(Monotone and supermultiplicative.)} $R(1) = 1$, $R$ is nondecreasing on $[1,\infty)$, and
+$R(\lambda\nu) \ge R(\lambda)\,R(\nu)$ for all $\lambda, \nu \ge 1$.
+\item \emph{(Below the square.)} $R(\lambda) < \lambda^2$ for every $\lambda > 1$.
+\item \emph{(Two exponents.)} Put $\beta_-(k) := \inf_{\lambda>1}\log R(\lambda)/\log\lambda$. The
+limit $\beta(k) := \lim_{\lambda\to\infty}\log R(\lambda)/\log\lambda$ exists and equals
+$\sup_{\lambda>1}\log R(\lambda)/\log\lambda$. They satisfy $0 \le \beta_-(k) \le \beta(k) \le 2$ and
+$\beta_-(k) < 2$, and
+\[
+  \lambda^{\beta_-(k)} \le R(\lambda) \le \lambda^{\beta(k)} \qquad (\lambda \ge 1) .
+\]
+For $\alpha \ge 0$, $R(\lambda) \ge \lambda^\alpha$ for every $\lambda \ge 1$ if and only if
+$\alpha \le \beta_-(k)$.
+\item \emph{(The rung.)} Let $d \ge 2$ and $0 < \alpha < 2$, and let $\preceq_\alpha$ be the order of
+\ref{prop:stable-step-cone}(2). Every pair $\Sigma \preceq_\alpha \Sigma'$ satisfies $n_\Sigma \le n_{\Sigma'}$
+everywhere, in the notation of \ref{prop:orbit-step-cone}(1), if and only if $\alpha \le \beta_-(k)$.
+\item \emph{(Values.)} If $k(r) = c\,r^{-\alpha}$ with $c > 0$ and $0 < \alpha < 2$, then
+$\beta_-(k) = \beta(k) = \alpha$. If $k(0{+})$ is finite, then $\beta_-(k) = \beta(k) = 0$. The profile
+$k(r) := 2^n$ for $2^{-n-1} < r \le 2^{-n}$, $n \in \ZZ$, satisfies the hypotheses of
+\ref{prop:orbit-step-cone} and has $\beta_-(k) = 0$ and $\beta(k) = 1$.
+\end{enumerate}
+\statusT\quad\emph{(Cites nothing: the definition of $R$, the integrability of the \Levy{} density in
+polar coordinates, and Fekete's argument for superadditive functions, written out. Clause (4) reads only
+the equivalence in \ref{prop:orbit-step-cone}(2), where $n_\Sigma$ is given by a formula and the ordering
+criterion is a substitution, and not the part of that node that spends A3. \textbf{What it is
+worth.} It states what the annotation of \ref{prop:orbit-step-cone} asserted, and corrects how it was
+to be used. The growth exponent $\beta(k)$ exists, but it bounds $R$ from above; the condition
+``$R(\lambda) \ge \lambda^\alpha$ for every $\lambda \ge 1$'' of \ref{thm:wedge-axis}(3) and
+\ref{prop:similarity-stable-order-families}(2) is $\alpha \le \beta_-(k)$, and for $d \ge 2$, by clause (4),
+it is exactly the condition that the ordered-density step set of $k$ contain the stable order of index $\alpha$.
+So the rung of a profile on the chain of stable orders, in the sense of ordered densities, is its lower
+exponent $\beta_-(k) \in [0, 2)$. The two exponents agree for the stable profiles, for the profiles
+bounded at the origin, and for the tempered profiles of \ref{prop:tempered-step-cone}, whose dilation
+ratio is $\lambda^\alpha$ by that node's clause (1); clause (5) shows that they need not agree in
+general, a profile constant on dyadic shells having a ratio equal to $1$ on $[1, 2)$ and to $2^m$ at
+$2^m$. The lower exponent also decides which stable orders the orbit's
+family survives, with any Gaussian part, since the increments of a family are infinitely divisible and so have ordered densities
+(\ref{prop:wedge-axis-profiles}). \textbf{Not claimed}: that a single positive increment, not known to be
+infinitely divisible, has ordered densities, which is the open converse of \ref{prop:orbit-step-cone}. The
+value $\beta(k) = 2$ occurs: $k(r) = r^{-2}(1 + \log(1/r))^{-2}$ on $(0, 1]$ and $r^{-2}$ on $(1, \infty)$
+is nonincreasing and admissible, with $R(\lambda) = \lambda^2/(1 + \log\lambda)^2$.)}
+\end{lemma}
+
+% CHANGED Q-0281 wave 2: proved (AffineHemigroup.DilationRatio; Lean core, guarded). Proof rewritten
+% to the Lean route in (2) (a pointwise lower bound c/r^2 near the origin in place of the shells
+% I_n) and in (5) (the dyadic exponents read at r = 1, beta(k) as a supremum); (3) is the Lean's
+% argument written in log-coordinates.
+\begin{proof}
+\leanok
+\emph{(1).} $R(1) = \inf k(r)/k(r) = 1$. For $\nu \ge \lambda \ge 1$ and $k(r) > 0$,
+$r/\nu \le r/\lambda$, so $k(r/\nu) \ge k(r/\lambda)$, $k$ being nonincreasing; taking infima,
+$R(\nu) \ge R(\lambda)$. For $\lambda, \nu \ge 1$ and $k(r) > 0$, $k(r/\nu) \ge k(r) > 0$, and
+\[
+  \frac{k(r/(\lambda\nu))}{k(r)} = \frac{k((r/\nu)/\lambda)}{k(r/\nu)}\cdot\frac{k(r/\nu)}{k(r)}
+  \ge R(\lambda)\,R(\nu) ;
+\]
+taking the infimum over $r$ gives $R(\lambda\nu) \ge R(\lambda)R(\nu)$.
+
+\emph{(2).} In polar coordinates, with $|S^{d-1}|$ the area of the unit sphere,
+$\int(|x|^2 \wedge 1)\,m(|x|)\,dx = |S^{d-1}|\int_0^\infty(r^2 \wedge 1)\,k(r)\,r^{-1}dr$, so
+$\int_0^1 r\,k(r)\,dr < \infty$. Suppose $R(\lambda_0) \ge \lambda_0^2$ for some $\lambda_0 > 1$, and pick
+$r_0$ with $k(r_0) > 0$. By the definition of $R$, $k(r/\lambda_0) \ge \lambda_0^2k(r)$ whenever
+$k(r) > 0$, and by induction $k(r_0\lambda_0^{-n}) \ge \lambda_0^{2n}k(r_0)$ for every $n \ge 0$. Let
+$0 < r \le r_0$, and let $n \ge 0$ be the integer with $\lambda_0^n \le r_0/r < \lambda_0^{n+1}$. Then
+$r \le r_0\lambda_0^{-n}$, so $k(r) \ge k(r_0\lambda_0^{-n}) \ge \lambda_0^{2n}k(r_0)$, $k$ being
+nonincreasing, and $\lambda_0^{2n} > r_0^2/(\lambda_0^2r^2)$. So
+\[
+  k(r) \ge \frac{c}{r^2} \quad (0 < r \le r_0), \qquad c := \frac{r_0^2\,k(r_0)}{\lambda_0^2} > 0 ,
+\]
+and $\int_0^{\min(r_0, 1)} r\,k(r)\,dr \ge c\int_0^{\min(r_0, 1)}r^{-1}dr = \infty$, a contradiction.
+
+\emph{(3).} Put $\phi(s) := \log R(e^s)$ for $s \ge 0$. By (1), $\phi \ge 0$ and
+$\phi(s + s') \ge \phi(s) + \phi(s')$, and by (2), $\phi(s) < 2s$ for $s > 0$. Let
+$L := \sup_{s>0}\phi(s)/s \in [0, 2]$. Fix $s_0 > 0$, and for $s \ge s_0$ let $n \ge 1$ be the integer
+with $ns_0 \le s < (n+1)s_0$. Superadditivity and $\phi \ge 0$ give
+$\phi(s) \ge \phi(ns_0) + \phi(s - ns_0) \ge n\,\phi(s_0)$, so
+\[
+  L \ge \frac{\phi(s)}{s} \ge \frac{ns_0}{s}\cdot\frac{\phi(s_0)}{s_0} \ge \Bigl(1 - \frac{s_0}{s}\Bigr)\frac{\phi(s_0)}{s_0} .
+\]
+As $s \to \infty$ every limit point of $\phi(s)/s$ lies between $\phi(s_0)/s_0$ and $L$; as $s_0$ is
+arbitrary, $\phi(s)/s \to L$. With $\lambda = e^s$, $\log R(\lambda)/\log\lambda = \phi(s)/s$, so $\beta(k)$
+exists and equals $L$. Each value $\log R(\lambda)/\log\lambda$, $\lambda > 1$, lies in $[0, 2)$, so
+$0 \le \beta_-(k) < 2$, and $\beta_-(k) \le \beta(k) \le 2$. The displayed bounds are the definitions of
+infimum and supremum, and hold at $\lambda = 1$ as $R(1) = 1$. Finally, $R(\lambda) \ge \lambda^\alpha$ for
+every $\lambda > 1$ says $\log R(\lambda)/\log\lambda \ge \alpha$ for every $\lambda > 1$, which is
+$\alpha \le \beta_-(k)$; at $\lambda = 1$ it holds always.
+
+\emph{(4).} If $\alpha \le \beta_-(k)$, let $\Sigma \preceq_\alpha \Sigma'$, with
+$M := \Sigma^{-1/2}\Sigma'\Sigma^{-1/2}$ and $m := \lambda_{\min}(M)$. By \ref{prop:stable-step-cone}(1)--(2),
+$m^{d+\alpha} \ge \det M$ and $\Sigma \le \Sigma'$, so $m \ge 1$, and by (3)
+$\det M \le m^d\,(m^{1/2})^{2\alpha} \le m^d\,R(m^{1/2})^2$; by \ref{prop:orbit-step-cone}(2) the
+densities are ordered. Conversely, suppose every pair of $\preceq_\alpha$ has ordered densities, and let
+$\lambda > 1$. As $d \ge 2$, $M := \diag(\lambda^2, \dots, \lambda^2, \lambda^{2(1+\alpha)})$ has at least one
+entry $\lambda^2$, so $\lambda_{\min}(M) = \lambda^2$ and $\det M = \lambda^{2(d+\alpha)} = \lambda_{\min}(M)^{d+\alpha}$:
+$I \preceq_\alpha M$ by condition (c) of \ref{prop:stable-step-cone}(1). By \ref{prop:orbit-step-cone}(2) the
+ordering of $n_I$ and $n_M$ gives $\lambda^{2(d+\alpha)} \le \lambda^{2d}R(\lambda)^2$, that is
+$R(\lambda) \ge \lambda^\alpha$. By (3), $\alpha \le \beta_-(k)$.
+
+\emph{(5).} For $k = c\,r^{-\alpha}$, $R(\lambda) = \lambda^\alpha$ (\ref{prop:orbit-step-cone}(3)), so both
+quotients are identically $\alpha$; if $k(0{+}) < \infty$, $R \equiv 1$ by the same clause, and both are
+$0$. For the dyadic profile: if $2^{-n-1} < r \le 2^{-n}$ then $2^{n} \le 1/r < 2^{n+1}$, so
+$k(r) \le 1/r$; $k$ is positive and nonincreasing, since $n$ decreases as $r$ increases; and
+$\int_0^\infty(r^2 \wedge 1)\,k(r)\,r^{-1}dr \le \int_0^\infty(r^2 \wedge 1)\,r^{-2}dr = 2$, which is the
+integrability, by the polar formula in (2). For $\lambda \ge 1$ let $n \ge 0$ be the integer with
+$2^n \le \lambda < 2^{n+1}$; then $2^{-n-1} < 1/\lambda \le 2^{-n}$, so $k(1/\lambda) = 2^n \le \lambda$,
+and $k(1) = 1$. Taking $r = 1$ in the definition of $R$ gives $R(\lambda) \le k(1/\lambda) \le \lambda$,
+so every quotient $\log R(\lambda)/\log\lambda$ is at most $1$. For $1 < \lambda < 2$, $n = 0$, so
+$R(\lambda) \le 1$, hence $R(\lambda) = 1$ by (1) and $\beta_-(k) = 0$. Dividing $r$ by $2$ moves it one
+dyadic shell inward, $k(r/2) = 2k(r)$ for every $r > 0$, so $R(2) = 2$ and the quotient at
+$\lambda = 2$ is $1$; by (1) and the bound at $r = 1$, $R(2^m) = 2^m$. The supremum of the quotients,
+which is $\beta(k)$ by (3), is therefore $1$.
+% CHANGED Q-0281 wave 2: blind review W2D-3/W2D-5, R(2^m) = 2^m written down, and the two appeals to
+% (1) and (3) named.
+\end{proof}
+
+% not in the draft: Q-0263 item 2. The positive end of prop:orbit-step-cone beyond the stable
+% profiles: a profile that is stable at the origin and nonincreasing after the stable factor is
+% removed has the stable dilation ratio, whatever it does at large radii, so its ordered-density
+% cone is the stable cone. Clause (3)(b) and clause (4) are one subordination of the heat kernel,
+% computed here; clause (4) puts the Matern at its endpoint alpha = 0.
+% CHANGED Q-0281: typed (the statement skeleton). Clause (2), the exponential moments, is split to
+% prop:tempered-moments (ADR-0025; records/formalization/PRICING.md: the costliest clause, with no
+% consumer); the text is unchanged and the \lean tag names the child's declaration too.
+% CHANGED Q-0281: \uses re-pointed to the split child it reads (condition (c) and (3) of prop:stable-step-cone only; prop:affine-orbits(4) only).
+% CHANGED Q-0281 wave 2: blind review W2D-1, the Assignment follows the rewritten proof of clause (2)
+% (compound Poisson approximations and Levy's continuity theorem); the statement text is unchanged.
+% CHANGED round-3 review (report D, item 5): clause (4) and the annotation say "ordered-density step
+% set" where they said "ordered-density cone", the name of prop:orbit-step-cone's set. Wording only.
+\begin{proposition}[profiles stable at the origin keep the stable cone]
+\label{prop:tempered-step-cone}
+\uses{prop:orbit-step-cone,lem:stable-step-order,prop:affine-orbits-matern,thm:cited-A3}
+\lean{AffineHemigroup.tempered_profile_exists, AffineHemigroup.tempered_step_cone,
+AffineHemigroup.tempered_exp_example, AffineHemigroup.tempered_subordinated_example,
+AffineHemigroup.matern_endpoint, AffineHemigroup.tempered_exponential_moments}\leanok
+Let $d \ge 1$ and $0 < \alpha < 2$, let $j : (0,\infty) \to [0,\infty)$ be nonincreasing with
+$j(0{+}) := \lim_{r\downarrow0}j(r)$ in $(0,\infty)$, and put $k(r) := r^{-\alpha}j(r)$.
+\begin{enumerate}
+\item \emph{(The stable cone.)} $k$ satisfies the hypotheses of \ref{prop:orbit-step-cone}, and its
+dilation ratio is $R(\lambda) = \lambda^\alpha$ for every $\lambda \ge 1$. So for the orbit
+$(\mu_\Sigma)$ of \ref{prop:orbit-step-cone}(1), with \Levy{} densities $n_\Sigma$, and for
+$\Sigma, \Sigma' \in \PD(d)$ with $M := \Sigma^{-1/2}\Sigma'\Sigma^{-1/2}$, $n_\Sigma \le n_{\Sigma'}$
+everywhere if and only if $\lambda_{\min}(M)^{d+\alpha} \ge \det M$, which is condition (c) of
+\ref{prop:stable-step-cone}; and then $\mu_{\Sigma'} = \mu_\Sigma * \rho$ with $\rho$ an infinitely
+divisible probability measure.
+\item \emph{(Exponential moments.)} If $\beta > 0$ and
+$\int_1^\infty e^{\beta r}r^{-1-\alpha}j(r)\,dr < \infty$, then
+$\int e^{\langle\theta,x\rangle}\,\mu_\Sigma(dx) < \infty$ for every $\Sigma \in \PD(d)$ and every
+$\theta \in \RR^d$ with $|\Sigma^{1/2}\theta| \le \beta$.
+\item \emph{(Two families.)} (a) For $\ell > 0$, $j(r) := e^{-r/\ell}$ satisfies the hypotheses, and
+those of (2) with $\beta = 1/\ell$. (b) The function
+\[
+  j(r) := \frac{\alpha/2}{\Gamma(1-\alpha/2)}\int_0^\infty(4\pi t)^{-d/2}\,t^{-1-\alpha/2}\,
+  e^{-1/(4t) - r^2t}\,dt
+\]
+satisfies the hypotheses, and those of (2) for every $0 < \beta < 1$; the law $\mu_I$ of
+\ref{prop:orbit-step-cone}(1) for $k = r^{-\alpha}j$ has
+$\widehat\mu_I(\omega) = \exp[-((1 + |\omega|^2)^{\alpha/2} - 1)]$, so its orbit has
+$\widehat\mu_\Sigma(\omega) = \exp[-((1 + \langle\omega,\Sigma\omega\rangle)^{\alpha/2} - 1)]$, which
+at $\Sigma = \ell^2I$ is $\exp[-((1 + \ell^2|\omega|^2)^{\alpha/2} - 1)]$.
+\item \emph{(The \Matern{} is the endpoint $\alpha = 0$.)} For $\gamma > 0$,
+$k_0(r) := \gamma\int_0^\infty(4\pi t)^{-d/2}\,t^{-1}\,e^{-1/(4t) - r^2t}\,dt$ satisfies the
+hypotheses of \ref{prop:orbit-step-cone}, with $k_0(0{+}) = \gamma\,\pi^{-d/2}\Gamma(\tfrac d2)$
+finite, and the law of \ref{prop:orbit-step-cone}(1) for $k_0$ is the \Matern{} law of index
+$\gamma$, $\widehat\mu_I(\omega) = (1 + |\omega|^2)^{-\gamma}$ (\ref{prop:affine-orbits}(4)). So its
+dilation ratio is $R \equiv 1$ and its ordered-density step set is the rays.
+\end{enumerate}
+\statusA\quad\ledger{A3}\quad\emph{(\textbf{Assignment.} \ledger{A3}(iii) is spent through
+\ref{prop:orbit-step-cone}, for the laws of clauses (1), (3) and (4) and the increments of clause
+(1). Clause (2) approximates $\mu_I$ by compound Poisson laws built by hand, which converge to it by
+\Levy{}'s continuity theorem, and spends nothing; clauses (3) and (4) are the Gamma integral,
+Frullani's integral (as in the proof of \ref{prop:affine-orbits}(4)) and Tonelli. \textbf{What it is worth.} The dilation
+ratio, and with it the ordered-density step set, sees only the profile at the origin: the stable factor
+$r^{-\alpha}$ sets it, and any nonincreasing tempering $j$ leaves it unchanged. So the orbits of
+clause (3) have the stable orbit's freedom across shapes on the cone of \ref{prop:stable-step-cone},
+whose description in scale and shape (its clause (3), an anisotropy gained per step of at most
+$(t_2/t_1)^{d\alpha/(d+\alpha)}$) reads condition (c) only and holds verbatim, and they have
+exponential moments, like the \Matern{} (whose law, that of $\sqrt{2V}Z$ in
+\ref{prop:affine-orbits}(4), has $\mathbb{E}\,e^{\langle\theta,\sqrt{2V}Z\rangle} =
+\mathbb{E}\,e^{V|\theta|^2} = (1 - |\theta|^2)^{-\gamma}$ for $|\theta| < 1$), where the stable \Levy{} density
+\ref{eq:stable-levy-density} decays only like a power. Clause
+(4) says what the \Matern{} lacks. Its exponent $\gamma\log(1 + u)$ is the limit of
+$(2\gamma/\alpha)((1+u)^{\alpha/2} - 1)$ as $\alpha \downarrow 0$, and its profile is the same
+subordination of the heat kernel at $\alpha = 0$, after the renormalization by $2/\alpha$ (the constant
+$c_\alpha$ tending to $0$): bounded at the origin, hence the rays. For the
+\Matern{} this is, by computation, the link between a logarithmic exponent and a profile bounded
+at the origin, which \ref{lem:isotropic-exponent-log}(2) gives for every profile bounded at the
+origin; there the positive increments give the same answer (\ref{prop:matern-steps}), as they do
+for every such profile (\ref{prop:bounded-profile-rays}). \textbf{Not claimed}: the converse of clause (1),
+that a positive increment forces ordered densities, for any profile of this class other than the
+stable one. \ref{lem:stable-tail} reads the large scales, where these profiles are tempered, and
+\ref{prop:log-orbit-rays} reads a logarithmic exponent, which these profiles do not have; it is
+open. \textbf{Named, not used} (Q-0328, the sources read at the page in
+\texttt{records/affine/READING-rosinski2007tempering.md}, \texttt{READING-ryznar2002estimates.md} and
+\texttt{READING-carmona1990relativistic.md}): the law of (3)(a) and every law of its orbit are proper
+tempered $\alpha$-stable (Rosi\'nski 2007, Def.~2.1, p.~679); the law of (3)(b) is Ryznar's relativistic
+$\alpha$-stable law with $m = 1$ (Ryznar 2002, eq.~(3), p.~2; at $\alpha = 1$ the operator of
+Carmona, Masters and Simon 1990, eq.~(I.6), p.~120), and it is not tempered $\alpha$-stable, since its
+$j$ has $j(0{+}) - j(r) = o(r)$ and so is not completely monotone; its subordinator is proper tempered
+$\alpha/2$-stable. The affine paper says so in its appendix's prose. Not checked against a source: that
+the exponent of (3)(b) at $\alpha = 1$, $\sqrt{1 + \ell^2|\omega|^2} - 1$, is the symmetric
+normal-inverse-Gaussian's (Q-0263). Nothing rests on any of these names.)}
+\end{proposition}
+
+% CHANGED Q-0281 wave 2: proved (AffineHemigroup.TemperedStepCone with the toolbox
+% AffineHemigroup.Subordination, and the child's AffineHemigroup.TemperedMoments; the increments of
+% (1) print A3(iii), the rest Lean core; guarded). Proof rewritten to the Lean route: clause (2)
+% approximates mu_I by compound Poisson laws and Levy's continuity theorem in place of the L^2 sum of
+% independent shells; (3)(b) reads j(0+) by continuity, C_eta without e^{-eta t}, and the Gamma
+% identity by Tonelli over sigma in (1, 1+u] in place of an integration by parts; (4) the
+% integrability from k_0 <= gamma C e^{-r/2} in place of the second moment of h_s.
+\begin{proof}
+\leanok
+\emph{Clause (1).} For $r < s$, $k(r) = r^{-\alpha}j(r) \ge s^{-\alpha}j(r) \ge s^{-\alpha}j(s) = k(s)$,
+so $k$ is nonincreasing, and it is not identically $0$ as $j(0{+}) > 0$. In polar coordinates, with
+$m(r) = k(r)r^{-d}$ and $j \le j(0{+})$,
+\[
+  \int(|x|^2 \wedge 1)\,m(|x|)\,dx = |S^{d-1}|\int_0^\infty(r^2 \wedge 1)\,r^{-1-\alpha}j(r)\,dr
+  \le |S^{d-1}|\,j(0{+})\Bigl(\int_0^1r^{1-\alpha}dr + \int_1^\infty r^{-1-\alpha}dr\Bigr) ,
+\]
+finite as $0 < \alpha < 2$. For $\lambda \ge 1$ and $r$ with $k(r) > 0$,
+$k(r/\lambda)/k(r) = \lambda^\alpha j(r/\lambda)/j(r) \ge \lambda^\alpha$, since $r/\lambda \le r$;
+and $j(r) > 0$ for small $r$, with $j(r/\lambda)/j(r) \to j(0{+})/j(0{+}) = 1$ as $r \downarrow 0$.
+So $R(\lambda) = \lambda^\alpha$. By \ref{prop:orbit-step-cone}(2) the densities are ordered exactly
+when $\lambda_{\min}(M) \ge 1$ and $\det M \le \lambda_{\min}(M)^{d+\alpha}$; the second inequality implies the
+first, since $\det M \ge \lambda_{\min}(M)^d$ gives $\lambda_{\min}(M)^\alpha \ge 1$. The increment is that of
+\ref{prop:orbit-step-cone}(2).
+
+\emph{Clause (2).} Let $\nu := m(|x|)\,dx$, a symmetric measure, and for $\varepsilon > 0$ let
+$\nu_\varepsilon$ be its restriction to $\{|x| > \varepsilon\}$, finite because
+$|x|^2 \wedge 1 \ge \varepsilon^2 \wedge 1$ there. Let
+$\pi_\varepsilon := e^{-\nu_\varepsilon(\RR^d)}\sum_{n\ge0}\nu_\varepsilon^{*n}/n!$ be the compound
+Poisson law of $\nu_\varepsilon$, a probability measure built by hand. Its transform is
+$e^{-\nu_\varepsilon(\RR^d)}\exp\widehat{\nu_\varepsilon}(\omega) =
+\exp[-\int_{|x|>\varepsilon}(1 - \cos\langle\omega,x\rangle)\,\nu(dx)]$, the transform of
+$\nu_\varepsilon$ being real by symmetry, and along $\varepsilon = 1/(n+1)$ it tends to
+$e^{-\psi_I(\omega)} = \widehat\mu_I(\omega)$ by monotone convergence. By \Levy{}'s continuity theorem,
+$\pi_\varepsilon \to \mu_I$ weakly along this sequence.
+
+For $\theta \in \RR^d$, $\int e^{\langle\theta,x\rangle}\,\nu_\varepsilon^{*n}(dx) =
+(\int e^{\langle\theta,x\rangle}\,\nu_\varepsilon(dx))^n$, so, by the symmetry of $\nu_\varepsilon$
+in the second step,
+\[
+  \int e^{\langle\theta,x\rangle}\,\pi_\varepsilon(dx)
+  = \exp\int(e^{\langle\theta,x\rangle} - 1)\,\nu_\varepsilon(dx)
+  = \exp\int(\cosh\langle\theta,x\rangle - 1)\,\nu_\varepsilon(dx) \le e^{M_\theta} ,
+\]
+where $M_\theta := \int(\cosh\langle\theta,x\rangle - 1)\,\nu(dx)$. Now let $|\theta| \le \beta$. As
+$\cosh s - 1 \le e^{s^2/2} - 1 \le \tfrac12s^2e^{s^2/2}$ and $\cosh s \le e^{|s|}$, polar coordinates
+give
+\[
+  M_\theta \le \tfrac12\beta^2e^{\beta^2/2}\int_{|x|\le1}|x|^2\,\nu(dx)
+  + |S^{d-1}|\int_1^\infty e^{\beta r}r^{-1-\alpha}j(r)\,dr < \infty .
+\]
+For $N > 0$ the function $x \mapsto e^{\langle\theta,x\rangle} \wedge N$ is bounded and continuous, so
+$\int(e^{\langle\theta,x\rangle} \wedge N)\,d\mu_I$ is the limit of
+$\int(e^{\langle\theta,x\rangle} \wedge N)\,d\pi_\varepsilon \le e^{M_\theta}$, and monotone
+convergence in $N$ gives $\int e^{\langle\theta,x\rangle}\,\mu_I(dx) \le e^{M_\theta}$. For general
+$\Sigma$, $\int e^{\langle\theta,x\rangle}\,\mu_\Sigma(dx) =
+\int e^{\langle\Sigma^{1/2}\theta,y\rangle}\,\mu_I(dy)$.
+
+\emph{Clause (3)(a).} $e^{-r/\ell}$ is nonincreasing with limit $1$ at $0$, and
+$\int_1^\infty e^{r/\ell}r^{-1-\alpha}e^{-r/\ell}dr = 1/\alpha$.
+
+% CHANGED Q-0281 wave 2: blind review W2D-4, the substitution written t = c/sigma (it serves every c > 0).
+\emph{Clause (3)(b).} Write $c_\alpha := (\alpha/2)/\Gamma(1-\alpha/2)$. The integrand of $j$ is
+positive and decreasing in $r$, so $j$ is nonincreasing; it is dominated by its value at $r = 0$, so
+$j$ is continuous, and the substitution $t = c/\sigma$, which gives
+$\int_0^\infty t^{-b-1}e^{-c/t}dt = c^{-b}\Gamma(b)$ for $b, c > 0$, gives
+$j(0{+}) = j(0) = c_\alpha(4\pi)^{-d/2}4^{(d+\alpha)/2}\Gamma(\tfrac{d+\alpha}{2})$, positive and
+finite. For $r \ge 0$ and $0 < \eta < 1$, $1/(4t) + r^2t \ge r$ (the arithmetic--geometric mean
+inequality) gives $1/(4t) + r^2t \ge (1-\eta)r + \eta/(4t)$, so $j(r) \le C_\eta e^{-(1-\eta)r}$ with
+$C_\eta := c_\alpha\int_0^\infty(4\pi t)^{-d/2}t^{-1-\alpha/2}e^{-\eta/(4t)}dt < \infty$, by the same
+substitution; hence the integral of (2) is finite for $0 < \beta < 1 - \eta$, and $\eta$ is arbitrary.
+
+For the exponent, let $h_s(x) := (4\pi s)^{-d/2}e^{-|x|^2/(4s)}$, the density with transform
+$e^{-s|\omega|^2}$, so that $\int(1 - \cos\langle\omega,x\rangle)h_s(x)\,dx = 1 - e^{-s|\omega|^2}$.
+For $s > 0$, $(1 - e^{-us})e^{-s} = e^{-s} - e^{-(1+u)s} = s\int_1^{1+u}e^{-\sigma s}\,d\sigma$, and
+$\int_0^\infty s^{-\alpha/2}e^{-\sigma s}\,ds = \sigma^{\alpha/2-1}\,\Gamma(1-\alpha/2)$; so by Tonelli
+$\int_0^\infty(1 - e^{-us})\,s^{-1-\alpha/2}e^{-s}\,ds = \Gamma(1-\alpha/2)\int_1^{1+u}
+\sigma^{\alpha/2-1}d\sigma$, that is,
+\[
+  c_\alpha\int_0^\infty(1 - e^{-us})\,s^{-1-\alpha/2}e^{-s}\,ds = (1+u)^{\alpha/2} - 1
+  \qquad (u \ge 0).
+\]
+Put $n(x) := c_\alpha\int_0^\infty h_s(x)\,s^{-1-\alpha/2}e^{-s}\,ds$. By Tonelli,
+$\int(1 - \cos\langle\omega,x\rangle)\,n(x)\,dx = (1 + |\omega|^2)^{\alpha/2} - 1$, and the
+substitution $s = |x|^2t$ gives $n(x) = |x|^{-d-\alpha}j(|x|) = m(|x|)$ with $m(r) = k(r)r^{-d}$.
+So $\psi_I(\omega) = (1 + |\omega|^2)^{\alpha/2} - 1$ in \ref{prop:orbit-step-cone}(1), and
+$\widehat\mu_\Sigma(\omega) = \widehat\mu_I(\Sigma^{1/2}\omega)$.
+
+\emph{Clause (4).} The integrand of $k_0$ is positive and decreasing in $r$, and, as in (3)(b),
+$k_0$ is continuous with $k_0(0{+}) = k_0(0) = \gamma(4\pi)^{-d/2}4^{d/2}\Gamma(\tfrac d2) =
+\gamma\pi^{-d/2}\Gamma(\tfrac d2)$ by the same Gamma integral, and $k_0(r) \le \gamma C e^{-r/2}$ for
+$r \ge 0$ with $C := \int_0^\infty(4\pi t)^{-d/2}t^{-1}e^{-1/(8t)}dt < \infty$. As $(r^2 \wedge 1)/r \le 1$,
+polar coordinates give $\int(|x|^2 \wedge 1)\,|x|^{-d}k_0(|x|)\,dx \le |S^{d-1}|\gamma C\int_0^\infty
+e^{-r/2}dr < \infty$, so $k_0$ satisfies the hypotheses of \ref{prop:orbit-step-cone}. Put
+$n_0(x) := \gamma\int_0^\infty h_s(x)\,s^{-1}e^{-s}\,ds$; the substitution $s = |x|^2t$ gives
+$n_0(x) = |x|^{-d}k_0(|x|)$. Frullani's integral (proof of \ref{prop:affine-orbits}(4)) gives
+$\int_0^\infty(1 - e^{-us})\,s^{-1}e^{-s}\,ds = \int_0^\infty(e^{-s} - e^{-(1+u)s})\,s^{-1}ds =
+\log(1+u)$, so by Tonelli $\int(1 - \cos\langle\omega,x\rangle)\,n_0(x)\,dx = \gamma\log(1 + |\omega|^2)$.
+So the law of $k_0$ has transform
+$e^{-\gamma\log(1 + |\omega|^2)} = (1 + |\omega|^2)^{-\gamma}$ and is the \Matern{} law of index
+$\gamma$, and \ref{prop:orbit-step-cone}(3) gives $R \equiv 1$ and the rays.
+\end{proof}
+
+% CHANGED Q-0281: split from prop:tempered-step-cone (ADR-0025; records/formalization/PRICING.md):
+% clause (2), copied verbatim. It approximates the law by compound Poisson laws built by hand and
+% spends nothing, is the costliest clause to formalize, and no node reads it; the parent's text and
+% numbering are unchanged.
+% CHANGED Q-0281 wave 2: blind review W2D-1/W2D-2, the statusT and this comment follow the rewritten
+% proof (compound Poisson approximations and Levy's continuity theorem); the statement is unchanged.
+\begin{proposition}[exponential moments of the tempered orbits]
+\label{prop:tempered-moments}
+\uses{prop:tempered-step-cone,prop:orbit-step-cone}
+\lean{AffineHemigroup.tempered_exponential_moments}\leanok
+Let $d \ge 1$ and $0 < \alpha < 2$, let $j$ and $k = r^{-\alpha}j$ be as in
+\ref{prop:tempered-step-cone}, and let $(\mu_\Sigma)$ be the orbit of \ref{prop:orbit-step-cone}(1)
+for $k$. If $\beta > 0$ and $\int_1^\infty e^{\beta r}r^{-1-\alpha}j(r)\,dr < \infty$, then
+$\int e^{\langle\theta,x\rangle}\,\mu_\Sigma(dx) < \infty$ for every $\Sigma \in \PD(d)$ and every
+$\theta \in \RR^d$ with $|\Sigma^{1/2}\theta| \le \beta$.
+\statusT\quad\emph{(Cites nothing: the law is approximated by compound Poisson laws built by hand,
+which converge to it by \Levy{}'s continuity theorem. Clause (2) of \ref{prop:tempered-step-cone},
+split off on 2026-10-04 (Q-0281, ADR-0025); the numbering stays the parent's.)}
+\end{proposition}
+
+% CHANGED Q-0281 wave 2: proved (AffineHemigroup.TemperedMoments; Lean core, guarded), on the route
+% the parent's proof of clause (2) now writes out.
+\begin{proof}
+\leanok
+This is the part of the proof of \ref{prop:tempered-step-cone} headed clause (2).
+\end{proof}
+
+% not in the draft: Q-0246 item 2, the necessity half at Levy index 0. The obstruction of
+% prop:matern-cross-shape read off the limit of the increment's transform at infinity: a positive
+% measure whose blow-up at the origin is dilation invariant is a point mass. It settles the draft's
+% Proposition 2.15 for every index gamma > 0 (Q-0209's first item), the "only if" half.
+% CHANGED Q-0281: \uses re-pointed to the split child it reads (prop:affine-orbits(4) beside its hypothesis).
+% CHANGED Q-0281 wave 2: the \statusT annotation inside this statement follows the rewritten proof (no
+% Riesz representation; a positive dilation-invariant functional on test functions is a multiple of
+% the point mass). The statement text is unchanged. Marked here on blind review W2C-4.
+\begin{proposition}[orbits of logarithmic exponent cascade along rays only]
+\label{prop:log-orbit-rays}
+\uses{prop:affine-orbits,prop:affine-orbits-matern}
+\lean{AffineHemigroup.log_orbit_rays, AffineHemigroup.matern_log_orbit_rays}\leanok
+Let $d \ge 1$, let $g$ satisfy the hypothesis of \ref{prop:affine-orbits}, and let $(\mu_\Sigma)$
+be its affine orbit, $\widehat\mu_\Sigma(\omega) = e^{-g(\langle\omega,\Sigma\omega\rangle)}$. Suppose
+there is $\kappa > 0$ with
+\[
+  g(cu) - g(u) \to \kappa\log c \qquad (u \to \infty), \text{ for every } c > 0 .
+\]
+If $\Sigma, \Sigma' \in \PD(d)$ and $\mu_{\Sigma'} = \mu_\Sigma * \rho$ for a positive finite measure
+$\rho$, then $\Sigma' = c\,\Sigma$ for some $c > 0$. In particular, for every $\gamma > 0$, no step
+of the \Matern{} orbit of index $\gamma$, $\widehat\mu_\Sigma(\omega) = (1 + \langle\omega,\Sigma
+\omega\rangle)^{-\gamma}$ (\ref{prop:affine-orbits}(4)), off the rays has a positive increment.
+\statusT\quad\emph{(Cites nothing beyond Fourier inversion on the Schwartz space. No
+Loewner order, continuity in $\Sigma$, cascade or infinite divisibility is assumed: one positive
+increment is enough. \textbf{What it is worth.} It is the index-$0$ end of the landscape, in both
+directions with \ref{prop:orbit-step-cone}: for such an orbit the positive increments and the
+ordered \Levy{} densities give the same answer, the rays. It extends \ref{prop:matern-cross-shape}
+from index $1$ to every index $\gamma > 0$, which is the draft's Proposition~2.15 for every $\gamma$
+(its check item~12 and the handoff's narrowed statement) in its ``only if'' half; and it proves the
+draft's Remark~2.12 (\emph{to adapt the shape of a non-Gaussian aperture is to re-measure}) for every
+orbit of logarithmic exponent. The mechanism: at small scales the increment looks like the
+distribution whose transform is $(\langle\omega,\Sigma\omega\rangle/\langle\omega,\Sigma'\omega\rangle)^\kappa$,
+homogeneous of degree $0$, and a positive functional on test functions that is invariant under
+dilations is a multiple of the point mass. Which rays carry a positive increment is not this node's business: for the \Matern{} orbit of
+every index, every ray (\ref{prop:affine-orbits}(4), assembled in \ref{prop:matern-steps}); for a
+general orbit, the rays carry positive increments exactly when $\mu_I$ is self-decomposable
+(\ref{prop:ray-families}). The direction that joins this node to \ref{prop:orbit-step-cone}(3) --- a profile bounded at the
+origin gives a logarithmic exponent --- is \ref{lem:isotropic-exponent-log}(2), an Abelian
+statement, and the join is \ref{prop:bounded-profile-rays} (Q-0151). \textbf{Not claimed}: the
+converse direction, that a logarithmic exponent comes from a profile bounded at the origin. At $d = 1$ the statement holds trivially, every step being a ray.)}
+\end{proposition}
+
+% CHANGED Q-0281 wave 2: proved (AffineHemigroup.LogOrbitRays; Lean core, guarded). Proof rewritten
+% to the Lean route: the annuli argument is run on the limit functional itself, so the Riesz
+% representation is not used, and h = c_0 is read from modulated dilates of one bump, so the
+% density of C_c^infty in the Schwartz space is not used.
+% CHANGED Q-0281 wave 2: blind review W2C-7: the bump b is taken with 0 <= b <= 1, which
+% |psi b| <= eta chi_0 needs.
+% CHANGED round-1 review (Gemini), required change 6 / VERIFY-round1-mathematics-paper item 7(i):
+% the Fourier normalization brought to the paper's (e^{i<omega,x>}, with (2pi)^{-d} in the inversion)
+% from Mathlib's e^{-2 pi i<x,xi>}, which the Lean proof uses. Notation only: the route, its steps and
+% the Lean are unchanged; the factor (2pi)^{-d} moves into Lambda, and the step "using h(2 pi xi) =
+% h(xi)" and the 2 pi in the test function phi_N are no longer needed.
+\begin{proof}
+\leanok
+Test functions are the smooth real functions with compact support; for one of them, $\phi$,
+write $\Phi(\xi) := \int e^{-i\langle\xi,x\rangle}\phi(x)\,dx$, a Schwartz function with
+$(2\pi)^{-d}\int\Phi = \phi(0)$ and $\phi(x) = (2\pi)^{-d}\int\Phi(\xi)e^{i\langle\xi,x\rangle}d\xi$.
+
+\emph{The increment's transform.} $\widehat\mu_\Sigma$ has no zero, so
+$\widehat\rho(\omega) = \exp[-(g(\langle\omega,\Sigma'\omega\rangle) - g(\langle\omega,\Sigma\omega\rangle))]$;
+$\widehat\rho(0) = 1$, so $\rho$ is a probability measure, and $|\widehat\rho| \le 1$.
+
+\emph{The blow-up.} For $\omega \ne 0$ and $t > 0$ put $u := t^2\langle\omega,\Sigma\omega\rangle$ and
+$c := \langle\omega,\Sigma'\omega\rangle/\langle\omega,\Sigma\omega\rangle$; as $t \to \infty$, $u \to \infty$ and
+\[
+  \widehat\rho(t\omega) = e^{-(g(cu) - g(u))} \to c^{-\kappa}
+  = h(\omega) := \Bigl(\frac{\langle\omega,\Sigma\omega\rangle}{\langle\omega,\Sigma'\omega\rangle}\Bigr)^{\kappa} ,
+\]
+a function that is even, bounded (by $(\lambda_{\max}(\Sigma)/\lambda_{\min}(\Sigma'))^\kappa$), homogeneous
+of degree $0$ and continuous off $0$. By Fubini and Fourier inversion,
+$\int\phi(x/R)\,\rho(dx) = (2\pi)^{-d}\int\Phi(\xi)\,\widehat\rho(\xi/R)\,d\xi$ for $R > 0$, and dominated
+convergence ($|\Phi\,\widehat\rho| \le |\Phi|$) gives, as $R \downarrow 0$,
+\[
+  \int\phi(x/R)\,\rho(dx) \to \Lambda(\phi) := (2\pi)^{-d}\,\mathrm{Re}\int\Phi(\xi)\,h(\xi)\,d\xi .
+\]
+So $\Lambda$ is a limit of the positive linear functionals
+$\phi \mapsto \int\phi(x/R)\,\rho(dx)$: it is linear, $\Lambda(\phi) \ge 0$ for $\phi \ge 0$, hence
+monotone, and $\Lambda(\phi(\cdot/\lambda)) = \Lambda(\phi)$ for $\lambda > 0$, as
+$\int\phi(x/(\lambda R))\,\rho(dx) \to \Lambda(\phi)$ too.
+
+\emph{$\Lambda$ vanishes on test functions vanishing near $0$.} Let $\phi \ge 0$ vanish on
+$\{|x| < r\}$ and on $\{|x| > R\}$, $0 < r \le R$, with $\phi \le M$, and take
+$\lambda > R/r$. The dilates $\phi(\lambda^nx)$, $n \ge 0$, have disjoint supports (a point
+$x$ with $\phi(\lambda^nx) \ne 0$ has $r \le \lambda^n|x| \le R$, and $\lambda^{n+1}|x| \ge \lambda r > R$),
+so $\sum_{n<N}\phi(\lambda^nx) \le M\chi(x)$, with $\chi$ a smooth bump equal to $1$ on
+$\{|x| \le R\}$ and $0 \le \chi \le 1$. By monotonicity and dilation invariance,
+$N\Lambda(\phi) \le M\Lambda(\chi)$ for every $N$, so $\Lambda(\phi) = 0$. A general $\phi$ vanishing
+near $0$ is $(\phi + M\chi') - M\chi'$, with $\chi' \ge 0$ a smooth bump equal to $1$ on
+$\{r \le |x| \le R\}$ and vanishing near $0$, both terms nonnegative and vanishing near $0$; so
+$\Lambda(\phi) = 0$.
+
+\emph{$\Lambda$ is a multiple of the point mass.} Let $\chi_0$ be a smooth bump with $\chi_0 = 1$ on
+$\{|x| \le 1\}$, $0 \le \chi_0 \le 1$, and put $c_0 := \Lambda(\chi_0) \ge 0$. For a test function $\phi$,
+$\psi := \phi - \phi(0)\chi_0$ has $\psi(0) = 0$. Given $\eta > 0$, take $\delta \le 1/2$ with
+$|\psi| \le \eta$ on $\{|x| < 2\delta\}$ and a smooth bump $b$ with $0 \le b \le 1$, equal to $1$ on
+$\{|x| \le \delta\}$ and vanishing off $\{|x| < 2\delta\}$. Then $\psi(1 - b)$ vanishes near $0$, so $\Lambda(\psi(1 - b)) = 0$, and
+$|\psi b| \le \eta\chi_0$, so $|\Lambda(\psi b)| \le \eta c_0$ by monotonicity. Hence $|\Lambda(\psi)| \le \eta c_0$
+for every $\eta > 0$, $\Lambda(\psi) = 0$, and $\Lambda(\phi) = c_0\phi(0)$.
+
+\emph{$h$ is constant.} Fix $a \ne 0$ and, for $N \ge 1$, the test function
+$\phi_N(x) := \chi_0(x/N)\cos\langle a,x\rangle$, which has $\phi_N(0) = 1$, so $\Lambda(\phi_N) = c_0$.
+Writing $\Phi_0$ for the transform of $\chi_0$, the transform of $\phi_N$ is
+$\frac{N^d}{2}\bigl(\Phi_0(N(\xi - a)) + \Phi_0(N(\xi + a))\bigr)$, and the substitution
+$\xi = \pm a + \eta/N$ gives
+\[
+  c_0 = \Lambda(\phi_N) = (2\pi)^{-d}\,\mathrm{Re}\Bigl[\tfrac12\int\Phi_0(\eta)\,h(a + \eta/N)\,d\eta
+    + \tfrac12\int\Phi_0(\eta)\,h(-a + \eta/N)\,d\eta\Bigr] .
+\]
+As $N \to \infty$, dominated convergence ($h$ bounded, continuous at $\pm a$, $\Phi_0$ integrable) gives
+the limit $\tfrac12(h(a) + h(-a))(2\pi)^{-d}\int\Phi_0 = h(a)\chi_0(0) = h(a)$. So $h(a) = c_0$ for every
+$a \ne 0$.
+
+\emph{The step is a ray.} $h(\omega) = c_0$ for every $\omega \ne 0$ forces $c_0 > 0$ and
+$\langle\omega,\Sigma'\omega\rangle = c_0^{-1/\kappa}\langle\omega,\Sigma\omega\rangle$ for every
+$\omega$; a symmetric matrix is determined by its quadratic form, so $\Sigma' = c_0^{-1/\kappa}\Sigma$.
+For the \Matern{} orbit, $g(u) = \gamma\log(1+u)$ and $g(cu) - g(u) = \gamma\log((1+cu)/(1+u))
+\to \gamma\log c$, so $\kappa = \gamma$.
+\end{proof}
+
+% draft: section 2.4, Proposition 2.15, both sentences, for every gamma > 0 (Q-0209 item 4). A
+% collation: the "only if" half is prop:log-orbit-rays, the "if" half prop:affine-orbits(4), whose
+% ray increments now cover every gamma. prop:matern-cross-shape is this node at index 1 with the
+% increment named (its proof since Q-0281 wave 2, group E); the remark after its proof keeps the
+% Green's-function argument, which shows the sign mechanism this node does not.
+% CHANGED Q-0281: \uses re-pointed to the split child it reads (prop:affine-orbits(4) beside (2)).
+\begin{proposition}[the \Matern{} orbit of every index: the positive steps are the rays]
+\label{prop:matern-steps}
+\uses{prop:affine-orbits,prop:log-orbit-rays,prop:affine-orbits-matern}
+\lean{AffineHemigroup.matern_steps}\leanok
+Let $d \ge 1$, $\gamma > 0$, and let $(\mu_\Sigma)_{\Sigma\in\PD(d)}$ be the \Matern{} orbit of index
+$\gamma$, $\widehat\mu_\Sigma(\omega) = (1 + \langle\omega,\Sigma\omega\rangle)^{-\gamma}$
+(\ref{prop:affine-orbits}(4)). Let $\Sigma, \Sigma' \in \PD(d)$ with $\Sigma' \ne \Sigma$. Then there
+is a positive finite measure $\rho$ with $\mu_{\Sigma'} = \mu_\Sigma * \rho$ if and only if
+$\Sigma' = \lambda^2\Sigma$ for some $\lambda > 1$; and then $\rho$ is unique, and it is the
+probability measure $(\Sigma^{1/2})_*\nu_\lambda$, with $\nu_\lambda$ the law of $\sqrt{2Y}\,Z$ of
+\ref{prop:affine-orbits}(4).
+\statusT\quad\emph{(Cites nothing beyond its two inputs. \textbf{What it is worth.} It is the
+draft's Proposition~2.15 in full, for every index $\gamma > 0$ where the draft proves $\gamma = 1$
+and states integer $\gamma$ with a check (its check item~12), and without the draft's hypothesis
+$\Sigma \le \Sigma'$: no pair of distinct shapes off a ray is joined by a positive increment,
+comparable or not. It proves the draft's Remark~2.12 (\emph{to adapt the shape of a non-Gaussian
+aperture is to re-measure}) for the \Matern{} orbits. At $d = 1$ every pair is a ray and the
+statement is the self-decomposability of the law of $\sqrt{2V}Z$. \textbf{Not claimed}: the
+draft's closing conjecture for every non-Gaussian orbit, which is false
+(\ref{prop:stable-step-cone}); the same statement for every orbit of logarithmic exponent, whose
+``only if'' half is \ref{prop:log-orbit-rays} and whose ``if'' half is the self-decomposability of
+$\mu_I$ (\ref{prop:ray-families}), not automatic.)}
+\end{proposition}
+
+% CHANGED Q-0281 wave 2: proved (AffineHemigroup.OrbitRays; Lean core, guarded). The Lean reads the
+% sign c >= 1 through the limit of the increment's transform along a ray, as in
+% prop:bounded-profile-rays, rather than at one point; the sentence says both, and the Lean reads the
+% limit along s omega, s -> infinity.
+% CHANGED Q-0281 wave 2: blind review W2C-6: "which is how the Lean reads it" moved from the proof to
+% this comment.
+\begin{proof}
+\leanok
+$\widehat\mu_\Sigma$ has no zero, so an increment $\rho$, if there is one, has the transform
+$\widehat\rho(\omega) = \bigl((1 + \langle\omega,\Sigma\omega\rangle)/(1 + \langle\omega,\Sigma'\omega\rangle)\bigr)^\gamma$,
+which determines it. \emph{Only if.} By \ref{prop:log-orbit-rays}, $\Sigma' = c\,\Sigma$ for some
+$c > 0$, and $c \ne 1$ as $\Sigma' \ne \Sigma$. As $\widehat\rho(0) = 1$, $\rho$ is a probability
+measure and $|\widehat\rho| \le 1$; at $\omega \ne 0$, with $u := \langle\omega,\Sigma\omega\rangle > 0$,
+$\widehat\rho(\omega) = ((1+u)/(1+cu))^\gamma$, which exceeds $1$ if $c < 1$ (and tends to
+$c^{-\gamma} > 1$ along $s\omega$, $s \to \infty$). So $c > 1$, and
+$\lambda := c^{1/2}$. \emph{If.} By \ref{prop:affine-orbits}(4), the hypothesis of
+\ref{prop:affine-orbits}(2) holds for $\lambda$ with the stated $\nu_\lambda$, and
+\ref{prop:affine-orbits}(2) gives $\mu_{\lambda^2\Sigma} = \mu_\Sigma * (\Sigma^{1/2})_*\nu_\lambda$.
+\end{proof}
+
+% not in the draft: Q-0263 item 1. A corollary of prop:log-orbit-rays: a decaying symbol rational in
+% u = <w, Sigma w>, the kind finitely many elliptic solves realize, has a logarithmic exponent of
+% integer index deg P - deg Q, so its orbit cascades along rays only.
+% CHANGED Q-0281: \uses re-pointed to the split child it reads (prop:affine-orbits(4) beside its hypothesis).
+% CHANGED Q-0281 wave 2: proved (AffineHemigroup.RationalSymbols, Lean core) on the proof's route;
+% statement and proof unchanged.
+\begin{proposition}[rational symbols cascade along rays only]
+\label{prop:rational-symbols}
+\uses{prop:affine-orbits,prop:log-orbit-rays,prop:affine-orbits-matern}
+\lean{AffineHemigroup.rational_symbols, AffineHemigroup.rational_symbols_examples}\leanok
+Let $d \ge 1$, and let $P$ and $Q$ be real polynomials with $\operatorname{deg}P > \operatorname{deg}Q$ and $P(0) = Q(0)$,
+neither of which vanishes on $[0,\infty)$. Suppose that $\omega \mapsto Q(|\omega|^2)/P(|\omega|^2)$
+is the characteristic function of a probability measure $\mu_I$ on $\RR^d$, and let
+$\mu_\Sigma := (\Sigma^{1/2})_*\mu_I$ for $\Sigma \in \PD(d)$, so that
+$\widehat\mu_\Sigma(\omega) = Q(\langle\omega,\Sigma\omega\rangle)/P(\langle\omega,\Sigma\omega\rangle)$.
+Then $g(u) := \log(P(u)/Q(u))$ satisfies the hypothesis of \ref{prop:affine-orbits}, and that of
+\ref{prop:log-orbit-rays} with $\kappa = \operatorname{deg}P - \operatorname{deg}Q$. So if $\Sigma, \Sigma' \in \PD(d)$ and
+$\mu_{\Sigma'} = \mu_\Sigma * \rho$ for a positive finite measure $\rho$, then $\Sigma' = c\,\Sigma$ for
+some $c \ge 1$. This applies, with $n \ge 1$ and $a_1, \dots, a_n > 0$, to the \Matern{} orbits of integer index
+$\gamma$ ($Q = 1$, $P = (1+u)^\gamma$, $\kappa = \gamma$), to the products
+$\prod_{i\le n}(1 + a_iu)^{-1}$ ($\kappa = n$), and to the mixtures $\sum_{i\le n}w_i(1 + a_iu)^{-1}$
+with $w_i \ge 0$ and $\sum_iw_i = 1$ ($\kappa = 1$).
+\statusT\quad\emph{(Cites nothing beyond \ref{prop:log-orbit-rays} and the \Matern{} laws of
+\ref{prop:affine-orbits}(4), at index $1$ for the products and mixtures and at index $\gamma$ for the
+\Matern{} example. \textbf{What it is worth.} It is the reason the \Matern{}'s
+implementability and its affine rigidity are one fact. Write $L_\Sigma := -\nabla\cdot\Sigma\nabla$,
+the operator with symbol $u = \langle\omega,\Sigma\omega\rangle$. A filter computed by finitely many
+solves of shifted equations $(L_\Sigma - z)v = w$, $z \in \CC \setminus [0,\infty)$, and finitely
+many applications of $L_\Sigma$ multiplies the transform by a rational function of $u$; conversely
+$Q(u)/P(u)$, with $P$ factored over $\CC$, is computed by $\operatorname{deg}P$ such solves and one application of
+$Q(L_\Sigma)$. A rational symbol that decays behaves like $u^{-\kappa}$ at infinity with $\kappa$ a
+positive integer, so its exponent grows like $\kappa\log u$: index $0$ at the origin, the case
+\ref{prop:log-orbit-rays} closes. So every affine orbit of a probability law that elliptic solves
+in the shape's own operator implement exactly, with a transform that does not vanish and decays
+($\operatorname{deg}P > \operatorname{deg}Q$), changes shape only by re-measurement, the \Matern{} of
+integer index first among them. The obstruction is the decay of a rational function, a whole
+power, and no choice of decaying $P$ and $Q$ avoids it. The
+families of \ref{prop:tempered-step-cone}(3), whose exponents have positive index at the origin,
+have the stable cone of steps across shapes, and their symbols are not rational. \textbf{Not
+claimed}: symbols that do not decay, $\operatorname{deg}P = \operatorname{deg}Q$ (an atom at the origin,
+e.g. $\tfrac12\delta_0 + \tfrac12$ the \Matern{} law of index $1$, symbol $(2 + u)/(2(1 + u))$), where
+$\kappa = 0$ and \ref{prop:log-orbit-rays} says nothing; symbols for which $Q$ has a zero in $(0,\infty)$, where the
+transform vanishes on an ellipsoid and \ref{prop:log-orbit-rays}, which reads the logarithm of the
+symbol, does not apply; which rays carry a positive increment, which is the self-decomposability of
+$\mu_I$ (\ref{prop:ray-families}), every ray for the \Matern{} (\ref{prop:matern-steps}); filters
+built from other operators, such as a separable or a lattice discretization, whose symbols are not
+functions of $u$ alone (on the grid, see the annotation of \ref{prop:matern-negative-mass}).)}
+\end{proposition}
+
+\begin{proof}
+\leanok
+$P$ and $Q$ have no zero on $[0,\infty)$ and agree at $0$, so they have one sign there and $P/Q$ is
+positive and continuous on $[0,\infty)$; $g$ is continuous with $g(0) = 0$, and $g \ge 0$ because a
+characteristic function has modulus at most $1$. So $g$ satisfies the hypothesis of
+\ref{prop:affine-orbits}. Write $p := \operatorname{deg}P$, $q := \operatorname{deg}Q$, $P(u) = a\,u^p(1 + \varepsilon_P(u))$ and
+$Q(u) = b\,u^q(1 + \varepsilon_Q(u))$ with $a, b \ne 0$ and $\varepsilon_P(u), \varepsilon_Q(u) \to 0$
+as $u \to \infty$. For $c > 0$,
+\[
+  g(cu) - g(u) = \log\frac{c^p(1 + \varepsilon_P(cu))}{1 + \varepsilon_P(u)}
+   - \log\frac{c^q(1 + \varepsilon_Q(cu))}{1 + \varepsilon_Q(u)} \to (p - q)\log c ,
+\]
+and $\kappa := p - q \ge 1$. \ref{prop:log-orbit-rays} gives $\Sigma' = c\,\Sigma$ with $c > 0$. Its
+proof shows that $\rho$ is a probability measure, so $|\widehat\rho| \le 1$, and for $\omega \ne 0$
+and $s \to \infty$, $\widehat\rho(s\omega) = e^{-(g(cu_s) - g(u_s))}$ with
+$u_s := s^2\langle\omega,\Sigma\omega\rangle \to \infty$ tends to $c^{-\kappa}$; so $c^{-\kappa} \le 1$
+and $c \ge 1$.
+
+For the examples, $P(0) = Q(0) = 1$ in each. The \Matern{} of integer index is
+\ref{prop:affine-orbits}(4). By that clause $(1 + a_i|\omega|^2)^{-1}$ is the transform of
+$(a_i^{1/2}I)_*\mu^{(1)}_I$, with $\mu^{(1)}_I$ the index-$1$ law; a product of transforms is the
+transform of a convolution, and a convex combination that of a mixture, of probability measures. The
+product has $Q = 1$ and $P = \prod_i(1 + a_iu)$. The mixture has $P = \prod_i(1 + a_iu)$ and
+$Q = \sum_iw_i\prod_{k\ne i}(1 + a_ku)$, whose coefficient of $u^{n-1}$ is
+$\sum_iw_i\prod_{k\ne i}a_k > 0$, so $\operatorname{deg}Q = n - 1$; and $Q(u) = P(u)\sum_iw_i(1 + a_iu)^{-1} > 0$
+for $u \ge 0$. None of these $P$ or $Q$ vanishes on $[0,\infty)$.
+\end{proof}
+
+% not in the draft: Q-0151's side finding, from the check its brief asked for (whether the
+% threshold relates to prop:orbit-step-cone's dilation ratio or to prop:log-orbit-rays' setting).
+% It is the second: a profile bounded at the origin gives a logarithmic exponent of index
+% |S^{d-1}| k(0+)/2 (lem:isotropic-exponent-log(2), Abelian), so prop:log-orbit-rays closes the
+% converse of prop:orbit-step-cone(3) for every such profile. The threshold c = d itself plays no
+% part: R is identically 1 for every bounded profile, whatever c.
+% CHANGED round-3 review (report D, item 4; VERIFY-round3-landscape-orbits-paper.md section 8): the
+% annotation's subordinated data are those with a = 0, the orbit of prop:orbit-step-cone(1) having no
+% Gaussian part. Annotation only.
+\begin{proposition}[orbits of a profile bounded at the origin cascade along rays only]
+\label{prop:bounded-profile-rays}
+\uses{prop:orbit-step-cone,prop:affine-orbits,prop:log-orbit-rays,lem:isotropic-exponent-log,def:isotropic-origin-datum,thm:cited-A3}
+\lean{AffineHemigroup.bounded_profile_rays}\leanok
+Let $d \ge 1$, let $k$ satisfy the hypotheses of \ref{prop:orbit-step-cone} with
+$k(0{+}) := \lim_{r\downarrow0}k(r)$ finite, and let $(\mu_\Sigma)$ be the orbit of
+\ref{prop:orbit-step-cone}(1), with \Levy{} densities $n_\Sigma$. For a unit vector $e$ the function
+$g(u) := \psi_I(\sqrt u\,e)$ satisfies the hypothesis of \ref{prop:affine-orbits}, and that of
+\ref{prop:log-orbit-rays} with $\kappa = \tfrac12|S^{d-1}|\,k(0{+}) > 0$. Consequently, for
+$\Sigma, \Sigma' \in \PD(d)$ the following are equivalent:
+\begin{enumerate}
+\item $\mu_{\Sigma'} = \mu_\Sigma * \rho$ for a positive finite measure $\rho$;
+\item $n_\Sigma \le n_{\Sigma'}$ everywhere;
+\item $\Sigma' = c\,\Sigma$ for some $c \ge 1$.
+\end{enumerate}
+\statusA\quad\ledger{A3}\quad\emph{(\textbf{Assignment.} \ledger{A3}(iii) is spent through
+\ref{prop:orbit-step-cone}, for the law $\mu_I$ and for the increment in (2)$\Rightarrow$(1). The
+implication (1)$\Rightarrow$(3) cites nothing beyond \ref{prop:log-orbit-rays} and
+\ref{lem:isotropic-exponent-log}. \textbf{What it is worth.} It is the converse of
+\ref{prop:orbit-step-cone}(3) for every profile bounded at the origin: there a positive increment,
+ordered \Levy{} densities and a ray are the same condition, which is Remark~2.12's ``to adapt the
+shape is to re-measure'' at index $0$ in full. Before Q-0151 the converse was known at the two
+ends, the stable profiles (\ref{lem:stable-tail}) and the orbits with a logarithmic exponent
+(\ref{prop:log-orbit-rays}); the missing link, that a profile bounded at the origin has a
+logarithmic exponent, is \ref{lem:isotropic-exponent-log}(2), an Abelian statement. The class
+contains the \Matern{} orbits (\ref{prop:tempered-step-cone}(4), with
+$|S^{d-1}|k_0(0{+}) = 2\gamma$ and $\kappa = \gamma$, as in \ref{prop:log-orbit-rays}), every
+subordinated isotropic datum with $a = 0$ whose delay profile is nonzero and bounded at the origin
+(the orbit of \ref{prop:orbit-step-cone}(1) has no Gaussian part), and the unit-step
+profiles $k = \mathbf{1}_{(0,\tau)}$, which are not subordinated (a polar profile
+\ref{eq:polar-profile-d} of a nonzero delay profile is positive at every radius). \textbf{Not claimed}: anything for a profile unbounded at the origin, in particular
+the converse of \ref{prop:tempered-step-cone}(1) for the tempered profiles $r^{-\alpha}j$,
+$\alpha > 0$, which stays open. The boundedness threshold $c = d$ of
+\ref{thm:origin-boundedness-d} plays no part here: every bounded profile has $R \equiv 1$ and
+$\kappa = \tfrac12|S^{d-1}|k(0{+})$, whatever its size relative to $d$.)}
+\end{proposition}
+
+% CHANGED Q-0281 wave 2: proved (AffineHemigroup.OrbitRays; prints A3(iii) through
+% prop:orbit-step-cone, guarded). The Lean follows this proof.
+% CHANGED round-1 review (Gemini), the author's decision D2: wording only, "the orbit of that node"
+% -> "of that proposition", as the paper now prints this proof whole (Appendix B).
+\begin{proof}
+\leanok
+\emph{The datum.} Put $k_d := |S^{d-1}|\,k$. It is nonincreasing, and
+$\int_{\RR^d}(|x|^2 \wedge 1)\,m(|x|)\,dx = \int_0^1 k_d(r)\,r\,dr + \int_1^\infty k_d(r)\,dr/r$ in
+polar coordinates, finite by hypothesis; so $(0,k_d)$ is an isotropic origin datum in dimension
+$d$ (\ref{def:isotropic-origin-datum}), whose \Levy{} measure has the radial density
+$k_d(r)\bigl(|S^{d-1}|r^d\bigr)^{-1} = m(r)$ and whose exponent is therefore $\psi_I$. Its profile at
+the origin is $|S^{d-1}|k(0{+})$, finite by hypothesis and positive because $k$ is nonincreasing and
+not identically $0$.
+
+\emph{The hypotheses on $g$.} $\psi_I$ is rotation invariant, so $e^{-g(|\omega|^2)} =
+e^{-\psi_I(\omega)} = \widehat\mu_I(\omega)$, the characteristic function of a probability measure;
+$g(0) = 0$ and $g \ge 0$, as $\psi_I$ is; and $g$ is continuous on $[0,\infty)$, being $-\log$ of
+the continuous positive function
+$u \mapsto \widehat\mu_I(\sqrt u\,e)$. So $g$ satisfies the hypothesis of \ref{prop:affine-orbits}, and
+the orbit $(\Sigma^{1/2})_*\mu_I$ of that proposition is the orbit here. By
+\ref{lem:isotropic-exponent-log}(2), $g(au) - g(u) \to \tfrac12|S^{d-1}|k(0{+})\log a = \kappa\log a$
+as $u \to \infty$, for every $a > 0$.
+
+\emph{The equivalence.} (2)$\Rightarrow$(1) is \ref{prop:orbit-step-cone}(2), with $\rho$ the
+infinitely divisible law named there. (3)$\Rightarrow$(2): $c = \lambda^2$ with $\lambda \ge 1$, and
+\ref{prop:orbit-step-cone}(3) puts every ray $\Sigma \le \lambda^2\Sigma$ in the relation of its
+clause (2). (1)$\Rightarrow$(3): \ref{prop:log-orbit-rays} gives $\Sigma' = c\,\Sigma$ with $c > 0$.
+Its proof shows that $\rho$ is a probability measure, so $|\widehat\rho| \le 1$; and for
+$\omega \ne 0$ and $s \to \infty$, with $u_s := s^2\langle\omega,\Sigma\omega\rangle \to \infty$,
+$\widehat\rho(s\omega) = \widehat\mu_{\Sigma'}(s\omega)/\widehat\mu_\Sigma(s\omega) =
+e^{-(g(cu_s) - g(u_s))} \to c^{-\kappa}$. So $c^{-\kappa} \le 1$, and $c \ge 1$.
+\end{proof}
+
+% draft: section 2.4, Proposition 2.15, gamma = 1. The draft's proof goes through the
+% Bessel-potential asymptotics of the Green's function and their derivatives, which its check
+% item 12 leaves open; this proof writes the Green's function as the Laplace transform of the heat
+% kernel and reads the leading term of its Hessian off one Gamma integral, so no Bessel function
+% appears. The draft's second sentence (integer gamma >= 2) is not a clause: its own check says
+% the sign argument needs the full leading coefficient there.
+% CHANGED Q-0281: \uses re-pointed to the split child it reads (prop:affine-orbits(4) only).
+% CHANGED Q-0281 wave 2, group E: proof rewritten to the Lean route (the author's decision of
+% 2026-10-05): the statement is prop:matern-steps at gamma = 1 with its ray increment identified by
+% transforms (AffineHemigroup.MaternCrossShape, Lean core, guarded), so \uses gains
+% prop:matern-steps. The Green's-function argument, which shows the mechanism, is kept whole as the
+% remark after the proof; prop:matern-negative-mass reads its paragraphs "The kernel" and "Its
+% Hessian near the origin" there (CHANGED Q-0281 wave 2: blind review W2E-1). The
+% statement is unchanged.
+\begin{proposition}[in the \Matern{} orbit every step across shapes fails]
+\label{prop:matern-cross-shape}
+\uses{prop:matern-steps,prop:affine-orbits-matern}
+\lean{AffineHemigroup.matern_cross_shape}\leanok
+Let $d \ge 2$ and let $(\mu_\Sigma)_{\Sigma\in\PD(d)}$ be the \Matern{} orbit of index $1$,
+$\widehat\mu_\Sigma(\omega) = (1 + \langle\omega,\Sigma\omega\rangle)^{-1}$
+(\ref{prop:affine-orbits}(4)). Let $\Sigma \le \Sigma'$ in $\PD(d)$ with $\Sigma' \ne \Sigma$.
+Then there is a positive finite measure $\rho$ with $\mu_{\Sigma'} = \mu_\Sigma * \rho$ if and only
+if $\Sigma' = \lambda^2\Sigma$ for some $\lambda > 1$; and then $\rho$ is the probability measure
+$\lambda^{-2}\delta_0 + (1-\lambda^{-2})\mu_{\Sigma'}$.
+\statusT\quad\emph{(Cites nothing beyond \ref{prop:matern-steps} at $\gamma = 1$ and the transforms
+of the \Matern{} laws (\ref{prop:affine-orbits}(4)). The remark after the proof gives a second
+argument for the ``only if'' half, by the Green's function; it cites the Gaussian integral, the Gamma
+integral, Fubini, and Fourier inversion for a Schwartz function. \textbf{Not claimed here}: the
+draft's second sentence, the \Matern{} orbits of index $\gamma \ne 1$. That is
+\ref{prop:matern-steps}, for every $\gamma > 0$: its ``only if'' half is \ref{prop:log-orbit-rays}
+(the limit of the increment's transform at infinity, not the Green's function), and its ``if'' half
+the ray increments of \ref{prop:affine-orbits}(4). Nor the case $d = 1$, where every step is a ray. The draft's
+conjecture that every step off the rays fails for every non-Gaussian orbit is false: the
+isotropic $\alpha$-stable orbit cascades on a cone of full-rank steps (\ref{prop:stable-step-cone}),
+of which this proposition is the formal endpoint $\alpha = 0$.
+\textbf{What it is worth.} With \ref{thm:rank-deficient-step} this closes the \Matern{} orbit of
+index $1$ completely: of all comparable pairs $\Sigma \le \Sigma'$, exactly the rays are
+increments. The mechanism, shown by the remark after the proof, is that of
+\ref{lem:charfn-one-on-subspace} in infinitesimal form: near the origin the increment would have to
+remove mass from the directions the step widens least.)}
+\end{proposition}
+
+\begin{proof}
+\leanok
+By \ref{prop:matern-steps} at $\gamma = 1$, which needs neither $d \ge 2$ nor $\Sigma \le \Sigma'$,
+a positive finite measure $\rho$ with $\mu_{\Sigma'} = \mu_\Sigma * \rho$ exists if and only if
+$\Sigma' = \lambda^2\Sigma$ for some $\lambda > 1$, and then $\rho$ is unique. It remains to name
+it. Let $\Sigma' = \lambda^2\Sigma$ with $\lambda > 1$, and put
+$\tau := \lambda^{-2}\delta_0 + (1-\lambda^{-2})\mu_{\Sigma'}$, a probability measure since
+$0 < \lambda^{-2} < 1$. For $\omega \in \RR^d$ write $u := \langle\omega,\Sigma\omega\rangle \ge 0$, so
+that $\langle\omega,\Sigma'\omega\rangle = \lambda^2u$. Since
+$\lambda^{-2}(1 + \lambda^2u) + 1 - \lambda^{-2} = 1 + u$,
+\[
+  \widehat\mu_\Sigma(\omega)\,\widehat\tau(\omega)
+  = \frac{1}{1+u}\Bigl(\lambda^{-2} + \frac{1-\lambda^{-2}}{1+\lambda^2u}\Bigr)
+  = \frac{1}{1+\lambda^2u} = \widehat\mu_{\Sigma'}(\omega) .
+\]
+A finite measure is determined by its transform, so $\mu_{\Sigma'} = \mu_\Sigma * \tau$, and by the
+uniqueness $\rho = \tau$.
+\end{proof}
+
+% not in the draft: Q-0281 wave 2, group I (blind review W2E-7, a split, delegated): the paragraphs
+% "The kernel" and "Its Hessian near the origin" of the remark below, which
+% prop:matern-negative-mass reads, as a node of their own, up to layout and naming (the lemma sets
+% d >= 1, writes P' in PSD(d), names the limits d B_d and B_d, and adds "of index 1
+% (prop:affine-orbits(4))"); d >= 1 is the range the computation needs, so nothing is widened.
+% CHANGED Q-0281 wave 2: blind review W2I-2: "word for word ... no mathematical content changed"
+% overstated the split.
+\begin{lemma}[the \Matern{} kernel of index $1$ and its Hessian near the origin]
+\label{lem:matern-kernel-hessian}
+\uses{prop:affine-orbits-matern}
+% CHANGED Q-0281 wave 2: blind review W2I-1: the tag gains AffineHemigroup.matern_orbit, which states
+% the law of index 1 and the transform of its orbit; with matern_kernel it covers clause (1) (ADR-0025).
+% CHANGED Q-0281 wave 2: blind review W2I-3: the citations gain Fourier uniqueness and Tonelli.
+\lean{AffineHemigroup.matern_kernel, AffineHemigroup.matern_orbit, AffineHemigroup.matern_kernel_hessian}\leanok
+Let $d \ge 1$, let $h_t(y) := (4\pi t)^{-d/2}e^{-|y|^2/4t}$ be the heat kernel, and put
+$G(y) := \int_0^\infty e^{-t}h_t(y)\,dt$ for $y \in \RR^d \setminus \{0\}$.
+\begin{enumerate}
+\item \emph{(The kernel.)} $G \ge 0$, $\int G = 1$, $\widehat G(\zeta) = (1+|\zeta|^2)^{-1}$ with
+$\widehat G(\zeta) = \int e^{i\langle\zeta,y\rangle}G(y)\,dy$, and $G$ is smooth on $\RR^d \setminus \{0\}$.
+For $\Sigma' \in \PD(d)$, $K'(x) := (\det\Sigma')^{-1/2}G(\Sigma'^{-1/2}x)$ is a probability density
+with $\widehat{K'}(\omega) = (1 + \langle\omega,\Sigma'\omega\rangle)^{-1}$, so it is the density of the
+\Matern{} law $\mu_{\Sigma'}$ of index $1$ (\ref{prop:affine-orbits}(4)).
+\item \emph{(Its Hessian near the origin.)} For a symmetric matrix $P'$ write
+$\nabla\cdot P'\nabla := \sum_{j,k}P'_{jk}\partial_j\partial_k$, and put $\kappa(s) := (4\pi s)^{-d/2}e^{-1/4s}$,
+$\mathcal{A}(r) := \int_0^\infty e^{-r^2s}\,\kappa(s)\,(4s^2)^{-1}ds$ and
+$\mathcal{B}(r) := \int_0^\infty e^{-r^2s}\,\kappa(s)\,(2s)^{-1}ds$. For $y = r\widehat y$ with $r > 0$ and
+$|\widehat y| = 1$,
+\[
+  r^d\,\nabla\cdot P'\nabla G(y) = \langle\widehat y, P'\widehat y\rangle\,\mathcal{A}(r) - (\tr P')\,\mathcal{B}(r) .
+\]
+As $r \downarrow 0$, $\mathcal{A}(r) \to d\,\mathcal{B}_d$ and $\mathcal{B}(r) \to \mathcal{B}_d :=
+\tfrac12\pi^{-d/2}\Gamma(\tfrac d2) > 0$; and if $P' \in \PSD(d)$, then
+$r^d\,\nabla\cdot P'\nabla G(r\widehat y) \to \mathcal{B}_d\bigl(d\langle\widehat y,P'\widehat y\rangle - \tr P'\bigr)$
+uniformly in $\widehat y$.
+\end{enumerate}
+\statusT\quad\emph{(Cites the Gaussian integral and the transform of a Gaussian, the Gamma
+integral, Tonelli and Fubini, differentiation under the integral sign, and Fourier uniqueness (a
+finite measure is determined by its transform). \textbf{The Lean.} Clause (1) is
+\texttt{matern\_kernel} together with \texttt{matern\_orbit} at $\gamma = 1$: the latter states that
+the law of $\sqrt{2V}Z$, with $V$ exponential of mean $1$ and independent of the standard normal
+$Z$, is a probability measure with transform
+$(1+|\omega|^2)^{-1}$, a \Matern{} law of index $1$, and that its orbit at $\Sigma'$ has transform
+$(1 + \langle\omega,\Sigma'\omega\rangle)^{-1}$; the former, that this orbit is $K'(x)\,dx$. Its total mass is
+its transform at $\omega = 0$, which is $1$. Clause (2) is \texttt{matern\_kernel\_hessian}.
+\textbf{What it is worth.} The
+Green's function of $1 - \Delta$ and the leading term of its Hessian at the origin, which the remark
+below and \ref{prop:matern-negative-mass} read: the increment of a step across shapes is, near the
+origin, homogeneous of degree $-d$ with the angular factor $d\langle\widehat y,P'\widehat y\rangle - \tr P'$.)}
+\end{lemma}
+
+% CHANGED Q-0281 wave 2, group I: proof rewritten to the Lean route (G through its radial profile
+% F and the integrals L_m; the Hessian by the chain rule; the limits by dominated convergence).
+\begin{proof}\leanok
+\emph{The profile.} For real $m$ and $u > 0$ put
+\[
+  L_m(u) := \int_0^\infty e^{-t}\,t^m\,e^{-u/4t}\,dt .
+\]
+The integral is finite: $e^{-u/4t} \le n!\,(4t/u)^n$ for every $n$, and with $n > -m-1$ the
+integrand is at most a multiple of $e^{-t}t^{m+n}$, which is integrable. For $u > u_0/2$ the
+$u$-derivative of the integrand, $-\tfrac14e^{-t}t^{m-1}e^{-u/4t}$, is bounded by
+$\tfrac14e^{-t}t^{m-1}e^{-u_0/8t}$, integrable by the same estimate, so $L_m$ is differentiable at
+$u_0$ with $L_m' = -\tfrac14L_{m-1}$. By induction on the order every $L_m$ is smooth on
+$(0,\infty)$. Since $(4\pi t)^{-d/2} = (4\pi)^{-d/2}t^{-d/2}$, $G(y) = F(|y|^2)$ with
+$F := (4\pi)^{-d/2}L_{-d/2}$, and
+\[
+  F' = -\tfrac14(4\pi)^{-d/2}L_{-d/2-1} , \qquad F'' = \tfrac1{16}(4\pi)^{-d/2}L_{-d/2-2} .
+\]
+
+\emph{Clause (1).} $G \ge 0$, and $G$ is smooth on $\RR^d \setminus \{0\}$, a composite of $F$ and the
+smooth map $y \mapsto |y|^2$, which sends $\RR^d \setminus \{0\}$ into $(0,\infty)$. The Gaussian
+integral gives $\int h_t = 1$ and $\widehat{h_t}(\zeta) = e^{-t|\zeta|^2}$ for $t > 0$. So
+$(y,t) \mapsto e^{-t}h_t(y)$ is integrable on $\RR^d \times (0,\infty)$, with integral
+$\int_0^\infty e^{-t}dt = 1$ by Tonelli; $G$ is integrable, and Fubini gives
+$\widehat G(\zeta) = \int_0^\infty e^{-t(1+|\zeta|^2)}dt = (1+|\zeta|^2)^{-1}$, which at $\zeta = 0$ is
+$\int G = 1$. A finite measure is determined by its transform, so the \Matern{} law of index $1$ at
+$I$, whose transform is $(1+|\omega|^2)^{-1}$ (\ref{prop:affine-orbits}(4)), is $G(y)\,dy$. The law
+$\mu_{\Sigma'}$ is its image under $y \mapsto \Sigma'^{1/2}y$, and this substitution, with Jacobian
+$(\det\Sigma')^{1/2}$, gives it the density $K'$; in particular $K'$ is a probability density with
+$\widehat{K'}(\omega) = \widehat G(\Sigma'^{1/2}\omega) = (1 + \langle\omega,\Sigma'\omega\rangle)^{-1}$.
+
+\emph{Clause (2).} For $x \ne 0$ the chain rule gives
+$\partial_j\partial_kG(x) = 4x_jx_kF''(|x|^2) + 2\delta_{jk}F'(|x|^2)$, so
+\[
+  \nabla\cdot P'\nabla G(x) = 4F''(|x|^2)\,\langle x,P'x\rangle + 2F'(|x|^2)\,\tr P' .
+\]
+For $r > 0$ the substitution $t = r^2s$ gives
+$L_m(r^2) = r^{2m+2}\int_0^\infty e^{-r^2s}s^me^{-1/4s}\,ds$, and since
+$\kappa(s) = (4\pi)^{-d/2}s^{-d/2}e^{-1/4s}$ this reads $4r^{d+2}F''(r^2) = \mathcal{A}(r)$ and
+$-2r^dF'(r^2) = \mathcal{B}(r)$. At $x = r\widehat y$ with $|\widehat y| = 1$, where
+$\langle x,P'x\rangle = r^2e$ with $e := \langle\widehat y,P'\widehat y\rangle$, this is
+\[
+  r^d\,\nabla\cdot P'\nabla G(r\widehat y) = e\,\mathcal{A}(r) - (\tr P')\,\mathcal{B}(r) .
+\]
+As $r \downarrow 0$ the integrands of $\mathcal{A}$ and $\mathcal{B}$ increase to
+$\kappa(s)(4s^2)^{-1}$ and $\kappa(s)(2s)^{-1}$, which are integrable because $d \ge 1$; by dominated
+convergence $\mathcal{A}(r) \to \mathcal{A}(0)$ and $\mathcal{B}(r) \to \mathcal{B}(0)$, the integrals of
+these limits. The substitution $s = 1/v$ gives
+$\int_0^\infty s^{-\alpha-1}e^{-1/4s}ds = \int_0^\infty v^{\alpha-1}e^{-v/4}dv = 4^\alpha\Gamma(\alpha)$
+for $\alpha > 0$, so $\mathcal{A}(0) = \tfrac14(4\pi)^{-d/2}4^{d/2+1}\Gamma(\tfrac d2+1) =
+\pi^{-d/2}\Gamma(\tfrac d2+1) = d\,\mathcal{B}_d$ and
+$\mathcal{B}(0) = \tfrac12(4\pi)^{-d/2}4^{d/2}\Gamma(\tfrac d2) = \mathcal{B}_d$, which is positive.
+Finally $|e| \le \|P'\|$, the operator norm, so
+\[
+  \Bigl| r^d\,\nabla\cdot P'\nabla G(r\widehat y) - \mathcal{B}_d\bigl(d\,e - \tr P'\bigr)\Bigr|
+  \le \bigl(\|P'\| + |\tr P'|\bigr)\bigl(|\mathcal{A}(r) - d\,\mathcal{B}_d| + |\mathcal{B}(r) - \mathcal{B}_d|\bigr)
+  \to 0
+\]
+uniformly in $\widehat y$; this part needs no sign of $P'$.
+
+Every step is machine-checked in Lean core, with no ledger entry; the formula of clause (2) holds
+for every square matrix $P'$, and the operator $\nabla\cdot P'\nabla$ is read in the standard basis.
+\end{proof}
+
+\emph{Remark: the mechanism.} A second proof of the ``only if'' half of
+\ref{prop:matern-cross-shape}, by the Green's function of $1 - \Delta$, shows why a step off the rays
+fails: near the origin the would-be increment is a function that is negative on an open cone. It
+reads the kernel $G$ and the Hessian of \ref{lem:matern-kernel-hessian}; \ref{prop:matern-negative-mass}
+measures the failure.
+% CHANGED Q-0281 wave 2: blind review W2E-1: the two paragraphs are named; "first two" miscounted the opening one.
+% CHANGED Q-0281 wave 2, group I: the paragraphs "The kernel" and "Its Hessian near the origin"
+% moved into lem:matern-kernel-hessian (blind review W2E-7); the remark keeps the increment and the sign.
+
+\emph{The increment, tested away from the origin.} Let $P := \Sigma' - \Sigma \in \PSD(d)$,
+$P \ne 0$, and suppose $\rho$ is a positive finite measure with $\mu_{\Sigma'} = \mu_\Sigma * \rho$.
+Then
+\[
+  \widehat\rho(\omega) = \frac{1 + \langle\omega,\Sigma\omega\rangle}{1 + \langle\omega,\Sigma'\omega\rangle}
+   = 1 - \langle\omega,P\omega\rangle\,\widehat{K'}(\omega) .
+\]
+Let $\phi$ be smooth with compact support in $\RR^d \setminus \{0\}$, and write
+$\widehat\phi(\omega) = \int e^{i\langle\omega,x\rangle}\phi(x)dx$, so that
+$\phi(x) = (2\pi)^{-d}\int\widehat\phi(\omega)e^{-i\langle\omega,x\rangle}d\omega$ and
+$-\nabla\cdot P\nabla\phi$ has transform $\langle\omega,P\omega\rangle\widehat\phi$. By Fubini,
+$\int\phi\,d\rho = (2\pi)^{-d}\int\widehat\phi(\omega)\widehat\rho(-\omega)\,d\omega$, and the same
+identity for the finite measure $K'(x)dx$ applied to $\nabla\cdot P\nabla\phi$ gives, $\widehat\rho$
+and $\widehat{K'}$ being even and $\phi(0) = 0$,
+\[
+  \int\phi\,d\rho = \phi(0) + \int K'(x)\,\nabla\cdot P\nabla\phi(x)\,dx
+   = \int\phi(x)\,\nabla\cdot P\nabla K'(x)\,dx ,
+\]
+the last step by integrating by parts twice over a region $\{|x| > r_0\}$ that contains the support
+of $\phi$, where $K'$ is smooth and no boundary term survives. Now in the coordinates
+$y = \Sigma'^{-1/2}x$, $\nabla_x\cdot P\nabla_xK'(x) = (\det\Sigma')^{-1/2}\,\nabla_y\cdot
+P'\nabla_yG(y)$ with $P' := \Sigma'^{-1/2}P\,\Sigma'^{-1/2} \in \PSD(d)$, $P' \ne 0$.
+
+\emph{The sign.} Suppose $P'$ is not a multiple of $I$. Its least eigenvalue is then below the
+mean $\tr P'/d$, so a unit eigenvector $\widehat y_0$ for it has
+$d\langle\widehat y_0,P'\widehat y_0\rangle - \tr P' < 0$. By continuity there are an open set
+$U$ of unit vectors containing $\widehat y_0$ and an $\eta > 0$ with
+$d\langle\widehat y,P'\widehat y\rangle - \tr P' < -\eta$ on $U$, and by the uniform convergence
+of \ref{lem:matern-kernel-hessian}(2) an $r_1 > 0$ with $\nabla_y\cdot P'\nabla_yG(r\widehat y) < 0$ for $0 < r < r_1$ and
+$\widehat y \in U$. The image $V$ of $\{r\widehat y : 0 < r < r_1,\ \widehat y \in U\}$ under
+$y \mapsto \Sigma'^{1/2}y$ is a nonempty open subset of $\RR^d \setminus \{0\}$ on which
+$\nabla\cdot P\nabla K' < 0$. A smooth $\phi \ge 0$, not identically $0$, with compact support in
+$V$ then has $\int\phi\,d\rho < 0$, which is impossible for a positive measure. So
+$P' = \kappa I$ for some $\kappa > 0$, that is $\Sigma' - \Sigma = \kappa\Sigma'$ and
+$\Sigma = (1-\kappa)\Sigma'$; as $\Sigma$ is positive definite, $\kappa < 1$, and
+$\Sigma' = \lambda^2\Sigma$ with $\lambda^2 = 1/(1-\kappa) > 1$.
+
+% not in the draft: Q-0263 item 3, the author's question (2026-10-03) how much the Matern orbit
+% fails across shapes. The quantitative form of prop:matern-cross-shape, from the same Hessian
+% asymptotics: off the origin the would-be increment is a smooth function homogeneous of degree -d
+% to leading order, with an angular factor of mean zero, so its negative mass diverges like a
+% logarithm at the origin. The lattice law of records/affine/check-grid-matern-cross-shape.py is
+% the heuristic of this coefficient cut off at the grid scale; it is measured there and stated in
+% the annotation, not proved.
+% CHANGED Q-0281: \uses re-pointed to the split child it reads (prop:affine-orbits(4) only).
+% CHANGED Q-0281 wave 2, group E: the two citations of prop:matern-cross-shape's proof re-pointed
+% to the remark after it, where its Green's-function paragraphs now stand (that node's proof is the
+% Lean route through prop:matern-steps). No step of this proof changed.
+% CHANGED Q-0281 wave 2, group I: \uses gains lem:matern-kernel-hessian, the remark's two paragraphs
+% split out as a node (blind review W2E-7); the citations re-pointed to it. No step changed.
+% CHANGED Q-0281 wave 2, group J: proved (AffineHemigroup.MaternNegativeMass, Lean core,
+% guarded), \leanok. The annotation's last citation narrowed to what the proof reads, monotone
+% convergence in place of the uniqueness of a Radon measure given its integrals of test functions.
+% CHANGED Q-0281 wave 2: blind review W2J-4: the citations gain Fubini and Tonelli, integration
+% by parts, the smooth step and the smooth function positive exactly on an open set.
+\begin{proposition}[how much a step across shapes fails: a logarithmic negative mass]
+\label{prop:matern-negative-mass}
+\uses{prop:matern-cross-shape,prop:affine-orbits-matern,lem:matern-kernel-hessian}
+\lean{AffineHemigroup.maternIncrement_eq_integral, AffineHemigroup.matern_negative_mass_off_origin,
+AffineHemigroup.matern_negative_mass_near_origin, AffineHemigroup.matern_negative_mass_log,
+AffineHemigroup.matern_negative_mass_plane,
+AffineHemigroup.matern_negative_mass_plane_example}\leanok
+Let $d \ge 2$ and let $(\mu_\Sigma)_{\Sigma\in\PD(d)}$ be the \Matern{} orbit of index $1$
+(\ref{prop:affine-orbits}(4)), with $K_\Sigma$ the density of $\mu_\Sigma$. Let
+$\Sigma, \Sigma' \in \PD(d)$ with $P := \Sigma' - \Sigma \in \PSD(d)$ and $P \ne 0$, put
+$P' := \Sigma'^{-1/2}P\,\Sigma'^{-1/2}$, and let $\rho$ be the linear functional on Schwartz
+functions
+\[
+  \rho(\phi) := (2\pi)^{-d}\int\widehat\phi(\omega)\,
+   \frac{1 + \langle\omega,\Sigma\omega\rangle}{1 + \langle\omega,\Sigma'\omega\rangle}\,d\omega ,
+\]
+with $\widehat\phi(\omega) = \int e^{i\langle\omega,x\rangle}\phi(x)\,dx$; it is $\int\phi\,d\rho$
+whenever $\mu_{\Sigma'} = \mu_\Sigma * \rho$ with $\rho$ a finite signed measure.
+\begin{enumerate}
+\item \emph{(Off the origin.)} $q := \nabla\cdot P\nabla K_{\Sigma'}$ is smooth on
+$\RR^d \setminus \{0\}$, and $\rho(\phi) = \int\phi\,q\,dx$ for every smooth $\phi$ with compact
+support in $\RR^d \setminus \{0\}$.
+\item \emph{(The density near the origin.)} Write $x = \Sigma'^{1/2}y$ and $y = r\widehat y$ with
+$r > 0$, $|\widehat y| = 1$, and put $\mathcal{B}_d := \tfrac12\pi^{-d/2}\Gamma(\tfrac d2)$. Then,
+uniformly in $\widehat y$ as $r \downarrow 0$,
+\[
+  (\det\Sigma')^{1/2}\,r^d\,q(\Sigma'^{1/2}r\widehat y) \to
+  \mathcal{B}_d\bigl(d\langle\widehat y,P'\widehat y\rangle - \tr P'\bigr) .
+\]
+\item \emph{(The negative mass diverges logarithmically.)} For $0 < a < 1$ let
+$E_a := \{x : a < |\Sigma'^{-1/2}x| < 1\}$, and write $s_\pm := \max(\pm s, 0)$. Then, as
+$a \downarrow 0$,
+\[
+  \int_{E_a}q_-\,dx = \mathcal{B}_d\,\Theta\,\log(1/a) + o(\log(1/a)) , \qquad
+  \Theta := \int_{S^{d-1}}\bigl(d\langle\widehat y,P'\widehat y\rangle - \tr P'\bigr)_-\,\sigma(d\widehat y) ,
+\]
+with $\sigma$ the surface measure on the unit sphere $S^{d-1}$, and the same holds for $q_+$ with
+the same $\Theta$. Moreover $\Theta > 0$ if and only if $\Sigma'$ is not a multiple of $\Sigma$, and
+then there is no finite signed measure $\rho$ with $\mu_{\Sigma'} = \mu_\Sigma * \rho$.
+\item \emph{(The plane.)} If $d = 2$ and $p_1 \ge p_2$ are the eigenvalues of $P'$, then
+$\mathcal{B}_2\Theta = (p_1 - p_2)/\pi$. For the step from $\Sigma = t^2I$ to
+$\Sigma' = t^2\diag(1+\varepsilon, 1)$, $t, \varepsilon > 0$, it is $\varepsilon/(\pi(1+\varepsilon))$.
+\end{enumerate}
+\statusT\quad\emph{(Cites nothing beyond \ref{lem:matern-kernel-hessian} (the
+kernel $G$, smooth off the origin, and the uniform limit of its Hessian), Fourier inversion for a Schwartz
+function, Fubini and Tonelli, integration by parts against smooth compactly supported functions,
+polar coordinates, the second moments of the uniform law on the sphere, a smooth nondecreasing step
+from $0$ on $(-\infty,0]$ to $1$ on $[1,\infty)$, the existence of a smooth $[0,1]$-valued function
+positive exactly on a given open set, and monotone convergence. \textbf{What it is worth.} It says how much the \Matern{} orbit
+fails across shapes, where \ref{prop:matern-cross-shape} says that it fails. Off the origin the
+would-be increment is a smooth function, homogeneous of degree $-d$ to leading order with an angular
+factor of mean zero; its positive and its negative parts both carry a mass that diverges like
+$\mathcal{B}_d\Theta\log(1/a)$ at the origin, where $\Theta$ measures how unevenly the step widens
+the directions and vanishes exactly on the rays. So the increment is not even a finite signed
+measure, which is stronger than \ref{prop:matern-cross-shape}'s conclusion at index $1$.
+\textbf{On the grid} (a measurement, not a statement). The record
+\texttt{records/affine/check-grid-matern-cross-shape.py} (output in
+\texttt{check-grid-matern-cross-shape-output.txt}) computes by FFT, on $\ZZ^2$, the negative mass of
+the lattice increment of the step from $t^2I$ to $t^2\diag(1+\varepsilon,1)$, with $t$ the aperture in
+grid spacings. The lattice operator is the random-walk discretization of $-\nabla\cdot S\nabla$ with symbol
+$D_S(\theta) = a(2 - 2\cos\theta_1) + c(2 - 2\cos\theta_2) + b_+(2 - 2\cos(\theta_1+\theta_2))
++ b_-(2 - 2\cos(\theta_1-\theta_2))$, where $a = S_{11} - |S_{12}|$, $c = S_{22} - |S_{12}|$ and
+$b_\pm = \max(\pm S_{12}, 0)$: a nine-point stencil in general, and for the diagonal $S$ of the steps
+measured here ($b_+ = b_- = 0$) the five-point stencil. The lattice \Matern{} law of index $\gamma$ has
+the symbol $(1 + D_S)^{-\gamma}$, and the torus is $n \times n$ with $n$ the least power of $2$ at or
+above $\max(256, 40\lambda_{\max}(S')^{1/2})$ for the step's target $S' = t^2\diag(1+\varepsilon,1)$,
+which is $n = 64t$ for every step reported. The grid bounds the
+frequencies, so that increment is a finite signed measure; its negative mass grows linearly in
+$\log t$. The slopes fitted over $t \in \{4, 8, 16, 32\}$ are $0.0030$, $0.0283$, $0.1064$ at
+$\gamma = 1$ and $\varepsilon = 0.01$, $0.1$, $0.5$, against clause (4)'s
+$\varepsilon/(\pi(1+\varepsilon)) = 0.0032$, $0.0289$, $0.1061$, which is clause (3) read with the
+shell cut off at the grid scale, $a \approx 1/t$. At $\gamma = 2$ they are $0.0060$, $0.0544$,
+$0.1768$. The same heuristic, applied to the $|x|^{-2}$ term of the index-$2$ increment, which is read
+off the degree-$0$ limit $h$ of its transform (the proof of \ref{prop:log-orbit-rays}, with $\kappa = 2$),
+gives the rates $0.0063$, $0.0553$, $0.1777$, computed by the script's last block; the slopes agree with
+them within $4\,\%$, as at index $1$. The first-order term in $P$, $2\varepsilon/(\pi(1+\varepsilon)) =
+0.0063$, $0.0579$, $0.2122$, is not the right comparison: it departs from the slopes as $\varepsilon$
+grows. \textbf{Not claimed}: the lattice law itself, which would need the second differences of the
+lattice Green's function compared with $q$ uniformly from the grid scale to the aperture; the
+coefficient at index $\gamma \ne 1$ as a theorem, where \ref{prop:log-orbit-rays} gives the failure and
+not its size, and the rate above is computed by a heuristic and not proved; the case $d = 1$, where
+every step is a ray.)}
+\end{proposition}
+
+% CHANGED Q-0281 wave 2, group J: proof rewritten to the Lean route. Clause (1) integrates by
+% parts against a smooth cut-off of K' in place of a region {|x| > r_0}; clause (3) bounds F by the
+% monotone integrals A, B in place of continuity on a compact shell, reads Theta > 0 off the mean
+% zero of the angular factor in place of the least eigenvector, and bounds the negative mass by
+% test functions increasing to an indicator in place of the density of test functions; clause (4)
+% computes in the standard basis in place of an eigenbasis.
+% CHANGED Q-0281 wave 2: blind review W2J-1: the smooth step s is nondecreasing (as
+% Real.smoothTransition is), which phi_n increasing to the indicator of U needs; W2J-2: the
+% diagonal second moments by a permutation of the coordinates; W2J-3: the transform of K' is even;
+% W2J-4: the existence of g justified where it is used.
+\begin{proof}
+\leanok
+\emph{The functional.} Let $\phi$ be a Schwartz function and $\nu$ a finite measure. The inversion
+formula $\phi(x) = (2\pi)^{-d}\int\widehat\phi(\omega)e^{-i\langle\omega,x\rangle}\,d\omega$, in which
+$\widehat\phi$ is integrable, and Fubini give
+\[
+  \int\widehat\phi(\omega)\,\widehat\nu(-\omega)\,d\omega = (2\pi)^d\int\phi\,d\nu .
+\]
+A finite signed measure is a difference $\rho_+ - \rho_-$ of finite measures, and
+$\mu_{\Sigma'} = \mu_\Sigma * \rho$ reads $\mu_{\Sigma'} + \mu_\Sigma * \rho_- = \mu_\Sigma * \rho_+$.
+Taking transforms and dividing by $\widehat\mu_\Sigma(\omega) = (1 + \langle\omega,\Sigma\omega\rangle)^{-1}$,
+which has no zero, gives
+$\widehat\rho_+(\omega) - \widehat\rho_-(\omega) = (1 + \langle\omega,\Sigma\omega\rangle)/(1 + \langle\omega,\Sigma'\omega\rangle)$,
+an even function of $\omega$. The display, applied to $\rho_+$ and to $\rho_-$, then gives
+$\rho(\phi) = \int\phi\,d\rho_+ - \int\phi\,d\rho_-$.
+
+\emph{Clause (1).} Let $K' := K_{\Sigma'}$. By \ref{lem:matern-kernel-hessian}(1),
+$K'(x) = (\det\Sigma')^{-1/2}G(\Sigma'^{-1/2}x)$, with $G$ smooth off the origin, is a density of
+$\mu_{\Sigma'}$, so $q$ is smooth on $\RR^d \setminus \{0\}$, and
+$\widehat{K'}(\omega) = (1 + \langle\omega,\Sigma'\omega\rangle)^{-1}$, an even function. Hence
+\[
+  \frac{1 + \langle\omega,\Sigma\omega\rangle}{1 + \langle\omega,\Sigma'\omega\rangle}
+  = 1 - \langle\omega,P\omega\rangle\,\widehat{K'}(\omega) .
+\]
+Let $\phi$ be smooth with compact support in $\RR^d \setminus \{0\}$. For every direction $v$ an
+integration by parts gives $\widehat{\partial_v\phi}(\omega) = -i\langle\omega,v\rangle\widehat\phi(\omega)$,
+so $\psi := \nabla\cdot P\nabla\phi$, smooth with compact support, has
+$\widehat\psi(\omega) = -\langle\omega,P\omega\rangle\widehat\phi(\omega)$. The display of the first
+paragraph, applied to $\nu = \delta_0$ and to $\nu = \mu_{\Sigma'}$, gives
+\[
+  \rho(\phi) = (2\pi)^{-d}\int\widehat\phi(\omega)\,d\omega
+    + (2\pi)^{-d}\int\widehat\psi(\omega)\,\widehat{K'}(-\omega)\,d\omega
+  = \phi(0) + \int K'\,\nabla\cdot P\nabla\phi\,dx = \int K'\,\nabla\cdot P\nabla\phi\,dx .
+\]
+Choose $\delta > 0$ with $|x|^2 > 2\delta^2$ on the support of $\phi$, let $s$ be a smooth
+nondecreasing function with values in $[0,1]$, equal to $0$ on $(-\infty,0]$ and to $1$ on
+$[1,\infty)$, and put
+$\chi(x) := s(|x|^2/\delta^2 - 1)$. Then $\chi K'$ is smooth on all of $\RR^d$, since it vanishes
+where $|x| \le \delta$, and it equals $K'$ on the open set $\{|x|^2 > 2\delta^2\}$, which contains the
+support of $\phi$. So $K'$ may be replaced by $\chi K'$ in the last integral. Integrating by parts
+twice in each term $P_{jk}\,\partial_j\partial_k\phi$, with no boundary term since $\phi$ has compact
+support, and using that $P$ is symmetric, gives
+$\rho(\phi) = \int\phi\,\nabla\cdot P\nabla(\chi K')\,dx = \int\phi\,q\,dx$, the last because
+$\nabla\cdot P\nabla(\chi K') = q$ on the support of $\phi$.
+
+\emph{Clause (2).} With $x = \Sigma'^{1/2}y$, $\nabla_x = \Sigma'^{-1/2}\nabla_y$, so
+$q(\Sigma'^{1/2}y) = (\det\Sigma')^{-1/2}\,\nabla_y\cdot P'\nabla_yG(y)$ for $y \ne 0$.
+\ref{lem:matern-kernel-hessian}(2) shows that
+$r^d\,\nabla\cdot P'\nabla G(r\widehat y) \to
+\mathcal{B}(0)(d\langle\widehat y,P'\widehat y\rangle - \tr P')$ uniformly in $\widehat y$, for
+every $P' \in \PSD(d)$, with $\mathcal{B}(0) = \tfrac12\pi^{-d/2}\Gamma(\tfrac d2) = \mathcal{B}_d$.
+
+\emph{Clause (3).} Put $Q(y) := \nabla\cdot P'\nabla G(y)$ and
+$f(\widehat y) := \mathcal{B}_d(d\langle\widehat y,P'\widehat y\rangle - \tr P')$. The substitution
+$x = \Sigma'^{1/2}y$, with $dx = (\det\Sigma')^{1/2}dy$, polar coordinates and Tonelli give
+\[
+  \int_{E_a}q_-\,dx = \int_{a<|y|<1}Q_-(y)\,dy = \int_a^1F(r)\,\frac{dr}{r} , \qquad
+  F(r) := \int_{S^{d-1}}\bigl(r^dQ(r\widehat y)\bigr)_-\,\sigma(d\widehat y) .
+\]
+By \ref{lem:matern-kernel-hessian}(2), $r^dQ(r\widehat y) = \langle\widehat y,P'\widehat y\rangle\mathcal{A}(r) - (\tr P')\mathcal{B}(r)$,
+and $0 \le \mathcal{A}(r) \le \mathcal{A}(0)$, $0 \le \mathcal{B}(r) \le \mathcal{B}(0)$ because
+$e^{-r^2s} \le 1$. So $|r^dQ(r\widehat y)| \le M := \|P'\|\mathcal{A}(0) + |\tr P'|\,\mathcal{B}(0)$, and
+$0 \le F(r) \le M|S^{d-1}|$ for every $r > 0$; in particular each $\int_{E_a}q_-\,dx$ is finite.
+Since $|s_- - s'_-| \le |s - s'|$, the uniform limit of clause (2) gives
+$F(r) \to \int f_-\,d\sigma = \mathcal{B}_d\Theta =: L$ as $r \downarrow 0$. Put
+$C := M|S^{d-1}| + |L|$. Given $\eta > 0$, take $r_\eta \in (0,\tfrac12]$ with $|F - L| \le \eta$
+on $(0,r_\eta)$. For $a < r_\eta$ and $a < r < 1$, $|F(r) - L|/r \le \eta/r + C/r_\eta$, so
+\[
+  \Bigl|\int_a^1F(r)\,\frac{dr}{r} - L\log(1/a)\Bigr| \le \eta\log(1/a) + \frac{C}{r_\eta} ,
+\]
+which is at most $2\eta\log(1/a)$ once $\log(1/a) \ge C/(\eta r_\eta)$. This is the first claim.
+The same argument with $s_+$ gives the limit $\int f_+\,d\sigma$, which equals $\int f_-\,d\sigma$
+because $\int f\,d\sigma = 0$: the integral of $\widehat y_i\widehat y_k$ over the sphere vanishes for
+$i \ne k$, by the reflection $\widehat y_i \mapsto -\widehat y_i$; for $i = k$ it does not depend on
+$i$, by a permutation of the coordinates, so it is $|S^{d-1}|/d$, since
+$\sum_i\widehat y_i^2 = 1$; hence
+$\int_{S^{d-1}}\langle\widehat y,P'\widehat y\rangle\,\sigma(d\widehat y) = |S^{d-1}|\tr P'/d$.
+
+If $\Sigma' = c\Sigma$, then $c \ne 0$, $\Sigma = c^{-1}\Sigma'$, $P' = (1 - c^{-1})I$, $f = 0$ on the
+sphere, and $\Theta = 0$. Conversely, let $\Sigma'$ not be a multiple of $\Sigma$. Then $P'$ is not
+a multiple of $I$: $P' = I - \Sigma'^{-1/2}\Sigma\,\Sigma'^{-1/2} = \kappa I$ would give
+$\Sigma = (1 - \kappa)\Sigma'$, with $1 - \kappa \ne 0$ since $\Sigma$ is positive definite. So unit
+eigenvectors $u$, $v$ for the largest and the least eigenvalue of $P'$ have
+$\langle v,P'v\rangle < \langle u,P'u\rangle$. If $f$ were nonnegative on the sphere, then
+$f(u) > f(v) \ge 0$, $f$ would be positive on an open set of the sphere around $u$, which $\sigma$
+charges, and $\int f\,d\sigma > 0$, against the mean zero. So $f(\widehat y_0) < 0$ at some unit
+$\widehat y_0$, $f_- > 0$ on an open set of the sphere around it, and $\Theta > 0$.
+
+Finally let $\Theta > 0$, and suppose $\mu_{\Sigma'} + \mu_\Sigma * \rho_- = \mu_\Sigma * \rho_+$ with
+$\rho_\pm$ finite measures. Fix $a \in (0,1)$. As $q$ is continuous on $\RR^d \setminus \{0\}$, which
+contains $E_a$, the set $U := E_a \cap \{q < 0\}$ is open; let $g$ be a smooth function with values
+in $[0,1]$ that is positive exactly on $U$ (one exists for every open set of $\RR^d$: cover $U$ by
+countably many open balls, each the set where a smooth bump function is positive, and sum the bumps
+with coefficients small enough that the series converges with all its derivatives), and put
+$\phi_n := s((n+1)g)$ for $n \in \NN$, with $s$ the smooth step of clause (1). Each
+$\phi_n$ is smooth with values in $[0,1]$, vanishes off $U$, and has compact support in the compact
+set $\{a \le |\Sigma'^{-1/2}x| \le 1\}$, which does not contain the origin. By clause (1) and the
+first paragraph,
+\[
+  \int\phi_n\,q\,dx = \int\phi_n\,d\rho_+ - \int\phi_n\,d\rho_- \ge -\rho_-(\RR^d) ,
+\]
+that is $\int\phi_n\,q_-\,dx \le \rho_-(\RR^d)$. As $n \to \infty$, $\phi_n$ increases to the
+indicator of $U$, since $s$ is nondecreasing, $g \ge 0$, $s(0) = 0$, and $(n+1)g \ge 1$ on $U$ for
+large $n$; so by monotone convergence $\int_{E_a}q_-\,dx = \int_Uq_-\,dx \le \rho_-(\RR^d)$
+for every $a$. But by the first claim $\int_{E_a}q_-\,dx \ge \tfrac12\mathcal{B}_d\Theta\log(1/a)$ for
+$a$ small enough, which tends to infinity.
+
+\emph{Clause (4).} Write $P' = (p_{jk})$ in the standard basis and
+$R := ((p_{11} - p_{22})^2 + 4p_{12}^2)^{1/2}$. The eigenvalues of $P'$ are the roots
+$(\tr P' \pm R)/2$ of its characteristic polynomial, so $p_1 - p_2 = R$. At
+$\widehat y = (\cos\theta, \sin\theta)$,
+\[
+  2\langle\widehat y,P'\widehat y\rangle - \tr P' = (p_{11} - p_{22})\cos2\theta + 2p_{12}\sin2\theta
+  = R\cos(2\theta - \theta_0)
+\]
+for an angle $\theta_0$. Polar coordinates in the plane, $(r,\theta) \in (0,\infty)\times(-\pi,\pi)$,
+compared with those of clause (3) on the unit disc, give
+$\int_{S^1}h\,d\sigma = \int_{-\pi}^{\pi}h(\cos\theta,\sin\theta)\,d\theta$. The substitution
+$t = 2\theta - \theta_0$ and the periodicity of $\cos$ give
+$\int_{-\pi}^{\pi}(\cos(2\theta - \theta_0))_-\,d\theta = \int_{-\pi/2}^{3\pi/2}(\cos t)_-\,dt =
+\int_{\pi/2}^{3\pi/2}(-\cos t)\,dt = 2$, so $\Theta = 2R$; and
+$\mathcal{B}_2 = \tfrac12\pi^{-1}\Gamma(1) = 1/(2\pi)$, so $\mathcal{B}_2\Theta = R/\pi$. For the step
+named, $P = \varepsilon t^2e_1e_1^{\tp}$ and $P' = \diag(\varepsilon/(1+\varepsilon), 0)$, so
+$R = \varepsilon/(1+\varepsilon)$.
+
+Every step is machine-checked in Lean core, with no ledger entry.
+\end{proof}

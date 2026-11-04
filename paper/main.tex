@@ -1,0 +1,205 @@
+% The affine paper of Paper VII of the hemigroup programme (repository slug `affine`; this directory
+% keeps the plain tags v0.1, ..., adr/0001): the (G, W) axiom scheme, affine rigidity, the affine
+% landscape and shape-adapted smoothing. Built on Paper V's model (spatial-hemigroup-scale-space,
+% paper/ and paper-b/): one file per section, every statement shared with the blueprint under a
+% `% shared with blueprint <label>` marker with the paper statement's own \label equal to the
+% blueprint label (article-kit LINKAGE.md rule 4), so that `linkage check` reports it `verbatim`;
+% the proofs of record from the blueprint, shortened where a proof is long; the ledger's page
+% anchors (blueprint/AXIOMS.md, never memory) printed in the prose before every [A] statement; one
+% relation-to-the-line remark per section; the frontier named where it occurs.
+%
+% Split on 2026-10-04 (Q-0307, adr/0001) at the seam of the whole-paper review
+% (records/affine/REVIEW-paper-whole.md, flag 41): the single article's section 3 and Appendix A
+% are the isotropic paper (paper-iso/), and this paper restates the six statements of it that it
+% uses (section 2.3). The section files keep the single article's numbers, which are the
+% blueprint's chapter numbers: 04-*.tex is section 3 here, 05-*.tex section 4, 06-*.tex section 5.
+%
+% Structure: notes/PLAN-article-structure.md, "The outline" (the author's decisions of
+% 2026-10-03), less its section 3.
+%   1  Introduction (Q-0292, rewritten for this paper in Q-0307; 1.1 owns the trust base)
+%   2  What is used from the earlier papers (no blueprint nodes for [V]; the six statements of
+%      the isotropic paper restated under their markers, section 2.3)
+%   3  The axiom scheme and the classical affine theory (blueprint ch. 4, 04-classical.tex)
+%   4  The affine landscape (ch. 5, 05-*.tex)
+%   5  Discussion and open problems (paper-only, Q-0292; the discussion added in Q-0309)
+%   Appendices A-C: the proofs, by section (A with the isotropic corner and the parameter space,
+%   moved there in Q-0312; C the complete proof of thm:wedge-axis, Q-0312); D-H: further results
+%   (F the statements of the former section 4.7, Q-0312); I: verification, the inventory behind
+%   section 1.1 (pass 6, the author's review of section 1, 2026-10-26).
+% Back matter (Q-0312, review flag 1; the author's declarations of 2026-10-04, Q-0314):
+% declarations.tex (competing interests none, funding none, data and code availability; no
+% acknowledgements section) and ai-statement.tex (author contribution and use of AI, on Paper V's
+% model; its text is rewritten from the session archive by the archivist, PROCESS.md section 8.5).
+% The draft (draft/spatial-hemigroup-affine.md) is superseded by this directory and paper-iso/
+% wherever a section exists there.
+%
+% References into the released modules of Paper V cite them by their released statement numbers
+% (repo CLAUDE.md): the line paper, \sscite{fagerstrom2026spatial}, tag v0.1, concept DOI
+% 10.5281/zenodo.22761631; the cone paper, \sscite{fagerstrom2026cone}, tag cone-v0.1, concept DOI
+% 10.5281/zenodo.22864169. No internal label reaches the reader (Q-0344, the author's review):
+% shared text writes \prog{V}{Thm.~7.3} and \progpaper{B}, which macros.tex prints as citations,
+% and the paper's own prose names the papers. Module C is not cited (the author, 2026-10-04). The
+% isotropic paper, fagerstrom2026isotropic, tag iso-v0.1, version DOI 10.5281/zenodo.23357468,
+% concept DOI 10.5281/zenodo.23357467, is cited by its released statement numbers since Q-0457
+% (located citations, as for the line paper and the cone paper; until its release it was named by
+% the statement, Q-0312, review flag 2). Paper VI is unreleased and is prose about further work,
+% never a \ref.
+%
+% Voice and register: article-kit docs/WRITING.md (neutral third person, the restraint budget).
+% Build: cd paper && latexmk -pdf main.tex. Gates before a commit: the build, `linkage check`
+% with every shared statement verbatim, `linkage paper`. LaTeX is written with the file tools,
+% never through shell heredocs.
+
+\documentclass[11pt]{article}
+
+\usepackage[a4paper,margin=1in]{geometry}
+\setlength{\emergencystretch}{1.5em}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{booktabs}
+\usepackage{graphicx}   % figures are PNGs from scripts in records/ (*.pdf is git-ignored)
+\usepackage[hidelinks]{hyperref}
+\hypersetup{
+  pdftitle={Spatial Scale Space from Hemigroup Axioms: Affine Covariance and Shape Adaptation},
+  pdfauthor={Daniel Fagerstr\"om},
+}
+
+\input{macros}
+% Q-0317: the librarian's record of ryznar2002estimates has a Greek alpha in its title; the
+% bibliography is never edited by hand, so the character is declared here. CI builds with Tectonic
+% (XeTeX), where inputenc's \DeclareUnicodeCharacter does not exist and broke the docs build; there
+% newunicodechar declares it, and pdfLaTeX keeps the inputenc form.
+\ifdefined\DeclareUnicodeCharacter
+  \DeclareUnicodeCharacter{03B1}{\ensuremath{\alpha}}
+\else
+  \usepackage{newunicodechar}
+  \newunicodechar{^^^^03b1}{\ensuremath{\alpha}}
+\fi
+\numberwithin{equation}{section}
+
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{example}[theorem]{Example}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+
+\title{Spatial scale space from hemigroup axioms:\\
+affine covariance and shape adaptation}
+\author{Daniel Fagerstr\"om}
+% The release v0.1 (records/affine/freeze_affine_release.py): the date, the version and the
+% version DOI. The draft line, restored at the first edit after the release:
+% \date{Working draft --- not yet released}
+\date{November 4, 2026 (v0.1)\\[3pt] {\normalsize \href{https://doi.org/10.5281/zenodo.23963515}{doi:10.5281/zenodo.23963515}}}
+
+\begin{document}
+\maketitle
+
+% The abstract is written with section 1, last (Paper V's order; Q-0292), from the draft's abstract,
+% each sentence compared with the statement it restates (WRITING.md § 5). Rewritten after the blind
+% review (Q-0293): the positive definite base of the single step and the continuous cascade
+% (thm:rank-deficient-step, lem:affine-reduction), 0 < alpha, gamma < 2 (thm:wedge-axis(3)), what is
+% classical (rem:kelker), the line papers in the trust base, and plain words for the corner, the
+% rays, the orbits and the kernels from scale zero. Within 250 words.
+% Rewritten for the affine paper alone (Q-0307, adr/0001): it leads with shape adaptation (the
+% review's flag 50), states prop:shape-adapted-apertures(2) with the hypothesis of
+% prop:affine-orbits (a positive transform; flag 1), adds prop:rational-symbols with its hypotheses
+% (a decaying rational function of |omega|^2 without zeros), and drops the isotropic results, which
+% are the isotropic paper's abstract now; three cited facts (A3, A5, A6); four since C4 (A9) (CHANGED Q-0281 wave 2: blind review W2F-2).
+% Q-0309 (fix group 5): "the single-step form is new" carries the hedge of rem:kelker, "against the
+% sources read" (Kelker, Fang-Kotz-Ng, Bryc, Cambanis-Huang-Simons; PRIOR-ART-novelty-claims.md);
+% "of probability theory" dropped to stay within 250 words.
+% Q-0312 (the blind review's flags 6 and 7): the rigidity sentence restated as
+% prop:shape-adapted-apertures(3) says it (a general linear order that contains the rays and one
+% rank-deficient step from a positive definite matrix admits the Gaussian alone; the increment's
+% positivity is the axiom, not a condition); the computation claim narrowed to "filters with a
+% rational symbol in the shape's operator", the class prop:rational-symbols treats.
+% Pass 6, the author's review of the abstract (2026-11-02, "The abstract should mention the
+% classification"; records/affine/REVIEW-author-paper-affine.md): the question is posed as section 1
+% poses it since pass 6 (adr/0006, items 2-4). Neither kernel nor
+% cascade is a choice for the Gaussian; under the hemigroup axioms both are, so an affine scale space
+% is fixed by G and W; the main result is the table of the families (tab:landscape: three groups,
+% three kinds of order; "what is known", since not every cell is a complete description); the stable
+% chain is read as the price of a non-Gaussian kernel in turning speed (tab:speed-limit). The
+% sentences on the rigidity, the shape-adapted apertures, the chain, the rational symbols and the
+% Matern law are the previous abstract's, compared again with prop:shape-adapted-apertures(2)-(3),
+% thm:wedge-axis(3), prop:rational-symbols and prop:matern-steps. New: the similarity sentence,
+% prop:similarity-stable-family(3) (d >= 2 throughout). "The core of this rigidity is a classical
+% characterization of the normal law" is gone for the word budget; rem:kelker and section 1 say it.
+% Also for the budget (249 words, the math counted as one word each; 241 before): "an order that
+% contains the rays" is "an order", every order of the scheme containing them by definition; and
+% "Smaller groups admit more families" is said by its strongest case, the similarity sentence.
+\begin{abstract}
+In dimension $d \ge 2$ an aperture has a shape, which shape-adapted smoothing fits to the
+image. For the affine Gaussian scale space neither kernel nor cascade is a
+choice. Under hemigroup axioms both are: a family is given by a group $G$ of linear maps it
+respects and an order $W$ on scale matrices along which coarser records further smooth finer
+ones. The main result describes the families of three groups (general linear, similarities,
+positive diagonal) along the ray, stable and Loewner orders, completely in some cases, by bounds or
+examples in others. For the general linear group, an order with one step from a positive definite
+matrix that widens the aperture in some directions and leaves it unchanged in others admits
+only Gaussian families. Shape-adapted apertures at fixed least smoothing are such steps from the first stage. Among
+linear images of rotation-invariant laws with a positive transform only the Gaussian reaches them
+by further smoothing. Every other such kernel measures the image afresh there, as the iteration of
+shape adaptation does anyway. Along a chain of orders from the rays ($\alpha = 0$) to the Loewner order
+($\alpha = \infty$), which allow faster changes of shape as $\alpha$ grows, a non-Gaussian kernel
+pays in speed of shape change. For
+$0 < \alpha, \gamma < 2$ linear images of the isotropic $\gamma$-stable law cascade along the order
+of index $\alpha$ exactly when $\gamma \ge \alpha$; from $\alpha = 2$ on only the Gaussian does.
+Linear images of a \Matern{} law, or of a law with a zero-free decaying rational transform in
+$|\omega|^2$, cascade at most along rays. With the similarities, non-Gaussian
+families cascade along the Loewner order.
+% Round-2 external review (the presentation review, Gemini; the author's decision D6): "scale
+% matrices" for "covariance matrices" (the stable laws have no covariance); what the order of index
+% alpha allows (the chain is strictly increasing, thm:wedge-axis(1)); that every other orbit measures
+% the image afresh at the adapted aperture (prop:shape-adapted-apertures(2)), as each round of the
+% iteration does (section 4.1); two cuts so that the count stays near 250.
+% Round-1 external review (Gemini, records/affine/PLAN-review-response-paper.md, batch B1): "describes",
+% with section 1's qualification; "admits only Gaussian families" (prop:shape-adapted-apertures(3)
+% proves no existence); what alpha indexes; "speed of shape change" for "turning speed"; the rational
+% symbols as the linear images of one law (prop:rational-symbols).
+% CHANGED Q-0281 wave 2: blind review W2F-2 (four cited facts since C4; same word count).
+% Q-0377 (the formalization closed, 125 of 125 nodes \leanok): the last sentence says the results
+% are machine-checked, as Paper V's abstract does in one clause (section 1.1). The companion
+% isotropic paper leaves it: the six statements restated from it are machine-checked in the same
+% development. Same word count (19 for 19), 250 words.
+% The writing-rules pass (group s1, 2026-10-14): the step's second hypothesis restored (it leaves
+% the aperture unchanged in the other directions, prop:shape-adapted-apertures(3)), the claim of
+% novelty dropped (the author's direction of 2026-10-12), and "line papers" and "cited facts" in
+% plain words, as the isotropic abstract says it.
+% Round 3's Lean (the author's decision D15): Propositions 3.11 and 4.22 are machine-checked, and C5
+% is a fifth assumption of the verified results.
+The results are machine-checked in Lean~4, assuming five published theorems.
+\end{abstract}
+
+\input{01-introduction}
+\input{02-line-papers}
+\input{04-classical}
+\input{05-landscape}
+\input{06-open-problems}
+
+% Appendices (Q-0290 for section 5, Q-0291 for sections 3 and 4): material moved out of the main
+% text, in its order, statements verbatim under their `% shared with blueprint` markers; the main
+% text names each and points here (Paper V's pattern, appendix-matern.tex there).
+\appendix
+\input{appendix-classical}
+\input{appendix-proofs}
+\input{appendix-wedge-axis}   % Q-0312: the complete proof of thm:wedge-axis and of what it spends
+\input{appendix-orientation}
+\input{appendix-orbits}
+\input{appendix-smaller-groups}   % Q-0312: the statements of the former section 4.7
+\input{appendix-linear-flow}
+\input{appendix-similarity-loewner}
+\input{appendix-verification}   % pass 6: the inventory behind section 1.1, on the isotropic paper's model
+
+\input{declarations}
+\input{ai-statement}   % Q-0312; its header says what to update before the release
+
+\bibliographystyle{plainurl}
+\bibliography{references}   % the subset of the librarian's export (`library bib export`) for the
+                            % citekeys the draft and the paper use
+
+\end{document}

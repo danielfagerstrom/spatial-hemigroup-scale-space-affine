@@ -1,0 +1,20 @@
+(11a) the two lower bounds on rho^c e^{-F(rho)}, Matern, rho >= 1
+  d = 2, gamma = 1.0: C_k = 0.47828442; Lemma A.3(1) constant e^(-13c/4 - 2C_k) = 0.000577635; Prop. A.6(4) at rho = 1: 0.000931901; both below the transform (least ratio true/bound: 1154.1 and 715.38)
+    c = d: printed constant C_* = (2 pi)^(-d) |S| e^(-13d/4 - 2C_k) = 9.19334e-5; with A.6(4): 0.000148317; the exact coefficient of log(1/s), B K(0+) = 0.31830989 (Example 3.14: 2 (2 pi)^(-d/2)/Gamma(d/2) = 0.31830989)
+  d = 2, gamma = 0.75: C_k = 0.35871332; Lemma A.3(1) constant e^(-13c/4 - 2C_k) = 0.00372598; Prop. A.6(4) at rho = 1: 0.00533368; both below the transform (least ratio true/bound: 198.01 and 138.33)
+  d = 3, gamma = 1.5: C_k = 1.070588; Lemma A.3(1) constant e^(-13c/4 - 2C_k) = 6.85059e-6; Prop. A.6(4) at rho = 1: 1.99838e-5; both below the transform (least ratio true/bound: 79458.0 and 27239.0)
+    c = d: printed constant C_* = (2 pi)^(-d) |S| e^(-13d/4 - 2C_k) = 3.47055e-7; with A.6(4): 1.01239e-6; the exact coefficient of log(1/s), B K(0+) = 0.14328979 (Example 3.14: 2 (2 pi)^(-d/2)/Gamma(d/2) = 0.14328979)
+  d = 1, gamma = 0.5: C_k = 0.11374594; Lemma A.3(1) constant e^(-13c/4 - 2C_k) = 0.0308848; Prop. A.6(4) at rho = 1: 0.0346054; both below the transform (least ratio true/bound: 26.437 and 14.501)
+    c = d: printed constant C_* = (2 pi)^(-d) |S| e^(-13d/4 - 2C_k) = 0.00983093; with A.6(4): 0.0110152; the exact coefficient of log(1/s), B K(0+) = 0.45015816 (Example 3.14: 2 (2 pi)^(-d/2)/Gamma(d/2) = 0.45015816)
+(11c) B_c of (A.9) against the constant of Cygan-Grzywny-Trojan, Thms. 8 and 9
+  d = 2, c = 1.5: B_c = 1.39473282673747   CGT constant at alpha = c: 1.39473282673747   R(d,c)|S|/c = 1.39473282673747
+  d = 3, c = 1.2: B_c = 0.58741344374998   CGT constant at alpha = c: 0.58741344374998   R(d,c)|S|/c = 0.58741344374998
+  d = 3, c = 2.0: B_c = 0.5   CGT constant at alpha = c: 0.5   R(d,c)|S|/c = 0.5
+  d = 5, c = 0.3: B_c = 0.787842469531004   CGT constant at alpha = c: 0.787842469531004   R(d,c)|S|/c = 0.787842469531004
+  d = 1, c = 0.5: B_c = 1.59576912160573   CGT constant at alpha = c: 1.59576912160573   R(d,c)|S|/c = 1.59576912160573
+(14) the plane half of the example w = 4
+  M_2 = sup z^(3/2)(e^(-z) - e^(-z/2)/2) = 0.0845269278183 at z = 0.68485907;  w_2 = Gamma(3/2)/(2 M_2) = 5.242275736
+  the cone paper's bound on the supremum: 3^(3/2) 5^(-5/2) = 0.092951600309 >= M_2;  4 x it = 0.3718064012 <= Gamma(3/2)/2 = sqrt(pi)/4 = 0.4431134627  (6912/3125 = 2.21184 <= pi)
+  so 4 <= Gamma(3/2)/(2 x 3^(3/2) 5^(-5/2)) = 4.7671418 <= w_2: proved in print, with no computed value
+  d = 1: the bound is (1 - 2^(-1/2))^2/2 = 0.04289321881, so the criterion holds for w <= Gamma(1)/(2 x it) = 11.65685425 = 6 + 4 sqrt 2 = 11.65685425
+all assertions passed

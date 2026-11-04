@@ -1,0 +1,832 @@
+% §5.5 The base, and §5.6 the wedge of an orbit --- blueprint chapter 5, part 05-orbits.tex (Q-0288).
+% Included from 05-landscape.tex; the conventions are in that file's header. Order: the blueprint's.
+% The stable rung comes first in 5.6 because prop:orbit-step-cone reads prop:stable-step-cone;
+% prop:stable-order-generated (blueprint part 05-wedges) follows prop:stable-exponent-cone, whose cone
+% it reads (Q-0290, review flag S12). The two Matern cross-shape nodes and the grid remark are in
+% appendix B, three routine proofs in appendix E (Q-0290). The six [A] nodes all rest on A3(iii),
+% named once at the start of 5.6 (the review's length judgement). The identification of the Matern
+% orbit with the anisotropic Matern of spatial statistics is a
+% naming read at the page (records/affine/READING-whittle1954stationary.md,
+% READING-lindgren2011explicit.md), not a fact a proof rests on.
+
+\subsection{The base: the general linear group along rays}\label{sec:affine-orbits}
+
+The smallest order of the scheme is the ray order. It requires only that the record at
+$\lambda^2\Sigma$, $\lambda > 1$, be a further smoothing of the record at $\Sigma$: a zoom out without
+a change of shape. This subsection asks which kernels can then be carried to every elliptical aperture
+covariantly under the whole general linear group, and the answer is that this costs nothing beyond
+what the isotropic theory requires. The kernel $\mu_I$ at the round aperture fixes the family, which is
+its \emph{affine orbit}: the kernel at $\Sigma$ is $(\Sigma^{1/2})_*\mu_I$, the round kernel stretched
+by $\Sigma^{1/2}$, as the Gaussian of covariance $2b\Sigma$ is the round Gaussian of covariance $2bI$
+stretched. The orbit is a family along the rays exactly when $\mu_I$ is rotation invariant and
+self-decomposable \ref{eq:self-decomposable} (Proposition~\ref{prop:ray-families}). The
+rotation-invariant self-decomposable laws other than $\delta_0$ are the kernels from scale zero of the
+isotropic families (Theorem~\ref{thm:isotropic-classification} and
+Lemma~\ref{lem:radial-marginal}(1)), so every isotropic scale space, the stable and the \Matern{} ones
+among them, has an affine orbit along the rays. What a non-Gaussian orbit cannot do is cascade along a
+step that widens the aperture in some directions and not in others, a step of rank below $d$
+(Proposition~\ref{prop:affine-orbits}(3)). The \Matern{} orbit of
+Proposition~\ref{prop:affine-orbits}(4) is the example to keep in mind.
+
+% shared with blueprint prop:affine-orbits
+\begin{proposition}[affine orbits of isotropic laws]\label{prop:affine-orbits}
+Let $d \ge 1$ and let $g : [0,\infty) \to [0,\infty)$ be continuous with $g(0) = 0$ and such that
+$\omega \mapsto e^{-g(|\omega|^2)}$ is the characteristic function of a probability measure
+$\mu_I$ on $\RR^d$. For $\Sigma \in \PD(d)$ put $\mu_\Sigma := (\Sigma^{1/2})_*\mu_I$, the
+\emph{affine orbit} of $\mu_I$.
+\begin{enumerate}
+\item \emph{(Covariance.)} $\widehat\mu_\Sigma(\omega) = e^{-g(\langle\omega,\Sigma\omega\rangle)}$,
+and $A_*\mu_\Sigma = \mu_{A\Sigma A^{\tp}}$ for every $A \in \GL(d)$ and $\Sigma \in \PD(d)$.
+\item \emph{(Cascade along rays.)} If for some $\lambda > 1$ there is a probability measure
+$\nu_\lambda$ on $\RR^d$ with $e^{-g(\lambda^2|\omega|^2)} = e^{-g(|\omega|^2)}\,\widehat\nu_\lambda(\omega)$,
+then $\mu_{\lambda^2\Sigma} = \mu_\Sigma * (\Sigma^{1/2})_*\nu_\lambda$ for every
+$\Sigma \in \PD(d)$.
+\item \emph{(No cascade across shapes.)} If $d \ge 2$ and $g$ is not linear, then for no
+$\Sigma \in \PD(d)$ and no $P \in \PSD(d)$ with $0 < \rank P < d$ is
+$\mu_{\Sigma+P} = \mu_\Sigma * \rho$ with $\rho$ a probability measure. In particular the orbit is
+not the family of kernels from scale zero of any affine cascade family.
+\item \emph{(The \Matern{} orbits.)} For $\gamma > 0$, $g_\gamma(u) := \gamma\log(1+u)$ satisfies
+the hypothesis in every dimension: $(1+|\omega|^2)^{-\gamma}$ is the characteristic function of
+the law of $\sqrt{2V}\,Z$, with $V$ Gamma distributed of shape $\gamma$ and scale $1$ and $Z$
+standard normal on $\RR^d$, independent. Its orbit has
+$\widehat\mu_\Sigma(\omega) = (1 + \langle\omega,\Sigma\omega\rangle)^{-\gamma}$; clause (3)
+applies to it, $g_\gamma$ not being linear; and the hypothesis of clause (2) holds for every
+$\gamma > 0$ and every $\lambda > 1$, with $\nu_\lambda$ the law of $\sqrt{2Y}\,Z$, where $Z$ is
+standard normal on $\RR^d$ and $Y \ge 0$, independent of $Z$, is compound Poisson with \Levy{}
+measure $\gamma\,(e^{-x/\lambda^2} - e^{-x})\,x^{-1}dx$ on $(0,\infty)$, of total mass
+$2\gamma\log\lambda$.
+\end{enumerate}
+\end{proposition}
+
+Clause (3) is Theorem~\ref{thm:rank-deficient-step} read on the orbit. The stable orbit
+$e^{-\langle\omega,\Sigma\omega\rangle^{\alpha/2}}$, $0 < \alpha < 2$, is another instance of the
+proposition (Lemma~\ref{lem:elliptical-stable}), so by clause (3) it is not a family along the Loewner
+order. For $\gamma > d/2$ the family of clause (4) is the \Matern{} covariance of spatial statistics
+(\sscite{matern1960spatial}, (2.4.5)--(2.4.7), pp.~17--18; \sscite{whittle1954stationary}, \S9,
+pp.~447--448; \sscite{lindgren2011explicit}, \S2.1, eqs.~(1)--(2), p.~426), with geometric anisotropy
+(\sscite{lindgren2011explicit}, \S3.4, p.~437), in which the matrix is a parameter of the covariance. Clause (3) excludes
+the rank-deficient steps between two values of it, and Proposition~\ref{prop:matern-steps} shows that
+no step across shapes has a positive increment.
+The proof is in Appendix~\ref{app:proofs}.
+
+
+The converse holds: a family covariant under the general linear group that cascades along the ray of
+$I$ is such an orbit, and the law must be self-decomposable.
+
+% shared with blueprint prop:ray-families+663841edc318
+\begin{proposition}[the ray families are the orbits of the self-decomposable isotropic laws]\label{prop:ray-families}
+Let $d \ge 1$ and let $(\mu_\Sigma)_{\Sigma\in\PD(d)}$ be probability measures on $\RR^d$ with
+\begin{enumerate}
+\item[(R1)] \emph{(affine covariance)} $A_*\mu_\Sigma = \mu_{A\Sigma A^{\tp}}$ for every
+$A \in \GL(d)$ and $\Sigma \in \PD(d)$;
+\item[(R2)] \emph{(a cascade along the ray of $I$)} for every $\lambda > 1$ there is a probability
+measure $\rho_\lambda$ on $\RR^d$ with $\mu_{\lambda^2I} = \mu_I * \rho_\lambda$.
+\end{enumerate}
+Then $\mu_I$ is rotation invariant and self-decomposable \ref{eq:self-decomposable},
+$\mu_\Sigma = (\Sigma^{1/2})_*\mu_I$ for every $\Sigma$, and the family cascades along every ray:
+$\mu_{\lambda^2\Sigma} = \mu_\Sigma * (\Sigma^{1/2})_*\rho_\lambda$ for every $\Sigma \in \PD(d)$
+and $\lambda > 1$. Conversely, for every rotation-invariant self-decomposable law $\mu_I$ on
+$\RR^d$ the family $\mu_\Sigma := (\Sigma^{1/2})_*\mu_I$ satisfies (R1) and (R2).
+\end{proposition}
+
+With Theorem~\ref{thm:affine-rigidity} this places the obstruction for $d \ge 2$: along the rays every
+rotation-invariant self-decomposable law keeps its orbit, and across every step of the Loewner order
+only the Gaussian does. Which steps across shapes
+an orbit survives depends on the law, and that is the next subsection.
+
+% proof of prop:ray-families
+\begin{proof}
+(R1) is (K3) of Definition~\ref{def:affine-cascade-family} for the kernels from scale zero, and (R2)
+is (K1) along the ray of $I$ alone.
+
+\emph{Covariance determines the orbit.} (R1) with $A = Q \in \Orth(d)$ and $\Sigma = I$ gives
+$Q_*\mu_I = \mu_{QQ^{\tp}} = \mu_I$, and with $A = \Sigma^{1/2}$ it gives
+$(\Sigma^{1/2})_*\mu_I = \mu_\Sigma$, as for the orbits of Proposition~\ref{prop:affine-orbits}.
+
+\emph{Self-decomposability.} By (R1) with $A = \lambda I$, $\mu_{\lambda^2I} = (\lambda I)_*\mu_I$,
+so (R2) reads $(\lambda I)_*\mu_I = \mu_I * \rho_\lambda$. Applying $(\lambda^{-1}I)_*$ gives
+$\mu_I = (cI)_*\mu_I * (cI)_*\rho_\lambda$ with $c := \lambda^{-1}$, which is
+\ref{eq:self-decomposable} with the residual $(cI)_*\rho_\lambda$, and every $c \in (0,1)$ arises.
+
+\emph{Every ray.} $\mu_{\lambda^2\Sigma} = (\Sigma^{1/2})_*\mu_{\lambda^2I}
+= (\Sigma^{1/2})_*(\mu_I * \rho_\lambda) = \mu_\Sigma * (\Sigma^{1/2})_*\rho_\lambda$.
+
+\emph{Converse.} For (R1), let $B := A\Sigma^{1/2}$ and $\Sigma' := A\Sigma A^{\tp} = BB^{\tp}$. Then
+$Q := \Sigma'^{-1/2}B$ is orthogonal, so
+$A_*\mu_\Sigma = B_*\mu_I = (\Sigma'^{1/2})_*Q_*\mu_I = \mu_{\Sigma'}$. For (R2), self-decomposability
+at $c := \lambda^{-1}$ gives $\mu_I = (cI)_*\mu_I * \rho_c$, and applying $(\lambda I)_*$ gives
+$\mu_{\lambda^2I} = \mu_I * (\lambda I)_*\rho_c$.
+\end{proof}
+
+\subsection{The step set of an orbit}\label{sec:affine-stable-cone}
+
+Shape adaptation changes the shape of the aperture as the scale grows (\S\ref{sec:landscape-uses}, the third use).
+For the Gaussian every Loewner step is a further smoothing, so the shape may change as fast as
+Lemma~\ref{lem:loewner-scale-shape}(3) allows: in the plane, a step that doubles the volume scale
+reaches an anisotropy gained of $4$ and no more. This subsection asks the same of the other affine
+orbits. Along which steps $\Sigma \to \Sigma'$ across shapes is the kernel at $\Sigma'$ the kernel at
+$\Sigma$ convolved with a probability measure? Along those steps the coarser record is a further
+smoothing of the finer one, and along every other step a change of shape is a re-measurement of the
+image.
+
+To state the question for every orbit, relate two apertures $\Sigma, \Sigma' \in \PD(d)$
+when $\mu_{\Sigma'} = \mu_\Sigma * \rho$ for a positive finite measure $\rho$. The orbit is covariant
+under $\GL(d)$ (Proposition~\ref{prop:affine-orbits}(1)), so this relation is $\GL(d)$-invariant, and by
+Proposition~\ref{prop:invariant-orders}(1) it is $\le_{\mathcal K}$ for exactly one step set
+$\mathcal K$: the set of $M$ with $\mu_M = \mu_I * \rho$. Call $\mathcal K$ the \emph{step set} of the
+orbit. It contains the rays exactly when $\mu_I$ is self-decomposable
+(Proposition~\ref{prop:ray-families}). For a non-Gaussian orbit it contains no step
+$\Sigma \to \Sigma + P$ with $0 < \rank P < d$ (Proposition~\ref{prop:affine-orbits}(3)), so the
+question is about steps of full rank.
+
+The answer depends on the kernel. The orbit of the isotropic $\alpha$-stable law, $0 < \alpha < 2$,
+cascades on full-rank steps of every orientation, under a speed limit of the Gaussian's form and
+narrower: with $t_1, t_2$ the volume scales of the two apertures, the anisotropy gained is at most
+$(t_2/t_1)^{d\alpha/(d+\alpha)}$, against $(t_2/t_1)^d$ for the Gaussian
+(Proposition~\ref{prop:stable-step-cone}(3) and Lemma~\ref{lem:loewner-scale-shape}(3)). For the
+Poisson kernel, $\alpha = 1$ (\S\ref{sec:classical-prior-art}), a step in the plane that doubles the
+volume scale reaches an anisotropy gained of $2^{2/3} \approx 1.59$ and no more, and
+Figure~\ref{fig:shape-plane} draws both limits. At the other end, the \Matern{} orbits cascade along
+the rays and along no other step (Proposition~\ref{prop:matern-steps}). No orbit whose transform falls
+off like a power of the frequency, in the sense of Proposition~\ref{prop:log-orbit-rays}, has a
+positive increment on a step off the rays, and the orbits of decaying rational symbols are among them
+(Proposition~\ref{prop:rational-symbols}). For the orbit of a general profile, one function of the
+profile, its dilation ratio, gives a set of steps on which the orbit cascades
+(Proposition~\ref{prop:orbit-step-cone}); whether it cascades on more steps is open. The subsection
+ends with what the theorem on the general linear row (\S\ref{sec:wedge-axis-proof}) takes from the
+orbits: the exponents of the isotropic stable law, the bound they put on a non-Gaussian law, and the
+stable order extended to $\PSD(d)$.
+
+The answers are read through the \Levy--Khintchine representation (C2, Theorem~\ref{thm:cited-A3}),
+and from here on the subsection uses its vocabulary. The kernels of the stable orbits and of the
+orbits of Proposition~\ref{prop:orbit-step-cone} are \emph{infinitely divisible} laws with no
+Gaussian part. Each is the law of a sum of independent displacements, and its \emph{\Levy{} measure}
+gives the expected number of displacements of each size and direction. Here that measure has a
+density $n_\Sigma(x)$, the rate of the displacements per unit volume, not the density of the kernel.
+A step $\Sigma \to \Sigma'$ is a further smoothing when the kernel at $\Sigma'$ has at least the rate
+of displacements of the kernel at $\Sigma$ at every size and in every direction,
+$n_\Sigma \le n_{\Sigma'}$ (Proposition~\ref{prop:orbit-step-cone}(2)), and for the stable orbits only
+then (Proposition~\ref{prop:stable-step-cone}(1)).
+
+\subsubsection*{The stable rung}
+
+The chain of cones $C_\alpha$ of \S\ref{sec:invariant-wedges} is a ladder from the rays ($\alpha = 0$)
+to the Loewner order ($\alpha = \infty$). Call the \emph{rung} of an orbit the largest index $\alpha$
+whose stable order its step set contains. The elliptical stable laws are built from their \Levy{}
+densities.
+
+% shared with blueprint lem:elliptical-stable
+\begin{lemma}[the elliptical stable laws]\label{lem:elliptical-stable}
+Let $d \ge 1$ and $0 < \alpha < 2$, and put
+\[
+  c_{d,\alpha} := \int_{\RR^d}(1 - \cos y_1)\,|y|^{-d-\alpha}\,dy .
+\]
+Then $0 < c_{d,\alpha} < \infty$. For $H \in \PD(d)$ and $x \in \RR^d \setminus \{0\}$ put
+\begin{equation}\label{eq:stable-levy-density}
+  n_H(x) := c_{d,\alpha}^{-1}(\det H)^{-1/2}\langle x,H^{-1}x\rangle^{-(d+\alpha)/2} ,
+  \qquad \psi_H(\omega) := \langle\omega,H\omega\rangle^{\alpha/2} .
+\end{equation}
+\begin{enumerate}
+\item For every $H \in \PD(d)$ and $\omega \in \RR^d$,
+$\psi_H(\omega) = \int_{\RR^d\setminus\{0\}}(1 - \cos\langle\omega,x\rangle)\,n_H(x)\,dx$, and
+$\int_{\RR^d\setminus\{0\}}(|x|^2 \wedge 1)\,n_H(x)\,dx < \infty$.
+\item For every $H \in \PD(d)$ there is a unique probability measure $S_\alpha(H)$ on $\RR^d$ with
+$\widehat{S_\alpha(H)} = e^{-\psi_H}$. It is infinitely divisible with generating triplet
+$(0, n_H(x)\,dx, 0)$, and $A_*S_\alpha(H) = S_\alpha(AHA^{\tp})$ for every $A \in \GL(d)$.
+\item $n_{AHA^{\tp}}(x) = |\det A|^{-1}\,n_H(A^{-1}x)$ for $A \in \GL(d)$, $H \in \PD(d)$ and
+$x \ne 0$.
+\end{enumerate}
+In particular $g(u) := u^{\alpha/2}$ satisfies the hypothesis of Proposition~\ref{prop:affine-orbits}, with
+$\mu_I = S_\alpha(I)$, and the affine orbit of $S_\alpha(I)$ is $\mu_\Sigma = S_\alpha(\Sigma)$, the
+\emph{stable orbit}.
+\end{lemma}
+
+The law $S_\alpha(H)$ is the rotation-invariant $\alpha$-stable law (\sscite{sato1999levy}, Thm.~14.14,
+p.~86) transported by $H^{1/2}$, with its constant normalized to $1$. In the terms of Samorodnitsky
+and Taqqu it is a sub-Gaussian stable law. The existence in (2) is their Proposition~2.5.2 with
+$R = 2H$, and their Proposition~2.5.7 makes every such law a linear image of $S_\alpha(I)$
+(\sscite{samorodnitsky1994stable}, pp.~78 and~81). At $\alpha = 1$, $S_1(I)$ is the kernel of the Poisson scale
+space at unit scale, with transform $e^{-|\omega|}$ (\S\ref{sec:classical-prior-art}). The proof is in
+Appendix~\ref{app:proofs}.
+
+The stable orbit cascades on a cone of full-rank steps, the steps whose \Levy{} densities
+\ref{eq:stable-levy-density} are ordered.
+
+% shared with blueprint prop:stable-step-cone+2382c75d66ad
+\begin{proposition}[the stable orbit cascades on a cone of full-rank steps]\label{prop:stable-step-cone}
+Let $d \ge 1$, $0 < \alpha < 2$, and let $\mu_\Sigma = S_\alpha(\Sigma)$, $\Sigma \in \PD(d)$, be the
+stable orbit (Lemma~\ref{lem:elliptical-stable}). For $\Sigma, \Sigma' \in \PD(d)$ put
+$M := \Sigma^{-1/2}\Sigma'\Sigma^{-1/2}$ and let $\lambda_{\min}(M)$ be its least eigenvalue.
+\begin{enumerate}
+\item \emph{(The step cone.)} The following are equivalent:
+(a) there is a positive finite measure $\rho$ with $\mu_{\Sigma'} = \mu_\Sigma * \rho$;
+(b) $n_\Sigma(x) \le n_{\Sigma'}(x)$ for every $x \ne 0$;
+(c) $\lambda_{\min}(M)^{d+\alpha} \ge \det M$.
+When they hold, $\Sigma \le \Sigma'$, and $\rho$ is unique: it is the infinitely divisible probability
+measure $\rho_{\Sigma,\Sigma'}$ with generating triplet $(0, (n_{\Sigma'} - n_\Sigma)(x)\,dx, 0)$.
+\item \emph{(The order.)} Write $\Sigma \preceq_\alpha \Sigma'$ when (c) holds. This is a partial order
+on $\PD(d)$, contained in the Loewner order, and $\Sigma \preceq_\alpha \Sigma'$ if and only if
+$A\Sigma A^{\tp} \preceq_\alpha A\Sigma'A^{\tp}$, for every $A \in \GL(d)$. The increments satisfy
+$\rho_{\Sigma,\Sigma} = \delta_0$, $\rho_{\Sigma,\Sigma''} = \rho_{\Sigma',\Sigma''} * \rho_{\Sigma,\Sigma'}$
+whenever $\Sigma \preceq_\alpha \Sigma' \preceq_\alpha \Sigma''$, and
+$A_*\rho_{\Sigma,\Sigma'} = \rho_{A\Sigma A^{\tp},A\Sigma'A^{\tp}}$.
+\item \emph{(Which steps.)} Every ray, $\Sigma' = \lambda^2\Sigma$ with $\lambda \ge 1$, satisfies
+$\Sigma \preceq_\alpha \Sigma'$, and no step $\Sigma' = \Sigma + P$ with $P \in \PSD(d)$ and
+$0 < \rank P < d$ does. In the coordinates of Lemma~\ref{lem:loewner-scale-shape} (volume scales $t_1, t_2$,
+the eigenvalues $n_1 \le \dots \le n_d$ of the relative shape $N$),
+\[
+  \Sigma_1 \preceq_\alpha \Sigma_2 \Longleftrightarrow n_1 \ge (t_1/t_2)^{2\alpha/(d+\alpha)} ,
+\]
+so the anisotropy gained, $\sqrt{n_d/n_1}$, is at most $(t_2/t_1)^{d\alpha/(d+\alpha)}$; and for
+every $t_2 \ge t_1$ and every $N \in \PD(d)$ with $\det N = 1$ and least eigenvalue at least
+$(t_1/t_2)^{2\alpha/(d+\alpha)}$, the matrix $\Sigma_2 := t_2^2S_1^{1/2}NS_1^{1/2}$ satisfies
+$\Sigma_1 \preceq_\alpha \Sigma_2$. In particular, for $d \ge 2$ and $t_2 > t_1$ the relative shape
+of a step in the cone may be any $N \ne I$ in that range, with any eigenvectors.
+\end{enumerate}
+\end{proposition}
+
+So the stable orbits, which are not Gaussian, cascade across shapes, on full-rank steps of every
+orientation. What
+limits a step is its relative anisotropy, the gap between $\lambda_{\min}(M)$ and the geometric mean
+$(\det M)^{1/d}$, and not its orientation. The cone lies between the rays and the Loewner order: the
+Loewner order is $n_1 \ge (t_1/t_2)^2$ (Lemma~\ref{lem:loewner-scale-shape}(1)). Clause (3)
+excludes the steps of rank below $d$ by condition (c), as Theorem~\ref{thm:rank-deficient-step} does for
+$g(u) = u^{\alpha/2}$. By Proposition~\ref{prop:stable-order-generated}(1) the order is that of the
+cone field $C_\alpha$.
+
+The proof of (a)$\Rightarrow$(b) rests on a lemma that reads the \Levy{} densities off the tail of an
+increment. Positivity is tested against functions supported at a large scale, so only a weak form of
+the tail is needed, and the homogeneity of the exponent gives it.
+
+% shared with blueprint lem:stable-tail
+\begin{lemma}[the tail of an increment is the difference of the \Levy{} densities]\label{lem:stable-tail}
+Let $d \ge 1$, $0 < \alpha < 2$, $H, H' \in \PD(d)$, and $C$ a real $d \times d$ matrix.
+Suppose $\rho$ is a positive finite measure on $\RR^d$ with
+\begin{equation}\label{eq:stable-tail-transform}
+  \widehat\rho(\omega) = \exp\bigl[-\langle\omega,C\omega\rangle - \psi_{H'}(\omega) + \psi_H(\omega)\bigr]
+  \qquad (\omega \in \RR^d),
+\end{equation}
+with $\psi_H$ and $n_H$ as in \ref{eq:stable-levy-density}. Then $\rho$ is a probability measure,
+and for every smooth $\phi$ with compact support in $\RR^d \setminus \{0\}$
+\begin{equation}\label{eq:stable-tail}
+  \lim_{R\to\infty} R^\alpha\int\phi(x/R)\,\rho(dx) = \int\phi(x)\,\bigl(n_{H'}(x) - n_H(x)\bigr)\,dx .
+\end{equation}
+Consequently $n_H(x) \le n_{H'}(x)$ for every $x \ne 0$.
+\end{lemma}
+
+Since $n_{H'} - n_H$ is homogeneous of degree $-d-\alpha$, the right-hand side of \ref{eq:stable-tail}
+equals $R^\alpha\int\phi(x/R)(n_{H'} - n_H)(x)\,dx$ for every $R$: at large scales the increment's mass
+is that of the signed difference of \Levy{} densities. The limit compares masses at large scales, not
+densities. The Gaussian factor $\langle\omega,C\omega\rangle$ is there for
+Proposition~\ref{prop:similarity-stable-order-kernels}(3).
+
+The proof writes $\int\phi(x/R)\,\rho(dx)$ by Fourier inversion as an integral of $\widehat\phi$ against
+$e^{-E(\cdot/R)} - 1$, with $\widehat\rho = e^{-E}$; the term $1$ costs nothing because $\phi$ vanishes
+at the origin. As the non-Gaussian part of the exponent is homogeneous of degree $\alpha$ and its Gaussian part of
+degree $2 > \alpha$, the factor $R^\alpha$ turns this into $\int\phi\,(n_{H'} - n_H)\,dx$ in the limit, and a nonnegative bump supported where
+$n_{H'} < n_H$ would make it negative. The complete proof is in Appendix~\ref{app:wedge-axis}.
+
+% proof of prop:stable-step-cone
+\begin{proof}
+\emph{(b)$\Leftrightarrow$(c).} Substitute $x = \Sigma^{1/2}y$. Then
+$\langle x,\Sigma^{-1}x\rangle = |y|^2$, $\langle x,\Sigma'^{-1}x\rangle = \langle y,M^{-1}y\rangle$ and
+$\det\Sigma'/\det\Sigma = \det M$, so (b) says $\langle y,M^{-1}y\rangle/|y|^2 \le
+(\det M)^{-1/(d+\alpha)}$ for every $y \ne 0$. The supremum of the left-hand side is $1/\lambda_{\min}(M)$,
+so (b) is (c).
+
+\emph{(c) gives $\Sigma \le \Sigma'$.} $\det M \ge \lambda_{\min}(M)^d$, so (c) gives $\lambda_{\min}(M) \ge 1$,
+hence $M \ge I$ and $\Sigma' - \Sigma = \Sigma^{1/2}(M - I)\Sigma^{1/2} \ge 0$.
+
+\emph{(a)$\Rightarrow$(b).} $e^{-\psi_\Sigma}$ has no zero, so
+$\widehat\rho = e^{-\psi_{\Sigma'} + \psi_\Sigma}$, which is \ref{eq:stable-tail-transform} with $C = 0$,
+and Lemma~\ref{lem:stable-tail} gives (b). The same identity shows that $\rho$ is unique.
+
+\emph{(b)$\Rightarrow$(a).} $f := n_{\Sigma'} - n_\Sigma$ is nonnegative, even and at most $n_{\Sigma'}$,
+so by Lemma~\ref{lem:elliptical-stable}(1) and C2(iii) there is an infinitely divisible $\rho$ with
+triplet $(0, f(x)\,dx, 0)$ and $\widehat\rho = e^{-\psi_{\Sigma'} + \psi_\Sigma}$. So
+$\mu_\Sigma * \rho$ and $\mu_{\Sigma'}$ have the same transform.
+
+\emph{Clause (2).} Transitivity is that of (b), antisymmetry that of the Loewner order, and by
+Lemma~\ref{lem:elliptical-stable}(3) condition (b) for $(A\Sigma A^{\tp}, A\Sigma'A^{\tp})$ is (b) for
+$(\Sigma, \Sigma')$ at $A^{-1}x$. The transforms $e^{-\psi_{\Sigma'} + \psi_\Sigma}$ telescope, which
+gives the cascade, and $\psi_\Sigma(A^{\tp}\omega) = \psi_{A\Sigma A^{\tp}}(\omega)$ gives the
+covariance.
+
+\emph{Clause (3).} A ray has $M = \lambda^2I$, and (c) reads $\lambda^{2(d+\alpha)} \ge \lambda^{2d}$. For
+$0 < \rank P < d$, $M = I + \Sigma^{-1/2}P\Sigma^{-1/2}$ has the eigenvalue $1$ and one above $1$, so
+$\lambda_{\min}(M) = 1 < \det M$. In the coordinates of Lemma~\ref{lem:loewner-scale-shape},
+$M = (t_2/t_1)^2N$, so (c) is $n_1^{d+\alpha} \ge (t_1/t_2)^{2\alpha}$, and
+$n_d/n_1 \le n_1^{-d} \le (t_2/t_1)^{2d\alpha/(d+\alpha)}$. The converse is
+Lemma~\ref{lem:loewner-scale-shape}(3). For the last sentence take
+$N = Q\diag(a, a^{-1/(d-1)}, \dots, a^{-1/(d-1)})Q^{\tp}$ with $Q$ arbitrary and
+$(t_1/t_2)^{2\alpha/(d+\alpha)} \le a < 1$.
+\end{proof}
+
+\begin{remark}[a second route to (a)$\Rightarrow$(b)]\label{rem:stable-step-sato}
+The implication (a)$\Rightarrow$(b) of Proposition~\ref{prop:stable-step-cone}(1) also follows from the
+uniqueness of the generating triplet. The increment $\rho$ has the transform $e^{-E}$ with
+$E := \psi_{\Sigma'} - \psi_\Sigma$, which is homogeneous of degree $\alpha$. So the image of $\rho$
+under $x \mapsto n^{-1/\alpha}x$ is an $n$-th convolution root of $\rho$ for every $n$, and $\rho$ is
+infinitely divisible. The generating triplets of $\mu_\Sigma$ and $\rho$ then add to one of
+$\mu_{\Sigma'}$. By the uniqueness of the triplet (\sscite{sato1999levy}, Thm.~8.1(ii), pp.~37--38) the
+\Levy{} measure of $\rho$ is $(n_{\Sigma'} - n_\Sigma)(x)\,dx$. So $n_{\Sigma'} - n_\Sigma \ge 0$
+almost everywhere, and by continuity at every $x \ne 0$.
+\end{remark}
+
+The theorem on the general linear row needs a bound on how anisotropic the exponents of a
+rotation-invariant non-Gaussian law can be. A law is \emph{operator-self-decomposable} with exponent
+$B$ when it is its own image under $e^{-tB}$ convolved with a residual, for every $t > 0$
+(\S\ref{sec:cited-facts}). Applying $(e^{tB})_*$, this says that the law stretched by $e^{tB}$ is the
+law convolved with a probability measure, a further smoothing. For $B = I$ the stretch is a zoom, and
+the condition is self-decomposability \ref{eq:self-decomposable}. On an affine orbit the kernel at $I$
+stretched by $e^{tB}$ is the kernel at $e^{tB}e^{tB^{\tp}}$ (Proposition~\ref{prop:affine-orbits}(1)),
+so an exponent of $\mu_I$ is a direction in which the orbit leaves the round aperture along further
+smoothings. The stable law gives the bound, and for a single linear flow $e^{tB}$ the same computation
+gives the set of its exponents.
+
+% shared with blueprint prop:stable-exponent-cone+9fbc223a4e90
+\begin{proposition}[the exponent cone of the isotropic stable law]\label{prop:stable-exponent-cone}
+Let $d \ge 1$ and $B$ a real $d \times d$ matrix, and write $\mathrm{sym}\,B := \tfrac12(B + B^{\tp})$.
+Call a probability measure $\mu$ on $\RR^d$ \emph{$B$-self-decomposable} if for every $t > 0$ there is a
+probability measure $\rho_t$ with $\mu = (e^{-tB})_*\mu * \rho_t$. For $0 < \alpha < 2$, $S_\alpha(I)$
+is $B$-self-decomposable if and only if
+\begin{equation}\label{eq:stable-exponent-cone}
+  (d+\alpha)\,\lambda_{\min}(\mathrm{sym}\,B) \ge \tr B .
+\end{equation}
+The set $\mathfrak k_\alpha$ of such $B$ is a closed convex cone, invariant under $B \mapsto QBQ^{\tp}$ for
+$Q \in \Orth(d)$; it contains every skew-symmetric matrix and $I$, and every $B \in \mathfrak k_\alpha$ has
+$\mathrm{sym}\,B \ge 0$, with $\lambda_{\min}(\mathrm{sym}\,B) > 0$ unless $B$ is skew-symmetric.
+\end{proposition}
+
+Only $\mathrm{sym}\,B$ enters, so the skew part of $B$, the turning of the flow, is free; what is
+limited is the anisotropy of $\mathrm{sym}\,B$. $B = I$ is ordinary self-decomposability. The cone grows
+with $\alpha$. The closure of the union of the $\mathfrak k_\alpha$ is the cone that
+\ref{eq:stable-exponent-cone} defines at $\alpha = 2$, and for $d \ge 2$ it is smaller than the
+Gaussian's cone $\{\mathrm{sym}\,B \ge 0\}$.
+The proof is in Appendix~\ref{app:proofs}.
+
+The exponent cones of the stable laws bound the contracting exponents of every rotation-invariant
+non-Gaussian law: such an exponent lies in $\mathfrak k_\alpha$ for some $\alpha < 2$. The proof of
+Theorem~\ref{thm:wedge-axis} uses this bound.
+
+% shared with blueprint prop:anisotropy-budget
+\begin{proposition}[the anisotropy budget of a rotation-invariant law]\label{prop:anisotropy-budget}
+Let $d \ge 1$, let $B$ be a real $d \times d$ matrix, and write
+$\lambda := \lambda_{\min}(\mathrm{sym}\,B)$ (Proposition~\ref{prop:stable-exponent-cone}).
+\begin{enumerate}
+\item If $e^{-tB} \to 0$ as $t \to \infty$ and $\mu$ is a rotation-invariant $B$-self-decomposable
+law on $\RR^d$ that is not Gaussian (a point mass counting as Gaussian), then $\lambda > 0$ and
+\[
+  \tr B < (d+2)\,\lambda .
+\]
+\item Conversely, if $\tr B < (d+2)\lambda$, then $\lambda > 0$, $e^{-tB} \to 0$, and $S_\alpha(I)$ is
+rotation invariant, not Gaussian, and $B$-self-decomposable for every $\alpha \in (0,2)$ with
+$\alpha \ge \tr B/\lambda - d$.
+\end{enumerate}
+\end{proposition}
+
+The ratio $\tr B/\lambda$ is at least $d$, with equality for a multiple of $I$ plus a skew part. For a
+contracting flow, a rotation-invariant non-Gaussian $B$-self-decomposable law exists exactly when the
+ratio stays below $d + 2$: an anisotropy budget of $2$, the ceiling of the stable index. The bound is
+strict, unlike \ref{eq:stable-exponent-cone}, because the \Levy{} measure must integrate $|x|^2$ near
+the origin. Clause (1) is proved in Appendix~\ref{app:wedge-axis}, clause (2) in
+Appendix~\ref{app:proofs}.
+
+\paragraph{Prior art.} The families of one linear flow are Urbanik's operator-self-decomposable laws
+\sscite{urbanik1972levy}. Their exponents are Jurek's U-exponents with the sign reversed. Jurek proves
+that the set of them is a closed convex cone and a Lie wedge, a cone of matrices closed under the
+conjugations $e^{X}Ye^{-X}$ by its own edge, and computes the Gaussian's
+(\sscite{jurek1992operator}, Prop.~1.2, Cor.~1.3 and the Example, pp.~1055--1057); for the standard
+Gaussian it is $\{\mathrm{sym}\,B \ge 0\}$, the closure of the union of the cones that \ref{eq:stable-exponent-cone} defines for
+$0 < \alpha < \infty$. The book of Jurek and Mason
+restates this frame, and in its terms $\mathfrak k_\alpha$ is the set of exponents of $S_\alpha(I)$
+(\sscite{jurek1993operator}, p.~85, Prop.~3.3.6, p.~86, and Prop.~3.3.10(a), p.~88). Their
+Proposition~3.4.1 characterizes a contracting exponent $B$ of a law by its \Levy{} measure $\nu$, with
+a matching condition on the Gaussian part (\sscite{jurek1993operator}, Prop.~3.4.1, p.~90). The
+condition on $\nu$ is $\nu(U) \ge \nu(e^{tB}U)$ for every Borel set $U$ and every $t \ge 0$. For
+contracting $B$ that reduces membership in $\mathfrak k_\alpha$ to a computation on the density $n_I$. The step set of an orbit corresponds to Urbanik's decomposability
+semigroup of $\mu_I$, transported to the orbit (\sscite{jurek1993operator}, Lemma~2.3.3, p.~54). Jurek
+and Mason compute that semigroup for Gaussian laws, where it gives the whole Loewner order
+(Prop.~2.3.8, p.~58). The qualitative
+fact behind Proposition~\ref{prop:anisotropy-budget} is Jurek's: a rotation-invariant law with such an
+exponent outside the skew-symmetric matrices is self-decomposable (\sscite{jurek1992operator},
+Prop.~1.6, p.~1056). Operator-stable laws, the limits of sums of independent copies normalized by matrices, have
+exponents of their own, a different set
+(\sscite{meerschaert2001limit}, Thm.~7.2.11, p.~262). Hudson and Mason compute them in the plane, and
+Holmes, Hudson and Mason in every dimension, for the laws whose symmetry group is conjugate to the
+orthogonal group (\sscite{hudson1981operator}, Thm.~3, p.~483; \sscite{holmes1982operator}, Thm.~3 and
+Cor.~3, p.~603, and p.~606). For $S_\alpha(I)$ they are $\alpha^{-1}I$ plus the skew-symmetric
+matrices. By Jurek's (1.7), read in the sign of this paper, the stability exponents of an infinitely
+divisible law are exponents of decomposability (\sscite{jurek1992operator}, p.~1057), so these matrices
+lie in
+$\mathfrak k_\alpha$, and on them $\mathrm{sym}\,B$ is a multiple of $I$. None
+of these sources computes the exponents of self-decomposability of a non-Gaussian law, bounds $\tr B$
+by $\lambda_{\min}(\mathrm{sym}\,B)$, or compares two members of the stable orbit. So the cone
+$\mathfrak k_\alpha$, the quantitative budget of Proposition~\ref{prop:anisotropy-budget} with its sharpness
+through $S_\alpha(I)$, and the step cone of Proposition~\ref{prop:stable-step-cone} are new against the
+sources read. The \Levy{} measure of the elliptical stable law, which the step cone compares, is
+classical (\sscite{hudson1981operator}, Thm.~3, p.~483, in the plane; \sscite{holmes1982operator},
+proof of Thm.~3, pp.~605--606, in every dimension).
+% Q-0309 (fix group 5): Jurek 1992 and Hudson-Mason 1981 read at the page by Q-0308
+% (records/affine/READING-jurek1992operator.md, READING-hudson1981operator.md; the table of
+% records/affine/PRIOR-ART-novelty-claims.md). Jurek's U-exponent Q has mu = e^{tQ}mu * nu_t, so the
+% exponent B here is -Q. Neither source covers K_alpha, the budget or the step cone; both are cited
+% for the frame (Prop. 1.2, Cor. 1.3, the Example, (1.7)), the qualitative budget (Prop. 1.6) and the
+% elliptical stable Levy measure (Hudson-Mason Thm. 3). The TODO(source) of section 1 is closed.
+% Holmes-Hudson-Mason read at the page (Q-0294; records/affine/READING-holmes1982operator.md):
+% stability exponents only (Thm. 1, p. 602; Cor. 3, p. 603); no exponents of self-decomposability,
+% no anisotropy budget, no step cone. Their transform exp{i(a,y) - beta|Wy|^gamma} is written here in
+% words (review flag 24: the source's letters a, beta, W, gamma carry other meanings in this paper).
+% That alpha^{-1}I + Q satisfies eq:stable-exponent-cone is the line (d + alpha)/alpha >= d/alpha.
+
+% CHANGED Q-0281 wave 2: blind review W2F-6 ("through" to "in the sense of": the proof of
+% prop:stable-order-generated no longer goes through thm:cone-orders).
+The step cone and the exponent cone are one object read in two ways. The chain of cones $C_\alpha$
+of \S\ref{sec:invariant-wedges} generates, in the sense of Theorem~\ref{thm:cone-orders}, exactly the stable
+orders, and its members of index $0 < \alpha < 2$ are the symmetric parts of the exponent cones. The link is the
+\emph{tangent cone} of a closed semigroup $S$ of matrices, which the Lie theory of semigroups calls its
+tangent wedge: the set of $B$ with $e^{tB} \in S$ for every $t \ge 0$, the generators of the
+one-parameter semigroups that $S$ contains (\sscite{hilgert1989lie}, Prop.~V.1.7, pp.~375--376).
+
+% shared with blueprint prop:stable-order-generated
+\begin{proposition}[the stable step cone is the order of the cone field $C_\alpha$]\label{prop:stable-order-generated}
+Let $d \ge 1$. For $0 \le \alpha < \infty$ put
+\[
+  C_\alpha := \{X \in \Sym(d) : X \text{ positive semidefinite},\ (d+\alpha)\,\lambda_{\min}(X) \ge \tr X\} ,
+  \qquad C_\infty := \PSD(d) ,
+\]
+and write $\preceq_{C_\alpha}$ for the order of the cone field $C_\alpha$ (Theorem~\ref{thm:cone-orders}), $\lambda_{\min}$ the least
+eigenvalue. Each $C_\alpha$ is an $\Orth(d)$-invariant closed convex cone containing $I$, with
+$C_\alpha \cap (-C_\alpha) = \{0\}$. For $\Sigma, \Sigma' \in \PD(d)$ let
+$M := \Sigma^{-1/2}\Sigma'\Sigma^{-1/2}$.
+\begin{enumerate}
+\item \emph{(Three orders, each generated by its cone field.)} $C_0 = \{cI : c \ge 0\}$, and
+$\Sigma \preceq_{C_0} \Sigma'$ if and only if $\Sigma' = c\,\Sigma$ with $c \ge 1$, the ray order on $\PD(d)$.
+For $0 < \alpha < \infty$ the condition $X \ge 0$ in $C_\alpha$ is implied by the inequality, and
+$\Sigma \preceq_{C_\alpha} \Sigma'$ if and only if $\lambda_{\min}(M)^{d+\alpha} \ge \det M$; for
+$0 < \alpha < 2$ this is the order $\preceq_\alpha$ of Proposition~\ref{prop:stable-step-cone}(2). $\Sigma \preceq_{C_\infty}
+\Sigma'$ if and only if $\Sigma \le \Sigma'$, the Loewner order. In each case the related pairs are exactly
+the pairs joined by a $C_\alpha$-causal curve, and $\Sigma^{1/2}M^t\Sigma^{1/2}$ is one.
+\item \emph{(The exponent cone is the tangent cone.)} For $0 < \alpha < 2$ the set $\mathfrak k_\alpha$ of
+\ref{eq:stable-exponent-cone} equals $\{B \in \gl(d) : e^{tB}e^{tB^{\tp}} \in \exp C_\alpha \text{ for every }
+t \ge 0\}$, the tangent cone of the semigroup $\{A : I \preceq_{C_\alpha} AA^{\tp}\}$, the set of $B$ with $e^{tB}$ in
+it for every $t \ge 0$, and
+$\mathfrak k_\alpha \cap \Sym(d) = C_\alpha$.
+\item \emph{(The Loewner order in other coordinates.)} For $0 < \alpha < \infty$ let
+$\Phi_\alpha(\Sigma) := (\det\Sigma)^{-1/(d+\alpha)}\,\Sigma$ on $\PD(d)$. Then $\Phi_\alpha$ is a
+diffeomorphism of $\PD(d)$ onto itself with inverse $T \mapsto (\det T)^{1/\alpha}\,T$;
+$\Sigma \preceq_{C_\alpha} \Sigma'$ if and only if $\Phi_\alpha(\Sigma) \le \Phi_\alpha(\Sigma')$; the derivative of
+$\Phi_\alpha$ at $\Sigma$ maps the cone $\Sigma^{1/2}C_\alpha\Sigma^{1/2}$ onto $\PSD(d)$; and
+$\Phi_\alpha(A\Sigma A^{\tp}) = \psi_\alpha(A)\,\Phi_\alpha(\Sigma)\,\psi_\alpha(A)^{\tp}$ for
+$A \in \GL(d)$, where $\psi_\alpha(A) := |\det A|^{-1/(d+\alpha)}A$ is an automorphism of the group
+$\GL(d)$. In particular $\psi_\alpha$ maps the semigroup $\{A : I \preceq_{C_\alpha} AA^{\tp}\}$ onto the semigroup
+$\{A : AA^{\tp} \ge I\}$ of the Loewner order.
+\end{enumerate}
+\end{proposition}
+
+So up to a change of coordinates the stable orders are the Loewner order: $\preceq_\alpha$ is the
+Loewner order read through $\Phi_\alpha$. The parameter interpolates between the rays, as $\alpha \to 0$,
+where $\Phi_\alpha$ degenerates to the shape map $\Sigma \mapsto (\det\Sigma)^{-1/d}\Sigma$, and the
+Loewner order at $\alpha = \infty$. The map $\Phi_\alpha$ acts on the parameters only.
+The proof is in Appendix~\ref{app:wedge-axis}.
+
+
+The cones form a chain, $C_0 \subsetneq C_\alpha \subsetneq C_\beta \subsetneq C_2 \subsetneq C_\infty$
+for $0 < \alpha < \beta < 2$. For $\alpha < \infty$ every nonzero member of $C_\alpha$ is positive
+definite, while $C_\infty$ contains the singular directions. Which general linear families each cone
+carries is Theorem~\ref{thm:wedge-axis}, stated and proved in
+\S\ref{sec:wedge-axis-proof}.
+
+\subsubsection*{Every profile: the dilation ratio}
+
+A rotation-invariant law with no Gaussian part and a \Levy{} density is described by one function of
+the radius, its \emph{profile} $k$: the \Levy{} density at $x$ is $k(|x|)\,|x|^{-d}$, so that the
+displacements with radius between $r_1$ and $r_2$ occur at the rate
+$|S^{d-1}|\int_{r_1}^{r_2}k(r)\,dr/r$. It is the polar profile of
+Definition~\ref{def:isotropic-origin-datum} divided by the area of the sphere, $k = k_d/|S^{d-1}|$. The
+stable profile is $k(r) = c_{d,\alpha}^{-1}r^{-\alpha}$ (Lemma~\ref{lem:elliptical-stable}). For a
+general nonincreasing profile the ordering of \Levy{} densities is read off one function, the
+\emph{dilation ratio} $R(\lambda)$, the least factor by which the profile, the rate of displacements per
+unit of $\log r$ in each direction, grows when the radius is divided by $\lambda$. It is $\lambda^\alpha$ for the stable profile and $1$ for a
+profile bounded at the origin (Proposition~\ref{prop:orbit-step-cone}(3)).
+
+% shared with blueprint prop:orbit-step-cone
+\begin{proposition}[the ordered-density step set of an affine orbit]\label{prop:orbit-step-cone}
+Let $d \ge 1$ and let $k : (0,\infty) \to [0,\infty)$ be nonincreasing, not identically $0$, and put
+$m(r) := k(r)\,r^{-d}$, with $\int_{\RR^d}(|x|^2 \wedge 1)\,m(|x|)\,dx < \infty$. For $\lambda \ge 1$ put
+\[
+  R(\lambda) := \inf\{k(r/\lambda)/k(r) : r > 0,\ k(r) > 0\} \in [1, \infty) .
+\]
+\begin{enumerate}
+\item \emph{(The orbit.)} There is a unique probability measure $\mu_I$ on $\RR^d$ with
+$\widehat\mu_I(\omega) = e^{-\psi_I(\omega)}$, $\psi_I(\omega) := \int(1 - \cos\langle\omega,x\rangle)\,
+m(|x|)\,dx$; it is rotation invariant and infinitely divisible with generating triplet
+$(0, m(|x|)\,dx, 0)$. For $\Sigma \in \PD(d)$ its orbit $\mu_\Sigma := (\Sigma^{1/2})_*\mu_I$ has
+$\widehat\mu_\Sigma(\omega) = \exp[-\int(1 - \cos\langle\omega,x\rangle)\,n_\Sigma(x)\,dx]$ with
+$n_\Sigma(x) := (\det\Sigma)^{-1/2}m(|\Sigma^{-1/2}x|)$.
+\item \emph{(The steps.)} For $\Sigma, \Sigma' \in \PD(d)$ put $M := \Sigma^{-1/2}\Sigma'\Sigma^{-1/2}$.
+Then $n_\Sigma \le n_{\Sigma'}$ everywhere if and only if $\lambda_{\min}(M) \ge 1$ and
+\[
+  \det M \le \lambda_{\min}(M)^d\,R\bigl(\lambda_{\min}(M)^{1/2}\bigr)^2 ;
+\]
+and then $\Sigma \le \Sigma'$, and $\mu_{\Sigma'} = \mu_\Sigma * \rho$ with $\rho$ the infinitely
+divisible probability measure with generating triplet $(0, (n_{\Sigma'} - n_\Sigma)(x)\,dx, 0)$.
+\item \emph{(Which steps.)} The relation of (2) is a partial order on $\PD(d)$, invariant under
+$\Sigma \mapsto A\Sigma A^{\tp}$ for $A \in \GL(d)$; it contains every ray $\Sigma \le \lambda^2\Sigma$,
+$\lambda \ge 1$, and no step $\Sigma \to \Sigma + P$ with $0 < \rank P < d$. If
+$k(r) = c\,r^{-\alpha}$, $0 < \alpha < 2$, then $R(\lambda) = \lambda^\alpha$ and its step set is the cone of
+Proposition~\ref{prop:stable-step-cone}. If $k(0{+}) := \lim_{r\downarrow0}k(r)$ is finite, then $R \equiv 1$ and
+its step set is the rays.
+\end{enumerate}
+\end{proposition}
+
+The least eigenvalue of $M$ fixes how far a step may widen its narrowest direction, and $R$ how much
+volume that buys. By the polar criterion of self-decomposability, C5 (\S\ref{sec:cited-facts};
+\S\ref{sec:iso-recap}), the laws of clause (1) are the rotation-invariant
+self-decomposable laws with no Gaussian part whose \Levy{} measure has a density, so clause (2)
+applies to the orbit of every such law. The proposition gives sufficiency. That a positive increment forces ordered densities is proved for the stable
+profiles (Lemma~\ref{lem:stable-tail}) and for the profiles bounded at the origin
+(Proposition~\ref{prop:bounded-profile-rays}). For a general profile it is open: the positivity of an
+increment alone does not exclude a signed \Levy{} measure. Inside a cascade family along a stable order or
+a cone order it holds for every profile, since there the increments are infinitely divisible
+(Proposition~\ref{prop:wedge-axis-profiles}). The class $I_0$ does not close the gap. By
+Cuppens's criterion, a law of clause (1) whose \Levy{} density is continuous and positive off the
+origin lies outside the class $I_0$ of laws whose factors are all infinitely divisible
+(\sscite{cuppens1975decomposition}, Thm.~7.2.1, p.~157). The stable and \Matern{} laws are among them
+(for the stable laws on the line, \sscite{linnik1977decomposition}, Thm.~6.7.2 and Ex.~1, p.~218).
+
+The proof substitutes $x = \Sigma^{1/2}y$, which turns the ordering of densities into a comparison of
+$m$ at $|y|$ and at $\langle y,M^{-1}y\rangle^{1/2}$. On each sphere the comparison is hardest along an
+eigenvector for $\lambda_{\min}(M)$, where it reads $k(r/\lambda) \ge (\det M)^{1/2}\lambda^{-d}k(r)$ with
+$\lambda := \lambda_{\min}(M)^{1/2}$, and the definition of $R$ makes this the inequality of (2). The
+complete proof is in Appendix~\ref{app:wedge-axis}.
+
+% Round 3 (report D, item 5; VERIFY-round3-landscape-orbits-paper.md section 9; taken unless vetoed,
+% PLAN-review-response-paper.md R3.1): the dyadic counterexample, as in the annotation of
+% prop:orbit-step-cone; an unnumbered paragraph, so that no later statement is renumbered.
+\paragraph{A step set, not a cone.} The relative steps $M$ allowed by clause (2) form a set
+$\mathcal K_R$ invariant under orthogonal conjugation, a step set in the sense of
+Proposition~\ref{prop:invariant-orders}. For the stable profiles and the profiles bounded at the origin
+it is $\exp C$ for a cone $C$ (clause (3)), and in general it need not be. The dyadic profile of
+Lemma~\ref{lem:dilation-ratio}(5) below has $R = 1$ on $[1, 2)$ and $R(2) = 2$. For $d \ge 2$, the
+matrix $M := \diag(4, \dots, 4, 16)$ has $\det M = 4^d\cdot 4 = \lambda_{\min}(M)^dR(2)^2$, so
+$M \in \mathcal K_R$. Its square root $M^{1/2} = \diag(2, \dots, 2, 4)$ has $\det M^{1/2} = 2^d\cdot 2$,
+above $\lambda_{\min}(M^{1/2})^dR(\sqrt2)^2 = 2^d$, so $M^{1/2} \notin \mathcal K_R$. A set $\exp C$ contains
+$e^{X/2}$ with $e^X$, so this $\mathcal K_R$ is $\exp C$ for no cone $C$.
+
+The dilation ratio is monotone and supermultiplicative, and it has a growth exponent. The growth
+exponent bounds $R$ from above, so the rung that ordered densities give a profile is its lower
+exponent instead.
+
+% shared with blueprint lem:dilation-ratio+4c533f713cd8
+\begin{lemma}[the dilation ratio: monotonicity and two exponents]\label{lem:dilation-ratio}
+Let $d \ge 1$, let $k$ be a profile as in Proposition~\ref{prop:orbit-step-cone}, and let $R$ be its dilation ratio,
+$R(\lambda) = \inf\{k(r/\lambda)/k(r) : r > 0,\ k(r) > 0\}$ for $\lambda \ge 1$.
+\begin{enumerate}
+\item \emph{(Monotone and supermultiplicative.)} $R(1) = 1$, $R$ is nondecreasing on $[1,\infty)$, and
+$R(\lambda\nu) \ge R(\lambda)\,R(\nu)$ for all $\lambda, \nu \ge 1$.
+\item \emph{(Below the square.)} $R(\lambda) < \lambda^2$ for every $\lambda > 1$.
+\item \emph{(Two exponents.)} Put $\beta_-(k) := \inf_{\lambda>1}\log R(\lambda)/\log\lambda$. The
+limit $\beta(k) := \lim_{\lambda\to\infty}\log R(\lambda)/\log\lambda$ exists and equals
+$\sup_{\lambda>1}\log R(\lambda)/\log\lambda$. They satisfy $0 \le \beta_-(k) \le \beta(k) \le 2$ and
+$\beta_-(k) < 2$, and
+\[
+  \lambda^{\beta_-(k)} \le R(\lambda) \le \lambda^{\beta(k)} \qquad (\lambda \ge 1) .
+\]
+For $\alpha \ge 0$, $R(\lambda) \ge \lambda^\alpha$ for every $\lambda \ge 1$ if and only if
+$\alpha \le \beta_-(k)$.
+\item \emph{(The rung.)} Let $d \ge 2$ and $0 < \alpha < 2$, and let $\preceq_\alpha$ be the order of
+Proposition~\ref{prop:stable-step-cone}(2). Every pair $\Sigma \preceq_\alpha \Sigma'$ satisfies $n_\Sigma \le n_{\Sigma'}$
+everywhere, in the notation of Proposition~\ref{prop:orbit-step-cone}(1), if and only if $\alpha \le \beta_-(k)$.
+\item \emph{(Values.)} If $k(r) = c\,r^{-\alpha}$ with $c > 0$ and $0 < \alpha < 2$, then
+$\beta_-(k) = \beta(k) = \alpha$. If $k(0{+})$ is finite, then $\beta_-(k) = \beta(k) = 0$. The profile
+$k(r) := 2^n$ for $2^{-n-1} < r \le 2^{-n}$, $n \in \ZZ$, satisfies the hypotheses of
+Proposition~\ref{prop:orbit-step-cone} and has $\beta_-(k) = 0$ and $\beta(k) = 1$.
+\end{enumerate}
+\end{lemma}
+
+So the condition $R(\lambda) \ge \lambda^\alpha$ for every $\lambda \ge 1$, which appears in
+Theorem~\ref{thm:wedge-axis}(3) and Proposition~\ref{prop:similarity-stable-order-families}(2), is
+$\alpha \le \beta_-(k)$, and for $d \ge 2$ it is exactly the condition that the ordered-density step set of
+$k$ contain the stable order of index $\alpha$. The two exponents agree for the stable profiles, for
+the profiles bounded at the origin and for the tempered profiles below, and the
+dyadic profile of clause (5) shows that they need not agree in general. The value $\beta(k) = 2$
+occurs, for $k(r) = r^{-2}(1 + \log(1/r))^{-2}$ on $(0, 1]$ and $r^{-2}$ beyond. The lower exponent
+also decides which stable orders the orbit's family survives, for every profile and with
+any Gaussian part (Proposition~\ref{prop:wedge-axis-profiles}). Whether a single positive increment outside a family orders
+the densities is the open converse of Proposition~\ref{prop:orbit-step-cone}. The proof is in
+Appendix~\ref{app:proofs}.
+
+\paragraph{Profiles stable at the origin.} A profile $k(r) = r^{-\alpha}j(r)$, with $j$ nonincreasing
+and $j(0{+})$ finite and positive, has the dilation ratio $\lambda^\alpha$ of the stable profile. So
+its orbit's ordered-density step set is the stable cone of index $\alpha$, however the profile is tempered
+at large radii. With an exponential tempering the orbit has exponential moments, as the \Matern{} law
+does and the stable law does not. One such family has the transforms
+$\exp[-((1 + \langle\omega,\Sigma\omega\rangle)^{\alpha/2} - 1)]$. With its exponent normalized to
+$(2\gamma/\alpha)((1 + u)^{\alpha/2} - 1)$, its limit as $\alpha \downarrow 0$ is the \Matern{} orbit of
+index $\gamma$, whose profile is bounded at the origin. These are Proposition~\ref{prop:tempered-step-cone},
+in Appendix~\ref{app:tempered}.
+
+\subsubsection*{Index $0$: the rays}
+
+At the bottom of the ladder, rung $0$, are the orbits whose transform falls off like a power of the
+frequency: $e^{-g(cu)}/e^{-g(u)} \to c^{-\kappa}$ as $u \to \infty$, for every $c > 0$. The \Matern{}
+orbit of index $\gamma$ is one, with $\kappa = \gamma$. For them one positive increment between two
+apertures forces a ray. The statement is about a single pair of apertures of the orbit, so it holds
+along every order.
+
+% shared with blueprint prop:log-orbit-rays+739cc86e19da
+\begin{proposition}[orbits of logarithmic exponent cascade along rays only]\label{prop:log-orbit-rays}
+Let $d \ge 1$, let $g$ satisfy the hypothesis of Proposition~\ref{prop:affine-orbits}, and let $(\mu_\Sigma)$
+be its affine orbit, $\widehat\mu_\Sigma(\omega) = e^{-g(\langle\omega,\Sigma\omega\rangle)}$. Suppose
+there is $\kappa > 0$ with
+\[
+  g(cu) - g(u) \to \kappa\log c \qquad (u \to \infty), \text{ for every } c > 0 .
+\]
+If $\Sigma, \Sigma' \in \PD(d)$ and $\mu_{\Sigma'} = \mu_\Sigma * \rho$ for a positive finite measure
+$\rho$, then $\Sigma' = c\,\Sigma$ for some $c > 0$. In particular, for every $\gamma > 0$, no step
+of the \Matern{} orbit of index $\gamma$, $\widehat\mu_\Sigma(\omega) = (1 + \langle\omega,\Sigma
+\omega\rangle)^{-\gamma}$ (Proposition~\ref{prop:affine-orbits}(4)), off the rays has a positive increment.
+\end{proposition}
+
+At small scales the increment looks like the distribution whose transform is
+$(\langle\omega,\Sigma\omega\rangle/\langle\omega,\Sigma'\omega\rangle)^\kappa$, a function homogeneous of
+degree $0$. A positive measure that is invariant under dilations and finite on compact sets is a point
+mass, so that transform must be constant.
+Which rays carry a positive increment is a separate question: for a general orbit, exactly those of
+a self-decomposable $\mu_I$ (Proposition~\ref{prop:ray-families}).
+The proof is in Appendix~\ref{app:proofs}.
+
+\begin{remark}[the analytic step in the literature]\label{rem:log-orbit-crum}
+The proof in Appendix~\ref{app:proofs} shows that the limit
+$h(\omega) := \lim_{t\to\infty}\widehat\rho(t\omega)$, which is
+$(\langle\omega,\Sigma\omega\rangle/\langle\omega,\Sigma'\omega\rangle)^\kappa$ for $\omega \ne 0$, is
+constant off $0$. That step has a second, published route. The limit $h$ of $\widehat\rho(t\,\cdot)$, with
+$h(0) = 1$, is a pointwise limit of continuous functions, so it is measurable. As a pointwise limit of
+characteristic functions it is positive definite (\sscite{sasvari2013multivariate}, Thm.~1.4.10,
+p.~28). A measurable positive definite
+function on $\RR^d$ equals a continuous one $f_c$ almost everywhere (\sscite{crum1956positive},
+Theorem, p.~548; \sscite{sasvari2013multivariate}, Thm.~2.11.7, p.~130). As $h$ is continuous off
+$0$, $h = f_c$ off $0$. So $f_c$ is homogeneous of degree $0$ off $0$ and continuous at $0$, hence
+constant, and $h$ is that constant off $0$.
+\end{remark}
+
+For the \Matern{} orbit of every index the two halves combine: the rays carry positive increments,
+and nothing else does.
+
+% shared with blueprint prop:matern-steps+2810f2866dc2
+\begin{proposition}[the \Matern{} orbit of every index: the positive steps are the rays]\label{prop:matern-steps}
+Let $d \ge 1$, $\gamma > 0$, and let $(\mu_\Sigma)_{\Sigma\in\PD(d)}$ be the \Matern{} orbit of index
+$\gamma$, $\widehat\mu_\Sigma(\omega) = (1 + \langle\omega,\Sigma\omega\rangle)^{-\gamma}$
+(Proposition~\ref{prop:affine-orbits}(4)). Let $\Sigma, \Sigma' \in \PD(d)$ with $\Sigma' \ne \Sigma$. Then there
+is a positive finite measure $\rho$ with $\mu_{\Sigma'} = \mu_\Sigma * \rho$ if and only if
+$\Sigma' = \lambda^2\Sigma$ for some $\lambda > 1$; and then $\rho$ is unique, and it is the
+probability measure $(\Sigma^{1/2})_*\nu_\lambda$, with $\nu_\lambda$ the law of $\sqrt{2Y}\,Z$ of
+Proposition~\ref{prop:affine-orbits}(4).
+\end{proposition}
+
+No hypothesis $\Sigma \le \Sigma'$ is needed: no pair of distinct apertures off a ray is joined by a
+positive increment, comparable or not.
+
+% proof of prop:matern-steps
+\begin{proof}
+$\widehat\mu_\Sigma$ has no zero, so an increment $\rho$, if there is one, has the transform
+$\widehat\rho(\omega) = \bigl((1 + \langle\omega,\Sigma\omega\rangle)/(1 + \langle\omega,\Sigma'\omega\rangle)\bigr)^\gamma$,
+which determines it. \emph{Only if.} By Proposition~\ref{prop:log-orbit-rays}, $\Sigma' = c\,\Sigma$ for
+some $c > 0$, and $c \ne 1$ as $\Sigma' \ne \Sigma$. As $\widehat\rho(0) = 1$, $\rho$ is a probability
+measure and $|\widehat\rho| \le 1$; at $\omega \ne 0$, with $u := \langle\omega,\Sigma\omega\rangle > 0$,
+$\widehat\rho(\omega) = ((1+u)/(1+cu))^\gamma$, which exceeds $1$ if $c < 1$. So $c > 1$, and
+$\lambda := c^{1/2}$. \emph{If.} By Proposition~\ref{prop:affine-orbits}(4), the hypothesis of
+Proposition~\ref{prop:affine-orbits}(2) holds for $\lambda$ with the stated $\nu_\lambda$, and
+Proposition~\ref{prop:affine-orbits}(2) gives $\mu_{\lambda^2\Sigma} = \mu_\Sigma * (\Sigma^{1/2})_*\nu_\lambda$.
+\end{proof}
+
+A filter computed by finitely many elliptic solves in the shape's own operator has a rational symbol,
+and a decaying rational symbol has a logarithmic exponent.
+
+% shared with blueprint prop:rational-symbols
+\begin{proposition}[rational symbols cascade along rays only]\label{prop:rational-symbols}
+Let $d \ge 1$, and let $P$ and $Q$ be real polynomials with $\operatorname{deg}P > \operatorname{deg}Q$ and $P(0) = Q(0)$,
+neither of which vanishes on $[0,\infty)$. Suppose that $\omega \mapsto Q(|\omega|^2)/P(|\omega|^2)$
+is the characteristic function of a probability measure $\mu_I$ on $\RR^d$, and let
+$\mu_\Sigma := (\Sigma^{1/2})_*\mu_I$ for $\Sigma \in \PD(d)$, so that
+$\widehat\mu_\Sigma(\omega) = Q(\langle\omega,\Sigma\omega\rangle)/P(\langle\omega,\Sigma\omega\rangle)$.
+Then $g(u) := \log(P(u)/Q(u))$ satisfies the hypothesis of Proposition~\ref{prop:affine-orbits}, and that of
+Proposition~\ref{prop:log-orbit-rays} with $\kappa = \operatorname{deg}P - \operatorname{deg}Q$. So if $\Sigma, \Sigma' \in \PD(d)$ and
+$\mu_{\Sigma'} = \mu_\Sigma * \rho$ for a positive finite measure $\rho$, then $\Sigma' = c\,\Sigma$ for
+some $c \ge 1$. This applies, with $n \ge 1$ and $a_1, \dots, a_n > 0$, to the \Matern{} orbits of integer index
+$\gamma$ ($Q = 1$, $P = (1+u)^\gamma$, $\kappa = \gamma$), to the products
+$\prod_{i\le n}(1 + a_iu)^{-1}$ ($\kappa = n$), and to the mixtures $\sum_{i\le n}w_i(1 + a_iu)^{-1}$
+with $w_i \ge 0$ and $\sum_iw_i = 1$ ($\kappa = 1$).
+\end{proposition}
+
+Write $\mathcal L_\Sigma := -\nabla\cdot\Sigma\nabla$, the operator with symbol $u = \langle\omega,\Sigma\omega\rangle$.
+Finitely many solves of shifted equations $(\mathcal L_\Sigma - z)v = w$, $z \in \CC \setminus [0,\infty)$, and
+finitely many applications of $\mathcal L_\Sigma$ multiply the transform by a rational function of $u$.
+Conversely $Q(u)/P(u)$, with $P$ factored over $\CC$, is computed by $\operatorname{deg}P$ such solves
+and one application of $Q(\mathcal L_\Sigma)$. A decaying rational symbol behaves like $u^{-\kappa}$ at infinity
+with $\kappa$ a positive integer. So every affine orbit of a law that such solves implement exactly,
+with a transform that does not vanish and decays, changes shape only by re-measurement. The converse
+fails: the \Matern{} orbits of every index and the orbits of profiles bounded at the origin cascade
+along rays only too (Propositions~\ref{prop:matern-steps} and~\ref{prop:bounded-profile-rays}), and the
+tempered orbits of Proposition~\ref{prop:tempered-step-cone}(3), whose symbols are not rational, have
+at least the stable cone. Symbols that do not decay, with an atom at the origin, are not covered.
+The proof is in Appendix~\ref{app:proofs}.
+
+
+The profiles bounded at the origin close the converse of Proposition~\ref{prop:orbit-step-cone}(2):
+by Lemma~\ref{lem:isotropic-exponent-log}(2) such a profile gives a logarithmic exponent.
+
+% shared with blueprint prop:bounded-profile-rays+ec7f6de3b73c
+\begin{proposition}[orbits of a profile bounded at the origin cascade along rays only]\label{prop:bounded-profile-rays}
+Let $d \ge 1$, let $k$ satisfy the hypotheses of Proposition~\ref{prop:orbit-step-cone} with
+$k(0{+}) := \lim_{r\downarrow0}k(r)$ finite, and let $(\mu_\Sigma)$ be the orbit of
+Proposition~\ref{prop:orbit-step-cone}(1), with \Levy{} densities $n_\Sigma$. For a unit vector $e$ the function
+$g(u) := \psi_I(\sqrt u\,e)$ satisfies the hypothesis of Proposition~\ref{prop:affine-orbits}, and that of
+Proposition~\ref{prop:log-orbit-rays} with $\kappa = \tfrac12|S^{d-1}|\,k(0{+}) > 0$. Consequently, for
+$\Sigma, \Sigma' \in \PD(d)$ the following are equivalent:
+\begin{enumerate}
+\item $\mu_{\Sigma'} = \mu_\Sigma * \rho$ for a positive finite measure $\rho$;
+\item $n_\Sigma \le n_{\Sigma'}$ everywhere;
+\item $\Sigma' = c\,\Sigma$ for some $c \ge 1$.
+\end{enumerate}
+\end{proposition}
+
+So for every profile bounded at the origin a positive increment, ordered \Levy{} densities and a ray
+are the same condition. The class contains the \Matern{} orbits
+(Proposition~\ref{prop:tempered-step-cone}(4), with $\kappa = \gamma$), every subordinated isotropic
+datum with $a = 0$ (Definition~\ref{def:isotropic-origin-datum}) whose delay profile is nonzero and bounded at the
+origin, and the unit-step profiles
+$k = \mathbf 1_{(0,\tau)}$. The equivalence holds on both sides of the boundedness threshold of the isotropic paper
+\prog{Iso}{Thm.~3.13}, the value $k_d(0{+}) = d$ of the polar profile at the origin above which a
+kernel without Gaussian part is bounded at its centre and at or below which it is not: every bounded
+profile has $R \equiv 1$, whatever its value at the origin. For a profile unbounded at the origin the
+three conditions part: for the stable profiles (1) and (2) are equivalent and (3) fails
+(Proposition~\ref{prop:stable-step-cone}), and for the others it is open whether (1) implies (2).
+The proof is in Appendix~\ref{app:proofs}.
+
+% Round 2 (presentation review), item 11 (VERIFY-round2-notation-paper.md § 11): the mechanism with
+% its formula and the hypotheses of Proposition E.4 (d >= 2, Sigma in PD(d), 0 != P in PSD(d));
+% compared with Remark E.3 and Proposition E.4(1)-(3), with B_d = 1/|S^{d-1}|.
+\paragraph{The size of the failure.} For the \Matern{} orbit of index $1$, $d \ge 2$, and a step from
+$\Sigma \in \PD(d)$ to $\Sigma' = \Sigma + P$ with $0 \ne P \in \PSD(d)$, the would-be increment has the
+transform $1 - \langle\omega,P\omega\rangle\,\widehat\mu_{\Sigma'}(\omega)$. Off the origin it is the
+function $q = \nabla\cdot P\nabla K_{\Sigma'}$, where the density $K_{\Sigma'}$ of $\mu_{\Sigma'}$ is a
+linear image of the Green's function of $1 - \Delta$. Near the origin, in the coordinates
+$y = \Sigma'^{-1/2}x$ and with $P' := \Sigma'^{-1/2}P\Sigma'^{-1/2}$, $q$ is
+$(\det\Sigma')^{-1/2}|S^{d-1}|^{-1}|y|^{-d}(d\langle\widehat y,P'\widehat y\rangle - \tr P')$ to leading
+order. Unless $\Sigma'$ is a multiple of $\Sigma$, the bracket is negative around a least eigenvector
+of $P'$. The negative mass on $\{a < |y| < 1\}$ then grows like $\log(1/a)$, so the increment is not
+even a finite signed measure
+(Proposition~\ref{prop:matern-cross-shape} with Remark~\ref{rem:matern-mechanism}, and
+Proposition~\ref{prop:matern-negative-mass}, with a computation on a grid in
+Remark~\ref{rem:matern-grid}; all four in Appendix~\ref{app:matern}).
+
+\subsubsection*{The stable order on the positive semidefinite matrices}
+
+The theorem on the general linear row (\S\ref{sec:wedge-axis-proof}) reads the families along the
+stable order, extended to $\PSD(d)$ by the origin and the rays. The next proposition gives that order
+and the general linear cell along it, on which the theorem rests. The same order for the similarities
+is the subject of Proposition~\ref{prop:similarity-stable-order-kernels} in \S\ref{sec:smaller-groups}.
+
+% Round-2 review (Gemini), item 9, the author's decision D8 (2026-11-03): the node is split; it keeps
+% clauses (1)-(2), and clauses (3)-(5) are prop:similarity-stable-order-kernels, printed in section 4.9
+% (05-smaller-groups.tex) with the lead sentences on eccentricity and spread and the comments on those
+% clauses that followed here.
+% shared with blueprint prop:similarity-stable-order-families+08facbc24d81
+\begin{proposition}[the stable order on $\PSD(d)$ and the general linear row along it]\label{prop:similarity-stable-order-families}
+Let $d \ge 2$ and $0 < \alpha < 2$. Write $\preceq_\alpha$ for the order of
+Proposition~\ref{prop:stable-step-cone}(2) on $\PD(d)$, and $\operatorname{ecc}(\Sigma) :=
+\lambda_{\max}(\Sigma)/\lambda_{\min}(\Sigma)$ for $\Sigma \in \PD(d)$.
+\begin{enumerate}
+\item \emph{(The stable order on $\PSD(d)$.)} For $\Sigma, \Sigma' \in \PSD(d)$ put
+$\Sigma \le_\alpha \Sigma'$ when $\Sigma = 0$, or $\Sigma' = c\,\Sigma$ for some $c \ge 1$, or
+$\Sigma, \Sigma' \in \PD(d)$ and $\Sigma \preceq_\alpha \Sigma'$. This is a partial order on $\PSD(d)$,
+invariant under $\GL(d)$, containing the rays and contained in the Loewner order, and every pair
+$\Sigma \le_\alpha \Sigma'$ is joined by a chain as in Theorem~\ref{thm:cascade-infinitely-divisible}(2); so
+$(G, \le_\alpha)$ is a wedge datum with the path condition (P) for every closed subgroup $G$ of $\GL(d)$
+containing the dilations. If $\alpha \le \beta < 2$, then $\Sigma \le_\alpha \Sigma'$ implies
+$\Sigma \le_\beta \Sigma'$. For $\Sigma \in \PD(d)$ with least and largest eigenvalues
+$\lambda_1 \le \lambda_d$, and $\varepsilon, t \ge 0$,
+\[
+  \varepsilon I \le_\alpha \Sigma \Leftrightarrow \varepsilon \le \varepsilon_\alpha(\Sigma) :=
+  \Bigl(\frac{\lambda_1^{d+\alpha}}{\det\Sigma}\Bigr)^{1/\alpha} ,
+  \qquad
+  \Sigma \le_\alpha tI \Leftrightarrow t \ge t_\alpha(\Sigma) :=
+  \Bigl(\frac{\lambda_d^{d+\alpha}}{\det\Sigma}\Bigr)^{1/\alpha} ,
+\]
+and $t_\alpha(\Sigma)/\varepsilon_\alpha(\Sigma) = \operatorname{ecc}(\Sigma)^{(d+\alpha)/\alpha}$.
+\item \emph{(The general linear row.)} Let $k$ be a profile as in Proposition~\ref{prop:orbit-step-cone} whose
+dilation ratio has $R(\lambda) \ge \lambda^\alpha$ for every $\lambda \ge 1$, and $\mu_I$ the law of that
+proposition's clause (1). Then $\Sigma \mapsto (\Sigma^{1/2})_*\mu_I$, $\Sigma \in \PSD(d)$, is the family of
+kernels from scale zero of a $(\GL(d), \le_\alpha)$-cascade family of kernels. This applies to the stable
+law $S_\beta(I)$ of every index $\beta \in [\alpha, 2)$ (the profile $k(r) = c_{d,\beta}^{-1}r^{-\beta}$ of
+Lemma~\ref{lem:elliptical-stable}), and to the profiles of Proposition~\ref{prop:tempered-step-cone} of every index
+$\beta \in [\alpha, 2)$.
+\end{enumerate}
+\end{proposition}
+
+The order $\le_\alpha$ of clause (1) is $\preceq^+_{C_\alpha}$ of Theorem~\ref{thm:cone-orders}(4), and the
+general linear row along it is Theorem~\ref{thm:wedge-axis}(3). The thresholds of clause (1) place every
+definite $\Sigma$ between two multiples of $I$ in the order, the sandwich on which the bounds of
+Proposition~\ref{prop:similarity-stable-order-kernels} rest. The proof is in Appendix~\ref{app:wedge-axis}.

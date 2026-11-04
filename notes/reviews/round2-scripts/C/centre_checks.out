@@ -1,0 +1,91 @@
+=== Lemma A.7: kappa_d, three independent routes ===
+d=1: closed 0.577215664902  Mellin 0.577215662455  direct 0.5772156649  lambda_d 0.0 (closed lambda -9.86076131526e-32)
+d=2: closed -0.115931515658  Mellin -0.115931515591  direct -0.1159315157  lambda_d -0.69314718056 (closed lambda -0.69314718056)
+d=3: closed -0.422784335098  Mellin -0.422784333317  direct -0.4227843351  lambda_d -1.0 (closed lambda -1.0)
+d=4: closed -0.615931515658  Mellin -0.615931512512  direct -0.6159315157  lambda_d -1.19314718056 (closed lambda -1.19314718056)
+d=5: closed -0.756117668432  Mellin -0.75611766413  direct -0.7561176684  lambda_d -1.33333333333 (closed lambda -1.33333333333)
+d=6: closed -0.865931515658  Mellin -0.865931510347  direct -0.8659315157  lambda_d -1.44314718056 (closed lambda -1.44314718056)
+kappa_1 - gammaE = -9.860761315e-32 ; kappa_2 - (gammaE - log2) = 0.0 ; kappa_3 - (gammaE - 1) = 0.0
+kappa_3 - kappa_1 + 1/1 = 9.860761315e-32
+kappa_4 - kappa_2 + 1/2 = 0.0
+kappa_5 - kappa_3 + 1/3 = -4.930380658e-32
+kappa_6 - kappa_4 + 1/4 = 0.0
+psi(1/2) = -1.96351002602  -gammaE-2log2 = -1.96351002602
+
+=== (A.2) bounds on Cin: Cin(X)-log X on [1, 1e4], and Cin(X)-log X >= -3 on (0,1) ===
+max Cin-logX on sample: 0.76724541  min: 0.15423484  (claimed within [-3, 13/4]); Cin(1) = 0.23981174 <= 1/4
+
+=== Example 3.14: Matern kernel, polar profile and constants ===
+  d=1 r=0.3: closed 0.9813766378  via (3.4) 0.9813766378
+  d=1 r=1.0: closed 0.3646751017  via (3.4) 0.3646751017
+  d=1 r=2.0: closed 0.08865861984  via (3.4) 0.08865861984
+  d=2 r=0.3: closed 1.294286591  via (3.4) 1.294286591
+  d=2 r=1.0: closed 0.6665137854  via (3.4) 0.6665137854
+  d=2 r=2.0: closed 0.209501211  via (3.4) 0.209501211
+  d=3 r=0.3: closed 1.397739483  via (3.4) 1.397739483
+  d=3 r=1.0: closed 0.8804035763  via (3.4) 0.8804035763
+  d=3 r=2.0: closed 0.339423065  via (3.4) 0.339423065
+  d=1 check 2g e^{-sqrt2 r} at r=1: 0.3646751017
+  d=3 check 2g(1+sqrt2 r)e^{-sqrt2 r} at r=1: 0.8804035763
+  k_d(0+) (d=2, g=3/4), r=1e-6: 1.5  expected 2g = 1.5
+
+--- d=2, gamma=3/4 (the worked numbers of p. 25) ---
+C_k = 0.358713 (paper 0.359);  K(0+) = 2.02319 (paper 2.023);  A = 0.831257 (paper 0.831)
+R(2,3/2) = 0.332968;  Q = 0.276782 (paper 0.277);  Q K(0+) = 0.559983 (paper 0.560);  closed-form coefficient = 0.559983
+A K(0+) = 1.6817928  vs 2^gamma = 1.6817928
+C_k closed form (3/2) K_0(sqrt2) = 0.35871332
+--- A K(0+) = 2^gamma in every dimension (consistency of Lemma A.7 with the transform) ---
+  d=1 gamma=0.75: A K(0+) = 1.681792831   2^gamma = 1.681792831
+  d=1 gamma=0.3: A K(0+) = 1.231144413   2^gamma = 1.231144413
+  d=1 gamma=1.7: A K(0+) = 3.249009585   2^gamma = 3.249009585
+  d=2 gamma=0.75: A K(0+) = 1.681792831   2^gamma = 1.681792831
+  d=2 gamma=0.3: A K(0+) = 1.231144413   2^gamma = 1.231144413
+  d=2 gamma=1.7: A K(0+) = 3.249009585   2^gamma = 3.249009585
+  d=3 gamma=0.75: A K(0+) = 1.681792831   2^gamma = 1.681792831
+  d=3 gamma=0.3: A K(0+) = 1.231144413   2^gamma = 1.231144413
+  d=3 gamma=1.7: A K(0+) = 3.249009585   2^gamma = 3.249009585
+  d=4 gamma=0.75: A K(0+) = 1.681792831   2^gamma = 1.681792831
+  d=4 gamma=0.3: A K(0+) = 1.231144413   2^gamma = 1.231144413
+  d=4 gamma=1.7: A K(0+) = 3.249009585   2^gamma = 3.249009585
+  d=5 gamma=0.75: A K(0+) = 1.681792831   2^gamma = 1.681792831
+  d=5 gamma=0.3: A K(0+) = 1.231144413   2^gamma = 1.231144413
+  d=5 gamma=1.7: A K(0+) = 3.249009585   2^gamma = 3.249009585
+
+--- the rate, Example 3.14 continued, gamma < d/2: p(x) ~ Gamma(d/2-g)/(2^g pi^{d/2} Gamma(g)) |x|^{2g-d} vs closed form (3.7) ---
+  d=2 |x|=0.01: p=4.963559  asym=5.5998309  ratio=0.88637658
+  d=2 |x|=0.001: p=17.071612  asym=17.70822  ratio=0.96405013
+  d=2 |x|=0.0001: p=55.361689  asym=55.998309  ratio=0.98863145
+  d=3 |x|=0.01: p=106.55402  asym=106.78314  ratio=0.99785429
+  d=3 |x|=0.001: p=3376.5357  asym=3376.7794  ratio=0.99992782
+  d=3 |x|=0.0001: p=106782.89  asym=106783.14  ratio=0.99999767
+  d=1, gamma=3/4: p(0) = Gamma(1/4)/(sqrt(2 pi) Gamma(3/4)) = 1.1803406  p(1e-4) = 1.1669218
+  d=1 p(0) via Thm 3.12(3): (2pi)^{-1/2}/Gamma(1/2) int sigma^{-1/2}(1+sigma)^{-3/4} = 1.1803406
+
+--- threshold gamma = d/2: p(x) ~ 2 (2pi)^{-d/2} Gamma(d/2)^{-1} log(1/|x|); and B K(0+) of Prop. 3.17(3) ---
+  d=1: p(1e-6)/log(1e6) = 0.44264302  coef = 0.45015816  (K_0 has a constant term: -gammaE+log(sqrt2) relative)
+       B K(0+) = 0.45015816  closed 2/(pi^(d/2)Gamma(d/2)) e^{-C_k - d/2(gE-psi(d/2))} K(0+) = 0.45015816
+  d=2: p(1e-6)/log(1e6) = 0.31299588  coef = 0.31830989  (K_0 has a constant term: -gammaE+log(sqrt2) relative)
+       B K(0+) = 0.31830989  closed 2/(pi^(d/2)Gamma(d/2)) e^{-C_k - d/2(gE-psi(d/2))} K(0+) = 0.31830989
+  d=3: p(1e-6)/log(1e6) = 0.14089765  coef = 0.14328979  (K_0 has a constant term: -gammaE+log(sqrt2) relative)
+       B K(0+) = 0.14328979  closed 2/(pi^(d/2)Gamma(d/2)) e^{-C_k - d/2(gE-psi(d/2))} K(0+) = 0.14328979
+
+--- Q and B closed forms of p. 24 against R(d,c) A and (2pi)^{-d}|S^{d-1}| A, generic d, c, C_k ---
+  d=2 c=0.7: Q(RA)=0.0807166915512  Q(closed)=0.0807166915512
+  d=2 c=1.6: Q(RA)=0.348098147592  Q(closed)=0.348098147592
+  d=2: B(closed via A)=0.140153919529  B(closed form)=0.140153919529
+  d=3 c=0.7: Q(RA)=0.0380354653275  Q(closed)=0.0380354653275
+  d=3 c=2.6: Q(RA)=0.31765175859  Q(closed)=0.31765175859
+  d=3: B(closed via A)=0.125775847178  B(closed form)=0.125775847178
+  d=5 c=0.7: Q(RA)=0.0175821540365  Q(closed)=0.0175821540365
+  d=5 c=4.6: Q(RA)=0.209865988296  Q(closed)=0.209865988296
+  d=5: B(closed via A)=0.0822898123944  B(closed form)=0.0822898123944
+
+--- R(d,c) against the Riesz kernel: (2pi)^{-d} int e^{-i<x,xi>}|xi|^{-c} dxi = R |x|^{c-d}, checked by Gaussian regularisation (d=2, c=3/2, d=3, c=1.2) ---
+  d=2 c=1.5: regularised inverse transform at |x|=1: 0.3329721   R(d,c) = 0.33296794
+  d=3 c=1.2: regularised inverse transform at |x|=1: 0.056097892   R(d,c) = 0.056093852
+
+--- Prop. 3.16(2) lower-bound constant and the log profile example ---
+  K(x) for k_d(u)=c(1-1/(2+log(1/u))) equals (1+log(1/x)/2)^c:  x=1e-3: 9.399557791 9.399557791
+
+--- Prop. A.4 constants for d=2, c=3/2, gamma=3/4 Matern (eps_0 with k_d(eps_0) >= c/2) ---
+  eps_0=0.88894 (any eps_0<= this works; take min(1,.)), tau=0.353553, kappa_0=0.000699411, delta=0.44447, c_1=1.28392e-5; actual coefficient Q K(0+)=0.560

@@ -1,0 +1,284 @@
+% Appendix E --- two further results on the wedge of an orbit, moved out of section 5.6 (was 5.5)
+% whole (Q-0290, the author's decision of 2026-10-04; review flags S10, S19 and the length judgement
+% on 5.5, which moves clauses (2)-(4) of prop:tempered-step-cone; the node is not split, so it moves
+% whole and 5.6 keeps a paragraph "Profiles stable at the origin" naming clause (1) and the rest).
+%   - B.1 prop:tempered-step-cone, with its proof.
+%   - B.2 the Matern orbit of index 1 across shapes, the mechanism and the size of the failure:
+%     prop:matern-cross-shape, prop:matern-negative-mass and rem:matern-grid. 5.6 keeps the paragraph
+%     "The mechanism, for the Matern orbit of index 1", naming all three. The numerical remark cites
+%     records/affine/check-grid-matern-cross-shape.py and its saved output; no statement uses a value.
+% Statements with their `% shared with blueprint` markers, verbatim.
+
+\section{Two further results on the step set of an orbit}\label{app:orbits}
+
+Two results complete the picture of \S\ref{sec:affine-stable-cone}. The
+first keeps the stable cone for profiles that are stable only near the origin. The second shows, for
+the \Matern{} orbit of index $1$, the mechanism by which a step across shapes fails.
+
+\subsection{Profiles stable at the origin}\label{app:tempered}
+
+A profile that is stable at the origin keeps the stable cone however it is tempered at large radii.
+
+% shared with blueprint prop:tempered-step-cone+a4dcbff6d803
+\begin{proposition}[profiles stable at the origin keep the stable cone]\label{prop:tempered-step-cone}
+Let $d \ge 1$ and $0 < \alpha < 2$, let $j : (0,\infty) \to [0,\infty)$ be nonincreasing with
+$j(0{+}) := \lim_{r\downarrow0}j(r)$ in $(0,\infty)$, and put $k(r) := r^{-\alpha}j(r)$.
+\begin{enumerate}
+\item \emph{(The stable cone.)} $k$ satisfies the hypotheses of Proposition~\ref{prop:orbit-step-cone}, and its
+dilation ratio is $R(\lambda) = \lambda^\alpha$ for every $\lambda \ge 1$. So for the orbit
+$(\mu_\Sigma)$ of Proposition~\ref{prop:orbit-step-cone}(1), with \Levy{} densities $n_\Sigma$, and for
+$\Sigma, \Sigma' \in \PD(d)$ with $M := \Sigma^{-1/2}\Sigma'\Sigma^{-1/2}$, $n_\Sigma \le n_{\Sigma'}$
+everywhere if and only if $\lambda_{\min}(M)^{d+\alpha} \ge \det M$, which is condition (c) of
+Proposition~\ref{prop:stable-step-cone}; and then $\mu_{\Sigma'} = \mu_\Sigma * \rho$ with $\rho$ an infinitely
+divisible probability measure.
+\item \emph{(Exponential moments.)} If $\beta > 0$ and
+$\int_1^\infty e^{\beta r}r^{-1-\alpha}j(r)\,dr < \infty$, then
+$\int e^{\langle\theta,x\rangle}\,\mu_\Sigma(dx) < \infty$ for every $\Sigma \in \PD(d)$ and every
+$\theta \in \RR^d$ with $|\Sigma^{1/2}\theta| \le \beta$.
+\item \emph{(Two families.)} (a) For $\ell > 0$, $j(r) := e^{-r/\ell}$ satisfies the hypotheses, and
+those of (2) with $\beta = 1/\ell$. (b) The function
+\[
+  j(r) := \frac{\alpha/2}{\Gamma(1-\alpha/2)}\int_0^\infty(4\pi t)^{-d/2}\,t^{-1-\alpha/2}\,
+  e^{-1/(4t) - r^2t}\,dt
+\]
+satisfies the hypotheses, and those of (2) for every $0 < \beta < 1$; the law $\mu_I$ of
+Proposition~\ref{prop:orbit-step-cone}(1) for $k = r^{-\alpha}j$ has
+$\widehat\mu_I(\omega) = \exp[-((1 + |\omega|^2)^{\alpha/2} - 1)]$, so its orbit has
+$\widehat\mu_\Sigma(\omega) = \exp[-((1 + \langle\omega,\Sigma\omega\rangle)^{\alpha/2} - 1)]$, which
+at $\Sigma = \ell^2I$ is $\exp[-((1 + \ell^2|\omega|^2)^{\alpha/2} - 1)]$.
+\item \emph{(The \Matern{} is the endpoint $\alpha = 0$.)} For $\gamma > 0$,
+$k_0(r) := \gamma\int_0^\infty(4\pi t)^{-d/2}\,t^{-1}\,e^{-1/(4t) - r^2t}\,dt$ satisfies the
+hypotheses of Proposition~\ref{prop:orbit-step-cone}, with $k_0(0{+}) = \gamma\,\pi^{-d/2}\Gamma(\tfrac d2)$
+finite, and the law of Proposition~\ref{prop:orbit-step-cone}(1) for $k_0$ is the \Matern{} law of index
+$\gamma$, $\widehat\mu_I(\omega) = (1 + |\omega|^2)^{-\gamma}$ (Proposition~\ref{prop:affine-orbits}(4)). So its
+dilation ratio is $R \equiv 1$ and its ordered-density step set is the rays.
+\end{enumerate}
+\end{proposition}
+
+For these profiles the dilation ratio, and with it the ordered-density step set, sees only the profile at
+the origin. The stable factor $r^{-\alpha}$ sets it, and any nonincreasing tempering leaves it
+unchanged. So the orbits
+of clause (3) have the stable orbit's freedom across shapes, with the anisotropy gained per step of
+Proposition~\ref{prop:stable-step-cone}(3), and they have exponential moments, as the \Matern{} law
+does and the stable law does not. The \Matern{} exponent $\gamma\log(1 + u)$ is the limit of
+$(2\gamma/\alpha)((1 + u)^{\alpha/2} - 1)$ as $\alpha \downarrow 0$, and clause (4) says what it lacks:
+its profile is the same subordination of the heat kernel at $\alpha = 0$, bounded at the origin, hence
+the rays. That a positive increment of a tempered orbit forces ordered densities is open.
+
+The two families of clause (3) belong to two classes of the literature. Rosi\'nski calls a law on
+$\RR^d$ \emph{tempered $\alpha$-stable} if it is infinitely divisible without Gaussian part and its
+\Levy{} measure is $r^{-\alpha-1}q(r,u)\,dr\,\sigma(du)$ in polar coordinates, with $\sigma$ a finite
+measure on the sphere and each $q(\cdot,u)$ completely monotone with $q(\infty,u) = 0$. The law is
+\emph{proper} if moreover $q(0{+},u) = 1$ (\sscite{rosinski2007tempering}, Def.~2.1, p.~679). The law
+$\mu_I$ of Proposition~\ref{prop:orbit-step-cone}(1) for $k = r^{-\alpha}j$ has the \Levy{} measure
+$r^{-\alpha-1}j(r)\,dr\,\sigma(du)$, with $\sigma$ the surface measure. In clause (3)(a),
+$j(r) = e^{-r/\ell}$, so $\mu_I$ is proper tempered $\alpha$-stable, with the exponential tempering that
+Rosi\'nski calls tilting (p.~679). So is every $\mu_\Sigma = (\Sigma^{1/2})_*\mu_I$ of its orbit:
+the substitution $s = r|\Sigma^{1/2}u|$, $v = \Sigma^{1/2}u/|\Sigma^{1/2}u|$ keeps the polar form,
+with $q(s,v) = \exp(-s|\Sigma^{-1/2}v|/\ell)$ in the new direction $v$, and with $\sigma$ replaced by
+the image of $|\Sigma^{1/2}u|^\alpha\,\sigma(du)$ under $u \mapsto v$. Clause (1) requires less of $j$, only that it be nonincreasing, and
+covers more than these laws, the stable law itself ($j$ constant) among them.
+
+Clause (3)(b) is the relativistic $\alpha$-stable law. Ryznar defines it for $0 < \alpha < 2$ by the
+exponent $(m^{2/\alpha} + |\omega|^2)^{\alpha/2} - m$ (\sscite{ryznar2002estimates}, p.~2, eq.~(3)),
+with $m > 0$ (p.~1). This extends the case $\alpha = 1$, $\sqrt{|\omega|^2 + m^2} - m$, of Carmona,
+Masters and Simon (\sscite{carmona1990relativistic}, p.~120, eq.~(I.6)). At $m = 1$ it is the
+exponent of $\mu_I$ in clause (3)(b). Ryznar's Lemmas~1 and~2 (pp.~3--4), the subordination and the
+\Levy{} density, are stated for $d \ge 2$ (p.~2). The proof below makes the same subordination
+computation, and it holds for every $d \ge 1$. On
+the orbit, $\mu_{\ell^2I}$ is the law at time $\ell^\alpha$ of the process with $m = \ell^{-\alpha}$.
+The other members are not rotation invariant, so they lie outside Ryznar's family.
+
+The law of clause (3)(b) is not tempered $\alpha$-stable for this $\alpha$. For a rotation-invariant \Levy{}
+measure, $q(\cdot,u)$ in the polar form is a positive constant multiple $c(u)\,j$ of $j$ for
+$\sigma$-almost every $u$, and this $j$ is not completely monotone. It is strictly decreasing with
+$j(0{+}) - j(r) = o(r)$ as $r \downarrow 0$, because $d + \alpha > 1$: the difference is of order
+$r^{d+\alpha}$ for $d + \alpha < 2$, $r^2\log(1/r)$ at $d + \alpha = 2$ and $r^2$ above. A completely monotone $q = \int_{(0,\infty)} e^{-rs}\,Q(ds)$
+with $Q \ne 0$ finite has instead $(q(0{+}) - q(r))/r \to \int s\,Q(ds) > 0$. The tempering sits in the
+subordinator. The law on $[0,\infty)$ with Laplace exponent $(1 + u)^{\alpha/2} - 1$ has the \Levy{}
+measure $c_\alpha s^{-1-\alpha/2}e^{-s}\,ds$ of the proof below, so it is proper tempered
+$\alpha/2$-stable, and $\mu_I$ is the heat kernel subordinated by it (Ryznar's Lemma~1, p.~3).
+% Q-0328: the three sources read at the page (records/affine/READING-rosinski2007tempering.md,
+% READING-ryznar2002estimates.md, READING-carmona1990relativistic.md); the TODO(source) of Q-0317 is
+% closed. Carmona-Masters-Simon's example (I.6) is the case alpha = 1; the family for 0 < alpha < 2
+% and the name are Ryznar's. The blind referee's fixes (2026-10-05) landed: q(s,v) in the new
+% direction and the changed sigma; Ryznar's Lemmas 1-2 stated for d >= 2, m > 0 from his p. 1; "a
+% positive constant multiple" and "for this alpha"; the o(r) cases. The o(r) claim and the two forms of j: records/affine/check-relativistic-tempering.py.
+
+% proof of prop:tempered-step-cone
+\begin{proof}[Sketch]
+\emph{(1).} $k = r^{-\alpha}j$ is nonincreasing and integrable as required, and
+$k(r/\lambda)/k(r) = \lambda^\alpha j(r/\lambda)/j(r) \ge \lambda^\alpha$, with ratio tending to
+$\lambda^\alpha$ as $r \downarrow 0$. So $R(\lambda) = \lambda^\alpha$, and
+Proposition~\ref{prop:orbit-step-cone}(2) gives the cone, which is condition (c) of
+Proposition~\ref{prop:stable-step-cone}(1).
+
+\emph{(2).} The compound Poisson laws $\pi_\varepsilon$ of the \Levy{} measure restricted to
+$\{|x| > \varepsilon\}$ have transforms tending to $\widehat\mu_I$ as $\varepsilon \downarrow 0$, so they
+converge to $\mu_I$ weakly by \Levy{}'s continuity theorem. By symmetry their exponential moments are
+$\exp\int_{|x|>\varepsilon}(\cosh\langle\theta,x\rangle - 1)\,m(|x|)\,dx$, at most
+$\exp\int(\cosh\langle\theta,x\rangle - 1)\,m(|x|)\,dx$, finite under the hypothesis, and the weak limit
+keeps the bound (truncate $e^{\langle\theta,x\rangle}$ at $N$, then let $N \to \infty$).
+
+\emph{(3).} (a) is a direct check. (b) By the Gamma integral, $j(0{+})$ is finite and positive, and
+$j(r) \le C_\eta e^{-(1-\eta)r}$ for every $\eta \in (0,1)$. With $h_s$ the heat kernel with transform
+$e^{-s|\omega|^2}$, the identity
+\[
+  c_\alpha\int_0^\infty(1 - e^{-us})\,s^{-1-\alpha/2}e^{-s}\,ds = (1+u)^{\alpha/2} - 1 ,
+  \qquad c_\alpha := \frac{\alpha/2}{\Gamma(1-\alpha/2)},
+\]
+and Tonelli show that $c_\alpha\int_0^\infty h_s\,s^{-1-\alpha/2}e^{-s}\,ds$ is the \Levy{} density of the
+law, and the substitution $s = |x|^2t$ shows that it is $|x|^{-d-\alpha}j(|x|)$.
+
+\emph{(4).} The same subordination with $s^{-1}e^{-s}$, Frullani's integral as in the proof of
+Proposition~\ref{prop:affine-orbits}(4), and Tonelli give the exponent $\gamma\log(1 + |\omega|^2)$ and
+the profile $k_0$, bounded at the origin by the Gamma integral and by $\gamma Ce^{-r/2}$ at large
+radii, so Proposition~\ref{prop:orbit-step-cone}(3) gives the rays.
+\end{proof}
+
+\subsection{The \texorpdfstring{\Matern{}}{Matern} orbit across shapes}\label{app:matern}
+
+A step of full rank widens every direction, so the subspace argument behind
+Proposition~\ref{prop:affine-orbits}(3) does not reach it. For the \Matern{} orbit of index $1$ it fails
+anyway off the rays: this is Proposition~\ref{prop:matern-steps} at index $1$, with the increment
+named. A sign computation at the origin (Remark~\ref{rem:matern-mechanism}) shows the mechanism.
+
+% shared with blueprint prop:matern-cross-shape
+\begin{proposition}[in the \Matern{} orbit every step across shapes fails]\label{prop:matern-cross-shape}
+Let $d \ge 2$ and let $(\mu_\Sigma)_{\Sigma\in\PD(d)}$ be the \Matern{} orbit of index $1$,
+$\widehat\mu_\Sigma(\omega) = (1 + \langle\omega,\Sigma\omega\rangle)^{-1}$
+(Proposition~\ref{prop:affine-orbits}(4)). Let $\Sigma \le \Sigma'$ in $\PD(d)$ with $\Sigma' \ne \Sigma$.
+Then there is a positive finite measure $\rho$ with $\mu_{\Sigma'} = \mu_\Sigma * \rho$ if and only
+if $\Sigma' = \lambda^2\Sigma$ for some $\lambda > 1$; and then $\rho$ is the probability measure
+$\lambda^{-2}\delta_0 + (1-\lambda^{-2})\mu_{\Sigma'}$.
+\end{proposition}
+
+% proof of prop:matern-cross-shape
+\begin{proof}
+By Proposition~\ref{prop:matern-steps} at $\gamma = 1$, which needs neither $d \ge 2$ nor $\Sigma \le \Sigma'$,
+a positive finite measure $\rho$ with $\mu_{\Sigma'} = \mu_\Sigma * \rho$ exists if and only if
+$\Sigma' = \lambda^2\Sigma$ for some $\lambda > 1$, and then $\rho$ is unique. It remains to name
+it. Let $\Sigma' = \lambda^2\Sigma$ with $\lambda > 1$, and put
+$\tau := \lambda^{-2}\delta_0 + (1-\lambda^{-2})\mu_{\Sigma'}$, a probability measure since
+$0 < \lambda^{-2} < 1$. For $\omega \in \RR^d$ write $u := \langle\omega,\Sigma\omega\rangle \ge 0$, so
+that $\langle\omega,\Sigma'\omega\rangle = \lambda^2u$. Since
+$\lambda^{-2}(1 + \lambda^2u) + 1 - \lambda^{-2} = 1 + u$,
+\[
+  \widehat\mu_\Sigma(\omega)\,\widehat\tau(\omega)
+  = \frac{1}{1+u}\Bigl(\lambda^{-2} + \frac{1-\lambda^{-2}}{1+\lambda^2u}\Bigr)
+  = \frac{1}{1+\lambda^2u} = \widehat\mu_{\Sigma'}(\omega) .
+\]
+A finite measure is determined by its transform, so $\mu_{\Sigma'} = \mu_\Sigma * \tau$, and by the
+uniqueness $\rho = \tau$.
+\end{proof}
+
+\begin{remark}[the mechanism]\label{rem:matern-mechanism}
+A second argument for the ``only if'' half of Proposition~\ref{prop:matern-cross-shape} shows why a
+step off the rays fails: near the origin the increment would have to remove mass from the directions
+the step widens least. The density of $\mu_{\Sigma'}$ is $K'(x) = (\det\Sigma')^{-1/2}\mathcal G(\Sigma'^{-1/2}x)$, with
+\[
+  \mathcal G(y) := \int_0^\infty e^{-t}(4\pi t)^{-d/2}e^{-|y|^2/4t}\,dt
+\]
+the Green's function of $1 - \Delta$, smooth off the origin. The increment would have the transform
+$1 - \langle\omega,P\omega\rangle\widehat{K'}(\omega)$, $P := \Sigma' - \Sigma$, so off the origin it is
+the function $\nabla\cdot P\nabla K'$. In the coordinates $y = \Sigma'^{-1/2}x$, with
+$P' := \Sigma'^{-1/2}P\Sigma'^{-1/2}$, the substitution $t = r^2s$ and the Gamma integral give,
+uniformly in the direction $\widehat y$,
+\[
+  r^d\,\nabla\cdot P'\nabla \mathcal G(r\widehat y) \to \mathcal{B}_d\bigl(d\,\langle\widehat y,P'\widehat y\rangle - \tr P'\bigr) ,
+  \qquad \mathcal{B}_d = \tfrac12\pi^{-d/2}\Gamma(\tfrac d2) > 0 .
+\]
+If $P'$ is not a multiple of $I$, the bracket is negative near a least eigenvector, so the increment
+is negative on an open cone near the origin, which a positive measure does not allow. So
+$P' = \kappa I$, which is $\Sigma' = \lambda^2\Sigma$.
+\end{remark}
+
+The same computation measures the failure. The would-be increment is not even a finite signed
+measure.
+
+% shared with blueprint prop:matern-negative-mass+8d55010dc2f2
+\begin{proposition}[how much a step across shapes fails: a logarithmic negative mass]\label{prop:matern-negative-mass}
+Let $d \ge 2$ and let $(\mu_\Sigma)_{\Sigma\in\PD(d)}$ be the \Matern{} orbit of index $1$
+(Proposition~\ref{prop:affine-orbits}(4)), with $K_\Sigma$ the density of $\mu_\Sigma$. Let
+$\Sigma, \Sigma' \in \PD(d)$ with $P := \Sigma' - \Sigma \in \PSD(d)$ and $P \ne 0$, put
+$P' := \Sigma'^{-1/2}P\,\Sigma'^{-1/2}$, and let $\rho$ be the linear functional on Schwartz
+functions
+\[
+  \rho(\phi) := (2\pi)^{-d}\int\widehat\phi(\omega)\,
+   \frac{1 + \langle\omega,\Sigma\omega\rangle}{1 + \langle\omega,\Sigma'\omega\rangle}\,d\omega ,
+\]
+with $\widehat\phi(\omega) = \int e^{i\langle\omega,x\rangle}\phi(x)\,dx$; it is $\int\phi\,d\rho$
+whenever $\mu_{\Sigma'} = \mu_\Sigma * \rho$ with $\rho$ a finite signed measure.
+\begin{enumerate}
+\item \emph{(Off the origin.)} $q := \nabla\cdot P\nabla K_{\Sigma'}$ is smooth on
+$\RR^d \setminus \{0\}$, and $\rho(\phi) = \int\phi\,q\,dx$ for every smooth $\phi$ with compact
+support in $\RR^d \setminus \{0\}$.
+\item \emph{(The density near the origin.)} Write $x = \Sigma'^{1/2}y$ and $y = r\widehat y$ with
+$r > 0$, $|\widehat y| = 1$, and put $\mathcal{B}_d := \tfrac12\pi^{-d/2}\Gamma(\tfrac d2)$. Then,
+uniformly in $\widehat y$ as $r \downarrow 0$,
+\[
+  (\det\Sigma')^{1/2}\,r^d\,q(\Sigma'^{1/2}r\widehat y) \to
+  \mathcal{B}_d\bigl(d\langle\widehat y,P'\widehat y\rangle - \tr P'\bigr) .
+\]
+\item \emph{(The negative mass diverges logarithmically.)} For $0 < a < 1$ let
+$E_a := \{x : a < |\Sigma'^{-1/2}x| < 1\}$, and write $s_\pm := \max(\pm s, 0)$. Then, as
+$a \downarrow 0$,
+\[
+  \int_{E_a}q_-\,dx = \mathcal{B}_d\,\Theta\,\log(1/a) + o(\log(1/a)) , \qquad
+  \Theta := \int_{S^{d-1}}\bigl(d\langle\widehat y,P'\widehat y\rangle - \tr P'\bigr)_-\,\sigma(d\widehat y) ,
+\]
+with $\sigma$ the surface measure on the unit sphere $S^{d-1}$, and the same holds for $q_+$ with
+the same $\Theta$. Moreover $\Theta > 0$ if and only if $\Sigma'$ is not a multiple of $\Sigma$, and
+then there is no finite signed measure $\rho$ with $\mu_{\Sigma'} = \mu_\Sigma * \rho$.
+\item \emph{(The plane.)} If $d = 2$ and $p_1 \ge p_2$ are the eigenvalues of $P'$, then
+$\mathcal{B}_2\Theta = (p_1 - p_2)/\pi$. For the step from $\Sigma = t^2I$ to
+$\Sigma' = t^2\diag(1+\varepsilon, 1)$, $t, \varepsilon > 0$, it is $\varepsilon/(\pi(1+\varepsilon))$.
+\end{enumerate}
+\end{proposition}
+
+Off the origin the would-be increment is a smooth function, homogeneous of degree $-d$ to leading
+order, with an angular factor of mean zero. Its positive and negative parts both carry a mass that
+diverges like $\mathcal{B}_d\Theta\log(1/a)$ at the origin, where $\Theta$ measures how unevenly the
+step widens the directions and vanishes exactly on the rays. So the failure is logarithmic in the
+resolution. Since $\Theta$ is homogeneous of degree one in $P'$, a smaller step only scales it down.
+
+% proof of prop:matern-negative-mass
+\begin{proof}[Sketch]
+\emph{(1)} is the first half of Remark~\ref{rem:matern-mechanism}, after
+Proposition~\ref{prop:matern-cross-shape}, with
+$q = \nabla\cdot P\nabla K_{\Sigma'}$, and \emph{(2)} is its uniform limit, through the \Matern{}
+densities of Proposition~\ref{prop:affine-orbits}(4). \emph{(3).} In polar coordinates
+$\int_{E_a}q_-\,dx = \int_a^1F(r)\,dr/r$ with $F(r)$ the sphere integral of $(r^dq)_-$ in the
+coordinates of (2); by (2), $F(r) \to \mathcal{B}_d\Theta$ as $r \downarrow 0$, which gives the logarithm.
+The same holds for $q_+$, because the bracket has mean zero over the sphere. If a finite signed
+measure were the increment, its total variation would be at least $\int_{E_a}q_-\,dx$ for every $a$.
+\emph{(4).} In the plane the bracket is $(p_1 - p_2)\cos2\varphi$ in an eigenbasis of $P'$, whose
+negative part integrates to $2(p_1 - p_2)$, and $\mathcal{B}_2 = 1/(2\pi)$.
+\end{proof}
+
+\begin{remark}[the failure on a grid, measured]\label{rem:matern-grid}
+On a grid the frequencies are bounded, and the lattice increment of a step across shapes is a finite
+signed measure. A script deposited with the paper (\texttt{check-grid-matern-cross-shape.py}) computes it by the fast
+Fourier transform on a periodic grid of $n \times n$ points. It discretizes $-\nabla\cdot S\nabla$ by minus the
+generator of a random walk on the eight neighbours, with symbol
+$D_S(\theta) = a(2 - 2\cos\theta_1) + c(2 - 2\cos\theta_2) + b_+(2 - 2\cos(\theta_1 + \theta_2)) +
+b_-(2 - 2\cos(\theta_1 - \theta_2))$, where $a = S_{11} - |S_{12}|$, $c = S_{22} - |S_{12}|$ and
+$b_\pm = \max(\pm S_{12}, 0)$; for the diagonal matrices below it is the five-point stencil. The
+lattice \Matern{} law of index $\gamma$ has the symbol $(1 + D_S)^{-\gamma}$, and the step is from
+$t^2I$ to $t^2\diag(1+\varepsilon, 1)$, with $t$ the aperture in grid spacings and $n = 64t$. In the computation the negative
+mass grows linearly in $\log t$; this lattice law is a numerical finding and is not proved. At
+% Round 3 (content review), D-R4: the fit named; D-R3: the index-2 comparison corrected
+% (VERIFY-round3-landscape-orbits-paper.md items 5-6, e5_index2_coefficient-output.txt).
+$\gamma = 1$ and $\varepsilon = 0.01$, $0.1$, $0.5$ the least-squares slopes against $\log t$ over
+$t \in \{4, 8, 16, 32\}$ are
+$0.0030$, $0.0283$ and $0.1064$. The heuristic comparison is with $0.0032$, $0.0289$ and $0.1061$, the
+values $\varepsilon/(\pi(1+\varepsilon))$ of Proposition~\ref{prop:matern-negative-mass}(4), which are
+the rates of its clause (3) if the shells are cut off at the grid scale, $a \approx 1/t$. At
+$\gamma = 2$ the slopes are $0.0060$, $0.0544$ and $0.1768$. The same heuristic, applied to the
+$|x|^{-2}$ term of the increment, gives the rates $0.0063$, $0.0553$ and $0.1777$. That term is read off
+the degree-$0$ limit $h$ of its transform (the proof of Proposition~\ref{prop:log-orbit-rays}), and the
+same script computes the rates. The grid
+agrees with them within 4\,\%, as at index $1$. The first-order term in $P$, $\gamma$ times the index-$1$
+values, is not the right comparison: at $\varepsilon = 0.5$ it gives $0.2122$. The index-$2$ rate is
+computed and not proved.
+\end{remark}

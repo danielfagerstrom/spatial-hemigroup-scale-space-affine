@@ -1,0 +1,329 @@
+% !TEX root = ../print.tex
+% Chapter 5 == section 5 of the article (notes/PLAN-article-structure.md, "The outline"): the affine
+% landscape, the plan's 5.2-5.8. Its 5.1 (what an affine scale space is for) is prose of the article
+% and has no node; its 5.8 (Lindeberg-Garding across the rungs) is prose with one node. Six parts:
+% this file (the chapter's opening and 5.2, the groups and the Loewner order in scale-shape
+% coordinates: prop:glplus-families, lem:loewner-scale-shape),
+% 05-wedges.tex (5.3, invariant wedges), 05-orbits.tex (5.4, the base (GL, rays); 5.5, the wedge of
+% an orbit), 05-smaller-groups.tex (5.6, smaller groups), 05-table.tex (5.7, the overview table:
+% thm:wedge-axis) and 05-shape-adapted.tex (5.8: prop:shape-adapted-apertures, and the reading of
+% the draft's Remark 2.17 in the nodes' terms). Until Q-0278 (2026-10-04) the nodes were the last three sections of 02-affine.tex
+% (sec:affine-orbits, the Matern and scale-shape section, sec:affine-stable-cone) and the part
+% 02-wedges.tex; no label, statement or proof changed in the move
+% (scripts/check-statements-unchanged.py). The order follows the plan; thm:wedge-axis, which reads
+% the stable-cone nodes (5.5), prop:anisotropy-budget and prop:similarity-stable-order-families (5.6),
+% is stated in 5.7 after them (the author, 2026-10-04).
+%
+% What the chapter spends. The nodes of the draft's sections 2.3-2.4 cite no source. The stable-cone
+% nodes (Q-0241, P-0019, not in the draft) spend A3 for the existence of the elliptical stable laws
+% and their increments (and of the radial-profile laws and increments of prop:orbit-step-cone and
+% prop:tempered-step-cone), and A5 for the infinite divisibility of operator-self-decomposable laws in
+% prop:anisotropy-budget. The five nodes of Q-0264 (prop:similarity-general-sandwich to
+% prop:similarity-general-index-zero) spend A3 only, for the triplets of a general part and the laws
+% and increments of their examples. Q-0267 (the plan's item D5, the cells of the overview table for
+% groups smaller than GL(d)) added lem:gw-kernels-from-origin (a family is its kernels from the
+% origin; restriction to a smaller datum), the ray column (prop:gw-ray-families,
+% prop:similarity-ray-families, prop:diagonal-ray-families, all [T], spending nothing, with
+% lem:gw-kernels-self-decomposable, [T], spending nothing, added in Q-0281 wave 1 -- CHANGED Q-0281
+% wave 1: blind check KS-9), and
+% prop:similarity-stable-order-families, the cell (similarities, stable order), which spends A6 and
+% A3 (since the round-2 split, 2026-11-03, that cell is prop:similarity-stable-order-kernels, and the
+% parent keeps the order and the general linear row along it, spending A3 only). The wedge nodes (Q-0266) spend nothing but thm:wedge-axis, which spends A5 and A3 through the
+% budget and the stable-cone nodes. Q-0282 (the draft rewrite's gaps in its section 5) added
+% prop:glplus-families (5.2), lem:dilation-ratio (5.5) and prop:shape-adapted-apertures (5.8), all
+% [T], spending nothing, and prop:diagonal-stable-order-families (5.6, the cell (diagonal, stable
+% order)), which spends A3 for the stable laws of its examples.
+%
+% Stays prose, and why: Remarks 2.12 and 2.13 of the draft (commentary; Remark 2.13's one
+% mathematical claim, that the stable orbit is no Loewner semigroup, is prop:affine-orbits(3) with
+% lem:elliptical-stable, which supplies the characteristic function e^{-|w|^alpha}; Remark 2.12's
+% sentence "to adapt the shape of a non-Gaussian aperture is to re-measure" is false for the stable
+% orbits, prop:stable-step-cone, and is NARROWED, not withdrawn: proved for the Matern orbit of
+% every index, prop:matern-steps (index 1 also by prop:matern-cross-shape), and for every orbit of
+% logarithmic exponent, prop:log-orbit-rays, the non-vanishing rational symbols and the profiles
+% bounded at the origin among them (prop:rational-symbols, prop:bounded-profile-rays); its size at
+% index 1 is prop:matern-negative-mass; for similarity-covariant families at Levy index 0 it holds for
+% elliptical parts, prop:similarity-orbit-family(3)-(4), and for a general part only at the origin,
+% prop:similarity-general-index-zero with prop:similarity-line-family(3), Q-0264), the closing
+% conjecture of the draft's section 2.4 (a conjecture, not a node: Q-0148's rule; refuted by
+% prop:stable-step-cone), and Remark 2.17 (vision commentary whose Lie-derivative formula is an open
+% check; its Lindeberg-Garding 1994 citation, dropped by Q-0225 for being unread, is restored at
+% Q-0255 -- read at the page, records/affine/READING-lindeberg1994shape.md -- and remains a
+% comparison no node's proof depends on; its reading in the nodes' terms closes
+% 05-smaller-groups.tex).
+
+\chapter{The affine landscape}
+\label{ch:landscape}
+
+This chapter is the article's \S 5, and in the draft's numbering its \S 2.3--\S 2.4 with what has
+been added to them. The non-Gaussian isotropic laws do not disappear from the affine picture. They
+lose the cascade along the whole Loewner order and keep weaker structures, each a corner of the
+$(G, W)$ scheme (\ref{def:gw-cascade-family}): a group $G$ and an order $W$. The chapter reads the
+Loewner order in volume and shape (\S\ref{sec:scale-shape}), describes the invariant orders and
+their cones, which index the wedge axis (\S\ref{sec:invariant-wedges}), and then fills the corners:
+the general linear group along rays (\S\ref{sec:affine-orbits}), the wedge an orbit survives beyond
+the rays (\S\ref{sec:affine-stable-cone}), and the groups smaller than the general linear group
+(\S\ref{sec:smaller-groups}).
+
+% The article's 5.1 (what an affine scale space is for) is prose with no node; the counter makes
+% the sections below 5.2-5.6, as in the article.
+\setcounter{section}{1}
+
+\section{The Loewner order in scale--shape coordinates}
+\label{sec:scale-shape}
+
+The groups of the landscape are closed subgroups of $\GL(d)$ containing the dilations. For $d \ge 2$
+the orientation-preserving group gives no row of its own: a family covariant under it is covariant
+under $\GL(d)$ (\ref{prop:glplus-families}). The geometry of the Loewner order read in volume and shape
+is what tells a vision application which comparisons across scale and shape exist at all
+(\ref{lem:loewner-scale-shape}).
+
+% not in the draft: Q-0282 item 1, the draft rewrite's gap in its 5.2 (Q-0279): GL^+(d) was listed
+% among the groups and no node treated it. What writing it down found: an orientation-reversing
+% matrix acts on any one pair (Sigma, Sigma') as an orientation-preserving one does, because the pair
+% has a joint stabilizer element of determinant -1 (simultaneous diagonalization by congruence); so
+% the orders are the same, and for the kernels the one thing needed is that an SO(d)-invariant law is
+% O(d)-invariant, which holds for d >= 2 and fails on the line (clause (3)). The increments follow the
+% kernels from scale zero because the rays make the transforms zero-free (the argument of
+% lem:affine-reduction's proof). Placed before lem:loewner-scale-shape, where the article lists the
+% groups; it reads only chapter 4.
+% CHANGED Q-0281: typed (the statement skeleton). The operator half of clause (2) is split to
+% lem:glplus-operator-families (ADR-0025; records/formalization/PRICING.md: it reads
+% lem:operators-to-kernels, the kernel half does not); the text is unchanged and the \lean tag names
+% the child's declaration too.
+% CHANGED Q-0281 wave M, phase 2: proved, Lean core (AffineHemigroup.GLPlus; the operator half
+% AffineHemigroup.GLPlusOperators). The proof of (1)'s matrix B is rewritten to the Lean route: a
+% Householder reflection, conjugated by T^{1/2} when T = Sigma + Sigma' is positive definite, in
+% place of the simultaneous diagonalization by congruence; the rest of the proof is the Lean's
+% route as written. The statement text is unchanged.
+% CHANGED blind referee of the response (records/affine/REFEREE-round2-response-paper.md, item 8):
+% the frequency of the proof of (2), the isotropic member, was z; now omega, as the paper's rule
+% asks from its section 3 on. Notation only; no step changes.
+\begin{proposition}[covariance under $\GL^+(d)$ is covariance under $\GL(d)$]
+\label{prop:glplus-families}
+% CHANGED Q-0281 wave M, phase 2: blind review WM2-1: the proof's "(2), operators" reads
+% lem:operators-to-kernels(4), which the split child lem:operators-to-kernels-families carries.
+\uses{def:gw-cascade-family,def:affine-cascade-family,lem:operators-to-kernels,lem:operators-to-kernels-families,thm:affine-rigidity}
+\lean{AffineHemigroup.glPlusSet_isClosedSubgroupGL, AffineHemigroup.exists_joint_reflection,
+AffineHemigroup.invariant_gl_of_invariant_glPlus, AffineHemigroup.isWedgeDatum_glPlus_iff,
+AffineHemigroup.gw_family_glPlus_iff, AffineHemigroup.glPlus_loewner_rigidity,
+AffineHemigroup.glPlus_line_counterexample,
+AffineHemigroup.gw_operator_family_glPlus_iff}\leanok
+Let $d \ge 1$ and $\GL^+(d) := \{A \in \GL(d) : \det A > 0\}$.
+\begin{enumerate}
+\item \emph{(The orders.)} $\GL^+(d)$ is a closed subgroup of $\GL(d)$ containing the dilations. For
+all $\Sigma, \Sigma' \in \PSD(d)$ there is a $B \in \GL(d)$ with $\det B = -1$, $B\Sigma B^{\tp} = \Sigma$
+and $B\Sigma'B^{\tp} = \Sigma'$. Consequently every relation on $\PSD(d)$ that is invariant under
+$\Sigma \mapsto A\Sigma A^{\tp}$ for every $A \in \GL^+(d)$ is invariant under it for every
+$A \in \GL(d)$, and $(\GL^+(d), W)$ is a wedge datum (\ref{def:gw-cascade-family}) if and only if
+$(\GL(d), W)$ is one.
+\item \emph{(The families, $d \ge 2$.)} Let $d \ge 2$ and let $(\GL^+(d), W)$ be a wedge datum. A
+family of probability measures indexed by $P_W$ is a $(\GL^+(d), W)$-cascade family of kernels if and
+only if it is a $(\GL(d), W)$-cascade family of kernels; and a family of operators indexed by $P_W$ is
+a $(\GL^+(d), W)$-cascade family of operators if and only if it is a $(\GL(d), W)$-cascade family of
+operators. In particular, for $W$ the Loewner order, the $(\GL^+(d), W)$-cascade families of kernels
+are the affine Gaussian scale spaces \ref{eq:affine-gaussian}, $b > 0$.
+\item \emph{(The line.)} Let $d = 1$ and let $W$ be the Loewner order, which on $\PSD(1) = [0,\infty)$
+is the usual order. The point masses $\mu_{s,t} := \delta_{\sqrt t - \sqrt s}$, $0 \le s \le t$, form a
+$(\GL^+(1), W)$-cascade family of kernels that is not a $(\GL(1), W)$-cascade family.
+\end{enumerate}
+\statusT\quad\emph{(Cites nothing beyond the spectral theorem and the uniqueness of the Fourier
+transform of a probability measure on $\RR^d$. \textbf{What it is worth.} The article's list of groups
+names $\GL^+(d)$ beside $\GL(d)$; for $d \ge 2$ the two give the same families in every column, so every
+node stated for $(\GL(d), W)$ holds verbatim for $(\GL^+(d), W)$: \ref{thm:affine-rigidity}, as clause
+(2) says, and with it \ref{prop:gw-ray-families}(3) and \ref{thm:wedge-axis}, whose families are
+$(\GL(d), W)$-families for orders $W$ that clause (1) makes $\GL(d)$-invariant as soon as they are
+$\GL^+(d)$-invariant. Two facts carry it: an orientation-reversing matrix acts on a given pair as an
+orientation-preserving one does, by the joint stabilizer element of clause (1); and a law invariant
+under $\mathrm{SO}(d)$ is invariant under $\Orth(d)$ when $d \ge 2$, $\mathrm{SO}(d)$ being transitive
+on spheres. The second fails on the line, and clause (3) shows that the conclusion fails with it.
+\textbf{Not claimed}: anything for a group containing $\mathrm{SO}(d)$ but not $\Orth(d)$ that does not
+act transitively on $\PD(d)$, such as the orientation-preserving similarities, where the proof above
+does not apply, $\Sigma^{1/2}$ not lying in the group; and the operator form beyond what
+\ref{lem:operators-to-kernels}(1), (2) and (4) give.)}
+\end{proposition}
+
+% CHANGED Q-0281 wave M, phase 2: the construction of B rewritten to the Lean route
+% (AffineHemigroup.exists_joint_reflection).
+\begin{proof}
+\leanok
+\emph{(1).} $\det$ is continuous and multiplicative, so $\GL^+(d)$ is a subgroup, closed in $\GL(d)$
+because its complement $\{\det A < 0\}$ is open, and $\det(\lambda I) = \lambda^d > 0$. For the matrix
+$B$, put $T := \Sigma + \Sigma' \in \PSD(d)$, and for $u \ne 0$ in $\RR^d$ let
+$H_u := I - 2\langle u, u\rangle^{-1}uu^{\tp}$, the reflection in $u^\perp$. It is symmetric, $H_u^2 = I$,
+and $\det H_u = 1 - 2 = -1$ by the matrix determinant lemma $\det(I + vu^{\tp}) = 1 + \langle u, v\rangle$.
+If $M$ is symmetric and $Mu = \lambda u$, then $Muu^{\tp} = \lambda uu^{\tp} = uu^{\tp}M$, so $H_u$
+commutes with $M$ and $H_uMH_u^{\tp} = MH_u^2 = M$. If $T$ is not positive definite, there is $u \ne 0$
+with $\langle u, Tu\rangle = 0$; then $\langle u, \Sigma u\rangle = \langle u, \Sigma'u\rangle = 0$, both
+terms being nonnegative, so $\Sigma u = \Sigma'u = 0$ by positive semidefiniteness, and $B := H_u$ has
+$B\Sigma B^{\tp} = \Sigma$ and $B\Sigma'B^{\tp} = \Sigma'$. If $T$ is positive definite, let
+$R := T^{1/2}$, symmetric and invertible, $M := R^{-1}\Sigma R^{-1}$, which is symmetric, and $u$ an
+eigenvector of $M$ (spectral theorem); then $R^{-1}\Sigma'R^{-1} = R^{-1}(R^2 - \Sigma)R^{-1} = I - M$
+has the eigenvector $u$ as well. Put $B := RH_uR^{-1}$. Then $\det B = \det H_u = -1$,
+$B\Sigma B^{\tp} = R\,H_uMH_u^{\tp}\,R = RMR = \Sigma$, and likewise
+$B\Sigma'B^{\tp} = R\,(I - M)\,R = \Sigma'$.
+
+Now let a relation be invariant under $\GL^+(d)$, let $\Sigma$ be related to $\Sigma'$, and let
+$\det A < 0$. With $B$ as above for the pair, $\det(AB) > 0$, and $(AB)\Sigma(AB)^{\tp} =
+A\Sigma A^{\tp}$, $(AB)\Sigma'(AB)^{\tp} = A\Sigma'A^{\tp}$; so $A\Sigma A^{\tp}$ is related to
+$A\Sigma'A^{\tp}$. For the wedge data: both groups are closed subgroups containing the dilations, the
+conditions on $W$ other than invariance do not involve the group, and invariance under $\GL(d)$
+implies invariance under $\GL^+(d)$ and, by what was just shown, conversely.
+
+\emph{(2), the isotropic member.} Let $(\mu_{\Sigma,\Sigma'})$ be a $(\GL^+(d), W)$-cascade family of
+kernels, with kernels from scale zero $\mu_\Sigma := \mu_{0,\Sigma}$. By (1), $(\GL(d), W)$ is a wedge
+datum, and (K1), (K2) and (K4) do not involve the group, so only (K3) for $\det A < 0$ is to be shown.
+For $Q \in \Orth(d)$ with $\det Q = 1$, $Q \cdot 0 = 0$ and $Q \cdot I = I$, so (K3) gives
+$Q_*\mu_I = \mu_I$, that is $\widehat\mu_I(Q^{\tp}\omega) = \widehat\mu_I(\omega)$. These $Q$ act transitively on
+each sphere centred at $0$: given unit vectors $u, v$ there is an orthogonal $Q$ with $Qu = v$, and if
+$\det Q = -1$, then $Q(I - 2ww^{\tp})$, with $w$ a unit vector orthogonal to $u$, which exists as
+$d \ge 2$, still maps $u$ to $v$ and has determinant $1$. So $\widehat\mu_I(\omega) = F(|\omega|^2)$ with
+$F(\tau) := \widehat\mu_I(\sqrt\tau\,e_1)$, continuous on $[0,\infty)$ with $F(0) = 1$.
+
+\emph{Every kernel from scale zero.} For $\Sigma \in \PD(d)$, $\Sigma^{1/2} \in \GL^+(d)$ and
+$\Sigma^{1/2} \cdot I = \Sigma$, so (K3) at the pair $(0, I)$ gives $\mu_\Sigma = (\Sigma^{1/2})_*\mu_I$
+and $\widehat\mu_\Sigma(\omega) = F(\langle\omega,\Sigma\omega\rangle)$. For $\Sigma \in \PSD(d)$, the
+pairs $(0, \Sigma + \varepsilon I)$ lie in $P_W$, as $W$ contains the rays, and tend to $(0, \Sigma)$ as
+$\varepsilon \downarrow 0$; (K2) and the continuity of $F$ give
+$\widehat\mu_\Sigma(\omega) = F(\langle\omega,\Sigma\omega\rangle)$ for every $\Sigma \in \PSD(d)$.
+
+\emph{No zeros.} Fix $\omega$ and put $f(s,t) := \widehat\mu_{sI,tI}(\omega)$ for $0 \le s \le t$, defined
+because $sI \le_W tI$. By (K2) $f$ is continuous, and by (K1) $f(t,t) = 1$ and
+$f(r,t) = f(s,t)\,f(r,s)$ for $r \le s \le t$. If $f(0,t) = 0$ for some $t$, let $t^*$ be the infimum of
+such $t$; then $t^* > 0$, $f(0,t^*) = 0$, and by continuity at $(t^*,t^*)$ there is $s \in (0,t^*)$ with
+$f(s,t^*) \ne 0$, while $f(0,s) \ne 0$; so $f(0,t^*) = f(s,t^*)\,f(0,s) \ne 0$, a contradiction. Hence
+$F(t|\omega|^2) = f(0,t) \ne 0$ for all $t \ge 0$ and $\omega$: $F$ has no zero, and no
+$\widehat\mu_\Sigma$ has one.
+
+\emph{(K3) for every $A \in \GL(d)$.} For $\Sigma \in \PSD(d)$,
+$\widehat\mu_\Sigma(A^{\tp}\omega) = F(\langle A^{\tp}\omega,\Sigma A^{\tp}\omega\rangle)
+= F(\langle\omega,(A\cdot\Sigma)\omega\rangle) = \widehat\mu_{A\cdot\Sigma}(\omega)$. Let
+$\Sigma \le_W \Sigma'$; then $A\cdot\Sigma \le_W A\cdot\Sigma'$, $W$ being $\GL(d)$-invariant by (1).
+(K1) at $0 \le_W \Sigma \le_W \Sigma'$ gives $\widehat\mu_{\Sigma'} = \widehat\mu_{\Sigma,\Sigma'}\,
+\widehat\mu_\Sigma$, so $\widehat\mu_{\Sigma,\Sigma'} = \widehat\mu_{\Sigma'}/\widehat\mu_\Sigma$, and
+likewise at the pair $(A\cdot\Sigma, A\cdot\Sigma')$. The transform of $A_*\mu_{\Sigma,\Sigma'}$ at
+$\omega$ is therefore $\widehat\mu_{\Sigma'}(A^{\tp}\omega)/\widehat\mu_\Sigma(A^{\tp}\omega) =
+\widehat\mu_{A\cdot\Sigma'}(\omega)/\widehat\mu_{A\cdot\Sigma}(\omega) =
+\widehat\mu_{A\cdot\Sigma,A\cdot\Sigma'}(\omega)$, and uniqueness of the transform gives
+$A_*\mu_{\Sigma,\Sigma'} = \mu_{A\cdot\Sigma,A\cdot\Sigma'}$. Conversely a $(\GL(d), W)$-family is a
+$(\GL^+(d), W)$-family, $\GL^+(d)$ being a subset of $\GL(d)$.
+
+\emph{(2), operators.} Let $(\Phi_{\Sigma,\Sigma'})$ be a $(\GL^+(d), W)$-cascade family of operators.
+By \ref{lem:operators-to-kernels}(1) and (4), $\Phi_{\Sigma,\Sigma'}f = \mu_{\Sigma,\Sigma'} * f$ with
+$(\mu_{\Sigma,\Sigma'})$ a $(\GL^+(d), W)$-cascade family of kernels, hence a $(\GL(d), W)$-family. For
+$A \in \GL(d)$, \ref{lem:operators-to-kernels}(2) with $\mu = \mu_{\Sigma,\Sigma'}$ and
+$\nu = \mu_{A\cdot\Sigma,A\cdot\Sigma'}$ turns $A_*\mu = \nu$ into
+$D_A\Phi_{\Sigma,\Sigma'}D_A^{-1} = \Phi_{A\cdot\Sigma,A\cdot\Sigma'}$. The other axioms of the operator
+form do not involve the group, and the converse is again the inclusion of the groups. For the
+Loewner order, the $(\GL(d), \text{Loewner})$-cascade families of kernels are the affine cascade
+families (\ref{def:affine-cascade-family}), which \ref{thm:affine-rigidity} identifies with the affine
+Gaussian scale spaces for $d \ge 2$.
+
+\emph{(3).} $\GL^+(1) = (0,\infty)$, acting on $[0,\infty)$ by $a \cdot s = a^2s$. (K1):
+$\mu_{s,s} = \delta_0$ and $\delta_{\sqrt t - \sqrt s} * \delta_{\sqrt s - \sqrt r} = \delta_{\sqrt t - \sqrt r}$.
+(K2): $\widehat\mu_{s,t}(\omega) = e^{i\omega(\sqrt t - \sqrt s)}$ is continuous in $(s,t)$. (K3): for
+$a > 0$, $a_*\delta_{\sqrt t - \sqrt s} = \delta_{a\sqrt t - a\sqrt s} = \delta_{\sqrt{a^2t} - \sqrt{a^2s}}$.
+(K4): $\mu_{0,1} = \delta_1 \ne \delta_0$. For $A = -1 \in \GL(1)$, $A \cdot s = s$, and
+$A_*\mu_{0,1} = \delta_{-1} \ne \delta_1 = \mu_{0,1}$, so (K3) fails for $\GL(1)$.
+\end{proof}
+
+% CHANGED Q-0281: split from prop:glplus-families (ADR-0025; records/formalization/PRICING.md): the
+% operator half of clause (2), copied verbatim. It reads lem:operators-to-kernels(1), (2) and (4),
+% which the kernel half does not; the parent's text and numbering are unchanged.
+% CHANGED Q-0281: blind review R5-1: \uses gains lem:operators-to-kernels-families, the split child
+% that now carries lem:operators-to-kernels(4), which the proof (the parent's paragraph "(2),
+% operators") reads.
+\begin{lemma}[the operator families under $\GL^+(d)$]
+\label{lem:glplus-operator-families}
+\uses{prop:glplus-families,lem:operators-to-kernels,lem:operators-to-kernels-families,def:gw-cascade-family}
+\lean{AffineHemigroup.gw_operator_family_glPlus_iff}\leanok
+Let $d \ge 2$ and let $(\GL^+(d), W)$ be a wedge datum (\ref{def:gw-cascade-family}). A family of
+operators indexed by $P_W$ is a $(\GL^+(d), W)$-cascade family of operators if and only if it is a
+$(\GL(d), W)$-cascade family of operators.
+\statusT\quad\emph{(Cites nothing beyond \ref{lem:operators-to-kernels}. The operator half of
+\ref{prop:glplus-families}(2), split off on 2026-10-04 (Q-0281, ADR-0025): it reads
+\ref{lem:operators-to-kernels}(1), (2) and (4), where the kernel half reads only the spectral theorem
+and the uniqueness of the transform; the numbering stays the parent's.)}
+\end{lemma}
+
+\begin{proof}
+\leanok
+This is the part of the proof of \ref{prop:glplus-families} headed (2), operators.
+\end{proof}
+
+% draft: section 2.4, Remark 2.16, clauses (1)-(3) as far as they are mathematics. The draft calls
+% shape space the hyperbolic plane at d = 2 and the reachable set a geodesic disc, with a check;
+% the node proves the reachable set is the ball of the affine-invariant distance and leaves the
+% identification with the hyperbolic plane to the annotation.
+\begin{lemma}[the Loewner order in scale--shape coordinates]
+\label{lem:loewner-scale-shape}
+\uses{def:affine-cascade-family}
+\lean{AffineHemigroup.scale_shape_coords, AffineHemigroup.loewner_iff_scale_shape,
+AffineHemigroup.loewner_no_order_within_scale, AffineHemigroup.loewner_speed_limit,
+AffineHemigroup.loewner_speed_limit_converse, AffineHemigroup.loewner_plane_disc}\leanok
+For $\Sigma \in \PD(d)$ put $t(\Sigma) := (\det\Sigma)^{1/2d}$, the \emph{volume scale}, and
+$S(\Sigma) := t(\Sigma)^{-2}\Sigma$, the \emph{shape}, so that $\det S(\Sigma) = 1$. Let
+$\Sigma_1, \Sigma_2 \in \PD(d)$, $t_k := t(\Sigma_k)$, $S_k := S(\Sigma_k)$, and let
+$n_1 \le \dots \le n_d$ be the eigenvalues of the \emph{relative shape}
+$N := S_1^{-1/2}S_2S_1^{-1/2}$, so that $n_1 \cdots n_d = 1$.
+\begin{enumerate}
+\item $\Sigma_1 \le \Sigma_2$ if and only if $n_1 \ge (t_1/t_2)^2$.
+\item \emph{(No order within a scale.)} If $\Sigma_1 \le \Sigma_2$ then $t_1 \le t_2$, with
+equality only if $\Sigma_1 = \Sigma_2$; and $\Sigma_1 \le \Sigma_2$ with $S_1 = S_2$ holds exactly
+when $\Sigma_2 = \lambda^2\Sigma_1$ with $\lambda \ge 1$.
+\item \emph{(A speed limit on shape.)} If $\Sigma_1 \le \Sigma_2$ then
+$(t_1/t_2)^2 \le n_1 \le n_d \le (t_2/t_1)^{2(d-1)}$, so the anisotropy gained,
+$\sqrt{n_d/n_1}$, is at most $(t_2/t_1)^d$. Conversely, for every $t_2 \ge t_1$ and every
+$N \in \PD(d)$ with $\det N = 1$ and least eigenvalue at least $(t_1/t_2)^2$,
+$\Sigma_2 := t_2^2\,S_1^{1/2}NS_1^{1/2}$ satisfies $\Sigma_1 \le \Sigma_2$, $t(\Sigma_2) = t_2$, and
+has relative shape $N$.
+\item \emph{(The plane.)} Let $d = 2$ and
+$\delta(S_1,S_2) := \bigl((\log n_1)^2 + (\log n_2)^2\bigr)^{1/2}$. For $t_2 \ge t_1$, the shapes
+$S(\Sigma_2)$ of the $\Sigma_2 \ge \Sigma_1$ with $t(\Sigma_2) = t_2$ are exactly the shapes $S$
+with $\det S = 1$ and $\delta(S_1,S) \le 2\sqrt2\,\log(t_2/t_1)$.
+\end{enumerate}
+\statusT\quad\emph{(Cites nothing: congruence preserves the Loewner order, and the determinant is
+the product of the eigenvalues. \textbf{Not claimed}: that $\delta$ is the distance of the
+affine-invariant Riemannian metric, that the shapes of determinant $1$ in the plane form the
+hyperbolic plane with orientation and log-anisotropy as polar coordinates, and so that clause (4)'s
+set is a geodesic disc --- the draft's reading, standard and not read at the page here (its check
+item~13); nor the draft's clause (3), homogeneity, which is (K3) and needs no node; nor the
+remark's reading of the order as a causal structure, which is the draft's Remark~2.17 and stays
+prose. In $d \ge 3$ clause (3) says the same thing in log-eigenvalue coordinates, a simplex
+$\{\log n_i \ge -2\log(t_2/t_1),\ \sum_i\log n_i = 0\}$.)}
+\end{lemma}
+
+% CHANGED Q-0281 wave 1: proof rewritten to the Lean route (clauses (1) and (2)): the congruence is by
+% S_1^{-1/2}, which carries Sigma_1 to t_1^2 I and Sigma_2 to t_2^2 N, so the identity
+% Sigma_k^{1/2} = t_k S_k^{1/2} is not needed; clause (2) reads the product of the n_i.
+\begin{proof}
+\leanok
+\emph{Clause (1).} Congruence by the invertible symmetric matrix $R := S_1^{-1/2}$ preserves positive
+semidefiniteness in both directions. Since $\Sigma_k = t_k^2S_k$, it carries $\Sigma_1$ to
+$t_1^2RS_1R = t_1^2I$ and $\Sigma_2$ to $t_2^2RS_2R = t_2^2N$. So $\Sigma_1 \le \Sigma_2$ exactly
+when $t_2^2N - t_1^2I \ge 0$, that is when $N \ge (t_1/t_2)^2I$, that is when every eigenvalue of $N$
+is at least $(t_1/t_2)^2$, which is $n_1 \ge (t_1/t_2)^2$.
+
+\emph{Clause (2).} $\det N = \det S_2/\det S_1 = 1$ is the product of the $n_i$. Under
+$\Sigma_1 \le \Sigma_2$ each $n_i$ is at least $c := (t_1/t_2)^2 > 0$ by clause (1), so $c^d \le 1$,
+$c \le 1$ and $t_1 \le t_2$. If $t_1 = t_2$ then $c = 1$: every $n_i$ is at least $1$ and their
+product is $1$, so $n_d = (\prod_{i<d}n_i)^{-1} \le 1$ as well. Then $I \le N \le I$, so $N = I$,
+$S_2 = S_1^{1/2}NS_1^{1/2} = S_1$ and $\Sigma_2 = t_2^2S_2 = t_1^2S_1 = \Sigma_1$. If
+$\Sigma_1 \le \Sigma_2$ and $S_1 = S_2$, then $\Sigma_2 = t_2^2S_1 = (t_2/t_1)^2\Sigma_1$ with
+$t_2/t_1 \ge 1$; conversely $\lambda^2\Sigma_1 - \Sigma_1 = (\lambda^2 - 1)\Sigma_1 \ge 0$ for
+$\lambda \ge 1$, and $S(\lambda^2\Sigma_1) = S_1$, since $t(\lambda^2\Sigma_1) = \lambda t_1$.
+
+\emph{Clause (3).} The lower bound on $n_1$ is clause (1). Then
+$n_d = \bigl(\prod_{i<d}n_i\bigr)^{-1} \le (t_2/t_1)^{2(d-1)}$, and
+$n_d/n_1 \le (t_2/t_1)^{2(d-1)}(t_2/t_1)^2$. For the converse,
+$\det\Sigma_2 = t_2^{2d}\det S_1\det N = t_2^{2d}$, so $t(\Sigma_2) = t_2$ and
+$S(\Sigma_2) = S_1^{1/2}NS_1^{1/2}$, whose relative shape is $N$; clause (1) gives
+$\Sigma_1 \le \Sigma_2$.
+
+\emph{Clause (4).} At $d = 2$, $n_1n_2 = 1$ and $n_1 \le 1$, so
+$\delta(S_1,S_2) = \sqrt2\,\log(1/n_1)$, and $n_1 \ge (t_1/t_2)^2$ is
+$\delta(S_1,S_2) \le 2\sqrt2\log(t_2/t_1)$. By clause (1) every $S(\Sigma_2)$ with
+$\Sigma_2 \ge \Sigma_1$ and $t(\Sigma_2) = t_2$ lies in the set; by clause (3) every $S$ in the set,
+whose relative shape $N = S_1^{-1/2}SS_1^{-1/2}$ has determinant $1$ and least eigenvalue at least
+$(t_1/t_2)^2$, is the shape of $t_2^2S = t_2^2S_1^{1/2}NS_1^{1/2}$.
+\end{proof}

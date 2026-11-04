@@ -1,0 +1,10 @@
+Item 3
+  alpha = 1/4: a = 0, c = oo
+  alpha = 1/2: a = 0, c = oo
+  alpha = 9/10: a = 0, c = oo
+  alpha = 1: a = 1, c = 0
+Item 4
+  on R^0 the form with n = 3 is f(0) |c1 + c2 + c3|^2:  True
+  on R^1 with n = 1, xi_1 = 0, c_1 = 1 the form is f(0) + f(0) - f(0) = f0
+Item 5
+  the second-difference identity holds:  True

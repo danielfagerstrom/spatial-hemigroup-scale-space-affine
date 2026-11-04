@@ -1,0 +1,52 @@
+% This article's macros.
+%
+% The framework's vocabulary (\lean/\leanok/\uses/\notready, \ledger, \notes, \sscite, and
+% the [T]/[A] status tags) lives in linkage-macros.tex, which the `article-kit` repo owns.
+% Everything below the rule is this article's own NOTATION — yours to change.
+%
+% Anything you add here is automatically render-safe (fatal check 4 reads this file's
+% \newcommand definitions); anything you use but do not define must be vetted in
+% render-allowlist.txt, or the manifest would silently drop it.
+
+\input{linkage-macros}
+
+% -- Notation -----------------------------------------------------------------
+\newcommand{\RR}{\mathbb{R}}
+\newcommand{\CC}{\mathbb{C}}
+\newcommand{\NN}{\mathbb{N}}
+\newcommand{\ZZ}{\mathbb{Z}}
+\newcommand{\Cin}{\operatorname{Cin}}   % the entire cosine integral, as in module B
+\newcommand{\Levy}{L\'evy}              % the name, accented through one macro
+\newcommand{\Matern}{Mat\'ern}          % the same device for the second member's name
+% The programme's internal labels of its released papers (Q-0344, the author's review of the
+% isotropic paper): \prog{V}{Thm.~7.3} is a numbered place in Paper V's line paper (V) or its cone
+% module (B), \progpaper{B} the paper itself. The blueprint prints its short form; each paper defines
+% the same two macros to print a real citation (paper*/macros.tex), so a statement shared verbatim
+% reads [V, Thm. 7.3] here and [2, Thm. 7.3] in a paper.
+\newcommand{\prog}[2]{[#1, #2]}
+\newcommand{\progpaper}[1]{[#1]}
+% A numbered place of [V] or [B] that the isotropic paper restates in its section 2 (Q-0406, the
+% author's review of that paper's section 3: a reader of section 3 is sent to the restatement, which
+% carries the released number, not to the earlier paper). \restated{V}{Def.~3.1}{def:line-family}
+% prints here exactly what \prog{V}{Def.~3.1} prints; the third argument is the label of the
+% restatement in paper-iso/02-line-papers.tex, which a paper's own \restated prints as
+% "Definition~\ref{def:line-family}" (and the affine paper as the located citation where it has no
+% such label). \restatedp is the same place cited as an aside: [V, Def. 3.1] here, the reference in
+% parentheses in a paper. The blueprint has no node with these labels and never \ref's them.
+\newcommand{\restated}[3]{[#1, #2]}
+\newcommand{\restatedp}[3]{[#1, #2]}
+% A clause of such a place, whose number may differ in the restatement:
+% \restatedc{B}{Prop.~4.9}{prop:line-filtration}{(4)}{(3)} prints [B, Prop. 4.9(4)] here and
+% "Proposition 2.6(3)" in the isotropic paper.
+\newcommand{\restatedc}[5]{[#1, #2#4]}
+% The affine chapter: parameter sets, the group, and the matrix operations.
+\newcommand{\PD}{\mathrm{PD}}           % positive definite d x d matrices
+\newcommand{\PSD}{\mathrm{PSD}}         % positive semidefinite d x d matrices
+\newcommand{\GL}{\mathrm{GL}}
+\newcommand{\Orth}{\mathrm{O}}          % the orthogonal group O(d)
+\newcommand{\tp}{\mathsf{T}}            % transpose, written A^{\tp}
+\newcommand{\tr}{\operatorname{tr}}
+\newcommand{\rank}{\operatorname{rank}}
+\newcommand{\diag}{\operatorname{diag}}
+\newcommand{\Sym}{\mathrm{Sym}}         % real symmetric d x d matrices
+\newcommand{\gl}{\mathfrak{gl}}         % all real d x d matrices, as a Lie algebra

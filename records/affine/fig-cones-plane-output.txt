@@ -1,0 +1,16 @@
+Invariant cones in the plane: X = [[a+u, v], [v, a-u]], round cones r <= k a
+  C_alpha, alpha =  0.25: round cone of opening k = 0.111111; 20000 random X, 0 disagreements
+  C_alpha, alpha =  1.00: round cone of opening k = 0.333333; 20000 random X, 0 disagreements
+  C_alpha, alpha =  1.50: round cone of opening k = 0.428571; 20000 random X, 0 disagreements
+  C_alpha, alpha =  2.00: round cone of opening k = 0.500000; 20000 random X, 0 disagreements
+  C_alpha, alpha =  5.00: round cone of opening k = 0.714286; 20000 random X, 0 disagreements
+  C_alpha, alpha = 40.00: round cone of opening k = 0.952381; 20000 random X, 0 disagreements
+  PSD(2): round cone of opening k = 1; 20000 random X, 0 disagreements
+  round cone k = 0.000000: beta(C) = 0.000000, 2k/(1-k) = 0.000000
+  round cone k = 0.333333: beta(C) = 1.000000, 2k/(1-k) = 1.000000
+  round cone k = 0.500000: beta(C) = 2.000000, 2k/(1-k) = 2.000000
+  round cone k = 0.800000: beta(C) = 8.000000, 2k/(1-k) = 8.000000
+  opening of C_0: k = 0.000000
+  opening of C_1: k = 0.333333
+  opening of C_2: k = 0.500000
+wrote paper/fig-cones-plane.png

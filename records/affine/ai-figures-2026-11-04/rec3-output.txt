@@ -1,0 +1,56 @@
+computed 2026-11-04; archive last turn (any session): 2026-11-04T20:33:13.995000+00:00 | cut used (UTC): 2026-11-04 20:33:13
+core 76 ceiling 80 | tagged 66 (q 51 eval 14 review 1 ) named ['63253a80', '53a4f41c', 'a34cd72a', '3c3842d5', '0cad1fd5', '25478c56'] added ['057cfca0', '25478c56', '0cad1fd5', '33b1ecdc']
+exclusions (session, ts, words):
+   7dbafaad 2026-10-12 07:44:22 5454
+   7dbafaad 2026-10-12 07:45:24 2145
+   057cfca0 2026-11-03 18:02:04 7043
+   0cad1fd5 2026-10-24 08:49:11 161
+   0cad1fd5 2026-10-24 10:38:22 172
+   0cad1fd5 2026-10-24 13:39:34 278
+  total 15253 in 6 turns
+
+## CORE
+  raw: sessions=76 subagent_traces=336 first=2026-09-25 01:37:30 last=2026-11-04 20:33:13 UTC days=31 wall=979h
+     typed=21172w/204t agents=226726 ratio=10.7 active=173.8h span_sum=732.6h
+  with exclusions: sessions=76 subagent_traces=336 first=2026-09-25 01:37:30 last=2026-11-04 20:33:13 UTC days=31 wall=979h
+     typed=5919w/199t agents=226726 ratio=38.3 active=173.8h span_sum=732.6h
+  with exclusions, without Lean session: sessions=75 subagent_traces=249 first=2026-09-25 01:37:30 last=2026-11-04 20:33:13 UTC days=31 wall=979h
+     typed=5536w/168t agents=197899 ratio=35.7 active=110.0h span_sum=635.8h
+  sensitivity: exclusions + every pasted_content block: sessions=76 subagent_traces=336 first=2026-09-25 01:37:30 last=2026-11-04 20:33:13 UTC days=31 wall=979h
+     typed=5823w/199t agents=226726 ratio=38.9 active=173.8h span_sum=732.6h
+  AI reports out, all terminal text kept: sessions=76 subagent_traces=336 first=2026-09-25 01:37:30 last=2026-11-04 20:33:13 UTC days=31 wall=979h
+     typed=6530w/202t agents=226726 ratio=34.7 active=173.8h span_sum=732.6h
+
+## CEILING
+  raw: sessions=80 subagent_traces=352 first=2026-09-21 16:31:06 last=2026-11-04 20:33:13 UTC days=37 wall=1060h
+     typed=30338w/453t agents=346885 ratio=11.4 active=241.1h span_sum=1146.9h
+  with exclusions: sessions=80 subagent_traces=352 first=2026-09-21 16:31:06 last=2026-11-04 20:33:13 UTC days=37 wall=1060h
+     typed=15085w/448t agents=346885 ratio=23.0 active=241.1h span_sum=1146.9h
+  with exclusions, without Lean session: sessions=79 subagent_traces=265 first=2026-09-21 16:31:06 last=2026-11-04 20:33:13 UTC days=37 wall=1060h
+     typed=14702w/417t agents=318058 ratio=21.6 active=177.3h span_sum=1050.0h
+  sensitivity: exclusions + every pasted_content block: sessions=80 subagent_traces=352 first=2026-09-21 16:31:06 last=2026-11-04 20:33:13 UTC days=37 wall=1060h
+     typed=13214w/448t agents=346885 ratio=26.3 active=241.1h span_sum=1146.9h
+  AI reports out, all terminal text kept: sessions=80 subagent_traces=352 first=2026-09-21 16:31:06 last=2026-11-04 20:33:13 UTC days=37 wall=1060h
+     typed=15696w/451t agents=346885 ratio=22.1 active=241.1h span_sum=1146.9h
+
+## window from iso-v0.1 (turns >= 2026-10-14 05:27:52 ) -- CORE
+  with exclusions: sessions=43 subagent_traces=35 first=2026-10-14 05:28:07 last=2026-11-04 20:33:13 UTC days=15 wall=519h
+     typed=1754w/59t agents=57217 ratio=32.6 active=29.1h span_sum=305.7h
+
+## window from iso-v0.1 (turns >= 2026-10-14 05:27:52 ) -- CEILING
+  with exclusions: sessions=44 subagent_traces=43 first=2026-10-14 05:28:07 last=2026-11-04 20:33:13 UTC days=15 wall=519h
+     typed=2096w/83t agents=64949 ratio=31.0 active=35.1h span_sum=403.0h
+
+## typed turns >=100 words in the four added sessions (ts, words, excluded words)
+   057cfca0 2026-11-03 18:02:04 7047 7043
+   25478c56 2026-10-26 20:32:32 224 0
+   25478c56 2026-10-27 15:45:01 225 0
+   0cad1fd5 2026-10-24 08:49:11 161 161
+   0cad1fd5 2026-10-24 10:38:22 172 172
+   0cad1fd5 2026-10-24 13:39:34 278 278
+
+## Agent tool calls and recorded subagent traces in the added sessions
+   057cfca0 Agent calls 25 traces 0 subagent_turns 0 active_h 5.9
+   25478c56 Agent calls 5 traces 0 subagent_turns 0 active_h 3.5
+   0cad1fd5 Agent calls 0 traces 0 subagent_turns 0 active_h 2.3
+   33b1ecdc Agent calls 11 traces 11 subagent_turns 391 active_h 5.9

@@ -1,0 +1,73 @@
+calibration: ray step S -> 1.21 S (positive exactly)
+  aperture   2.0: negative mass 7.5e-15
+  aperture   8.0: negative mass 5.0e-15
+  aperture  32.0: negative mass 2.7e-14
+
+rank-one step S -> S + eps * t^2 * e1 e1' (widen one axis by a fraction eps), S = t^2 diag(1, 1):
+  gamma  aperture   eps    negative mass   atom rho(0)   minimum at
+      1       2.0   0.01       3.483e-03        0.9955   (np.int64(0), np.int64(1))
+      1       2.0   0.10       3.185e-02        0.9573   (np.int64(0), np.int64(1))
+      1       2.0   0.50       1.139e-01        0.8259   (np.int64(0), np.int64(1))
+      1       4.0   0.01       5.396e-03        0.9952   (np.int64(0), np.int64(1))
+      1       4.0   0.10       4.923e-02        0.9545   (np.int64(0), np.int64(-1))
+      1       4.0   0.50       1.793e-01        0.8164   (np.int64(0), np.int64(1))
+      1       8.0   0.01       7.440e-03        0.9951   (np.int64(0), np.int64(1))
+      1       8.0   0.10       6.788e-02        0.9536   (np.int64(0), np.int64(1))
+      1       8.0   0.50       2.530e-01        0.8133   (np.int64(0), np.int64(-1))
+      1      16.0   0.01       9.558e-03        0.9950   (np.int64(0), np.int64(1))
+      1      16.0   0.10       8.778e-02        0.9533   (np.int64(0), np.int64(-1))
+      1      16.0   0.50       3.270e-01        0.8124   (np.int64(0), np.int64(-1))
+      1      32.0   0.01       1.171e-02        0.9950   (np.int64(0), np.int64(1))
+      1      32.0   0.10       1.079e-01        0.9532   (np.int64(0), np.int64(-1))
+      1      32.0   0.50       4.004e-01        0.8121   (np.int64(0), np.int64(1))
+      2       2.0   0.01       6.930e-03        0.9910   (np.int64(0), np.int64(1))
+      2       2.0   0.10       6.065e-02        0.9171   (np.int64(0), np.int64(1))
+      2       2.0   0.50       1.879e-01        0.6910   (np.int64(0), np.int64(1))
+      2       4.0   0.01       1.074e-02        0.9904   (np.int64(0), np.int64(1))
+      2       4.0   0.10       9.361e-02        0.9118   (np.int64(0), np.int64(1))
+      2       4.0   0.50       3.051e-01        0.6762   (np.int64(0), np.int64(-1))
+      2       8.0   0.01       1.480e-02        0.9902   (np.int64(0), np.int64(1))
+      2       8.0   0.10       1.298e-01        0.9101   (np.int64(0), np.int64(-1))
+      2       8.0   0.50       4.277e-01        0.6714   (np.int64(0), np.int64(1))
+      2      16.0   0.01       1.901e-02        0.9901   (np.int64(0), np.int64(1))
+      2      16.0   0.10       1.681e-01        0.9095   (np.int64(0), np.int64(-1))
+      2      16.0   0.50       5.498e-01        0.6699   (np.int64(0), np.int64(1))
+      2      32.0   0.01       2.331e-02        0.9901   (np.int64(0), np.int64(1))
+      2      32.0   0.10       2.066e-01        0.9093   (np.int64(0), np.int64(1))
+      2      32.0   0.50       6.728e-01        0.6695   (np.int64(0), np.int64(1))
+
+full-rank cross-shape step S -> S' with S = t^2 diag(1, 0.5), S' = t^2 diag(1.2, 0.55):
+  gamma 1, aperture   2.0: negative mass 6.888e-03, atom 0.8764, minimum at (np.int64(0), np.int64(-1))
+  gamma 1, aperture   8.0: negative mass 2.940e-02, atom 0.8635, minimum at (np.int64(0), np.int64(1))
+  gamma 1, aperture  32.0: negative mass 6.208e-02, atom 0.8622, minimum at (np.int64(0), np.int64(-1))
+  gamma 2, aperture   2.0: negative mass 1.126e-02, atom 0.7688, minimum at (np.int64(0), np.int64(1))
+  gamma 2, aperture   8.0: negative mass 5.038e-02, atom 0.7462, minimum at (np.int64(0), np.int64(-1))
+  gamma 2, aperture  32.0: negative mass 1.072e-01, atom 0.7438, minimum at (np.int64(0), np.int64(1))
+
+turning step: S = t^2 [[1, 0.3], [0.3, 1]] -> S + t^2 * 0.2 * v v', v = (1, -1)/sqrt 2
+(widens the minor axis of S: a Loewner step that also turns the shape)
+  aperture   2.0: negative mass 8.108e-02, atom 0.8732, minimum at (np.int64(1), np.int64(1))
+  aperture   8.0: negative mass 1.676e-01, atom 0.8629, minimum at (np.int64(1), np.int64(1))
+  aperture  32.0: negative mass 2.636e-01, atom 0.8619, minimum at (np.int64(-1), np.int64(-1))
+
+slope of the negative mass in ln(aperture), against the first-order term in P,
+(gamma/pi) * eps/(1+eps): at gamma = 1 the continuum rate, the density ~ (eps'/2pi) r^-2 cos(2 phi)
+cut off at the grid; at gamma = 2 not the right comparison (the rates of the next block)
+  gamma 1, eps 0.01: measured 0.0030, first-order term 0.0032
+  gamma 1, eps 0.10: measured 0.0283, first-order term 0.0289
+  gamma 1, eps 0.50: measured 0.1064, first-order term 0.1061
+  gamma 2, eps 0.01: measured 0.0060, first-order term 0.0063
+  gamma 2, eps 0.10: measured 0.0544, first-order term 0.0579
+  gamma 2, eps 0.50: measured 0.1768, first-order term 0.2122
+
+the coefficient at every index: the continuum rate of the |x|^-2 term of the increment,
+read off the degree-0 limit h of its transform, against the slopes above (t in {4, 8, 16, 32})
+  gamma   eps    rate     slope    slope/rate   first-order term gamma*eps/(pi(1+eps))
+      1  0.01   0.0032   0.0030        0.964   0.0032
+      1  0.10   0.0289   0.0283        0.977   0.0289
+      1  0.50   0.1061   0.1064        1.002   0.1061
+      2  0.01   0.0063   0.0060        0.964   0.0063
+      2  0.10   0.0553   0.0544        0.985   0.0579
+      2  0.50   0.1777   0.1768        0.995   0.2122
+(at gamma = 1 the rate is eps/(pi(1+eps)), Proposition E.4(4) of the paper, proved there by
+ another route; this checks the constant and the sign of the method)

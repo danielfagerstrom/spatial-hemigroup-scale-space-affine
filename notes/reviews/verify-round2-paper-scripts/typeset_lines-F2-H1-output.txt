@@ -1,0 +1,48 @@
+# H.1 statement (p. 93-94), to the start of the prose after it
+p93 y= 462.45 | Proposition H.1 (similarity-covariant families with a stable part). Let d ≥ 2 and 0 &lt; α &lt; 2.
+p93 y= 476.00 | For maps h : PD(d) → PD(d) and C : PD(d) → PSD(d) put µ Σ := N (0, C(Σ)) ∗ S α (h(Σ)), with
+p93 y= 489.55 | N (0, C) the centred Gaussian law of covariance C.
+p93 y= 507.47 | 1. (The stable parts are ordered.) If Σ, Σ ′ ∈ PD(d) and µ Σ ′ = µ Σ ∗ ρ for a positive finite
+p93 y= 521.02 | measure ρ, then h(Σ) ⪯ α h(Σ ′ ).
+p93 y= 543.51 | 2. (Bounded shape.) Suppose that h(cQΣQ T ) = c Q h(Σ) Q T for c &gt; 0 and Q ∈ O(d), that h
+p93 y= 561.59 | extends continuously to PSD(d) \ {0} with values in PD(d), and that every Loewner step
+p93 y= 570.61 | Σ ≤ Σ ′ in PD(d) has an increment as in (1). Then h(I) = h 0 I with h 0 &gt; 0, and with
+p93 y= 584.16 | c 1 := λ max (h(e 1 e T )) &gt; 0,
+p93 y= 591.04 | 1
+p93 y= 609.09 | λ max (h(Σ))  h 0  α
+p93 y= 619.05 | ≤ for every Σ ∈ PD(d).
+p93 y= 626.54 | λ min (h(Σ)) c 1
+p93 y= 650.18 | 3. (A stable part that is not rotation invariant.) Let b ≥ 0 and κ &gt; 0 with ακ 2 −(d+1)κ−1 ≥
+p93 y= 668.26 | 0, and put h(Σ) := Σ + κ tr(Σ)I and C(Σ) := 2bΣ for Σ ∈ PSD(d), with S α (0) := δ 0 .
+p93 y= 677.28 | For every Σ ≤ Σ ′ in PSD(d) there is a probability measure ρ Σ,Σ ′ with µ Σ ′ = µ Σ ∗ ρ Σ,Σ ′ ,
+p93 y= 693.96 | and the family (ρ Σ,Σ ′ ) satisfies (K1), (K2) and (K4) of Definition 3.2, and (K3) for every
+p93 y= 708.91 | similarity A = cQ, c &gt; 0, Q ∈ O(d). Its stable part S α (h(Σ)) is rotation invariant only
+p93 y= 722.45 | when Σ is a multiple of I.
+p93 y= 744.91 | In clause (3) the non-Gaussian part carries the shape of Σ, and b = 0 is allowed, so no
+--- 20 clustered lines, vertical extent 296 pt = 21.8 body-line heights
+
+# F.2 statement and the prose after it (p. 87), to the first proof of the subsection
+p87 y= 448.53 | Proposition F.2 (a fixed frame: the families are products). Let d ≥ 1. For s ∈ (0, ∞) d write
+p87 y= 462.08 | D s := diag(s 1 , . . . , s d ), and 1 := (1, . . . , 1). Let (µ s ) d be probability measures on d with
+p87 y= 468.31 | s∈(0,∞) R
+p87 y= 486.19 | (D1) (covariance under the diagonal group) (D δ ) ∗ µ s = µ D s for all δ, s ∈ (0, ∞) d ;
+p87 y= 492.86 | δ
+p87 y= 513.24 | (D2) (a cascade along each axis) for every i ≤ d and every λ &gt; 1 there is a probability measure
+p87 y= 522.26 | ρ i,λ on d with µ = µ 1 ∗ ρ i,λ .
+p87 y= 528.44 | R 1+(λ−1)e i
+p87 y= 549.30 | Then there are self-decomposable laws ν 1 , . . . , ν d on R (in the sense of (2.2) at d = 1) with
+p87 y= 568.74 | µ = (s ) ν ⊗ · · · ⊗ (s ) ν for every s ∈ (0, ∞) d ,
+p87 y= 574.88 | s 1 ∗ 1 d ∗ d
+p87 y= 598.32 | where (s i ) ∗ is the image under x 7→ s i x on R. Conversely, for any self-decomposable laws
+p87 y= 611.87 | ν 1 , . . . , ν d on R this family satisfies (D1) and (D2), and it cascades along the coordinatewise
+p87 y= 621.00 | ′ (1) (d) ′ (i)
+p87 y= 627.32 | order: µ s = µ s ∗ (ρ s 1 ,s 1 ′ ⊗ · · · ⊗ ρ s d ,s d ′ ) for s ≤ s , with probability measures ρ s i ,s i ′ o
+p87 y= 651.75 | So the non-Gaussian anisotropic families that cascade at a fixed orientation are exactly the
+p87 y= 665.30 | products of d independent self-decomposable laws, one per axis, and the factors may differ.
+p87 y= 678.85 | By Proposition F.1(3) the non-Gaussian factors then fix the frame. A product family gains
+p87 y= 692.40 | anisotropy along its frame’s axes as fast per step as the Gaussian does and cannot turn, while
+p87 y= 705.95 | the stable orbits turn, with a smaller gain per step (Proposition 4.7). Turning alone therefore
+p87 y= 719.50 | does not exclude non-Gaussian kernels. The proof of the product form uses the characteristic
+p87 y= 733.05 | function of Lemma 3.8.
+p88 y=  85.08 | Proof of Proposition F.1. Clause (1). The transform of a product measure is the product of the
+--- 23 clustered lines, vertical extent 312 pt = 23.0 body-line heights

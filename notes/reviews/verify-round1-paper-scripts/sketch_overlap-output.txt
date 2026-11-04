@@ -1,0 +1,4 @@
+statement                                  sketch words full words 4-gram share aligned share
+Lemma 4.8 (lem:stable-tail)                         124        366         0.21          0.53
+Proposition 4.13 (prop:orbit-step-cone)             231        489         0.18          0.55
+Theorem 4.21 (thm:wedge-axis)                       620       1697         0.22          0.31

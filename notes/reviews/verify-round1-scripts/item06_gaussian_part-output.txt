@@ -1,0 +1,10 @@
+(1) the Gaussian as a mixture of uniform laws on centred balls
+  d = 1: int w = 1.0, largest relative error of the identity 1.93e-21
+  d = 2: int w = 1.0, largest relative error of the identity 1.11e-21
+  d = 3: int w = 1.0, largest relative error of the identity 2.34e-21
+  d = 5: int w = 1.0, largest relative error of the identity 2.57e-21
+(2) the intersection of two balls is nonincreasing in the distance of the centres
+  16200 consecutive pairs checked, d = 1, 2, 3
+(3) Matern(3/4) * N(0, a I), a = 0.3: the radial density is decreasing
+  d = 2: p(0) = 0.24066729, p(1) = 0.095398036, p(5) = 0.00010363855; decreasing on r = 0, 1/8, ..., 5
+  d = 3: p(0) = 0.13336396, p(1) = 0.047355562, p(5) = 2.2770896e-5; decreasing on r = 0, 1/8, ..., 5

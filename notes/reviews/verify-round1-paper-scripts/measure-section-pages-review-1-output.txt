@@ -1,0 +1,66 @@
+Total length: 108.00 pages (to the end of the text)
+
+part       start  pages  title
+1           1.56   5.75  Introduction
+  1.1       6.47   0.84  What is machine-checked
+2           7.31   7.39  What is used from the earlier papers
+  2.1       7.59   0.38  Notation
+  2.2       7.97   1.37  The axioms and the classification on the line
+  2.3       9.34   2.52  What is used from the isotropic paper
+  2.4      11.85   2.85  The cited facts
+3          14.70  11.05  The axiom scheme and the classical affine theory
+  3.1      15.17   3.83  The (G, W) scheme, from operators to kernels
+  3.2      19.00   0.44  The parameter space
+  3.3      19.44   1.23  Infinitely divisible increments from the cascade
+  3.4      20.67   3.18  The single step and rigidity
+  3.5      23.85   1.91  Prior art, and the relation to the line
+4          25.76  28.73  The affine landscape
+  4.1      26.37   0.96  What an affine scale space is for
+  4.2      27.33   1.49  The groups, and the Loewner order in volume and shape
+  4.3      28.81   3.40  The landscape at a glance
+  4.4      32.21   3.57  Invariant wedges
+  4.5      35.78   1.45  The base: the general linear group along rays
+  4.6      37.23  10.93  The step set of an orbit
+  4.7      48.16   2.19  The general linear row along the chain
+  4.8      50.34   2.98  Shape-adapted smoothing across the rungs
+  4.9      53.32   1.17  Smaller groups
+5          54.49   2.39  Conclusion
+  5.1      55.48   1.40  Open problems
+A          56.89   9.91  Between operators and kernels, and the axiom scheme
+  A.1      57.04   3.87  Between operators and kernels
+  A.2      60.91   0.26  A family is its kernels from scale zero
+  A.3      61.17   2.08  The isotropic corner
+  A.4      63.25   1.75  The parameter space
+  A.5      65.00   0.66  Infinitely divisible increments
+  A.6      65.66   1.14  The single step
+B          66.80   3.03  Deferred proofs for the affine landscape
+  B.1      66.95   0.40  The groups and the Loewner order
+  B.2      67.35   2.47  The base, and the step set of an orbit
+C          69.82  13.18  The complete proof of the general linear row
+  C.1      70.21   5.70  Invariant orders and their cones
+  C.2      75.91   1.06  The ray column
+  C.3      76.97   3.71  The step set of an orbit
+  C.4      80.68   2.32  The theorem
+D          83.00   1.09  The orientation-preserving group
+E          84.09   3.72  Two further results on the step set of an orbit
+  E.1      84.21   1.72  Profiles stable at the origin
+  E.2      85.93   1.87  The Mat\'ern orbit across shapes
+F          87.81   5.19  Further results on the smaller groups
+  F.1      87.95   1.58  Frames
+  F.2      89.53   2.30  The ray column
+  F.3      91.83   1.17  The diagonal group along the stable order
+G          93.00   1.37  One linear flow
+H          94.37   8.80  The similarities with the Loewner order
+  H.1      94.61   2.15  An elliptical non-Gaussian part
+  H.2      96.76   5.43  A general non-Gaussian part
+  H.3     102.19   0.98  The families of the scheme
+I         103.17   1.88  Verification
+(back)    105.05
+(back)    105.36
+(bib)     105.69
+(end)     109.00
+
+paper: back matter 0.64 pages (to the bibliography)
+
+paper: main text 55.89 pages (to the first appendix heading)
+paper: appendices 48.16 pages (to the back matter)

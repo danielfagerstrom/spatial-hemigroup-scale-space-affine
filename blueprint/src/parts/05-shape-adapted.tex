@@ -1,0 +1,148 @@
+% !TEX root = ../print.tex
+% Section 5.8 of the article: shape-adapted smoothing across the rungs (notes/PLAN-article-structure.md,
+% "The outline"). The section is prose of the article, reading the practice of Lindeberg and Garding
+% against the families of 5.4-5.6; the prose closing this part, the draft's Remark 2.17 read in the
+% nodes' terms, is its material (it closed 05-smaller-groups.tex until Q-0284, the author's decision
+% of 2026-10-04). The one node here is the linear algebra its first paragraph needs, as a corollary of
+% thm:rank-deficient-step (Q-0282 item 4, the draft rewrite's gap in its 5.8, Q-0279). It is placed in
+% its own part, after 5.7, so that the section numbers follow the article's, and so that it does not
+% touch 04-classical.tex. Spends nothing.
+
+\section{Shape-adapted smoothing across the rungs}
+\label{sec:shape-adapted}
+
+The practice of shape-adapted smoothing normalizes the adapted scale matrix by its least eigenvalue.
+The step from the isotropic first stage to the adapted aperture is then rank-deficient, and only the
+Gaussian has a positive increment along it (\ref{prop:shape-adapted-apertures}).
+
+% not in the draft as a node: the draft rewrite's 5.8, first paragraph (Q-0279), which applies
+% thm:rank-deficient-step to the apertures Sigma_t = t M_I of Lindeberg-Garding 1994, step 2
+% (records/affine/READING-lindeberg1994shape.md, section 3: M_I = M / lambda_min(M), local scale
+% matrix t M_I). The node states the linear algebra and the corollary on kernels; the source is named
+% in the annotation as the reason for the normalization, and no proof reads it.
+% CHANGED Q-0281: typed (the statement skeleton); no split (records/formalization/PRICING.md).
+% CHANGED Q-0327: notation only (whole-paper review flag 21; blind draft review flag 29): the variance
+% of the aperture is $w$, no longer $t$, which is the volume scale of lem:loewner-scale-shape.
+% CHANGED round-2 review (Gemini), item 15 (records/affine/reviews/VERIFY-round2-notation-paper.md):
+% wording only, "Its kernel" -> "Its null space ker P" in (1), as the paper writes it elsewhere, since
+% "kernel" names a law in this paper. No claim changes; \uses and \lean unchanged.
+\begin{proposition}[the apertures of shape-adapted smoothing are rank-deficient steps]
+\label{prop:shape-adapted-apertures}
+\uses{thm:rank-deficient-step,prop:affine-orbits,def:gw-cascade-family,lem:gw-kernels-from-origin,prop:gw-ray-families}
+\lean{AffineHemigroup.shape_adapted_step, AffineHemigroup.shape_adapted_gaussian,
+AffineHemigroup.shape_adapted_scheme}\leanok
+Let $d \ge 2$, $w > 0$, and $M \in \PD(d)$ with least eigenvalue $1$, and put $\Sigma_w := wM$, so that
+the least eigenvalue of $\Sigma_w$ is $w$, and $P := \Sigma_w - wI$.
+\begin{enumerate}
+\item \emph{(The step.)} $P = w(M - I)$ is positive semidefinite. Its null space $\ker P$ is the eigenspace of $M$ for
+the eigenvalue $1$, and its range is spanned by the eigenvectors of $M$ with eigenvalues above $1$. So
+$\rank P \le d - 1$, with $\rank P = 0$ exactly when $M = I$; for $d = 2$ and $M \ne I$, $\rank P = 1$.
+\item \emph{(Only the Gaussian follows the apertures.)} Let $g$, $\mu_I$ and the affine orbit
+$\mu_\Sigma = (\Sigma^{1/2})_*\mu_I$, $\Sigma \in \PD(d)$, be as in \ref{prop:affine-orbits}, and let
+$M \ne I$. There is a probability measure $\rho$ on $\RR^d$ with $\mu_{\Sigma_w} = \mu_{wI} * \rho$ if and
+only if $g(u) = bu$ for some $b \ge 0$, that is, $\mu_I$ is the centred Gaussian law with covariance $2bI$
+($\delta_0$ when $b = 0$). Then $\rho$ is the centred Gaussian law with covariance $2bP$, carried by the
+range of $P$.
+\item \emph{(In the scheme.)} Let $(\GL(d), W)$ be a wedge datum (\ref{def:gw-cascade-family}) with
+$wI \le_W wM$ for some $w > 0$ and some $M \ne I$ as above. Then for every $(\GL(d), W)$-cascade family
+of kernels there is a $b > 0$ with $\widehat\mu_{\Sigma,\Sigma'}(\omega) =
+e^{-b\langle\omega,(\Sigma'-\Sigma)\omega\rangle}$ for every pair $\Sigma \le_W \Sigma'$.
+\end{enumerate}
+\statusT\quad\emph{(Cites nothing beyond the spectral theorem and the uniqueness of the Fourier
+transform. \textbf{What it is worth.} It is the statement the article's reading of shape-adapted
+smoothing rests on. The iteration of Lindeberg and Gårding normalizes the second-moment matrix by its
+least eigenvalue and uses $wM_I$ as the local scale matrix, $M_I := M/\lambda_{\min}(M)$ (Lindeberg and
+Gårding 1994, step 2 of the composed method, p.~396, read at the page:
+\texttt{records/affine/READING-lindeberg1994shape.md}); so its apertures are the $\Sigma_w$ of this node,
+with least eigenvalue the scale $w$ of the isotropic first stage. By (1) the step $wI \to \Sigma_w$
+leaves the least eigendirection unchanged and widens the others, and by (2) such a step is a further
+smoothing only in the Gaussian orbit, by the degenerate Gaussian along the widened directions, in the
+plane along the major axis alone. In every other affine orbit the adapted aperture is related to the first
+stage by no increment that is a probability measure, though the orbit may cascade along other steps of
+full rank (\ref{prop:stable-step-cone}). Clause (3) reads it in the scheme: an order invariant under the
+general linear group that contains one such step leaves only Gaussian increments, as the Loewner order
+does (\ref{thm:affine-rigidity}); the stable orders $\preceq_\alpha$ contain none
+(\ref{prop:stable-step-cone}(3)). \textbf{Not claimed}: anything about the convergence of the iteration or
+the second-moment matrix; the selection at fixed volume, which no order relates
+(\ref{lem:loewner-scale-shape}(2)); and the existence of a $(\GL(d), W)$-family in (3), which needs
+$\Sigma' - \Sigma$ positive semidefinite on every pair of $W$.)}
+\end{proposition}
+
+% CHANGED Q-0281 wave 1: proof of (1) rewritten to the Lean route: no eigenbasis of M is chosen; the
+% least eigenvalue is attained at a unit eigenvector, the range is identified through three facts and the
+% spectral theorem in the form "the eigenspaces span R^d", and the rank through rank-nullity.
+% CHANGED Q-0328: four semicolons and a trailing "being" clause made sentences (register; no step
+% changed), and the paper's copy re-transcribed verbatim (it still printed the eigenbasis argument).
+% CHANGED round-2 review (Gemini), items 8 and 15 (records/affine/reviews/VERIFY-round2-structure-paper.md
+% § 8, VERIFY-round2-notation-paper.md § 15): the first sentence, which said that the least eigenvalue
+% is the least eigenvalue, now reads the hypothesis through the Rayleigh quotient; "the kernel of P" and
+% "its kernel" read "the null space ker P" and "its null space". The route (the Lean's, Q-0281) and
+% every step are unchanged.
+\begin{proof}
+\leanok
+\emph{(1).} The least eigenvalue of $M$ is $1 = \min_{|x| = 1}\langle x, Mx\rangle$, and it is attained at a unit eigenvector $v$. So $\langle x, (M - I)x\rangle \ge 0$ for
+every $x$, that is, $M - I$ is positive semidefinite, and $Mv = v$. Then $P = w(M - I)$ is positive
+semidefinite, $\lambda_{\min}(wM) = w\lambda_{\min}(M) = w$, and $Px = 0$ exactly when $Mx = x$, as
+$w > 0$: the null space $\ker P$ is the eigenspace $E_1$ of $M$ for $1$. For the range: if $Mx = cx$ with
+$c > 1$ then $x = P\bigl((w(c-1))^{-1}x\bigr)$, so every eigenspace $E_c$, $c > 1$, lies in the range,
+and so does their span $K$. The range is orthogonal to $E_1$: $P$ is symmetric, so
+$\langle z, Px\rangle = \langle Pz, x\rangle = 0$ for $z \in E_1$. The eigenspaces of
+the symmetric matrix $M$ span $\RR^d$, and $E_c = 0$ for $c < 1$, since
+$0 \le \langle x, (M - I)x\rangle = (c - 1)|x|^2$ on $E_c$. So every $y$ is $a + k$ with $a \in E_1$ and
+$k \in K$. If $y$ is in the range, then $a = y - k$ is in the range as well as in $E_1$, so
+$\langle a, a\rangle = 0$, and $y = k \in K$: the range is $K$. By rank--nullity the rank of $P$ is $d$
+minus the dimension of its null space, which contains $v \ne 0$, so $\rank P \le d - 1$. It is
+$0$ exactly when $P = 0$, that is $M = I$. For $d = 2$ and $M \ne I$ it is therefore $1$.
+
+\emph{(2).} By \ref{prop:affine-orbits}(1), $\widehat\mu_\Sigma(\omega) = e^{-g(\langle\omega,\Sigma\omega\rangle)}$.
+If $\mu_{\Sigma_w} = \mu_{wI} * \rho$, taking transforms gives
+$e^{-g(\langle\omega,(wI + P)\omega\rangle)} = e^{-g(\langle\omega,wI\omega\rangle)}\,\widehat\rho(\omega)$, which is
+\ref{eq:one-step} with $\Sigma = wI \in \PD(d)$ and $P$ positive semidefinite with $0 < \rank P < d$ by
+(1), and $g$ is continuous with $g(0) = 0$ and $g \ge 0$. \ref{thm:rank-deficient-step} gives $g(u) = bu$ with
+$b = g(1) \ge 0$ and $\rho$ the centred Gaussian law with covariance $2bP$, which is carried by the range
+of $P$, the law of $(2bP)^{1/2}Z$ with $Z$ standard normal. Then $\widehat\mu_I(\omega) = e^{-b|\omega|^2}$,
+the transform of the centred Gaussian law with covariance $2bI$. Conversely, if $g(u) = bu$ with
+$b \ge 0$, the converse half of \ref{thm:rank-deficient-step} gives \ref{eq:one-step} for $\Sigma = wI$ and
+this $P$ with that Gaussian $\rho$, and the transforms of $\mu_{\Sigma_w}$ and $\mu_{wI} * \rho$ agree.
+
+\emph{(3).} Let $(\mu_{\Sigma,\Sigma'})$ be a $(\GL(d), W)$-cascade family of kernels, with kernels from scale zero $\mu_\Sigma$. $W$ contains the rays, so the ray order is contained in it, and
+\ref{lem:gw-kernels-from-origin}(1) restricts the family to $(\GL(d), \text{rays})$ with the same kernels
+from scale zero. By \ref{prop:gw-ray-families}(3), $\mu_\Sigma = (\Sigma^{1/2})_*\mu_I$ with $\mu_I$
+rotation invariant, self-decomposable and not $\delta_0$, and $\widehat\mu_\Sigma(\omega) =
+F(\langle\omega,\Sigma\omega\rangle)$ with $F(u) := \widehat\mu_I(\sqrt u\,e_1)$ continuous and $F(0) = 1$. By
+\ref{prop:gw-ray-families}(1), $F$ has no zero. It is real, as $\mu_I$ is invariant under $-I$, and
+$|F| \le 1$, so $F > 0$, and $g := -\log F$ is continuous, nonnegative, with $g(0) = 0$ and
+$e^{-g(|\omega|^2)} = \widehat\mu_I(\omega)$: the hypotheses of \ref{prop:affine-orbits} hold, and the
+$\mu_\Sigma$, $\Sigma \in \PD(d)$, are the orbit of $\mu_I$. (K1) of \ref{def:gw-cascade-family} at $0 \le_W wI \le_W wM$ gives
+$\mu_{wM} = \mu_{wI} * \mu_{wI,wM}$, so (2) gives $g(u) = bu$, and $b > 0$ because $\mu_I \ne \delta_0$.
+Then $\widehat\mu_\Sigma(\omega) = e^{-b\langle\omega,\Sigma\omega\rangle}$ for every $\Sigma \in \PSD(d)$, by
+the form above. These transforms have no zero, and (K1) at $0 \le_W \Sigma \le_W \Sigma'$ gives
+$\widehat\mu_{\Sigma'} = \widehat\mu_{\Sigma,\Sigma'}\,\widehat\mu_\Sigma$, so
+$\widehat\mu_{\Sigma,\Sigma'}(\omega) = e^{-b\langle\omega,(\Sigma'-\Sigma)\omega\rangle}$.
+\end{proof}
+
+\medskip
+
+\textbf{The families across the rungs.} The draft's Remark~2.17 reads \ref{lem:loewner-scale-shape}
+for a vision application, and it stays prose. Read in the nodes' terms, beyond the step of
+\ref{prop:shape-adapted-apertures}, it is a ladder of four rungs. The Gaussian cascades in every
+direction of $(t,S)$ (\ref{thm:affine-rigidity}). The isotropic stable orbits cascade across shapes
+in any orientation, with an anisotropy gained per step of at most $(t_2/t_1)^{d\alpha/(d+\alpha)}$
+(\ref{prop:stable-step-cone}), and so, by ordered \Levy{} densities on the same cone, do the orbits
+of profiles that are stable at the origin and tempered beyond, which have exponential moments
+(\ref{prop:tempered-step-cone}). A frame family cascades in scale and in relative scale at a fixed
+orientation (\ref{prop:frame-families}), and the families of one linear flow drift in shape along a
+fixed curve, locked to scale (\ref{prop:one-parameter-families}). The \Matern{} orbits, and
+every orbit of logarithmic exponent, among them every orbit whose symbol is rational and does not
+vanish, the kind elliptic solves in the shape's own operator implement exactly, cascade in scale only
+(\ref{prop:matern-steps}, \ref{prop:log-orbit-rays}, \ref{prop:rational-symbols}), so for them a different shape is a re-measurement of the original
+image rather than a further smoothing of the current one; between these ends, the steps an orbit
+survives by ordered \Levy{} densities are read off its profile's dilation ratio
+(\ref{prop:orbit-step-cone}). The draft's Remark~2.12 says the re-measurement of every non-Gaussian
+aperture; that sentence is narrowed to the orbits of logarithmic exponent, where it is proved. For
+families covariant under similarities only, an elliptical part at \Levy{} index $0$ is shape-blind
+(\ref{prop:similarity-orbit-family}(3)--(4)), and a general part is shape-blind at the origin and need
+not be beyond it (\ref{prop:similarity-general-index-zero}, \ref{prop:similarity-line-family}); at a
+positive index the shape of the part is bounded when its rank-one limit is comparable to the isotropic
+member (\ref{prop:similarity-general-bounded-shape}) and may be unbounded otherwise
+(\ref{prop:similarity-degenerate-family}).

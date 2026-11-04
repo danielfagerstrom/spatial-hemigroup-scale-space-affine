@@ -1,0 +1,643 @@
+% Appendix H --- the similarities with the Loewner order. Moved out of section 5's "Smaller groups"
+% whole (Q-0290, the author's decision of 2026-10-04; the review's length judgement, which keeps
+% prop:similarity-cascade-families, the bound es <= 4 ecc and one summary paragraph in the main text):
+% prop:similarity-stable-family, prop:similarity-orbit-family, rem:gaussian-matern-step,
+% prop:similarity-general-sandwich, prop:similarity-general-bounded-shape,
+% prop:similarity-degenerate-family, prop:similarity-line-family and
+% prop:similarity-general-index-zero, with their `% shared with blueprint` markers, verbatim, and the
+% sentences naming the cited facts they rest on. The numerical remark cites
+% records/affine/check-gaussian-matern-step.py and its saved output; no statement uses a value.
+% Q-0309 (fix group 2, review flag 37; records/affine/move-q0309-similarity-cascade.py):
+% prop:similarity-cascade-families, every clause of which is about the statements here, moved from
+% 5.7 to the end of this appendix, with the paragraph after it and its proof, verbatim.
+
+\section{The similarities with the Loewner order}\label{app:similarity}
+
+The statements of this appendix are summarized in \S\ref{sec:smaller-groups}, under ``The similarities
+with the Loewner order'', and in the cell of Table~\ref{tab:landscape}. They concern families of
+kernels from scale zero covariant under the similarities whose Loewner steps have infinitely
+divisible increments, or positive ones when there is no Gaussian part. The question throughout is
+how far from rotation invariance the non-Gaussian part of a kernel can be. The appendix answers it in
+three steps. The first subsection takes the part to be elliptical, an image of one law, and bounds its
+eccentricity. The second takes a general part, compares it with its limit at the thinnest apertures,
+and shows which hypotheses bound its shape and which do not. The last subsection shows that every
+family of the scheme has the infinitely divisible increments that the first two assume.
+
+\subsection{An elliptical non-Gaussian part}
+
+The first two statements take the non-Gaussian part to be elliptical.
+
+% shared with blueprint prop:similarity-stable-family+297bca78b259
+\begin{proposition}[similarity-covariant families with a stable part]\label{prop:similarity-stable-family}
+Let $d \ge 2$ and $0 < \alpha < 2$. For maps $h : \PD(d) \to \PD(d)$ and $C : \PD(d) \to \PSD(d)$
+put $\mu_\Sigma := N(0,C(\Sigma)) * S_\alpha(h(\Sigma))$, with $N(0,C)$ the centred Gaussian law of
+covariance $C$.
+\begin{enumerate}
+\item \emph{(The stable parts are ordered.)} If $\Sigma, \Sigma' \in \PD(d)$ and
+$\mu_{\Sigma'} = \mu_\Sigma * \rho$ for a positive finite measure $\rho$, then
+$h(\Sigma) \preceq_\alpha h(\Sigma')$.
+\item \emph{(Bounded shape.)} Suppose that $h(cQ\Sigma Q^{\tp}) = c\,Q\,h(\Sigma)\,Q^{\tp}$ for $c > 0$
+and $Q \in \Orth(d)$, that $h$ extends continuously to $\PSD(d) \setminus \{0\}$ with values in
+$\PD(d)$, and that every Loewner step $\Sigma \le \Sigma'$ in $\PD(d)$ has an increment as in (1).
+Then $h(I) = h_0I$ with $h_0 > 0$, and with $c_1 := \lambda_{\max}(h(e_1e_1^{\tp})) > 0$,
+\[
+  \frac{\lambda_{\max}(h(\Sigma))}{\lambda_{\min}(h(\Sigma))} \le \Bigl(\frac{h_0}{c_1}\Bigr)^{\alpha}
+  \qquad \text{for every } \Sigma \in \PD(d) .
+\]
+\item \emph{(A stable part that is not rotation invariant.)} Let $b \ge 0$ and $\kappa > 0$ with
+$\alpha\kappa^2 - (d+1)\kappa - 1 \ge 0$, and put $h(\Sigma) := \Sigma + \kappa\tr(\Sigma)I$ and
+$C(\Sigma) := 2b\Sigma$ for $\Sigma \in \PSD(d)$, with $S_\alpha(0) := \delta_0$. For every
+$\Sigma \le \Sigma'$ in $\PSD(d)$ there is a probability measure $\rho_{\Sigma,\Sigma'}$ with
+$\mu_{\Sigma'} = \mu_\Sigma * \rho_{\Sigma,\Sigma'}$, and the family $(\rho_{\Sigma,\Sigma'})$ satisfies
+(K1), (K2) and (K4) of Definition~\ref{def:affine-cascade-family}, and (K3) for every similarity $A = cQ$,
+$c > 0$, $Q \in \Orth(d)$. Its stable part $S_\alpha(h(\Sigma))$ is rotation invariant only when
+$\Sigma$ is a multiple of $I$.
+\end{enumerate}
+\end{proposition}
+
+In clause (3) the non-Gaussian part carries the shape of $\Sigma$, and $b = 0$ is allowed, so no
+Gaussian part is needed for that. Clause (2)'s bound tends to $1$ as $\alpha \to 0$. For clause (3)'s family
+that bound is $((1 + d\kappa)/(1 + \kappa))^\alpha$, and the eccentricity of the stable part is at most
+$(1 + \kappa)/\kappa$, its value at rank one. The condition on
+$\kappa$ is sufficient, not sharp. Without the extension of $h$ to rank one with values in $\PD(d)$
+clause (2) fails (Proposition~\ref{prop:similarity-degenerate-family}).
+
+% proof of prop:similarity-stable-family
+\begin{proof}[Sketch]
+\emph{(1).} The increment has the transform \ref{eq:stable-tail-transform} with
+$\tfrac12(C(\Sigma') - C(\Sigma))$ for its matrix $C$, $H = h(\Sigma)$ and $H' = h(\Sigma')$, so
+Lemma~\ref{lem:stable-tail} orders the \Levy{} densities, which is $h(\Sigma) \preceq_\alpha h(\Sigma')$ by
+Proposition~\ref{prop:stable-step-cone}(1).
+
+\emph{(2).} Equivariance under $\Orth(d)$ gives $h(I) = h_0I$, as in the proof of
+Lemma~\ref{lem:affine-gauge}. Scale so that $\lambda_{\max}(\Sigma) = 1$, and sandwich
+$Q\diag(1, \varepsilon, \dots, \varepsilon)Q^{\tp} \le \Sigma \le I$ with $Qe_1$ a top eigenvector. Let
+$\eta_1 \le \dots \le \eta_d$ be the eigenvalues of $h(\Sigma)$. By (1) and the inclusion of
+$\preceq_\alpha$ in the Loewner order, letting $\varepsilon \to 0$ gives
+$Q\,h(e_1e_1^{\tp})\,Q^{\tp} \le h(\Sigma)$, so $\eta_d \ge c_1$. For $h(\Sigma) \preceq_\alpha h_0I$ the
+relative step $M = h_0h(\Sigma)^{-1}$ has $\lambda_{\min}(M) = h_0/\eta_d$ and
+$\det M = h_0^d/(\eta_1\cdots\eta_d)$, so condition (c) of Proposition~\ref{prop:stable-step-cone}(1) reads
+\[
+  \prod_i\frac{\eta_i}{\eta_d} \ge \Bigl(\frac{\eta_d}{h_0}\Bigr)^\alpha ,
+  \qquad\text{whence}\qquad
+  \frac{\eta_d}{\eta_1} \le \Bigl(\frac{h_0}{\eta_d}\Bigr)^\alpha \le \Bigl(\frac{h_0}{c_1}\Bigr)^\alpha ,
+\]
+the left-hand product being at most $\eta_1/\eta_d$.
+
+\emph{(3).} Let $P := \Sigma' - \Sigma$ with $\Sigma \ne 0$, and put $H := h(\Sigma)$,
+$\tau := \tr\Sigma$ and $u := \tr(P)/\tau$. The relative step
+$M = H^{-1/2}h(\Sigma')H^{-1/2} = I + H^{-1/2}PH^{-1/2} + \kappa\tr(P)H^{-1}$ has
+$\lambda_{\min}(M) \ge 1 + \kappa u/(1+\kappa)$ and $\tr M \le d + (1+d\kappa)u/\kappa$, because
+$\kappa\tau I \le H \le (1+\kappa)\tau I$. With $A := (1+d\kappa)/\kappa$ and $B := \kappa/(1+\kappa)$
+these bounds read $\tr M \le d + Au$ and $\lambda_{\min}(M) \ge 1 + Bu$, and the condition on $\kappa$,
+$(d+\alpha)\kappa^2 \ge (1+d\kappa)(1+\kappa)$, is $A \le (d+\alpha)B$. The inequality of arithmetic and
+geometric means for the eigenvalues of $M$, and Bernoulli's inequality, give
+\[
+  \det M \le \Bigl(\frac{\tr M}{d}\Bigr)^d
+  \le \Bigl(1 + \frac{d+\alpha}{d}\,\frac{\kappa u}{1+\kappa}\Bigr)^d
+  \le \lambda_{\min}(M)^{d+\alpha} ,
+\]
+which is condition (c). So the densities are ordered, and
+Proposition~\ref{prop:stable-step-cone}(1) gives the stable increment; the Gaussian increment is
+$N(0, 2bP)$. The axioms are read off the telescoping transforms.
+\end{proof}
+
+For an elliptical part of any self-decomposable profile, infinitely divisible increments order the
+parts, and the bound on the shape is read off the dilation ratio.
+
+% shared with blueprint prop:similarity-orbit-family+550d5a069682
+\begin{proposition}[similarity-covariant families with an elliptical part: bounded shape, and shape-blind at index $0$]\label{prop:similarity-orbit-family}
+Let $d \ge 2$, let $k$ be as in Proposition~\ref{prop:orbit-step-cone} and right-continuous, with dilation ratio
+$R$, and write $\nu_H := (H^{1/2})_*\nu_I$, $H \in \PD(d)$, for the orbit of the law $\nu_I$ of
+Proposition~\ref{prop:orbit-step-cone}(1), with \Levy{} densities $n_H$. For maps $h : \PD(d) \to \PD(d)$ and
+$C : \PD(d) \to \PSD(d)$ put $\mu_\Sigma := N(0,C(\Sigma)) * \nu_{h(\Sigma)}$.
+\begin{enumerate}
+\item \emph{(Infinitely divisible increments order the parts.)} If $\Sigma, \Sigma' \in \PD(d)$ and
+$\mu_{\Sigma'} = \mu_\Sigma * \rho$ with $\rho$ infinitely divisible, then $C(\Sigma) \le C(\Sigma')$
+and $n_{h(\Sigma)} \le n_{h(\Sigma')}$ everywhere: the step $h(\Sigma) \to h(\Sigma')$ is in the step
+set of Proposition~\ref{prop:orbit-step-cone}(2).
+\item \emph{(Bounded shape.)} Suppose $h(cQ\Sigma Q^{\tp}) = c\,Q\,h(\Sigma)\,Q^{\tp}$ for $c > 0$ and
+$Q \in \Orth(d)$, that $h$ extends continuously to $\PSD(d) \setminus \{0\}$ with values in $\PD(d)$,
+and that every Loewner step $\Sigma \le \Sigma'$ in $\PD(d)$ has an infinitely divisible increment.
+Then $h(I) = h_0I$ with $h_0 > 0$, and with $c_1 := \lambda_{\max}(h(e_1e_1^{\tp}))$,
+\[
+  \frac{\lambda_{\max}(h(\Sigma))}{\lambda_{\min}(h(\Sigma))} \le R\bigl((h_0/c_1)^{1/2}\bigr)^2
+  \qquad \text{for every } \Sigma \in \PD(d) .
+\]
+\item \emph{(Index $0$: shape-blind.)} If $k(0{+})$ is finite, $h$ is equivariant as in (2) (no
+extension needed), and every Loewner step has an infinitely divisible increment, then $h(\Sigma)$
+is a multiple of $I$ for every $\Sigma$.
+\item \emph{(Logarithmic exponent, no Gaussian part.)} Let instead the non-Gaussian parts be the
+orbit $(\nu_H)$ of a law satisfying the hypothesis of Proposition~\ref{prop:log-orbit-rays}, let $C \equiv 0$
+and $h$ be equivariant as in (2), and suppose every Loewner step has a positive finite increment.
+Then $h(\Sigma)$ is a multiple of $I$ for every $\Sigma$.
+\end{enumerate}
+\end{proposition}
+
+Without a Gaussian part, clause (4) gets shape-blindness from positive increments alone. With a
+Gaussian part a positive increment need not order the parts, so clauses (1)--(3) require infinitely
+divisible increments. A computation, Remark~\ref{rem:gaussian-matern-step}, suggests that this
+hypothesis cannot simply be dropped; it is not a proof. Proposition~\ref{prop:similarity-cascade-families}
+discharges the hypothesis for every family of the scheme.
+
+% proof of prop:similarity-orbit-family
+\begin{proof}[Sketch]
+\emph{(1).} Both kernels are infinitely divisible with triplets $(C(\cdot), n_{h(\cdot)}(x)\,dx, 0)$, and
+by the uniqueness C2(ii) the triplet of $\rho$ adds to that of $\mu_\Sigma$; so $C(\Sigma) \le C(\Sigma')$
+and $n_{h(\Sigma)} \le n_{h(\Sigma')}$ almost everywhere. In the coordinates $x = h(\Sigma)^{1/2}y$, an
+open set of positive measure near each radius and the right-continuity of $k$ give
+$D\,m(r) \le m(r/\lambda)$ for every $r > 0$, where $m(r) = k(r)r^{-d}$, $D^2$ is the determinant of the
+relative step $M$ and $\lambda^2$ its least eigenvalue; as $\langle y, M^{-1}y\rangle^{1/2} \le |y|/\lambda$
+and $m$ is nonincreasing, that is the ordering everywhere.
+
+\emph{(2)} is the proof of Proposition~\ref{prop:similarity-stable-family}(2), with the step set of
+Proposition~\ref{prop:orbit-step-cone}(2) in place of the stable cone, $R$ being nondecreasing, and
+$h(I) = h_0I$ as in the proof of Lemma~\ref{lem:affine-gauge}.
+
+\emph{(3).} $R \equiv 1$ (Proposition~\ref{prop:orbit-step-cone}(3)), so every Loewner step moves $h$ along
+a ray, and $\Sigma \le tI$ makes $h(\Sigma)$ a multiple of $h(tI) = th_0I$.
+
+\emph{(4).} The positive increment of $\Sigma \le tI$ is an increment of the orbit $(\nu_H)$ from $h(\Sigma)$
+to $th_0I$, and Proposition~\ref{prop:log-orbit-rays} makes them multiples.
+\end{proof}
+
+\begin{remark}[a Gaussian part and a positive increment, measured]\label{rem:gaussian-matern-step}
+In the plane take $C(\Sigma) = 2b\Sigma$, the \Matern{} orbit of index $1$ as the elliptical part, and
+$h(\Sigma) = \Sigma + \kappa\tr(\Sigma)I$ with $\kappa = 2$. Consider the step from $\diag(1, 0.3)$ by
+$\diag(0.05, 0.55)$, for which $h(\Sigma')$ is not a multiple of $h(\Sigma)$. A script deposited
+with the paper computes its would-be increment by the fast Fourier transform. It samples the transform
+of the increment on the frequency grid of a spatial square of side $60\,\lambda_{\max}(h(\Sigma'))^{1/2}
+\approx 132$ centred at the origin, at two resolutions, $1024^2$ and $2048^2$ points (spacings $0.129$
+and $0.065$, frequencies up to $\pi$ over the spacing, about $24$ and $49$ in each coordinate). At
+$b = 2$ the computed density is nonnegative to rounding:
+its minimum is $-10^{-17}$ of its maximum at both resolutions, as for the ray steps that calibrate the
+computation. At $b = 0.1$ it is negative, with negative mass $1.4\cdot10^{-2}$ at $2048^2$ points.
+% Round 3 (content review), E item 8 (remark_h3_checks-output.txt): the value at the finer grid, and why.
+At $1024^2$ points the Gaussian factor is still $0.05$ at the largest frequency. These are numerical
+findings, and positivity at $b = 2$ is not proved. If that increment is positive, it is not infinitely
+divisible, since its \Levy{} measure would be the signed $n_{h(\Sigma')} - n_{h(\Sigma)}$. The
+computation thus suggests that the Gaussian part smooths away the obstruction of
+Proposition~\ref{prop:log-orbit-rays} on this full-rank step. By
+Proposition~\ref{prop:similarity-cascade-families} these kernels are the kernels from scale zero of no
+(similarities, Loewner)-cascade family, so the example shows why the axioms require continuity along
+the order.
+\end{remark}
+
+\subsection{A general non-Gaussian part}
+
+For a non-Gaussian part with no orbit structure the same sandwich works in the order of \Levy{}
+measures, and in the order of exponents when there is no Gaussian part.
+
+% shared with blueprint prop:similarity-general-sandwich+86d7dd25f45f
+\begin{proposition}[the sandwich for a general similarity-covariant part]\label{prop:similarity-general-sandwich}
+Let $d \ge 2$. For each $\Sigma \in \PD(d)$ let $\mu_\Sigma$ be a symmetric infinitely divisible
+probability measure on $\RR^d$ with generating triplet $(C(\Sigma), L_\Sigma, 0)$, and put
+$\psi_\Sigma(\omega) := \int(1 - \cos\langle\omega,x\rangle)\,L_\Sigma(dx)$; so
+$\mu_\Sigma = N(0,C(\Sigma)) * \nu_\Sigma$, where the \emph{non-Gaussian part} $\nu_\Sigma$ has
+$\widehat\nu_\Sigma = e^{-\psi_\Sigma}$. Suppose the family is covariant under similarities,
+$(\sqrt c\,Q)_*\mu_\Sigma = \mu_{cQ\Sigma Q^{\tp}}$ for $c > 0$, $Q \in \Orth(d)$ and
+$\Sigma \in \PD(d)$, which is (K3) of Definition~\ref{def:affine-cascade-family} for $A = \sqrt c\,Q$. Put
+$\Sigma_\varepsilon := \diag(1,\varepsilon,\dots,\varepsilon)$ for $0 < \varepsilon \le 1$.
+\begin{enumerate}
+\item \emph{(Covariance.)} $C(cQ\Sigma Q^{\tp}) = c\,Q\,C(\Sigma)\,Q^{\tp}$,
+$L_{cQ\Sigma Q^{\tp}} = (\sqrt c\,Q)_*L_\Sigma$ and
+$\psi_{cQ\Sigma Q^{\tp}}(\omega) = \psi_\Sigma(\sqrt c\,Q^{\tp}\omega)$. In particular $L_I$ and
+$\psi_I$ are rotation invariant.
+\item \emph{(Infinitely divisible increments.)} If $\mu_{\Sigma'} = \mu_\Sigma * \rho$ with $\rho$
+infinitely divisible, then $C(\Sigma) \le C(\Sigma')$, $L_\Sigma \le L_{\Sigma'}$ and
+$\psi_\Sigma \le \psi_{\Sigma'}$.
+\item \emph{(Positive increments without a Gaussian part.)} If $C \equiv 0$ and
+$\mu_{\Sigma'} = \mu_\Sigma * \rho$ with $\rho$ a positive finite measure, then $\rho$ is a
+probability measure, $\widehat\rho = e^{-(\psi_{\Sigma'} - \psi_\Sigma)}$, and
+$\psi_\Sigma \le \psi_{\Sigma'}$.
+\item \emph{(The rank-one limit.)} Suppose every Loewner step $\Sigma \le \Sigma'$ in $\PD(d)$ has an
+infinitely divisible increment. Then $L_*(B) := \lim_{\varepsilon\downarrow0}L_{\Sigma_\varepsilon}(B)$
+exists for every Borel set $B$ bounded away from the origin, and $L_*$ extends to a \Levy{} measure
+with $L_* \le L_{\Sigma_\varepsilon}$ for every $\varepsilon$; and
+$\psi_*(\omega) := \lim_{\varepsilon\downarrow0}\psi_{\Sigma_\varepsilon}(\omega)$ exists for every
+$\omega$. Both are invariant under every $R \in \Orth(d)$ with $Re_1 = \pm e_1$. If instead
+$C \equiv 0$ and every Loewner step has a positive finite increment, $\psi_*$ exists and has the same
+invariance.
+\item \emph{(The sandwich.)} Let $\Sigma \in \PD(d)$ with $\lambda_{\max}(\Sigma) = 1$, and let
+$Q \in \Orth(d)$ have as its first column a unit eigenvector of $\Sigma$ for the eigenvalue $1$. Under
+the first hypothesis of (4),
+\[
+  Q_*L_* \le L_\Sigma \le L_I
+  \qquad\text{and}\qquad
+  \psi_*(Q^{\tp}\omega) \le \psi_\Sigma(\omega) \le \psi_I(\omega) \quad (\omega \in \RR^d) ;
+\]
+under the second, the inequalities between the exponents hold.
+\end{enumerate}
+\end{proposition}
+
+The rank-one limit needs no continuity hypothesis: the \Levy{} measures along $\Sigma_\varepsilon$
+decrease as $\varepsilon \downarrow 0$, so the limit exists by monotonicity alone. The analogue of the
+extension of $h$ to rank one in the elliptical statements is therefore a hypothesis on the size of the
+limit, and the limit may be $0$ (Proposition~\ref{prop:similarity-degenerate-family}). For the families of the scheme the standing hypotheses
+and the first hypothesis of (4) are theorems (Proposition~\ref{prop:similarity-cascade-families}(1)).
+
+% proof of prop:similarity-general-sandwich
+\begin{proof}[Sketch]
+\emph{(1).} The symmetry of $\mu_\Sigma$ and the uniqueness C2(ii) make $L_\Sigma$ symmetric, so the
+transform collapses to $\exp[-\tfrac12\langle\omega,C(\Sigma)\omega\rangle - \psi_\Sigma(\omega)]$ as in the
+proof of Lemma~\ref{lem:elliptical-stable}(2). The image under $A = \sqrt c\,Q$, which (K3) of
+Definition~\ref{def:affine-cascade-family} identifies with $\mu_{cQ\Sigma Q^{\tp}}$, has the triplet
+$(AC(\Sigma)A^{\tp}, A_*L_\Sigma, 0)$, and uniqueness gives the identities.
+
+\emph{(2).} The triplets of a convolution add, as in the proof of
+Proposition~\ref{prop:similarity-orbit-family}(1). \emph{(3).} The transform of $\mu_\Sigma$ is positive, so
+$\widehat\rho = e^{-(\psi_{\Sigma'} - \psi_\Sigma)}$ and $|\widehat\rho| \le 1$.
+
+\emph{(4).} $\varepsilon \mapsto L_{\Sigma_\varepsilon}(B)$ is nondecreasing and bounded by $L_I(B)$ on sets
+bounded away from the origin, so it converges. On a shell $\{|x| \ge \delta\}$ the limit is countably
+additive, since for disjoint $B_n$ the terms $L_{\Sigma_\varepsilon}(B_n)$ are dominated by the summable
+$L_I(B_n)$, and it extends to a \Levy{} measure below every $L_{\Sigma_\varepsilon}$. The invariance holds because $R\Sigma_\varepsilon R^{\tp} =
+\Sigma_\varepsilon$ when $Re_1 = \pm e_1$.
+
+\emph{(5).} $Q\Sigma_\varepsilon Q^{\tp} \le \Sigma \le I$ for $\varepsilon \le \lambda_{\min}(\Sigma)$, and (2) or
+(3) with (1) and (4) gives the inequalities.
+\end{proof}
+
+The shape of a general part is measured by one of three functionals, and each bound is the sandwich
+read in one of them.
+
+% shared with blueprint prop:similarity-general-bounded-shape+892ef79455a8
+\begin{proposition}[bounded shape under a comparable rank-one limit]\label{prop:similarity-general-bounded-shape}
+For a measure $L$ on $\RR^d \setminus \{0\}$, a function $\psi \ge 0$ on $\RR^d$, $s > 0$ and
+$H \in \PD(d)$, put
+\[
+  \operatorname{rs}(L) := \inf\{K \ge 1 : Q_*L \le K\,L \text{ for every } Q \in \Orth(d)\},
+\]
+\[
+  \operatorname{es}(\psi) := \inf\{K \ge 1 : \psi(Q\omega) \le K\,\psi(\omega) \text{ for every } Q \in \Orth(d),\ \omega \in \RR^d\},
+\]
+\[
+  \mathcal M_s(L) := \int(|x|^2 \wedge s^2)\,\frac{xx^{\tp}}{|x|^2}\,L(dx),
+  \qquad T_s(L) := \tr\mathcal M_s(L) = \int(|x|^2 \wedge s^2)\,L(dx),
+\]
+\[
+  \operatorname{ecc}(H) := \frac{\lambda_{\max}(H)}{\lambda_{\min}(H)} ,
+\]
+the \emph{rotational spread}, the \emph{exponent spread}, the \emph{moment matrix at scale $s$} and
+the eccentricity, the infimum of the empty set being $\infty$, and $\operatorname{cond}M := \lambda_{\max}(M)/\lambda_{\min}(M)
+\in [1,\infty]$ for $M \in \PSD(d) \setminus \{0\}$. Let the family be as in
+Proposition~\ref{prop:similarity-general-sandwich}.
+\begin{enumerate}
+\item \emph{(The functionals.)} For $c > 0$ and $Q \in \Orth(d)$,
+$\operatorname{rs}((cQ)_*L) = \operatorname{rs}(L)$, $\operatorname{es}(\psi(cQ\,\cdot)) = \operatorname{es}(\psi)$
+and $\mathcal M_s((cQ)_*L) = c^2Q\,\mathcal M_{s/c}(L)\,Q^{\tp}$. $\operatorname{rs}(L) = 1$ exactly when $L$ is rotation
+invariant, $\operatorname{es}(\psi) = 1$ exactly when $\psi$ is, and $\operatorname{es}(\psi_L) \le \operatorname{rs}(L)$ for the
+exponent $\psi_L(\omega) := \int(1 - \cos\langle\omega,x\rangle)\,L(dx)$; the exponent spread of a sum is at
+most the largest exponent spread of its terms. For the orbit $(\nu_H)$ of a profile as in
+Proposition~\ref{prop:orbit-step-cone}(1), $\operatorname{es}(\psi_{\nu_H}) \le 4\operatorname{ecc}(H)$; for the stable orbit,
+$\operatorname{es}(\psi_{S_\alpha(H)}) = \operatorname{ecc}(H)^{\alpha/2}$.
+\item \emph{(\Levy{} level.)} Suppose every Loewner step in $\PD(d)$ has an infinitely divisible
+increment and $L_* \ge \theta L_I$ for some $\theta \in (0,1]$. Then for every $\Sigma \in \PD(d)$, with
+$t := \lambda_{\max}(\Sigma)$,
+\[
+  \theta\,L_{tI} \le L_\Sigma \le L_{tI} ,
+  \qquad
+  \operatorname{rs}(L_\Sigma) \le 1/\theta ,
+  \qquad
+  \operatorname{es}(\psi_\Sigma) \le 1/\theta .
+\]
+\item \emph{(Exponent level.)} Suppose every Loewner step in $\PD(d)$ has an infinitely divisible
+increment, or that $C \equiv 0$ and every Loewner step has a positive finite increment; and that
+$\psi_* \ge \theta\psi_I$ for some $\theta \in (0,1]$. Then $\theta\psi_{tI} \le \psi_\Sigma \le \psi_{tI}$ and
+$\operatorname{es}(\psi_\Sigma) \le 1/\theta$ for every $\Sigma \in \PD(d)$, $t := \lambda_{\max}(\Sigma)$.
+\item \emph{(Moments, scale by scale.)} Suppose every Loewner step in $\PD(d)$ has an infinitely
+divisible increment, and $L_I \ne 0$. For $s > 0$ the limit $\mathcal M_s^* := \lim_{\varepsilon\downarrow0}\mathcal M_s(L_{\Sigma_\varepsilon})$
+exists and is $\diag(a_s, b_s, \dots, b_s)$; put $\theta_s := d\min(a_s,b_s)/T_s(L_I) \in [0,1]$. Then for every
+$\Sigma \in \PD(d)$ and $s > 0$, with $t := \lambda_{\max}(\Sigma)$,
+$\operatorname{cond}\mathcal M_s(L_\Sigma) \le 1/\theta_{s/\sqrt t}$; so
+$\operatorname{cond}\mathcal M_s(L_\Sigma) \le 1/\inf_{r>0}\theta_r$ for all $\Sigma$ and $s$.
+\end{enumerate}
+\end{proposition}
+
+The exponent spread is the functional in which the shape is measured. It is defined for every
+symmetric infinitely divisible law, it is the condition number for a Gaussian, it is
+$\operatorname{ecc}(H)^{\alpha/2}$ on the stable orbit and at most $4\operatorname{ecc}(H)$ on the
+elliptical orbit of every nonincreasing profile, so it extends the eccentricity that the elliptical statements bound, and it equals
+$1$ exactly for the rotation-invariant parts. It is also the only one of the three that positive
+increments see when there is no Gaussian part (clause (3)). The hypotheses are sufficient, not
+necessary: the shape-blind family $((\det\Sigma)^{1/(2d)})_*\nu_I$ has $L_* = 0$ and spread $1$.
+
+% proof of prop:similarity-general-bounded-shape
+\begin{proof}[Sketch]
+\emph{(1).} The rotational and the exponent spread are unchanged under conjugation and dilation, and
+$\mathcal M_s((cQ)_*L) = c^2Q\,\mathcal M_{s/c}(L)\,Q^{\tp}$ by the substitution $x \mapsto cQx$. If
+$Q_*L \le L$ for every $Q$, then $L = Q_*(Q^{-1})_*L \le Q_*L$, so equality holds. For the orbit of a profile, $\psi_{\nu_H}(\omega) = g(\langle\omega,H\omega\rangle)$
+with $g$ nondecreasing, as $k$ is nonincreasing in the substitution of
+Proposition~\ref{prop:orbit-step-cone}(1), and $g(4u) \le 4g(u)$ from $1 - \cos2\tau \le 4(1 - \cos\tau)$;
+so $g(cu) \le 4c\,g(u)$ for $c \ge 1$, which gives $4\operatorname{ecc}(H)$. For the stable orbit the
+exponent is $\langle\omega,H\omega\rangle^{\alpha/2}$ (Lemma~\ref{lem:elliptical-stable}(2)).
+
+\emph{(2), (3).} After scaling to $t = 1$, Proposition~\ref{prop:similarity-general-sandwich}(5) gives
+$\theta L_I \le Q_*L_* \le L_\Sigma \le L_I$, and, for every $Q' \in \Orth(d)$,
+$Q'_*L_\Sigma \le L_I \le \theta^{-1}L_\Sigma$; the same for exponents.
+
+\emph{(4).} $\mathcal M_s$ is monotone in the \Levy{} measure, so the limit exists; its invariance under
+the $Q'$ with $Q'e_1 = \pm e_1$ makes it $\diag(a_s, b_s, \dots, b_s)$, by the argument of the proof of
+Lemma~\ref{lem:affine-gauge}, and $\mathcal M_s(L_I) = \tfrac1dT_s(L_I)\,I$. The sandwich gives
+$Q\mathcal M_s^*Q^{\tp} \le \mathcal M_s(L_\Sigma) \le \tfrac1dT_s(L_I)\,I$.
+\end{proof}
+
+Without a hypothesis on the rank-one limit the shape need not be bounded, already for elliptical
+stable parts.
+
+% shared with blueprint prop:similarity-degenerate-family+82099345e828
+\begin{proposition}[without a nondegenerate rank-one limit the shape is unbounded]\label{prop:similarity-degenerate-family}
+Let $d \ge 2$, $0 < \alpha < 2$, $\tfrac{1}{d+\alpha} \le \gamma < \tfrac1d$ and $p := 1 - d\gamma$, so that
+$0 < p \le \tfrac{\alpha}{d+\alpha}$. For $\Sigma \in \PSD(d)$ put $h(\Sigma) := (\det\Sigma)^\gamma\,\Sigma^p$,
+which is $0$ when $\Sigma$ is singular. For $b \ge 0$ put
+$\mu_\Sigma := N(0,2b\Sigma) * S_\alpha(h(\Sigma))$, with $S_\alpha$ and $n_H$ as in
+Lemma~\ref{lem:elliptical-stable} and $S_\alpha(0) := \delta_0$; write $L_\Sigma := n_{h(\Sigma)}(x)\,dx$ and
+$\psi_\Sigma$ for the \Levy{} measure and the exponent of the non-Gaussian part, $\Sigma \in \PD(d)$, and
+use the notation of Proposition~\ref{prop:similarity-general-bounded-shape}.
+\begin{enumerate}
+\item \emph{(A cascade.)} $h$ is continuous on $\PSD(d)$, $h(cQ\Sigma Q^{\tp}) = c\,Q\,h(\Sigma)\,Q^{\tp}$ for
+$c > 0$ and $Q \in \Orth(d)$, and $n_{h(\Sigma)} \le n_{h(\Sigma')}$ for every $\Sigma \le \Sigma'$ in $\PD(d)$.
+For every $\Sigma \le \Sigma'$ in $\PSD(d)$ there is an infinitely divisible probability measure
+$\rho_{\Sigma,\Sigma'}$ with $\mu_{\Sigma'} = \mu_\Sigma * \rho_{\Sigma,\Sigma'}$, and the family
+$(\rho_{\Sigma,\Sigma'})$ satisfies (K1), (K2) and (K4) of Definition~\ref{def:affine-cascade-family}, and (K3) for
+every similarity $A = cQ$.
+\item \emph{(Unbounded shape.)} For $\Sigma \in \PD(d)$, $\operatorname{ecc}(h(\Sigma)) = \operatorname{ecc}(\Sigma)^p$,
+$\operatorname{es}(\psi_\Sigma) = \operatorname{ecc}(\Sigma)^{p\alpha/2}$, $\operatorname{rs}(L_\Sigma) \ge \operatorname{ecc}(\Sigma)^{p\alpha/2}$, and for
+every $s > 0$
+\[
+  \operatorname{cond}\mathcal M_s(L_\Sigma) \ge \frac{G_1}{d\,G_0}\operatorname{ecc}(\Sigma)^{p\alpha/2} ,
+\]
+\[
+  G_0 := \int_{\RR^d}(z_d^2 \wedge 1)\,|z|^{-d-\alpha}\,dz ,
+  \quad
+  G_1 := \int_{\RR^d}(|z|^2 \wedge 1)\,|z|^{-d-\alpha}\,dz ,
+\]
+both finite and positive. The rank-one limit of Proposition~\ref{prop:similarity-general-sandwich}(4) is $L_* = 0$.
+\item \emph{(A nonzero rotation-invariant rank-one limit is not enough.)} Let $0 < \beta < \alpha$, let
+$S'_\beta(H)$ and $n'_H$ be the law and the \Levy{} density of Lemma~\ref{lem:elliptical-stable} for the index
+$\beta$, with $S'_\beta(0) := \delta_0$, and put $\mu'_\Sigma := \mu_\Sigma * S'_\beta(\tr(\Sigma)\,I)$, with \Levy{} measure
+$L'_\Sigma = (n_{h(\Sigma)} + n'_{\tr(\Sigma)I})(x)\,dx$ and exponent $\psi'_\Sigma$. The family $(\mu'_\Sigma)$
+has all the properties of (1); its rank-one limit is $L'_* = n'_I(x)\,dx$, nonzero and rotation
+invariant; for every $s > 0$, $\theta_s > 0$ in Proposition~\ref{prop:similarity-general-bounded-shape}(4); and for
+every $\Sigma \in \PD(d)$
+\[
+  \operatorname{es}(\psi'_\Sigma) \ge \operatorname{ecc}(\Sigma)^{p\alpha/2} ,
+  \qquad
+  \sup_{s>0}\operatorname{cond}\mathcal M_s(L'_\Sigma) \ge \frac{G_1}{d\,G_0}\operatorname{ecc}(\Sigma)^{p\alpha/2} .
+\]
+\end{enumerate}
+\end{proposition}
+
+So under similarity covariance with a cascade along the whole Loewner order, the non-Gaussian part
+need not stay within a bounded neighbourhood of isotropy, with or without a Gaussian part. The
+extension of $h$ to rank one with values in $\PD(d)$ cannot be dropped: here $h$ extends by $0$ and the
+shape is unbounded. It is not necessary either, since the gauge $(\det\Sigma)^{1/d}I$, the endpoint
+$\gamma = 1/d$, also vanishes at rank one and has spread $1$. The family interpolates between the stable
+orbit, $\gamma = 0$, which has no rank-one step, and that shape-blind gauge. Clause (3) shows that a
+nonzero rank-one limit, even a rotation-invariant one, is not enough: what
+Proposition~\ref{prop:similarity-general-bounded-shape} needs is comparability with $L_I$.
+
+% proof of prop:similarity-degenerate-family
+\begin{proof}[Sketch]
+\emph{The Loewner--Heinz inequality} (\sscite{bhatia1997matrix}, Thm.~V.1.9, p.~115). For $0 < p < 1$,
+$\Sigma^p = \kappa_p^{-1}\int_0^\infty(I - s(\Sigma + sI)^{-1})s^{p-1}\,ds$, and inversion reverses the
+order on $\PD(d)$, so $\Sigma \le \Sigma'$ gives $\Sigma^p \le \Sigma'^p$ and $\Sigma'^{-p} \le \Sigma^{-p}$.
+
+\emph{(1).} $\det h(\Sigma) = \det\Sigma$, so by \ref{eq:stable-levy-density}
+\[
+  n_{h(\Sigma)}(x) = c_{d,\alpha}^{-1}\,(\det\Sigma)^{((d+\alpha)\gamma - 1)/2}\,\langle x,\Sigma^{-p}x\rangle^{-(d+\alpha)/2} ,
+\]
+and along a Loewner step both factors increase, the first because $(d+\alpha)\gamma \ge 1$. So
+Proposition~\ref{prop:stable-step-cone}(1) gives the stable increments, and the axioms follow as in the
+proof of Proposition~\ref{prop:similarity-stable-family}(3). For $\gamma < 1/(d+\alpha)$ the display gives
+$n_{h(I + \tau e_1e_1^{\tp})}(e_2) < n_{h(I)}(e_2)$, and Lemma~\ref{lem:stable-tail} excludes a positive
+increment, so the lower bound on $\gamma$ is needed.
+
+\emph{(2).} The eigenvalues of $h(\Sigma)$ are $(\det\Sigma)^\gamma\sigma_i^p$, $\sigma_i$ those of $\Sigma$,
+so $\operatorname{ecc}(h(\Sigma)) = \operatorname{ecc}(\Sigma)^p$, and
+Proposition~\ref{prop:similarity-general-bounded-shape}(1) gives the spreads. For the moments let $H \in \PD(d)$ have
+unit eigenvectors $v_\pm$ for its eigenvalues $\eta_+ := \lambda_{\max}(H)$ and
+$\eta_- := \lambda_{\min}(H)$, and substitute $x = H^{1/2}y$, under which
+$n_H(x)\,dx = c_{d,\alpha}^{-1}|y|^{-d-\alpha}\,dy$ and $\langle v_\pm,x\rangle = \eta_\pm^{1/2}\langle v_\pm,y\rangle$.
+A rotation taking $v_-$ to $e_d$ and the dilation $y = s\eta_-^{-1/2}z$ give the upper bound, and
+$|x|^2 \le \eta_+|y|^2$ with the average $\tfrac1d$ of $\langle v_+,y\rangle^2/|y|^2$ over the sphere the lower:
+\[
+  \langle v_-,\mathcal M_s(n_H)v_-\rangle \le c_{d,\alpha}^{-1}\eta_-^{\alpha/2}s^{2-\alpha}G_0 ,
+  \qquad
+  \langle v_+,\mathcal M_s(n_H)v_+\rangle \ge \frac{c_{d,\alpha}^{-1}}{d}\,\eta_+^{\alpha/2}s^{2-\alpha}G_1 .
+\]
+Their ratio is at most $\operatorname{cond}\mathcal M_s(n_H)$, which gives the bound with $H = h(\Sigma)$.
+Along $\Sigma_\varepsilon$ the densities tend to $0$ off a null set, so $L_* = 0$ by dominated convergence,
+in the sense of Proposition~\ref{prop:similarity-general-sandwich}(4).
+
+\emph{(3).} The gauge $\tr(\Sigma)I$ is equivariant and monotone, so the second factor cascades too, and
+$L'_* = n'_I(x)\,dx$. At large $|\omega|$ the index-$\alpha$ term dominates the exponent, and at small $s$ it
+dominates the moments, which gives the two bounds.
+\end{proof}
+
+The rotational spread is not equivalent to the other two functionals, and exact shape-blindness at index
+$0$ fails for a general part. Both are shown by a part laid along lines.
+
+% shared with blueprint prop:similarity-line-family+b0f25a81e985
+\begin{proposition}[a part laid along lines]\label{prop:similarity-line-family}
+Let $d \ge 2$, let $k : (0,\infty) \to [0,\infty)$ be nonincreasing and not identically $0$ with
+$\int_0^1rk(r)\,dr + \int_1^\infty k(r)\,dr/r < \infty$, let $\ell(dr) := k(|r|)\,dr/|r|$ on
+$\RR \setminus \{0\}$, and let $\overline\sigma$ be the normalised surface measure on $S^{d-1}$. For
+$\Sigma \in \PSD(d)$ and $q_\Sigma(u) := \langle u,\Sigma u\rangle$ let $L_\Sigma$ be the measure on
+$\RR^d \setminus \{0\}$ with
+\[
+  \int f\,dL_\Sigma := \int_{S^{d-1}}\overline\sigma(du)\int_{\RR}f\bigl(r\,q_\Sigma(u)^{1/2}u\bigr)\,\ell(dr)
+\]
+for Borel $f \ge 0$ on $\RR^d$ with $f(0) = 0$, and for $b \ge 0$ let $\mu_\Sigma := N(0,2b\Sigma) * \nu_\Sigma$,
+$\nu_\Sigma$ the law with triplet $(0, L_\Sigma, 0)$.
+\begin{enumerate}
+\item \emph{(A cascade.)} $L_\Sigma$ is a symmetric \Levy{} measure; for $\Sigma \in \PD(d)$ it is the image
+of $\overline\sigma(du)\,2k(s\,q_\Sigma(u)^{-1/2})\,ds/s$ under $(u,s) \mapsto su$, a polar profile nonincreasing in
+$s$ and at most $2k(0{+})$; $L_{cQ\Sigma Q^{\tp}} = (\sqrt c\,Q)_*L_\Sigma$; and $L_\Sigma \le L_{\Sigma'}$ for
+$\Sigma \le \Sigma'$. Hence for every $\Sigma \le \Sigma'$ in $\PSD(d)$ there is an infinitely divisible
+probability measure $\rho_{\Sigma,\Sigma'}$ with $\mu_{\Sigma'} = \mu_\Sigma * \rho_{\Sigma,\Sigma'}$, and the family
+$(\rho_{\Sigma,\Sigma'})$ satisfies (K1), (K2), (K4) of Definition~\ref{def:affine-cascade-family} and (K3) for every
+similarity.
+\item \emph{(Three functionals.)} For every $\Sigma \in \PD(d)$ and $s > 0$,
+$\operatorname{es}(\psi_\Sigma) \le 4d(d+2)$ and $\operatorname{cond}\mathcal M_s(L_\Sigma) \le d+2$, while
+$\operatorname{rs}(L_{\Sigma_\varepsilon}) \to \infty$ as $\varepsilon \downarrow 0$. The rank-one limit $L_*$ is at least the
+image of $\overline\sigma(du)\,2k(s/|u_1|)\,ds/s$ (the set $u_1 = 0$ is $\overline\sigma$-null), so it
+charges every open cone.
+\item \emph{(Not shape-blind at index $0$.)} If $\Sigma \in \PD(d)$ is not a multiple of $I$, then $L_\Sigma$,
+and so $\nu_\Sigma$, is not rotation invariant. This holds in particular when $k(0{+}) < \infty$, so that
+every polar profile of every $L_\Sigma$ is bounded at the origin.
+\end{enumerate}
+\end{proposition}
+
+The \Levy{} measure is laid along lines, and in direction $u$ it is the one-dimensional profile dilated
+by $q_\Sigma(u)^{1/2}$. The exponent and the moments stay within a bounded neighbourhood of isotropy,
+while the rotational spread does not, although the rank-one limit is nonzero and charges every
+direction. Clause (3) holds even under infinitely divisible increments: a general part with polar
+profiles bounded at the origin need not be shape-blind. For this family the index at the origin is
+$2k(0{+})$ in every direction for every $\Sigma$, and the shape is carried at positive radii.
+
+% proof of prop:similarity-line-family
+\begin{proof}[Sketch]
+\emph{(1).} Splitting the line integral at $0$ and substituting $s = rq^{1/2}$ gives the polar form,
+nonincreasing in $s$ because $k$ is, and $q_\Sigma \le q_{\Sigma'}$ for $\Sigma \le \Sigma'$ orders the
+measures. C2(iii) gives the laws and increments, and the axioms (K1)--(K4) of
+Definition~\ref{def:affine-cascade-family}, (K3) for similarities, follow from the transforms as in the
+proof of Proposition~\ref{prop:similarity-general-sandwich}(1).
+
+% CHANGED Q-0281 wave 2: blind review W2I-4: the sketch of (2) re-transcribed to the route of the
+% proof of record: the bounds at Sigma itself from the fourth moments, fixed caps for the rotational
+% spread, open cones through sectors. It no longer routes through
+% prop:similarity-general-bounded-shape(3)-(4), and reads no law.
+\emph{(2).} The exponent is $\psi_\Sigma(\omega) = \int\overline\sigma(du)\,\psi_\ell(q_\Sigma(u)^{1/2}\langle\omega,u\rangle)$,
+where $\psi_\ell$, the exponent of the line profile, is even, nondecreasing on $[0,\infty)$ and satisfies
+$\psi_\ell(a\tau) \ge \tfrac{a^2}{4}\psi_\ell(\tau)$ for $0 < a \le 1$, from $\psi_\ell(2\tau) \le
+4\psi_\ell(\tau)$ and the monotonicity of $\psi_\ell$. Let $\Sigma \in \PD(d)$, $t := \lambda_{\max}(\Sigma)$ and
+$v$ a unit eigenvector for it, so that $t\langle v,u\rangle^2 \le q_\Sigma(u) \le t$ on the sphere. Then
+$\psi_\Sigma(R\omega) \le \psi_\ell(t^{1/2}|\omega|)$ for every $R \in \Orth(d)$. For $\omega \ne 0$, $w := \omega/|\omega|$ and
+$a := |\langle v,u\rangle|\,|\langle w,u\rangle| \le 1$, the fourth moments of the normalised surface measure,
+$\int\langle v,u\rangle^2\langle w,u\rangle^2\,\overline\sigma(du) = \frac{1 + 2\langle v,w\rangle^2}{d(d+2)}$, give
+\[
+  \psi_\Sigma(\omega) \ge \int\overline\sigma(du)\,\psi_\ell\bigl(a\,t^{1/2}|\omega|\bigr)
+  \ge \tfrac14\psi_\ell(t^{1/2}|\omega|)\int\langle v,u\rangle^2\langle w,u\rangle^2\,\overline\sigma(du)
+  \ge \frac{\psi_\ell(t^{1/2}|\omega|)}{4d(d+2)} ,
+\]
+which is the bound on $\operatorname{es}(\psi_\Sigma)$, the functionals being those of
+Proposition~\ref{prop:similarity-general-bounded-shape}. In the same way
+$\langle y,\mathcal M_s(L_\Sigma)y\rangle = \int\overline\sigma(du)\,\langle y,u\rangle^2G_s(q_\Sigma(u))$, with
+$G_s(\tau) := \int(\tau r^2 \wedge s^2)\,\ell(dr)$, lies between $G_s(t)|y|^2/(d(d+2))$ and $G_s(t)|y|^2/d$, so
+$\operatorname{cond}\mathcal M_s(L_\Sigma) \le d+2$. For the rotational spread fix $r_0$ with $k(r_0) > 0$, the shell
+$r_0/4 < |x| < r_0/2$ and, for $q_2 \in (0,\tfrac14]$, the cap $U$ of directions with $u_1^2 < q_2/2$ and
+$u_2^2 > \tfrac14$; let $R$ exchange $e_1$ and $e_2$. For $\varepsilon < q_2/2$, $q_{\Sigma_\varepsilon} < q_2$ on $U$ and
+$q_{\Sigma_\varepsilon} > \tfrac14$ on $RU$, so on the shell the sector over $U$ carries at most $2\overline\sigma(U)I(q_2)$ and
+the sector over $RU$ at least $2\overline\sigma(U)I(\tfrac14) > 0$, where
+$I(q) := \int_{r_0/4}^{r_0/2}k(sq^{-1/2})\,ds/s \le \log 2\cdot k(\tfrac{r_0}{4}q^{-1/2})$ tends to $0$ with $q$, $k$ tending
+to $0$ at infinity. So the rotational spread is unbounded. Finally $q_{\Sigma_\varepsilon}(u) \ge u_1^2$ puts the image of
+$\overline\sigma(du)\,2k(s/|u_1|)\,ds/s$ below every $L_{\Sigma_\varepsilon}$, hence below $L_*$; and a nonempty open cone
+contains a sector $\{x : cr_0/2 < |x| < cr_0,\ x/|x| \in V\}$ with $V$ open, $\overline\sigma(V) > 0$ and $|u_1| > c$ on
+$V$, which every $L_{\Sigma_\varepsilon}$ charges with mass at least $\overline\sigma(V)k(r_0)\log 2$.
+
+\emph{(3).} Let $\lambda_{\min}(\Sigma) < m'' < m' < \lambda_{\max}(\Sigma)$. If $L_\Sigma$ were rotation
+invariant, a cone of directions around the largest eigenvector, on which $q_\Sigma > m'$, and its
+image under the reflection exchanging the largest and the least eigenvectors, on which
+$q_\Sigma < m''$, would carry equal mass on every shell. As $k$ is nonincreasing,
+this gives $\int_a^b k(s/\sqrt{m'})\,ds/s \le \int_a^b k(s/\sqrt{m''})\,ds/s$ for $0 < a < b$, the reverse of
+the pointwise inequality between the integrands. So $k(r) = k(\lambda r)$ for almost every $r$, with
+$\lambda := (m'/m'')^{1/2} > 1$, and then $k = 0$.
+\end{proof}
+
+What survives of shape-blindness at index $0$ for a general part is shape-blindness at the origin.
+
+% shared with blueprint prop:similarity-general-index-zero+64089ae1c63d
+\begin{proposition}[index $0$ for a general part: shape-blind at the origin]\label{prop:similarity-general-index-zero}
+Let the family be as in Proposition~\ref{prop:similarity-general-sandwich}, and suppose $L_I$ is the \Levy{} measure of
+an isotropic origin datum $(0, k_d)$ in dimension $d$ (Definition~\ref{def:isotropic-origin-datum}) with
+$c := k_d(0{+}) < \infty$. Let $\overline\sigma$ be the normalised surface measure on $S^{d-1}$, and for a Borel
+set $A \subseteq S^{d-1}$ and $0 < \varepsilon < 1$ put $K_A(\varepsilon) := \{x : \varepsilon < |x| \le 1,\ x/|x| \in A\}$.
+\begin{enumerate}
+\item \emph{(Infinitely divisible increments: the index at the origin.)} If every Loewner step in $\PD(d)$ has
+an infinitely divisible increment, then for every $\Sigma \in \PD(d)$ and every Borel $A \subseteq S^{d-1}$
+\[
+  \lim_{\varepsilon\downarrow0}\frac{L_\Sigma(K_A(\varepsilon))}{\log(1/\varepsilon)} = c\,\overline\sigma(A) .
+\]
+\item \emph{(The exponent, to within a bounded term.)} If every Loewner step has an infinitely divisible
+increment, or if $C \equiv 0$ and every Loewner step has a positive finite increment, then for every
+$\Sigma \in \PD(d)$ every limit point of $\psi_\Sigma(\omega) - \psi_I(\omega)$ as $|\omega| \to \infty$ lies in
+$[\tfrac c2\log\lambda_{\min}(\Sigma), \tfrac c2\log\lambda_{\max}(\Sigma)]$.
+\item \emph{(The blow-up.)} Under either hypothesis of (2), let $\Sigma \in \PD(d)$ and suppose
+\emph{(D)}: for $\overline\sigma$-almost every $u \in S^{d-1}$ the limit
+$\Delta_\Sigma(u) := \lim_{r\to\infty}\bigl(\psi_\Sigma(ru) - \psi_I(ru)\bigr)$ exists. Then $\Delta_\Sigma$ is
+$\overline\sigma$-almost everywhere equal to a constant.
+\end{enumerate}
+\end{proposition}
+
+Under infinitely divisible increments, with or without a Gaussian part, the \Levy{} measure of every
+part has the isotropic member's logarithmic index $c$ at the origin, spread uniformly over directions
+(clause (1)). Under positive increments alone, and without a Gaussian part, the exponents are
+sandwiched in the same way (clause (2)), and the blow-up of Proposition~\ref{prop:log-orbit-rays} works
+for a general part under (D) (clause (3)). Condition (D) for a general part with polar profiles bounded
+at the origin requires the second term of the exponent's expansion, which needs more than boundedness,
+and is open.
+
+% proof of prop:similarity-general-index-zero
+\begin{proof}[Sketch]
+\emph{(1).} $\lambda_{\min}(\Sigma)I \le \Sigma \le \lambda_{\max}(\Sigma)I$, so by
+Proposition~\ref{prop:similarity-general-sandwich}(2) $L_\Sigma$ lies between $L_{tI} = (\sqrt t)_*L_I$ at the
+two values of $t$. By \ref{eq:polar-decomposition} of Definition~\ref{def:isotropic-origin-datum},
+$L_{tI}(K_A(\varepsilon)) = \overline\sigma(A)\int_\varepsilon^1k_d(rt^{-1/2})\,dr/r$, and $k_d \to c$ at the
+origin.
+
+\emph{(2).} The same sandwich for the exponents, with $\psi_{tI}(\omega) - \psi_I(\omega) \to \tfrac c2\log t$ by
+Lemma~\ref{lem:isotropic-exponent-log}(2).
+
+\emph{(3).} For the step $\Sigma \le tI$, $t := \lambda_{\max}(\Sigma)$, let $\rho$ be its increment under the
+second hypothesis. Under the first, let $\rho$ be the non-Gaussian factor of its increment: the law with
+triplet $(0, \nu', 0)$ (C2(iii)), where $\nu = L_{tI} - L_\Sigma$ is the \Levy{} measure of the increment
+(C2(ii)) and $\nu'$ its symmetrization. In both cases $\widehat\rho = e^{-(\psi_{tI} - \psi_\Sigma)}$, so
+$0 < \widehat\rho \le 1$, and $\widehat\rho(\omega/\varepsilon) \to t^{-c/2}e^{\Delta_\Sigma(\omega/|\omega|)}$ by
+Lemma~\ref{lem:isotropic-exponent-log}(2) and (D). On the measure side
+$\int\phi(x/\varepsilon)\,\rho(dx) \to \phi(0)\rho(\{0\})$ by dominated convergence, and Fourier inversion
+makes the limit of the transforms the constant $\rho(\{0\})$ almost everywhere. For an elliptical part of a
+profile bounded at the origin (D) holds by Lemma~\ref{lem:isotropic-exponent-log}(2), and this gives
+Proposition~\ref{prop:similarity-orbit-family}(4) again.
+\end{proof}
+
+\subsection{The families of the scheme}\label{app:similarity-scheme}
+
+The statements above assume that every Loewner step has an infinitely divisible increment. For the
+families of the scheme this is a theorem, which discharges that hypothesis everywhere above.
+
+% shared with blueprint prop:similarity-cascade-families+f33d542fd9b1
+\begin{proposition}[similarity cascades: infinitely divisible increments are a theorem of the axioms]\label{prop:similarity-cascade-families}
+Let $d \ge 2$, let $G$ be a closed subgroup of $\GL(d)$ containing the similarities $cQ$, $c > 0$,
+$Q \in \Orth(d)$, and let $(\mu_{\Sigma,\Sigma'})$ be a $(G, \text{Loewner})$-cascade family of kernels
+(Definition~\ref{def:gw-cascade-family}(2)), with kernels from scale zero $\mu_\Sigma := \mu_{0,\Sigma}$.
+\begin{enumerate}
+\item \emph{(Infinitely divisible kernels and increments.)} Every $\mu_{\Sigma,\Sigma'}$ is infinitely divisible. For
+every $\Sigma \in \PD(d)$, $\mu_\Sigma$ is a symmetric infinitely divisible law with generating triplet
+$(C(\Sigma), L_\Sigma, 0)$, where $C(\Sigma) \in \PSD(d)$ and $L_\Sigma$ is a symmetric \Levy{} measure;
+$(\sqrt c\,Q)_*\mu_\Sigma = \mu_{cQ\Sigma Q^{\tp}}$ for $c > 0$ and $Q \in \Orth(d)$; and every Loewner
+step $\Sigma \le \Sigma'$ in $\PD(d)$ has the infinitely divisible increment $\mu_{\Sigma,\Sigma'}$,
+$\mu_{\Sigma'} = \mu_\Sigma * \mu_{\Sigma,\Sigma'}$.
+\item \emph{(The general part.)} Consequently $(\mu_\Sigma)_{\Sigma \in \PD(d)}$ is a family as in
+Proposition~\ref{prop:similarity-general-sandwich}, and the hypothesis ``every Loewner step in $\PD(d)$ has an
+infinitely divisible increment'' holds. So Proposition~\ref{prop:similarity-general-sandwich}(1)--(5),
+Proposition~\ref{prop:similarity-general-bounded-shape}(1)--(4) and Proposition~\ref{prop:similarity-general-index-zero}(1)--(3)
+hold for it under their remaining hypotheses alone, which are:
+\begin{itemize}
+\item the comparability $L_* \ge \theta L_I$ in Proposition~\ref{prop:similarity-general-bounded-shape}(2);
+\item $\psi_* \ge \theta\psi_I$ in (3) there;
+\item $L_I \ne 0$ in (4) there;
+\item in Proposition~\ref{prop:similarity-general-index-zero}, that $L_I$ is the \Levy{} measure of an isotropic
+origin datum $(0, k_d)$ with $k_d(0{+}) < \infty$, with (D) in its clause (3).
+\end{itemize}
+\item \emph{(Elliptical parts.)} If moreover $\mu_\Sigma = N(0, C(\Sigma)) * \nu_{h(\Sigma)}$ for every
+$\Sigma \in \PD(d)$, with $k$, $(\nu_H)$, $h$ and $C$ as in Proposition~\ref{prop:similarity-orbit-family}, then that
+proposition's clauses (2) and (3) hold under their remaining hypotheses alone (in (2): $h$ equivariant and
+extending continuously to $\PSD(d) \setminus \{0\}$ with values in $\PD(d)$; in (3): $k(0{+}) < \infty$
+and $h$ equivariant), with or without a Gaussian part.
+\end{enumerate}
+\end{proposition}
+
+So for every family of the scheme at (similarities, Loewner), with or without a Gaussian part, the shape
+is bounded whenever the rank-one limit is comparable to the isotropic member, and at index $0$ the part
+is shape-blind at the origin. Only the infinite divisibility is discharged. The comparability
+conditions, $L_I \ne 0$, the origin datum and (D) remain hypotheses. The statements above keep their
+hypothesis because they concern families of kernels from scale zero with no increments between other
+pairs and no continuity; replacing it by the cascade axioms could only narrow them.
+
+% proof of prop:similarity-cascade-families
+\begin{proof}
+\emph{(1).} $(G, \text{Loewner})$ is a wedge datum (Definition~\ref{def:gw-cascade-family}), and by
+Theorem~\ref{thm:cascade-infinitely-divisible}(3)(a) it has the path condition, so by
+Theorem~\ref{thm:cascade-infinitely-divisible}(2) every $\mu_{\Sigma,\Sigma'}$ and every
+$\mu_\Sigma = \mu_{0,\Sigma}$ is infinitely divisible. The similarity $-I$ fixes every $\Sigma$, so (K3)
+makes $\mu_\Sigma$ symmetric, and the uniqueness C2(ii) makes its drift $0$ and its \Levy{} measure
+symmetric. (K3) at $(0, \Sigma)$ with $A = \sqrt c\,Q$ is the covariance, and (K1) at
+$0 \le \Sigma \le \Sigma'$ gives the increment.
+
+\emph{(2)} and \emph{(3).} By (1) the family is as in
+Proposition~\ref{prop:similarity-general-sandwich}, and every Loewner step has an infinitely divisible
+increment, which is the hypothesis of the named clauses of
+Propositions~\ref{prop:similarity-general-sandwich}, \ref{prop:similarity-general-bounded-shape},
+\ref{prop:similarity-general-index-zero} and~\ref{prop:similarity-orbit-family}.
+\end{proof}

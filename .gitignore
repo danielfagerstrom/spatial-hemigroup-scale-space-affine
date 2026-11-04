@@ -1,0 +1,9 @@
+Formalization/.lake/
+*.olean
+paper/*.aux
+paper/*.log
+paper/*.bbl
+paper/*.blg
+paper/*.out
+.zenodo-deposition.json
+*.zip

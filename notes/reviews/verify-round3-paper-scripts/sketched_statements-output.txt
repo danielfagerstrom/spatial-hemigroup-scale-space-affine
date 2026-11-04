@@ -1,0 +1,26 @@
+calibration: Appendix C 71760 chars over ~13 pages = 5520 chars/page
+
+no.   label                                      stmt leanok proof  proof leanok #lean bp proof  sketch  ratio
+4.4   prop:affine-orbits                         True        True   True             5     3974    1848   0.47  [Proof of Proposition~\ref{prop:affine-orbits} (sketch)]
+4.18  prop:rational-symbols                      True        True   True             2     1846     835   0.45  [Proof of Proposition~\ref{prop:rational-symbols} (sketch)]
+4.24  prop:similarity-stable-order-kernels       True        True   True             5     6741    3272   0.49  [Proof of Proposition~\ref{prop:similarity-stable-order-kernels} (sketch)]
+A.3   prop:isotropic-corner                      True        True   True             7     8922    4392   0.49  [Proof of Proposition~\ref{prop:isotropic-corner} (sketch)]
+D.1   prop:glplus-families                       True        True   True             8     6646    2380   0.36  [Sketch]
+E.1   prop:tempered-step-cone                    True        True   True             6     6403    1919   0.30  [Sketch]
+E.4   prop:matern-negative-mass                  True        True   True             6     8735     900   0.10  [Sketch]
+F.2   prop:fixed-frame-families                  True        True   True             2     3360    1547   0.46  [Proof of Proposition~\ref{prop:fixed-frame-families} (sketch)]
+F.3   prop:similarity-ray-families               True        True   True             6     5346    1792   0.34  [Proof of Proposition~\ref{prop:similarity-ray-families} (sketch)]
+F.4   prop:diagonal-ray-families                 True        True   True             6     5182    1550   0.30  [Proof of Proposition~\ref{prop:diagonal-ray-families} (sketch)]
+F.5   prop:diagonal-stable-order-families        True        True   True             7     6682    1818   0.27  [Proof of Proposition~\ref{prop:diagonal-stable-order-families} (sketch)]
+H.1   prop:similarity-stable-family              True        True   True             3     4469    2433   0.54  [Sketch]
+H.2   prop:similarity-orbit-family               True        True   True             4     3140    1323   0.42  [Sketch]
+H.4   prop:similarity-general-sandwich           True        True   True             6     4458    1426   0.32  [Sketch]
+H.5   prop:similarity-general-bounded-shape      True        True   True             4     4504    1403   0.31  [Sketch]
+H.6   prop:similarity-degenerate-family          True        True   True             3     8057    2568   0.32  [Sketch]
+H.7   prop:similarity-line-family                True        True   True             5    11774    3335   0.28  [Sketch]
+H.8   prop:similarity-general-index-zero         True        True   True             3     4218    1248   0.30  [Sketch]
+4.14  lem:dilation-ratio                         True        True   True             7     4897    2304   0.47  [Proof of Lemma~\ref{lem:dilation-ratio} (sketch)]
+A.5   lem:parameter-space                        True        True   True            12     7594    3349   0.44  [Proof of Lemma~\ref{lem:parameter-space} (sketch)]
+
+total blueprint proofs 116948 chars = 21.2 pages; sketches 41642 chars = 7.5 pages; net cost of printing all in place of the sketches = 13.6 pages
+subset F.2, F.3, F.4, F.5, H.1, H.2, H.4, H.5, H.6, H.7, H.8: blueprint proofs 11.1 pages, sketches 3.7 pages, net 7.4 pages

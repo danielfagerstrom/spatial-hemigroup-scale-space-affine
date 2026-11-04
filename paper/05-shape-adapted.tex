@@ -1,0 +1,199 @@
+% §5.9 Shape-adapted smoothing across the rungs --- blueprint chapter 5, part 05-shape-adapted.tex
+% (Q-0288). Included from 05-landscape.tex; the conventions are in that file's header. The one node is
+% prop:shape-adapted-apertures; the rest reads the practice of Lindeberg and Garding (5.1) against the
+% nodes of 5.5-5.7, which is the part's closing prose in the blueprint. The numbers for the slant of 60
+% degrees are arithmetic from prop:stable-step-cone(1)(c). The hub's experiments with a stable
+% replacement are not used (the author, 2026-10-04). The section's relation remark closes this file.
+
+\subsection{Shape-adapted smoothing across the rungs}\label{sec:shape-adapted}
+
+% Writing-rules pass, group s47 (rules 8 and 10): the opening asks the practitioner's question.
+Shape adaptation is the use this paper has for an affine scale space, and the place where the choice
+of kernel shows. The iteration of Lindeberg and G\aa{}rding, which the affine-invariant features of
+Baumberg and of Mikolajczyk and Schmid run in simplified forms (\S\ref{sec:landscape-uses}), measures
+the image at each point through an aperture fitted to the second-moment matrix there. A reader who
+uses it can ask whether the adapted record is a further smoothing of the isotropic first stage,
+computed from it by one more convolution with a probability kernel, or a new measurement of the image,
+and whether the answer depends on the kernel. It depends on the kernel and on the normalization.
+Holding the least smoothing fixed, as Lindeberg and G\aa{}rding do, makes the step from the first
+stage to the adapted aperture rank-deficient, and among the affine orbits only the Gaussian follows
+such a step by an increment that is a probability measure
+(Proposition~\ref{prop:shape-adapted-apertures}). Holding the volume fixed, as Baumberg's warp of
+determinant~$1$ does, makes the adapted aperture a re-measurement for every family, the Gaussian
+included (Lemma~\ref{lem:loewner-scale-shape}(2)). The first three uses of
+\S\ref{sec:landscape-uses} are read in turn below, with the results of
+\S\S\ref{sec:affine-orbits}--\ref{sec:wedge-axis-proof} and the smaller groups of
+\S\ref{sec:smaller-groups}; the fourth, singularity theory, is not treated (\S\ref{sec:conclusion}).
+
+\paragraph{Shape selection at fixed least smoothing.} The practice keeps the least eigenvalue of the
+local scale matrix at the variance $w$ of the isotropic first stage. The step from the first stage to the
+adapted aperture is then rank-deficient, and among the affine orbits only the Gaussian has a positive
+increment along it.
+
+% shared with blueprint prop:shape-adapted-apertures
+\begin{proposition}[the apertures of shape-adapted smoothing are rank-deficient steps]\label{prop:shape-adapted-apertures}
+Let $d \ge 2$, $w > 0$, and $M \in \PD(d)$ with least eigenvalue $1$, and put $\Sigma_w := wM$, so that
+the least eigenvalue of $\Sigma_w$ is $w$, and $P := \Sigma_w - wI$.
+\begin{enumerate}
+\item \emph{(The step.)} $P = w(M - I)$ is positive semidefinite. Its null space $\ker P$ is the eigenspace of $M$ for
+the eigenvalue $1$, and its range is spanned by the eigenvectors of $M$ with eigenvalues above $1$. So
+$\rank P \le d - 1$, with $\rank P = 0$ exactly when $M = I$; for $d = 2$ and $M \ne I$, $\rank P = 1$.
+\item \emph{(Only the Gaussian follows the apertures.)} Let $g$, $\mu_I$ and the affine orbit
+$\mu_\Sigma = (\Sigma^{1/2})_*\mu_I$, $\Sigma \in \PD(d)$, be as in Proposition~\ref{prop:affine-orbits}, and let
+$M \ne I$. There is a probability measure $\rho$ on $\RR^d$ with $\mu_{\Sigma_w} = \mu_{wI} * \rho$ if and
+only if $g(u) = bu$ for some $b \ge 0$, that is, $\mu_I$ is the centred Gaussian law with covariance $2bI$
+($\delta_0$ when $b = 0$). Then $\rho$ is the centred Gaussian law with covariance $2bP$, carried by the
+range of $P$.
+\item \emph{(In the scheme.)} Let $(\GL(d), W)$ be a wedge datum (Definition~\ref{def:gw-cascade-family}) with
+$wI \le_W wM$ for some $w > 0$ and some $M \ne I$ as above. Then for every $(\GL(d), W)$-cascade family
+of kernels there is a $b > 0$ with $\widehat\mu_{\Sigma,\Sigma'}(\omega) =
+e^{-b\langle\omega,(\Sigma'-\Sigma)\omega\rangle}$ for every pair $\Sigma \le_W \Sigma'$.
+\end{enumerate}
+\end{proposition}
+
+The apertures of the practice are the $\Sigma_w = wM$ of
+Proposition~\ref{prop:shape-adapted-apertures}, with $M$ the shape matrix divided
+by its least eigenvalue (\sscite{lindeberg1994shape}, p.~396, step~2; \sscite{lindeberg1997shape}, \S6.2).
+In the Gaussian, every adapted aperture is therefore a further smoothing of the first stage, whether or not
+it is computed that way, by the degenerate Gaussian along the widened directions; in the plane it is the
+first stage blurred once more along the major axis. In every other affine orbit the adapted aperture is a
+re-measurement of the image, related to the first stage by no increment that is a probability measure,
+though the orbit may cascade along other steps of full rank (Proposition~\ref{prop:stable-step-cone}).
+Clause (3) reads this in the scheme: an order invariant under the general linear group that contains one
+such step leaves only Gaussian increments, as the Loewner order does.
+
+% proof of prop:shape-adapted-apertures
+\begin{proof}
+\emph{(1).} The least eigenvalue of $M$ is $1 = \min_{|x| = 1}\langle x, Mx\rangle$, and it is attained at a unit eigenvector $v$. So $\langle x, (M - I)x\rangle \ge 0$ for
+every $x$, that is, $M - I$ is positive semidefinite, and $Mv = v$. Then $P = w(M - I)$ is positive
+semidefinite, $\lambda_{\min}(wM) = w\lambda_{\min}(M) = w$, and $Px = 0$ exactly when $Mx = x$, as
+$w > 0$: the null space $\ker P$ is the eigenspace $E_1$ of $M$ for $1$. For the range: if $Mx = cx$ with
+$c > 1$ then $x = P\bigl((w(c-1))^{-1}x\bigr)$, so every eigenspace $E_c$, $c > 1$, lies in the range,
+and so does their span $K$. The range is orthogonal to $E_1$: $P$ is symmetric, so
+$\langle z, Px\rangle = \langle Pz, x\rangle = 0$ for $z \in E_1$. The eigenspaces of
+the symmetric matrix $M$ span $\RR^d$, and $E_c = 0$ for $c < 1$, since
+$0 \le \langle x, (M - I)x\rangle = (c - 1)|x|^2$ on $E_c$. So every $y$ is $a + k$ with $a \in E_1$ and
+$k \in K$. If $y$ is in the range, then $a = y - k$ is in the range as well as in $E_1$, so
+$\langle a, a\rangle = 0$, and $y = k \in K$: the range is $K$. By rank--nullity the rank of $P$ is $d$
+minus the dimension of its null space, which contains $v \ne 0$, so $\rank P \le d - 1$. It is
+$0$ exactly when $P = 0$, that is $M = I$. For $d = 2$ and $M \ne I$ it is therefore $1$.
+
+\emph{(2).} By Proposition~\ref{prop:affine-orbits}(1), $\widehat\mu_\Sigma(\omega) = e^{-g(\langle\omega,\Sigma\omega\rangle)}$.
+If $\mu_{\Sigma_w} = \mu_{wI} * \rho$, taking transforms gives
+$e^{-g(\langle\omega,(wI + P)\omega\rangle)} = e^{-g(\langle\omega,wI\omega\rangle)}\,\widehat\rho(\omega)$, which is
+\ref{eq:one-step} with $\Sigma = wI \in \PD(d)$ and $P$ positive semidefinite with $0 < \rank P < d$ by
+(1), and $g$ is continuous with $g(0) = 0$ and $g \ge 0$. Theorem~\ref{thm:rank-deficient-step} gives $g(u) = bu$ with
+$b = g(1) \ge 0$ and $\rho$ the centred Gaussian law with covariance $2bP$, which is carried by the range
+of $P$, the law of $(2bP)^{1/2}Z$ with $Z$ standard normal. Then $\widehat\mu_I(\omega) = e^{-b|\omega|^2}$,
+the transform of the centred Gaussian law with covariance $2bI$. Conversely, if $g(u) = bu$ with
+$b \ge 0$, the converse half of Theorem~\ref{thm:rank-deficient-step} gives \ref{eq:one-step} for $\Sigma = wI$ and
+this $P$ with that Gaussian $\rho$, and the transforms of $\mu_{\Sigma_w}$ and $\mu_{wI} * \rho$ agree.
+
+\emph{(3).} Let $(\mu_{\Sigma,\Sigma'})$ be a $(\GL(d), W)$-cascade family of kernels, with kernels from scale zero $\mu_\Sigma$. $W$ contains the rays, so the ray order is contained in it, and
+Lemma~\ref{lem:gw-kernels-from-origin}(1) restricts the family to $(\GL(d), \text{rays})$ with the same kernels
+from scale zero. By Proposition~\ref{prop:gw-ray-families}(3), $\mu_\Sigma = (\Sigma^{1/2})_*\mu_I$ with $\mu_I$
+rotation invariant, self-decomposable and not $\delta_0$, and $\widehat\mu_\Sigma(\omega) =
+F(\langle\omega,\Sigma\omega\rangle)$ with $F(u) := \widehat\mu_I(\sqrt u\,e_1)$ continuous and $F(0) = 1$. By
+Proposition~\ref{prop:gw-ray-families}(1), $F$ has no zero. It is real, as $\mu_I$ is invariant under $-I$, and
+$|F| \le 1$, so $F > 0$, and $g := -\log F$ is continuous, nonnegative, with $g(0) = 0$ and
+$e^{-g(|\omega|^2)} = \widehat\mu_I(\omega)$: the hypotheses of Proposition~\ref{prop:affine-orbits} hold, and the
+$\mu_\Sigma$, $\Sigma \in \PD(d)$, are the orbit of $\mu_I$. (K1) of Definition~\ref{def:gw-cascade-family} at $0 \le_W wI \le_W wM$ gives
+$\mu_{wM} = \mu_{wI} * \mu_{wI,wM}$, so (2) gives $g(u) = bu$, and $b > 0$ because $\mu_I \ne \delta_0$.
+Then $\widehat\mu_\Sigma(\omega) = e^{-b\langle\omega,\Sigma\omega\rangle}$ for every $\Sigma \in \PSD(d)$, by
+the form above. These transforms have no zero, and (K1) at $0 \le_W \Sigma \le_W \Sigma'$ gives
+$\widehat\mu_{\Sigma'} = \widehat\mu_{\Sigma,\Sigma'}\,\widehat\mu_\Sigma$, so
+$\widehat\mu_{\Sigma,\Sigma'}(\omega) = e^{-b\langle\omega,(\Sigma'-\Sigma)\omega\rangle}$.
+\end{proof}
+
+So the normalization of the practice places the adaptation on the boundary of the Loewner cone
+(Figure~\ref{fig:shape-plane}(b)), the part
+that Theorem~\ref{thm:rank-deficient-step} closes to every non-Gaussian orbit. A stable orbit can follow
+the practice's shapes by moving up the scale axis to the boundary of its own step set. An orbit whose
+transform decays like a power of the frequency, such as a \Matern{} orbit, cannot follow them at all:
+its step set lies inside the rays (Propositions~\ref{prop:log-orbit-rays}
+and~\ref{prop:matern-steps}). For the stable orbit of index $\alpha$, write $wI$ for the first stage,
+as in Proposition~\ref{prop:shape-adapted-apertures}, and $sS$ for an aperture of shape $S$, with
+$\det S = 1$ and least eigenvalue $n_1$; $w$ and $s$ are scale parameters in the variance gauge,
+squared lengths rather than volume scales. Condition (c)
+of Proposition~\ref{prop:stable-step-cone}(1) at $\Sigma = wI$ says that $sS$ is a further smoothing
+of $wI$ exactly when $s \ge w\,n_1^{-(d+\alpha)/\alpha}$. At the boundary the scale parameter along the minor axis,
+$s\,n_1$, is $n_1^{-d/\alpha}$ times that of the first stage. A planar pattern seen at slant $\sigma$, the angle
+between the line of sight and the normal of the surface, is foreshortened by the factor $\cos\sigma$
+across the tilt, so the shape that fits it has the eigenvalue ratio $1/\cos^2\sigma$. At
+$\sigma = 60^\circ$ that ratio is $4$, so $n_1 = 1/2$ in the plane. The factor $n_1^{-d/\alpha}$ by
+which the minor axis must grow is then $4$ at $\alpha = 1$, about $2.52$ at $\alpha = 1.5$ and about
+$2.07$ at $\alpha = 1.9$. For the Gaussian it is $1$: the minor axis keeps the scale parameter of the first
+stage. The selection at fixed volume, the normalization Lindeberg and G\aa{}rding reject
+(\sscite{lindeberg1997shape}, \S6.1), is a
+re-measurement for every family by Lemma~\ref{lem:loewner-scale-shape}(2), so no cascade axiom bears on
+it.
+
+\paragraph{Following a shape across scale.} Every family covariant under $\GL(d)$ that cascades along rays
+is the orbit of a rotation-invariant self-decomposable law (Proposition~\ref{prop:ray-families}). Those
+laws are the kernels from scale zero of the isotropic families of the isotropic paper
+(Theorem~\ref{thm:isotropic-classification} and Lemma~\ref{lem:radial-marginal}(1), restated in
+\S\ref{sec:iso-recap}), so each of them supports this use: within a fixed shape, a coarser record is the
+isotropic increment transported by $\Sigma^{1/2}$.
+
+\paragraph{Shape change: the speed limit.} When the adapted shape is re-estimated as the scale grows, the
+apertures trace a curve in scale and shape, and it is a cascade only if each step lies in the family's
+step set. With $t_1 < t_2$ the volume scales of two apertures, Table~\ref{tab:speed-limit} gives each family's
+limit on the anisotropy gained by further smoothing.
+
+\begin{table}[tp]
+\centering
+\small
+\setlength{\tabcolsep}{4pt}
+\renewcommand{\arraystretch}{1.15}
+\begin{tabular}{@{}p{0.27\textwidth}p{0.33\textwidth}p{0.34\textwidth}@{}}
+\toprule
+family & steps across shapes that are further smoothings & anisotropy gained per step \\
+\midrule
+Gaussian & exactly the Loewner steps & at most $(t_2/t_1)^d$, in any orientation
+(Lemma~\ref{lem:loewner-scale-shape}(3)) \\
+isotropic $\alpha$-stable orbit & exactly the steps with $\lambda_{\min}(M)^{d+\alpha} \ge \det M$ &
+at most $(t_2/t_1)^{d\alpha/(d+\alpha)}$, in any orientation (Proposition~\ref{prop:stable-step-cone}(3)) \\
+stable profiles of index $\alpha$ under a nonincreasing tempering & at least the stable cone of index
+$\alpha$; whether more is open & at least the stable orbit's freedom
+(Proposition~\ref{prop:tempered-step-cone}(1)) \\
+orbit of a self-decomposable profile $k$ & at least the steps read off $R$; exactly the rays when $k$ is
+bounded at the origin & read off $R$ for ordered densities; not known in general
+(Propositions~\ref{prop:orbit-step-cone} and~\ref{prop:bounded-profile-rays}) \\
+\Matern{} orbit of every index; every orbit of logarithmic exponent & at most the rays; exactly the
+rays for the \Matern{} orbits and whenever the law is self-decomposable & none: every change of shape
+is a re-measurement (Propositions~\ref{prop:log-orbit-rays}, \ref{prop:matern-steps}
+and~\ref{prop:ray-families}) \\
+frame families & the coordinatewise order of one frame & the Gaussian's bound along the frame's axes
+only; no turning (Propositions~\ref{prop:frame-families} and~\ref{prop:fixed-frame-families}) \\
+one linear flow & the curve $e^{sB}\Sigma_0e^{sB^{\tp}}$ & drift locked to scale; for a rotation-invariant
+non-Gaussian law with a contracting flow the anisotropy of $\mathrm{sym}\,B$ is budgeted
+(Propositions~\ref{prop:one-parameter-families} and~\ref{prop:anisotropy-budget}) \\
+\bottomrule
+\end{tabular}
+\caption{The speed limit on shape drift, family by family, for the affine orbits and the families of
+\S\ref{sec:smaller-groups}; $t_1 < t_2$ are volume scales and $M$ is the relative step.}
+\label{tab:speed-limit}
+\end{table}
+
+Beyond its step set every family re-measures, the Gaussian included. The stable orbits turn
+too, in any orientation. Among the general linear families the Gaussian alone has the Loewner
+order's gain per step. The affine orbits whose symbol in the shape's operator is a decaying rational function without
+zeros on $[0, \infty)$, the same for every shape, cascade at most along rays (Proposition~\ref{prop:rational-symbols}), and along all of them
+when the law is self-decomposable. For them a different shape is a re-measurement of the
+original image rather than a further smoothing of the current one.
+
+\begin{remark}[relation to the isotropic theory and to the line]\label{rem:landscape-line}
+At $d = 1$ every step is a ray, so every order of this section is the order of $[0, \infty)$, and the
+general linear row is the line's theory: Proposition~\ref{prop:ray-families} is then the definition of
+self-decomposability, and Proposition~\ref{prop:matern-steps} the self-decomposability of the law of
+$\sqrt{2V}Z$. Even there the group matters: under $\GL^+(1)$ the axioms admit point masses that $\GL(1)$
+excludes (Proposition~\ref{prop:glplus-families}(3)). For $d \ge 2$ the base of the general linear row,
+the rays, carries exactly the kernels from scale zero of the isotropic families of the isotropic paper,
+transported by $\Sigma^{1/2}$ (Proposition~\ref{prop:ray-families}, with
+Theorem~\ref{thm:isotropic-classification}). What dimension adds is the room to change shape. Steps of
+rank below $d$ exist only for $d \ge 2$, and they are what forces the Gaussian
+(Theorem~\ref{thm:rank-deficient-step}). Steps of full rank across shapes separate the families: the
+stable index bounds the anisotropy per step, a lower bound on the step set of an orbit is read off the
+dilation ratio of its profile, and the orbit of a profile bounded at the origin cascades along no step
+across shapes.
+\end{remark}

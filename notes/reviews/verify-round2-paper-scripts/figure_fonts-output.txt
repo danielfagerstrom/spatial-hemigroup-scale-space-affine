@@ -1,0 +1,14 @@
+body text 11 pt; \scriptsize 8 pt, \footnotesize 9 pt in the 11 pt article class
+
+Figure 1 (fig-rank-deficient-step), p. 21: 920 px at 294 ppi = 3.13 in printed; figsize width 4.6 in; scale 0.680
+   8.0 pt in script ->  5.4 pt printed   legend (Sigma = I, Sigma + P, range of P, <x,w> = +-1)   [fig-rank-deficient-step.py:82]   (9 pt printed needs 13.2 pt in the script)
+  10.0 pt in script ->  6.8 pt printed   the letter w   [fig-rank-deficient-step.py:74]   (9 pt printed needs 13.2 pt in the script)
+
+Figure 2 (fig-shape-plane), p. 29: 1386 px at 221 ppi = 6.27 in printed; figsize width 6.3 in; scale 0.995
+   8.0 pt in script ->  8.0 pt printed   every label: titles, axis labels, ticks, alpha =, rays, Loewner   [fig-shape-plane.py:131 (rcParams font.size 8), :167, :191]   (9 pt printed needs 9.0 pt in the script)
+
+Figure 3 (fig-cones-plane), p. 33: 1640 px at 262 ppi = 6.26 in printed; figsize width 8.2 in; scale 0.763
+  10.0 pt in script ->  7.6 pt printed   panel titles, axis labels (u, change of shape; a, growth in size; u; v)   [fig-cones-plane.py:108-110, 131-133 (default 10)]   (9 pt printed needs 11.8 pt in the script)
+   8.0 pt in script ->  6.1 pt printed   legend (C1, k = 1/3 ...), annotations (non-Gaussian families ...)   [fig-cones-plane.py:124-128, 139]   (9 pt printed needs 11.8 pt in the script)
+   7.5 pt in script ->  5.7 pt printed   the word rays in (b)   [fig-cones-plane.py:122]   (9 pt printed needs 11.8 pt in the script)
+

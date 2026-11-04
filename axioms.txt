@@ -1,0 +1,1277 @@
+'AffineHemigroup.wedge_zero_le' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.wedge_zero_one_mem' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.isWedgeDatum_loewner' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.isWedgeDatum_ray' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.glSet_isClosedSubgroupGL' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.charFun_push' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.charFun_affineGaussian' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.affineGaussian_carried_by_range' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.charFun_one_on_subspace' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.eq_dirac_of_charFun_one_near_zero' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.affine_reduction' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.single_ratio_cauchy' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.rank_deficient_step' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.rank_deficient_step_converse' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.affine_rigidity' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.affine_rigidity_kernel' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.affine_gauge' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.affine_gauge_slice' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.scale_shape_coords' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.loewner_iff_scale_shape' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.loewner_no_order_within_scale' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.loewner_speed_limit' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.loewner_speed_limit_converse' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.loewner_plane_disc' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.affine_orbit_covariance' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.affine_orbit_ray_cascade' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.affine_orbit_no_cross_shape' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.matern_orbit' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.maternRay_W_nonneg' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.ray_families' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.ray_families_converse' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.gw_family_restrict' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.gw_kernels_from_origin' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.gw_kernels_from_origin_unique' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.gw_kernels_from_origin_converse' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.selfDecomposable_charFun_ne_zero' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.gw_ray_families' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.gw_ray_families_unique' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.gw_ray_families_gl' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.gw_ray_families_gl_converse' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.gw_kernels_selfDecomposable' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.gw_kernels_hasNoZeros' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.gw_family_determined_by_kernels' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.shape_adapted_step' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.shape_adapted_gaussian' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.shape_adapted_scheme' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.thresholdSup_spec' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.threshold_pos' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.thresholdSup_succ' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.threshold_strictAnti' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.threshold_limit_bounds' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.threshold_limit' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.tendsto_stirlingRatio' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.threshold_asymptotic_bounds' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.threshold_asymptotic' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.slowFactor_basic' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.slowFactor_ratio' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.slowFactor_tendsto_of_integrable' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.slowFactor_tendsto_atTop' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.cin_sub_log_limit' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.sphere_log_mean' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.sphereLogMean_one' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.exponent_profile_asymptotic' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.exponent_profile_bounds' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.transform_power_comparison' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.transform_power_bounded_iff' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.transform_power_limit' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.slowLog_bounds' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.slowLog_div_log' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.IsLawOf.tendsto_integral_charFun_div_slowLog' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'AffineHemigroup.tendsto_integral_div_integral' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.origin_density_rate_profile' depends on axioms: [propext,
+ AffineHemigroup.karamata_tauberian_zero,
+ Classical.choice,
+ Quot.sound]
+'AffineHemigroup.origin_ball_rate_profile' depends on axioms: [propext,
+ AffineHemigroup.karamata_tauberian_zero,
+ Classical.choice,
+ Quot.sound]
+'AffineHemigroup.origin_density_power_of_integrable' depends on axioms: [propext,
+ AffineHemigroup.karamata_tauberian_zero,
+ Classical.choice,
+ Quot.sound]
+'AffineHemigroup.origin_density_power_of_not_integrable' depends on axioms: [propext,
+ AffineHemigroup.karamata_tauberian_zero,
+ Classical.choice,
+ Quot.sound]
+'AffineHemigroup.origin_density_rate_profile_critical' depends on axioms: [propext,
+ AffineHemigroup.karamata_tauberian_zero,
+ Classical.choice,
+ Quot.sound]
+'AffineHemigroup.origin_ball_rate_profile_critical' depends on axioms: [propext,
+ AffineHemigroup.karamata_tauberian_zero,
+ Classical.choice,
+ Quot.sound]
+'AffineHemigroup.origin_density_log_of_integrable' depends on axioms: [propext,
+ AffineHemigroup.karamata_tauberian_zero,
+ Classical.choice,
+ Quot.sound]
+'AffineHemigroup.origin_density_log_of_not_integrable' depends on axioms: [propext,
+ AffineHemigroup.karamata_tauberian_zero,
+ Classical.choice,
+ Quot.sound]
+'AffineHemigroup.origin_rate_profile' depends on axioms: [propext,
+ AffineHemigroup.karamata_tauberian_zero,
+ AffineHemigroup.levy_khintchine_converse,
+ AffineHemigroup.sato_polar_criterion,
+ AffineHemigroup.wolfe_symmetric_unimodal,
+ Classical.choice,
+ Quot.sound]
+'AffineHemigroup.origin_rate_profile_critical' depends on axioms: [propext,
+ AffineHemigroup.karamata_tauberian_zero,
+ AffineHemigroup.levy_khintchine_converse,
+ AffineHemigroup.sato_polar_criterion,
+ AffineHemigroup.wolfe_symmetric_unimodal,
+ Classical.choice,
+ Quot.sound]
+'AffineHemigroup.witness_polar_closed_form' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.witness_threshold_criterion' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.witness_antitone_iff' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.stableConst_pos_finite' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.stableDensity_act' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.stableExp_eq_lintegral' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.stable_tail' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.stable_density_order_iff' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.stableLE_partialOrder' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.stableLE_rays_not_rank_deficient' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.stableLE_scale_shape' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.stableLE_scale_shape_converse' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.stableLE_any_eigenframe' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.eigUp_spec' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.stablePlusLE_order' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.isGauge_iff_isIncreasingBijection' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.radial_marginal' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.radial_marginal_eq_dirac' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.radial_marginal_ops' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.isotropic_marginal_cascadeData' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.isotropic_marginal_family' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.line_levy_unique' depends on axioms: [propext,
+ AffineHemigroup.levy_khintchine_converse,
+ AffineHemigroup.levy_khintchine_unique,
+ Classical.choice,
+ Quot.sound]
+'AffineHemigroup.isotropic_classification' depends on axioms: [propext,
+ AffineHemigroup.levy_khintchine_converse,
+ AffineHemigroup.levy_khintchine_unique,
+ Classical.choice,
+ Quot.sound]
+'AffineHemigroup.isotropic_classification_necessity' depends on axioms: [propext,
+ AffineHemigroup.levy_khintchine_converse,
+ AffineHemigroup.levy_khintchine_unique,
+ Classical.choice,
+ Quot.sound]
+'AffineHemigroup.isotropic_classification_sufficiency' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.isotropic_classification_origin' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.isotropic_classification_unique' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.isotropic_realisation' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.isotropic_classification_operators' depends on axioms: [propext,
+ AffineHemigroup.levy_khintchine_converse,
+ AffineHemigroup.levy_khintchine_unique,
+ Classical.choice,
+ Quot.sound]
+'AffineHemigroup.isotropic_classification_operators_necessity' depends on axioms: [propext,
+ AffineHemigroup.levy_khintchine_converse,
+ AffineHemigroup.levy_khintchine_unique,
+ Classical.choice,
+ Quot.sound]
+'AffineHemigroup.isotropic_classification_operators_sufficiency' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'AffineHemigroup.isotropic_classification_operators_unique' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.scale_zero_exponent_unique' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.scale_zero_dilation' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.scale_zero_gauge_unique' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.scale_zero_family_unique' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.scale_zero_kernel_of_family' depends on axioms: [propext,
+ AffineHemigroup.levy_khintchine_converse,
+ AffineHemigroup.levy_khintchine_unique,
+ Classical.choice,
+ Quot.sound]
+'AffineHemigroup.scale_zero_family_iff' depends on axioms: [propext,
+ AffineHemigroup.levy_khintchine_converse,
+ AffineHemigroup.levy_khintchine_unique,
+ Classical.choice,
+ Quot.sound]
+'AffineHemigroup.scale_zero_exponent' depends on axioms: [propext,
+ AffineHemigroup.levy_khintchine_converse,
+ AffineHemigroup.levy_khintchine_exists,
+ AffineHemigroup.levy_khintchine_unique,
+ AffineHemigroup.sato_polar_criterion,
+ AffineHemigroup.selfDecomposable_infinitelyDivisible,
+ Classical.choice,
+ Quot.sound]
+'AffineHemigroup.scale_zero_kernels' depends on axioms: [propext,
+ AffineHemigroup.levy_khintchine_converse,
+ AffineHemigroup.levy_khintchine_exists,
+ AffineHemigroup.levy_khintchine_unique,
+ AffineHemigroup.sato_polar_criterion,
+ AffineHemigroup.selfDecomposable_infinitelyDivisible,
+ Classical.choice,
+ Quot.sound]
+'AffineHemigroup.scale_zero_operators' depends on axioms: [propext,
+ AffineHemigroup.levy_khintchine_converse,
+ AffineHemigroup.levy_khintchine_exists,
+ AffineHemigroup.levy_khintchine_unique,
+ AffineHemigroup.sato_polar_criterion,
+ AffineHemigroup.selfDecomposable_infinitelyDivisible,
+ Classical.choice,
+ Quot.sound]
+'AffineHemigroup.scale_zero_families' depends on axioms: [propext,
+ AffineHemigroup.levy_khintchine_converse,
+ AffineHemigroup.levy_khintchine_exists,
+ AffineHemigroup.levy_khintchine_unique,
+ AffineHemigroup.sato_polar_criterion,
+ AffineHemigroup.selfDecomposable_infinitelyDivisible,
+ Classical.choice,
+ Quot.sound]
+'AffineHemigroup.scale_zero_relabelling_display' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.scale_zero_relabelling' depends on axioms: [propext,
+ AffineHemigroup.levy_khintchine_converse,
+ AffineHemigroup.levy_khintchine_exists,
+ AffineHemigroup.levy_khintchine_unique,
+ AffineHemigroup.sato_polar_criterion,
+ AffineHemigroup.selfDecomposable_infinitelyDivisible,
+ Classical.choice,
+ Quot.sound]
+'AffineHemigroup.map_withDensity_of_isometry' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.OriginDatum.smul_levyDensity_eq' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.OriginDatum.measurable_dilDensity' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.OriginDatum.map_smul_levyMeasure' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.OriginDatum.stageProfile_nonneg' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.OriginDatum.stageMeasure_zero' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.OriginDatum.stageMeasure_absolutelyContinuous' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'AffineHemigroup.OriginDatum.stageMeasure_map_isometry' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.OriginDatum.stageMeasure_rotation' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.OriginDatum.stageMeasure_neg' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.OriginDatum.stageMeasure_add' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.OriginDatum.stageMeasure_integrable' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.OriginDatum.exponent_smul_sub_smul' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.OriginDatum.stageMeasure_univ_eq_lintegral' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.OriginDatum.lintegral_stageProfile' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.OriginDatum.profileAtOrigin_cap' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.OriginDatum.lintegral_hb_top' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.OriginDatum.stageMeasure_univ' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.OriginDatum.stageMeasure_univ_ne_top_iff' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.isotropic_stage_transform' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.isotropic_stage_mass' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.cpLaw_eq_dirac_add' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.cpSmooth_le' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.isFiniteMeasure_cpSmooth' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.convPow_succ_absolutelyContinuous' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.cpSmooth_absolutelyContinuous' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.cpSmooth_univ' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.charFun_cpLaw_of_symm' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.mconvL1E_smul_dirac_add' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.eq_dirac_of_singleton_eq_one' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.not_selfDecomposable_of_atom' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.isotropic_stage_compoundPoisson' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.isotropic_stage_exp_neg_mass' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.profileAtOrigin_pos' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.isotropic_stage_atom' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.isotropic_stage_not_selfDecomposable' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.exists_law_of_symm_triplet' depends on axioms: [propext,
+ AffineHemigroup.levy_khintchine_converse,
+ Classical.choice,
+ Quot.sound]
+'AffineHemigroup.isotropic_stage_triplet' depends on axioms: [propext,
+ AffineHemigroup.levy_khintchine_converse,
+ Classical.choice,
+ Quot.sound]
+'AffineHemigroup.null_le_exp_neg_mass' depends on axioms: [propext,
+ AffineHemigroup.levy_khintchine_converse,
+ Classical.choice,
+ Quot.sound]
+'AffineHemigroup.isotropic_stage_absolutelyContinuous' depends on axioms: [propext,
+ AffineHemigroup.levy_khintchine_converse,
+ Classical.choice,
+ Quot.sound]
+'AffineHemigroup.isotropic_stage_smooth_density' depends on axioms: [propext,
+ AffineHemigroup.density_of_integrable_charFun,
+ Classical.choice,
+ Quot.sound]
+'AffineHemigroup.isotropic_stage_dichotomy' depends on axioms: [propext,
+ AffineHemigroup.density_of_integrable_charFun,
+ AffineHemigroup.levy_khintchine_converse,
+ Classical.choice,
+ Quot.sound]
+'AffineHemigroup.exists_density_of_absolutelyContinuous' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.mconvE_withDensity' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.isotropic_stage_operator' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.isotropic_stage_no_point_mass' depends on axioms: [propext,
+ AffineHemigroup.levy_khintchine_converse,
+ Classical.choice,
+ Quot.sound]
+'AffineHemigroup.exists_kernels_of_isotropicOperatorFamily' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.exists_operators_of_kernels' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.sphereArea_eq_toSphere' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.OriginDatum.tendsto_profileAtOrigin' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.OriginDatum.polar_decomposition' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.witness_isDelayDatum' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.measurable_gaussVar' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.isotropic_exponent_log_bound' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.origin_decay_exponent' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.OriginDatum.exponent_decay' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.exponent_gaussian_limit' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.exponent_profile_limit' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.transform_profile_limit' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.origin_profile_dimension_free' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.OriginDatum.exponent_eq_add' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.OriginDatum.exponent_le_sq_at' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.OriginDatum.exponent_ge_log' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.OriginDatum.tendsto_ofReal_exponent_div_log' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.positive_transform_heat' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.positive_transform_bound' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.density_bound_ball' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.origin_density_smooth' depends on axioms: [propext,
+ AffineHemigroup.density_of_integrable_charFun,
+ Classical.choice,
+ Quot.sound]
+'AffineHemigroup.origin_density_bounded_smooth' depends on axioms: [propext,
+ AffineHemigroup.density_of_integrable_charFun,
+ Classical.choice,
+ Quot.sound]
+'AffineHemigroup.origin_unbounded' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.origin_unbounded_rate' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.origin_dichotomy' depends on axioms: [propext,
+ AffineHemigroup.density_of_integrable_charFun,
+ Classical.choice,
+ Quot.sound]
+'AffineHemigroup.delay_polar_profile' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.delay_polar_profile_datum' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.subordinated_profileAtOrigin' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.subordinated_law' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.delayLaw_zero' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.subordinated_density_limit' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.subordinated_unbounded' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.isotropic_exponent_log_limit' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.polar_classification' depends on axioms: [propext,
+ AffineHemigroup.levy_khintchine_converse,
+ AffineHemigroup.levy_khintchine_exists,
+ AffineHemigroup.levy_khintchine_unique,
+ AffineHemigroup.sato_polar_criterion,
+ AffineHemigroup.selfDecomposable_infinitelyDivisible,
+ Classical.choice,
+ Quot.sound]
+'AffineHemigroup.eq_of_rotationInvariant' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.polar_reading' depends on axioms: [propext,
+ AffineHemigroup.levy_khintchine_converse,
+ AffineHemigroup.levy_khintchine_exists,
+ AffineHemigroup.levy_khintchine_unique,
+ AffineHemigroup.sato_polar_criterion,
+ AffineHemigroup.selfDecomposable_infinitelyDivisible,
+ Classical.choice,
+ Quot.sound]
+'AffineHemigroup.polar_reading_unique' depends on axioms: [propext,
+ AffineHemigroup.levy_khintchine_converse,
+ AffineHemigroup.levy_khintchine_unique,
+ AffineHemigroup.sato_polar_criterion,
+ Classical.choice,
+ Quot.sound]
+'AffineHemigroup.polar_reading_admissible' depends on axioms: [propext,
+ AffineHemigroup.levy_khintchine_converse,
+ AffineHemigroup.levy_khintchine_exists,
+ AffineHemigroup.levy_khintchine_unique,
+ AffineHemigroup.sato_polar_criterion,
+ AffineHemigroup.selfDecomposable_infinitelyDivisible,
+ Classical.choice,
+ Quot.sound]
+'AffineHemigroup.classA_iff_originDatum' depends on axioms: [propext,
+ AffineHemigroup.levy_khintchine_converse,
+ AffineHemigroup.levy_khintchine_exists,
+ AffineHemigroup.levy_khintchine_unique,
+ AffineHemigroup.sato_polar_criterion,
+ AffineHemigroup.selfDecomposable_infinitelyDivisible,
+ Classical.choice,
+ Quot.sound]
+'AffineHemigroup.filtration_witness' depends on axioms: [propext,
+ AffineHemigroup.levy_khintchine_converse,
+ AffineHemigroup.levy_khintchine_exists,
+ AffineHemigroup.levy_khintchine_unique,
+ AffineHemigroup.sato_polar_criterion,
+ AffineHemigroup.selfDecomposable_infinitelyDivisible,
+ Classical.choice,
+ Quot.sound]
+'AffineHemigroup.filtration_witness_exists' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.filtration_strict' depends on axioms: [propext,
+ AffineHemigroup.levy_khintchine_converse,
+ AffineHemigroup.levy_khintchine_exists,
+ AffineHemigroup.levy_khintchine_unique,
+ AffineHemigroup.sato_polar_criterion,
+ AffineHemigroup.selfDecomposable_infinitelyDivisible,
+ Classical.choice,
+ Quot.sound]
+'AffineHemigroup.classA_of_succ' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.lkForm_sub_negDef' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.lkForm_negDef' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.bernstein_triplet_unique' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.classS_of_classAInf' depends on axioms: [propext,
+ AffineHemigroup.levy_khintchine_exists,
+ AffineHemigroup.levy_khintchine_unique,
+ AffineHemigroup.sato_polar_criterion,
+ AffineHemigroup.schoenberg_radial_bernstein,
+ AffineHemigroup.selfDecomposable_infinitelyDivisible,
+ Classical.choice,
+ Quot.sound]
+'AffineHemigroup.classAInf_of_classS' depends on axioms: [propext,
+ AffineHemigroup.levy_khintchine_converse,
+ AffineHemigroup.sato_polar_criterion,
+ Classical.choice,
+ Quot.sound]
+'AffineHemigroup.filtration_top' depends on axioms: [propext,
+ AffineHemigroup.levy_khintchine_converse,
+ AffineHemigroup.levy_khintchine_exists,
+ AffineHemigroup.levy_khintchine_unique,
+ AffineHemigroup.sato_polar_criterion,
+ AffineHemigroup.schoenberg_radial_bernstein,
+ AffineHemigroup.selfDecomposable_infinitelyDivisible,
+ Classical.choice,
+ Quot.sound]
+'AffineHemigroup.cin_ray_scaled' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.no_cin_ray_in_the_plane' depends on axioms: [propext,
+ AffineHemigroup.levy_khintchine_converse,
+ AffineHemigroup.levy_khintchine_exists,
+ AffineHemigroup.levy_khintchine_unique,
+ AffineHemigroup.sato_polar_criterion,
+ AffineHemigroup.selfDecomposable_infinitelyDivisible,
+ Classical.choice,
+ Quot.sound]
+'AffineHemigroup.criticalValues_strictAnti' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.criticalValues_tendsto' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.criticalValues_existsUnique_window' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.threshold_natCast_le' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.witness_classA_iff' depends on axioms: [propext,
+ AffineHemigroup.levy_khintchine_converse,
+ AffineHemigroup.levy_khintchine_exists,
+ AffineHemigroup.levy_khintchine_unique,
+ AffineHemigroup.sato_polar_criterion,
+ AffineHemigroup.selfDecomposable_infinitelyDivisible,
+ Classical.choice,
+ Quot.sound]
+'AffineHemigroup.witness_classA_iff_le' depends on axioms: [propext,
+ AffineHemigroup.levy_khintchine_converse,
+ AffineHemigroup.levy_khintchine_exists,
+ AffineHemigroup.levy_khintchine_unique,
+ AffineHemigroup.sato_polar_criterion,
+ AffineHemigroup.selfDecomposable_infinitelyDivisible,
+ Classical.choice,
+ Quot.sound]
+'AffineHemigroup.witness_not_classA_of_gt' depends on axioms: [propext,
+ AffineHemigroup.levy_khintchine_converse,
+ AffineHemigroup.levy_khintchine_exists,
+ AffineHemigroup.levy_khintchine_unique,
+ AffineHemigroup.sato_polar_criterion,
+ AffineHemigroup.selfDecomposable_infinitelyDivisible,
+ Classical.choice,
+ Quot.sound]
+'AffineHemigroup.separating_family_strict' depends on axioms: [propext,
+ AffineHemigroup.levy_khintchine_converse,
+ AffineHemigroup.levy_khintchine_exists,
+ AffineHemigroup.levy_khintchine_unique,
+ AffineHemigroup.sato_polar_criterion,
+ AffineHemigroup.selfDecomposable_infinitelyDivisible,
+ Classical.choice,
+ Quot.sound]
+'AffineHemigroup.separating_family_critical_values' depends on axioms: [propext,
+ AffineHemigroup.levy_khintchine_converse,
+ AffineHemigroup.levy_khintchine_exists,
+ AffineHemigroup.levy_khintchine_unique,
+ AffineHemigroup.sato_polar_criterion,
+ AffineHemigroup.selfDecomposable_infinitelyDivisible,
+ Classical.choice,
+ Quot.sound]
+'AffineHemigroup.measurePreserving_splitLast' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.lintegral_shadow' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.shadowWeight_lintegral' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.shadowWeight_normalisation' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.shadowProfile_le' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.shadowProfile_antitoneOn' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.shadowProfile_continuousOn' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.OriginDatum.lintegral_dropLast_levyMeasure' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.OriginDatum.shadow_levyMeasure' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.OriginDatum.shadow_exponent' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.OriginDatum.shadow_profileAtOrigin' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.shadow_profile_mean' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.shadow_profile_regular' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.shadow_datum' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.eq_of_ae_eq_of_antitoneOn_of_continuousOn' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.exists_radial_exponent' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.stepOriginDatum_not_continuousOn' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.profile_one_dimension_down' depends on axioms: [propext,
+ AffineHemigroup.levy_khintchine_converse,
+ AffineHemigroup.levy_khintchine_exists,
+ AffineHemigroup.levy_khintchine_unique,
+ AffineHemigroup.sato_polar_criterion,
+ AffineHemigroup.selfDecomposable_infinitelyDivisible,
+ Classical.choice,
+ Quot.sound]
+'AffineHemigroup.profile_one_dimension_down_of_classA' depends on axioms: [propext,
+ AffineHemigroup.levy_khintchine_converse,
+ AffineHemigroup.levy_khintchine_exists,
+ AffineHemigroup.levy_khintchine_unique,
+ AffineHemigroup.sato_polar_criterion,
+ AffineHemigroup.selfDecomposable_infinitelyDivisible,
+ Classical.choice,
+ Quot.sound]
+'AffineHemigroup.not_classA_succ_of_profile_discontinuous' depends on axioms: [propext,
+ AffineHemigroup.levy_khintchine_converse,
+ AffineHemigroup.levy_khintchine_exists,
+ AffineHemigroup.levy_khintchine_unique,
+ AffineHemigroup.sato_polar_criterion,
+ AffineHemigroup.selfDecomposable_infinitelyDivisible,
+ Classical.choice,
+ Quot.sound]
+'AffineHemigroup.step_datum_separates' depends on axioms: [propext,
+ AffineHemigroup.levy_khintchine_converse,
+ AffineHemigroup.levy_khintchine_exists,
+ AffineHemigroup.levy_khintchine_unique,
+ AffineHemigroup.sato_polar_criterion,
+ AffineHemigroup.selfDecomposable_infinitelyDivisible,
+ Classical.choice,
+ Quot.sound]
+'AffineHemigroup.cin_ray_not_classA' depends on axioms: [propext,
+ AffineHemigroup.levy_khintchine_converse,
+ AffineHemigroup.levy_khintchine_exists,
+ AffineHemigroup.levy_khintchine_unique,
+ AffineHemigroup.sato_polar_criterion,
+ AffineHemigroup.selfDecomposable_infinitelyDivisible,
+ Classical.choice,
+ Quot.sound]
+'AffineHemigroup.isotropic_bridge_family' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.isotropic_bridge_matern' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.isotropic_bridge_stable' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.isotropic_bridge_student_transform' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.isotropic_bridge_student_family' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.kanterUniform_zero' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.isProbabilityMeasure_kanterUniform' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.radial_monotone_family' depends on axioms: [propext,
+ AffineHemigroup.levy_khintchine_converse,
+ AffineHemigroup.levy_khintchine_unique,
+ AffineHemigroup.wolfe_symmetric_unimodal,
+ Classical.choice,
+ Quot.sound]
+'AffineHemigroup.exists_antitone_density_of_concave' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.concaveENN_kanterUniform' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.map_volume_volCoord' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.measure_singleton_zero_of_tendsto' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.radial_density_of_mixture' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.radial_monotone_of_selfDecomposable' depends on axioms: [propext,
+ AffineHemigroup.wolfe_symmetric_unimodal,
+ Classical.choice,
+ Quot.sound]
+'AffineHemigroup.IsLawOf.tendsto_norm_charFun' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.tendsto_exp_neg_classA' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.radial_monotone_law' depends on axioms: [propext,
+ AffineHemigroup.levy_khintchine_converse,
+ AffineHemigroup.sato_polar_criterion,
+ AffineHemigroup.wolfe_symmetric_unimodal,
+ Classical.choice,
+ Quot.sound]
+'AffineHemigroup.charFun_cpLaw' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.OriginDatum.bigJumps_conv_ge' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.OriginDatum.truncate_law_tail' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.OriginDatum.law_eq_conv' depends on axioms: [propext,
+ AffineHemigroup.levy_khintchine_converse,
+ Classical.choice,
+ Quot.sound]
+'AffineHemigroup.OriginDatum.all_scales' depends on axioms: [propext,
+ AffineHemigroup.levy_khintchine_converse,
+ Classical.choice,
+ Quot.sound]
+'AffineHemigroup.origin_lower_bound' depends on axioms: [propext,
+ AffineHemigroup.levy_khintchine_converse,
+ Classical.choice,
+ Quot.sound]
+'AffineHemigroup.origin_lower_bound_density' depends on axioms: [propext,
+ AffineHemigroup.levy_khintchine_converse,
+ Classical.choice,
+ Quot.sound]
+'AffineHemigroup.origin_lower_bound_ball' depends on axioms: [propext,
+ AffineHemigroup.levy_khintchine_converse,
+ Classical.choice,
+ Quot.sound]
+'AffineHemigroup.origin_upper_bound_of_heat' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.origin_upper_bound' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.origin_density_upper' depends on axioms: [propext,
+ AffineHemigroup.levy_khintchine_converse,
+ AffineHemigroup.sato_polar_criterion,
+ AffineHemigroup.wolfe_symmetric_unimodal,
+ Classical.choice,
+ Quot.sound]
+'AffineHemigroup.origin_density_lower' depends on axioms: [propext,
+ AffineHemigroup.levy_khintchine_converse,
+ Classical.choice,
+ Quot.sound]
+'AffineHemigroup.origin_density_log_order' depends on axioms: [propext,
+ AffineHemigroup.levy_khintchine_converse,
+ Classical.choice,
+ Quot.sound]
+'AffineHemigroup.origin_ball_log_order' depends on axioms: [propext,
+ AffineHemigroup.levy_khintchine_converse,
+ Classical.choice,
+ Quot.sound]
+'AffineHemigroup.origin_density_order' depends on axioms: [propext,
+ AffineHemigroup.levy_khintchine_converse,
+ AffineHemigroup.sato_polar_criterion,
+ AffineHemigroup.wolfe_symmetric_unimodal,
+ Classical.choice,
+ Quot.sound]
+'AffineHemigroup.heatKernel_sq_ge' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.measure_ball_le_heatKernel' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.radial_density_mul_ball_le' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.radial_density_le_ball' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.volume_unitBall_toReal_pos' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.OriginDatum.not_ae_zero_of_profileAtOrigin_pos' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'AffineHemigroup.tendsto_log_div_log_inv' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.exists_between_profile' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.origin_ball_rate' depends on axioms: [propext,
+ AffineHemigroup.karamata_tauberian_zero,
+ Classical.choice,
+ Quot.sound]
+'AffineHemigroup.origin_density_rate' depends on axioms: [propext,
+ AffineHemigroup.karamata_tauberian_zero,
+ Classical.choice,
+ Quot.sound]
+'AffineHemigroup.origin_ball_rate_critical' depends on axioms: [propext,
+ AffineHemigroup.karamata_tauberian_zero,
+ Classical.choice,
+ Quot.sound]
+'AffineHemigroup.origin_density_rate_critical' depends on axioms: [propext,
+ AffineHemigroup.karamata_tauberian_zero,
+ Classical.choice,
+ Quot.sound]
+'AffineHemigroup.origin_transform_ball_log' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.origin_density_log_lower' depends on axioms: [propext,
+ AffineHemigroup.karamata_tauberian_zero,
+ Classical.choice,
+ Quot.sound]
+'AffineHemigroup.origin_rate' depends on axioms: [propext,
+ AffineHemigroup.karamata_tauberian_zero,
+ AffineHemigroup.levy_khintchine_converse,
+ AffineHemigroup.sato_polar_criterion,
+ AffineHemigroup.wolfe_symmetric_unimodal,
+ Classical.choice,
+ Quot.sound]
+'AffineHemigroup.origin_rate_critical' depends on axioms: [propext,
+ AffineHemigroup.karamata_tauberian_zero,
+ AffineHemigroup.levy_khintchine_converse,
+ AffineHemigroup.sato_polar_criterion,
+ AffineHemigroup.wolfe_symmetric_unimodal,
+ Classical.choice,
+ Quot.sound]
+'AffineHemigroup.tendsto_ball_of_gauss' depends on axioms: [propext,
+ AffineHemigroup.karamata_tauberian_zero,
+ Classical.choice,
+ Quot.sound]
+'AffineHemigroup.tendsto_radial_density_of_ball' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.antitoneOn_dyadic_bound' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.IsRayProfile.tendsto_gaussian_average' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.IsRayProfile.tendsto_truncMoment_dilate' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.IsRayProfile.tendsto_gaussMoment_div_truncMoment' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'AffineHemigroup.IsRayProfile.ratio_le' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.IsRayProfile.tendsto_mul_div_truncMoment' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.IsRayProfile.gaussMoment_le' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.IsRayProfile.exp_mul_truncMoment_le_gaussMoment' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'AffineHemigroup.radial_density_shell' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.tendsto_rpow_sub_one_div_pow_sub_one' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.sphereArea_eq_mul_volume_unitBall' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.OriginDatum.exponent_le_smul' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.IsLawOf.isRayProfile' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.IsLawOf.tendsto_ray_ratio' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.IsLawOf.integral_gauss_eq' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.IsLawOf.tendsto_gauss_div_ray' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.IsLawOf.integral_charFun_closedBall' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.gaussMoment_eq' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.rateConst_pos' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.rateConst_div' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.critConst_eq' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.chain_loewner' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.chain_ray_zero' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.chain_ray' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.chain_stepSet' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.stepSet_loewner' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.stepSet_ray' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.stepSet_stable' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.cascade_small_increment' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.convList_cascade' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.cascade_interval_infinitelyDivisible' depends on axioms: [propext,
+ AffineHemigroup.khintchine_null_array,
+ Classical.choice,
+ Quot.sound]
+'AffineHemigroup.chain_infinitelyDivisible' depends on axioms: [propext,
+ AffineHemigroup.khintchine_null_array,
+ Classical.choice,
+ Quot.sound]
+'AffineHemigroup.gw_family_infinitelyDivisible' depends on axioms: [propext,
+ AffineHemigroup.khintchine_null_array,
+ Classical.choice,
+ Quot.sound]
+'AffineHemigroup.isotropic_family_infinitelyDivisible' depends on axioms: [propext,
+ AffineHemigroup.khintchine_null_array,
+ Classical.choice,
+ Quot.sound]
+'AffineHemigroup.densTriplet_lkExponent' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.exists_law_densTriplet' depends on axioms: [propext,
+ AffineHemigroup.levy_khintchine_converse,
+ Classical.choice,
+ Quot.sound]
+'AffineHemigroup.ellipticalStable_exists_unique' depends on axioms: [propext,
+ AffineHemigroup.levy_khintchine_converse,
+ Classical.choice,
+ Quot.sound]
+'AffineHemigroup.ellipticalStable_props' depends on axioms: [propext,
+ AffineHemigroup.levy_khintchine_converse,
+ Classical.choice,
+ Quot.sound]
+'AffineHemigroup.ellipticalStable_orbit' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.stable_step_cone_tfae' depends on axioms: [propext,
+ AffineHemigroup.levy_khintchine_converse,
+ Classical.choice,
+ Quot.sound]
+'AffineHemigroup.stable_step_cone_increment' depends on axioms: [propext,
+ AffineHemigroup.levy_khintchine_converse,
+ Classical.choice,
+ Quot.sound]
+'AffineHemigroup.stable_step_increments' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.exists_density_increment' depends on axioms: [propext,
+ AffineHemigroup.levy_khintchine_converse,
+ Classical.choice,
+ Quot.sound]
+'AffineHemigroup.RadialProfile.not_ge_at_infinity' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.dilRatio_mem' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.profileLaw_exists_unique' depends on axioms: [propext,
+ AffineHemigroup.levy_khintchine_converse,
+ Classical.choice,
+ Quot.sound]
+'AffineHemigroup.profileLaw_props' depends on axioms: [propext,
+ AffineHemigroup.levy_khintchine_converse,
+ Classical.choice,
+ Quot.sound]
+'AffineHemigroup.orbit_density_order_iff' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.orbit_density_order_increment' depends on axioms: [propext,
+ AffineHemigroup.levy_khintchine_converse,
+ Classical.choice,
+ Quot.sound]
+'AffineHemigroup.orbit_density_order_props' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.orbit_density_order_stable' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.orbit_density_order_bounded' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.det_mexp_smul' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.exp_mul_le_norm_sq_mexp' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.stable_exponent_cone' depends on axioms: [propext,
+ AffineHemigroup.levy_khintchine_converse,
+ Classical.choice,
+ Quot.sound]
+'AffineHemigroup.stableExpCone_props' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.tendsto_blow_fourier' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.blowLim_eq_mul_eval_zero' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.tendsto_fourier_test_cos' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.log_orbit_rays' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.matern_log_orbit_rays' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.one_le_of_ray_increment' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.matern_steps' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.RadialProfile.toOriginDatum_exponent' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.bounded_profile_rays' depends on axioms: [propext,
+ AffineHemigroup.levy_khintchine_converse,
+ Classical.choice,
+ Quot.sound]
+'AffineHemigroup.stab_isClosedSubgroupGL' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.stab_isCompact_of_isFull' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.carried_by_subspace_of_not_isCompact' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.stab_dirac_ebasis' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.isFull_of_isRotationInvariant' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.parameter_space_tfae' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.parameter_space_index_bijOn' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.parameter_space_index_unique' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.parameter_space_atoms' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.parameter_space_scheme' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.gram_glSet_eq_pdSet' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.parameter_space_diag_example' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.eq_dirac_of_push_smul_eq' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.isotropic_corner_slice' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.isotropic_corner_gauge' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.isotropic_corner_gauge_forall' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.isotropic_corner_gauge_unique' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.isotropic_corner_rescale' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.isotropic_corner_gl_determined' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.simSet_isClosedSubgroupGL' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.isotropic_corner_sim_not_determined' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.tendsto_eval_mul_div_eval' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.rational_symbols' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.rational_symbols_examples' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.dilRatio_monotone' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.dilRatio_lt_sq' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.dilRatio_exponents' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.dilRatio_rung' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.dilRatio_exponents_stable' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.dilRatio_exponents_bounded' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.dilRatio_dyadic' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.lintegral_one_sub_cos_subProfile' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.lintegral_gamma_subordinator' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.lintegral_frullani_subordinator' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.tempered_profile_exists' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.tempered_step_cone' depends on axioms: [propext,
+ AffineHemigroup.levy_khintchine_converse,
+ Classical.choice,
+ Quot.sound]
+'AffineHemigroup.tempered_exp_example' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.tempered_subordinated_example' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.matern_endpoint' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.lintegral_exp_inner_le_of_tendsto' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.tempered_exponential_moments' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.tendsto_msqrt' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.stepLE_iff_factor' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.stepLE_invariant' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.invariant_relation_eq_stepLE' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.stepLE_order_props' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.stepLE_compose' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.stepLE_chain_of_mem' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.stepLE_trans_tfae' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.step_composite_example' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.infCone_props' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.matern_cross_shape' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.frame_family_cascade' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.frame_family_gaussian' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.frame_family_only_gaussian' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.fixed_frame_families' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.fixed_frame_families_converse' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.similarity_ray_parameter' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.similarity_ray_families' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.similarity_ray_kernels' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.similarity_ray_isotropic' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.similarity_ray_two_families' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.similarity_row_isotropic_members' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.diagonal_ray_parameter' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.diagonal_ray_families' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.diagonal_ray_frame' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.diagonal_loewner_products' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.diagonal_rays_no_product' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.diagonal_rays_off_frame' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.one_parameter_families' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.one_parameter_families_converse' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.one_parameter_origin' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.one_parameter_curve' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.one_parameter_gaussian' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.one_parameter_products' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.one_parameter_stable_member' depends on axioms: [propext,
+ AffineHemigroup.levy_khintchine_converse,
+ Classical.choice,
+ Quot.sound]
+'AffineHemigroup.isExpContracting_iff' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.anisotropy_budget_converse' depends on axioms: [propext,
+ AffineHemigroup.levy_khintchine_converse,
+ Classical.choice,
+ Quot.sound]
+'AffineHemigroup.logSpec_product_majorized' depends on axioms: [propext,
+ AffineHemigroup.gelfand_naimark_logMajorized,
+ Classical.choice,
+ Quot.sound]
+'AffineHemigroup.partialSum_eigUp_isLeast' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.partialSum_eigUp_lipschitz' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.eigUp_add_majorized' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.symCone_mem_iff' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.symCone_majorization' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.specCone_isClosedConvexCone' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.orthInvariant_cone_eq_specCone' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.orthInvariant_pointed_cone_sign' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.expSet_specCone' depends on axioms: [propext,
+ AffineHemigroup.gelfand_naimark_logMajorized,
+ Classical.choice,
+ Quot.sound]
+'AffineHemigroup.coneField_eq' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.causalLE_iff_expSet' depends on axioms: [propext,
+ AffineHemigroup.gelfand_naimark_logMajorized,
+ Classical.choice,
+ Quot.sound]
+'AffineHemigroup.causalLE_order' depends on axioms: [propext,
+ AffineHemigroup.gelfand_naimark_logMajorized,
+ Classical.choice,
+ Quot.sound]
+'AffineHemigroup.closed_order_tangent_wedge' depends on axioms: [propext,
+ AffineHemigroup.gelfand_naimark_logMajorized,
+ Classical.choice,
+ Quot.sound]
+'AffineHemigroup.closed_order_cone_tfae' depends on axioms: [propext,
+ AffineHemigroup.gelfand_naimark_logMajorized,
+ Classical.choice,
+ Quot.sound]
+'AffineHemigroup.closed_order_without_cone' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.causalPlus_wedge' depends on axioms: [propext,
+ AffineHemigroup.gelfand_naimark_logMajorized,
+ Classical.choice,
+ Quot.sound]
+'AffineHemigroup.causalPlus_ray' depends on axioms: [propext,
+ AffineHemigroup.gelfand_naimark_logMajorized,
+ Classical.choice,
+ Quot.sound]
+'AffineHemigroup.stableGenCone_props' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.psdSet_cone_props' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.stable_order_zero' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.stable_order_pos' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.stable_order_infty' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.stableExpCone_tangent' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.stable_order_loewner_coords' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.sim_stable_parts_ordered' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.sim_stable_bounded_shape' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.sim_stable_not_shape_blind' depends on axioms: [propext,
+ AffineHemigroup.levy_khintchine_converse,
+ Classical.choice,
+ Quot.sound]
+'AffineHemigroup.sim_orbit_id_increment' depends on axioms: [propext,
+ AffineHemigroup.levy_khintchine_converse,
+ AffineHemigroup.levy_khintchine_exists,
+ AffineHemigroup.levy_khintchine_unique,
+ Classical.choice,
+ Quot.sound]
+'AffineHemigroup.sim_orbit_bounded_shape' depends on axioms: [propext,
+ AffineHemigroup.levy_khintchine_converse,
+ AffineHemigroup.levy_khintchine_exists,
+ AffineHemigroup.levy_khintchine_unique,
+ Classical.choice,
+ Quot.sound]
+'AffineHemigroup.sim_orbit_index_zero' depends on axioms: [propext,
+ AffineHemigroup.levy_khintchine_converse,
+ AffineHemigroup.levy_khintchine_exists,
+ AffineHemigroup.levy_khintchine_unique,
+ Classical.choice,
+ Quot.sound]
+'AffineHemigroup.sim_orbit_log' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.sim_general_covariance' depends on axioms: [propext,
+ AffineHemigroup.levy_khintchine_unique,
+ Classical.choice,
+ Quot.sound]
+'AffineHemigroup.sim_general_id_increment' depends on axioms: [propext,
+ AffineHemigroup.levy_khintchine_exists,
+ AffineHemigroup.levy_khintchine_unique,
+ Classical.choice,
+ Quot.sound]
+'AffineHemigroup.sim_general_finite_increment' depends on axioms: [propext,
+ AffineHemigroup.levy_khintchine_unique,
+ Classical.choice,
+ Quot.sound]
+'AffineHemigroup.sim_general_rank_one_limit' depends on axioms: [propext,
+ AffineHemigroup.levy_khintchine_exists,
+ AffineHemigroup.levy_khintchine_unique,
+ Classical.choice,
+ Quot.sound]
+'AffineHemigroup.sim_general_rank_one_exp_limit' depends on axioms: [propext,
+ AffineHemigroup.levy_khintchine_exists,
+ AffineHemigroup.levy_khintchine_unique,
+ Classical.choice,
+ Quot.sound]
+'AffineHemigroup.sim_general_sandwich' depends on axioms: [propext,
+ AffineHemigroup.levy_khintchine_exists,
+ AffineHemigroup.levy_khintchine_unique,
+ Classical.choice,
+ Quot.sound]
+'AffineHemigroup.anisotropy_functionals' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.sim_bounded_shape_levy' depends on axioms: [propext,
+ AffineHemigroup.levy_khintchine_exists,
+ AffineHemigroup.levy_khintchine_unique,
+ Classical.choice,
+ Quot.sound]
+'AffineHemigroup.sim_bounded_shape_exp' depends on axioms: [propext,
+ AffineHemigroup.levy_khintchine_exists,
+ AffineHemigroup.levy_khintchine_unique,
+ Classical.choice,
+ Quot.sound]
+'AffineHemigroup.sim_bounded_shape_moments' depends on axioms: [propext,
+ AffineHemigroup.levy_khintchine_exists,
+ AffineHemigroup.levy_khintchine_unique,
+ Classical.choice,
+ Quot.sound]
+'AffineHemigroup.sim_cascade_infinitelyDivisible' depends on axioms: [propext,
+ AffineHemigroup.khintchine_null_array,
+ AffineHemigroup.levy_khintchine_exists,
+ AffineHemigroup.levy_khintchine_unique,
+ Classical.choice,
+ Quot.sound]
+'AffineHemigroup.sim_cascade_general' depends on axioms: [propext,
+ AffineHemigroup.khintchine_null_array,
+ AffineHemigroup.levy_khintchine_exists,
+ AffineHemigroup.levy_khintchine_unique,
+ Classical.choice,
+ Quot.sound]
+'AffineHemigroup.sim_cascade_elliptical' depends on axioms: [propext,
+ AffineHemigroup.khintchine_null_array,
+ AffineHemigroup.levy_khintchine_converse,
+ AffineHemigroup.levy_khintchine_exists,
+ AffineHemigroup.levy_khintchine_unique,
+ Classical.choice,
+ Quot.sound]
+'AffineHemigroup.stable_order_gl_row' depends on axioms: [propext,
+ AffineHemigroup.levy_khintchine_converse,
+ Classical.choice,
+ Quot.sound]
+'AffineHemigroup.stable_order_gl_row_examples' depends on axioms: [propext,
+ AffineHemigroup.levy_khintchine_converse,
+ Classical.choice,
+ Quot.sound]
+'AffineHemigroup.stable_order_sim_kernels' depends on axioms: [propext,
+ AffineHemigroup.khintchine_null_array,
+ AffineHemigroup.levy_khintchine_exists,
+ AffineHemigroup.levy_khintchine_unique,
+ Classical.choice,
+ Quot.sound]
+'AffineHemigroup.stable_order_sim_isotropic' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.stable_order_sandwich' depends on axioms: [propext,
+ AffineHemigroup.khintchine_null_array,
+ AffineHemigroup.levy_khintchine_exists,
+ AffineHemigroup.levy_khintchine_unique,
+ Classical.choice,
+ Quot.sound]
+'AffineHemigroup.loewner_order_sandwich' depends on axioms: [propext,
+ AffineHemigroup.khintchine_null_array,
+ AffineHemigroup.levy_khintchine_exists,
+ AffineHemigroup.levy_khintchine_unique,
+ Classical.choice,
+ Quot.sound]
+'AffineHemigroup.stable_order_cell_strict' depends on axioms: [propext,
+ AffineHemigroup.levy_khintchine_converse,
+ Classical.choice,
+ Quot.sound]
+'AffineHemigroup.anisotropy_budget' depends on axioms: [propext,
+ AffineHemigroup.levy_khintchine_exists,
+ AffineHemigroup.levy_khintchine_unique,
+ AffineHemigroup.operatorSelfDecomposable_infinitelyDivisible,
+ Classical.choice,
+ Quot.sound]
+'AffineHemigroup.budget_of_contracting' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.wedge_axis_chain' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.wedge_axis_not_psd' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.wedge_axis_singular' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.wedge_axis_index' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.wedge_axis_stable' depends on axioms: [propext,
+ AffineHemigroup.levy_khintchine_converse,
+ Classical.choice,
+ Quot.sound]
+'AffineHemigroup.wedge_axis_non_gaussian' depends on axioms: [propext,
+ AffineHemigroup.levy_khintchine_converse,
+ AffineHemigroup.levy_khintchine_exists,
+ AffineHemigroup.levy_khintchine_unique,
+ AffineHemigroup.operatorSelfDecomposable_infinitelyDivisible,
+ Classical.choice,
+ Quot.sound]
+'AffineHemigroup.wedge_axis_row' depends on axioms: [propext,
+ AffineHemigroup.levy_khintchine_converse,
+ AffineHemigroup.levy_khintchine_exists,
+ AffineHemigroup.levy_khintchine_unique,
+ AffineHemigroup.operatorSelfDecomposable_infinitelyDivisible,
+ Classical.choice,
+ Quot.sound]
+'AffineHemigroup.wedge_axis_row_members' depends on axioms: [propext,
+ AffineHemigroup.levy_khintchine_converse,
+ AffineHemigroup.levy_khintchine_exists,
+ AffineHemigroup.levy_khintchine_unique,
+ AffineHemigroup.operatorSelfDecomposable_infinitelyDivisible,
+ Classical.choice,
+ Quot.sound]
+'AffineHemigroup.wedge_axis_profiles' depends on axioms: [propext,
+ AffineHemigroup.khintchine_null_array,
+ AffineHemigroup.levy_khintchine_converse,
+ AffineHemigroup.levy_khintchine_exists,
+ AffineHemigroup.levy_khintchine_unique,
+ Classical.choice,
+ Quot.sound]
+'AffineHemigroup.wedge_axis_profiles_stable' depends on axioms: [propext,
+ AffineHemigroup.khintchine_null_array,
+ AffineHemigroup.levy_khintchine_converse,
+ AffineHemigroup.levy_khintchine_exists,
+ AffineHemigroup.levy_khintchine_unique,
+ Classical.choice,
+ Quot.sound]
+'AffineHemigroup.wedge_axis_cell' depends on axioms: [propext,
+ AffineHemigroup.khintchine_null_array,
+ AffineHemigroup.levy_khintchine_converse,
+ AffineHemigroup.levy_khintchine_exists,
+ AffineHemigroup.levy_khintchine_unique,
+ AffineHemigroup.sato_polar_criterion,
+ Classical.choice,
+ Quot.sound]
+'AffineHemigroup.wedge_axis_cone_laws' depends on axioms: [propext,
+ AffineHemigroup.khintchine_null_array,
+ AffineHemigroup.levy_khintchine_converse,
+ AffineHemigroup.levy_khintchine_exists,
+ AffineHemigroup.levy_khintchine_unique,
+ AffineHemigroup.sato_polar_criterion,
+ Classical.choice,
+ Quot.sound]
+'AffineHemigroup.wedge_axis_cell_gaussian' depends on axioms: [propext,
+ AffineHemigroup.khintchine_null_array,
+ AffineHemigroup.levy_khintchine_converse,
+ AffineHemigroup.levy_khintchine_exists,
+ AffineHemigroup.levy_khintchine_unique,
+ AffineHemigroup.sato_polar_criterion,
+ Classical.choice,
+ Quot.sound]
+'AffineHemigroup.wedge_axis_cone_laws_gaussian' depends on axioms: [propext,
+ AffineHemigroup.khintchine_null_array,
+ AffineHemigroup.levy_khintchine_converse,
+ AffineHemigroup.levy_khintchine_exists,
+ AffineHemigroup.levy_khintchine_unique,
+ AffineHemigroup.sato_polar_criterion,
+ Classical.choice,
+ Quot.sound]
+'AffineHemigroup.polar_mean_form' depends on axioms: [propext,
+ AffineHemigroup.levy_khintchine_exists,
+ AffineHemigroup.sato_polar_criterion,
+ Classical.choice,
+ Quot.sound]
+'AffineHemigroup.rowLaws_coe_eq_coneLaws' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.diagonal_stable_datum' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.diagonal_stable_frame' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.diagonal_stable_sources' depends on axioms: [propext,
+ AffineHemigroup.levy_khintchine_converse,
+ Classical.choice,
+ Quot.sound]
+'AffineHemigroup.diagonal_stable_gaussian_excluded' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.diagonal_stable_not_product' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.diagonal_stable_mixed' depends on axioms: [propext,
+ AffineHemigroup.levy_khintchine_converse,
+ Classical.choice,
+ Quot.sound]
+'AffineHemigroup.sim_index_zero_levy' depends on axioms: [propext,
+ AffineHemigroup.levy_khintchine_exists,
+ AffineHemigroup.levy_khintchine_unique,
+ Classical.choice,
+ Quot.sound]
+'AffineHemigroup.sim_index_zero_exp' depends on axioms: [propext,
+ AffineHemigroup.levy_khintchine_exists,
+ AffineHemigroup.levy_khintchine_unique,
+ Classical.choice,
+ Quot.sound]
+'AffineHemigroup.sim_index_zero_blowup' depends on axioms: [propext,
+ AffineHemigroup.levy_khintchine_converse,
+ AffineHemigroup.levy_khintchine_exists,
+ AffineHemigroup.levy_khintchine_unique,
+ Classical.choice,
+ Quot.sound]
+'AffineHemigroup.line_family_levy' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.line_family_cascade' depends on axioms: [propext,
+ AffineHemigroup.levy_khintchine_converse,
+ Classical.choice,
+ Quot.sound]
+'AffineHemigroup.line_family_functionals' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.line_family_levy_not_shape_blind' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.line_family_not_shape_blind' depends on axioms: [propext,
+ AffineHemigroup.levy_khintchine_converse,
+ AffineHemigroup.levy_khintchine_unique,
+ Classical.choice,
+ Quot.sound]
+'AffineHemigroup.degenerate_cascade' depends on axioms: [propext,
+ AffineHemigroup.levy_khintchine_converse,
+ Classical.choice,
+ Quot.sound]
+'AffineHemigroup.degenerate_unbounded' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.degenerate_rotation_invariant_limit' depends on axioms: [propext,
+ AffineHemigroup.levy_khintchine_converse,
+ Classical.choice,
+ Quot.sound]
+'AffineHemigroup.matern_kernel' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.matern_kernel_hessian' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.maternIncrement_eq_integral' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.matern_negative_mass_off_origin' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.matern_negative_mass_near_origin' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.matern_negative_mass_log' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.matern_negative_mass_plane' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.matern_negative_mass_plane_example' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.integrable_gaussDensity' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.isUnit_det_of_mem_orthSet' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.isUnit_det_smul_one' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.translation_iff_relational' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.covariant_iff_relational' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.rotation_iff_relational' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.scale_iff_relational' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.operators_to_kernels_repr' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.operators_to_kernels_unique' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.operators_to_kernels_converse' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.operators_to_kernels_transport' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.operators_to_kernels_transport_iff' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.operators_to_kernels_continuity' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.operators_to_kernels_gw' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.operators_to_kernels_affine' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.operators_to_kernels_isotropic' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.kernels_to_operators_continuity' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.kernels_to_operators_gw' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.kernels_operators_correspondence' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.kernels_to_operators_isotropic' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.affine_rigidity_operators' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.affine_rigidity_interior' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.affine_rigidity_boundary_family' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.IsAffineCascadeFamily.toNoK2' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.IsAffineCascadeFamilyNoK2.rotationInvariant' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.IsAffineCascadeFamilyNoK2.selfDecomposable' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.boundaryCov_posSemidef' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.charFun_boundaryFamily' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.boundaryFamily_isAffineCascadeFamilyNoK2' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.boundaryFamily_not_affineGaussian' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.boundaryFamily_not_continuous' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.glPlusSet_isClosedSubgroupGL' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.exists_joint_reflection' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.invariant_gl_of_invariant_glPlus' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.isWedgeDatum_glPlus_iff' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.gw_family_glPlus_iff' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.glPlus_loewner_rigidity' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.glPlus_line_counterexample' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.gw_operator_family_glPlus_iff' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.witness_isotropic_classification' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.witness_isotropic_classification_unique' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.witness_isotropic_classification_operators' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.witness_origin_boundedness' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.witness_radial_monotone' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.witness_filtration' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.witness_no_cin_ray' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.witness_rank_deficient_step' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.witness_affine_rigidity' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.witness_cone_orders' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.witness_shape_adapted' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.witness_wedge_axis' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.witness_origin_subordinated' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.witness_wedge_axis_nonpsd' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.cin_ray_mem_classA_one' depends on axioms: [propext,
+ AffineHemigroup.levy_khintchine_converse,
+ AffineHemigroup.levy_khintchine_exists,
+ AffineHemigroup.levy_khintchine_unique,
+ AffineHemigroup.sato_polar_criterion,
+ AffineHemigroup.selfDecomposable_infinitelyDivisible,
+ Classical.choice,
+ Quot.sound]
+'AffineHemigroup.witness_origin_profile_exponent' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.witnessF_originDatum' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.maternOriginDatum_exponent' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.witnessF_not_classS' depends on axioms: [propext,
+ AffineHemigroup.levy_khintchine_converse,
+ AffineHemigroup.levy_khintchine_exists,
+ AffineHemigroup.levy_khintchine_unique,
+ AffineHemigroup.sato_polar_criterion,
+ AffineHemigroup.selfDecomposable_infinitelyDivisible,
+ Classical.choice,
+ Quot.sound]
+'AffineHemigroup.witness_origin_upper_bound' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.witness_origin_rate' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.witness_origin_rate_critical' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.witness_threshold_asymptotic' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.witness_exponent_profile' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.witness_exponent_profile_matern' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.witness_separating_family' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.witness_shadow_datum' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.witness_profile_discontinuous' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.witness_scale_zero_kernels' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.heatDatum_exponent' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.witness_isotropic_stage_smooth' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.steepDatum_profileAtOrigin' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AffineHemigroup.witness_isotropic_stage_atom' depends on axioms: [propext,
+ AffineHemigroup.levy_khintchine_converse,
+ AffineHemigroup.levy_khintchine_exists,
+ AffineHemigroup.levy_khintchine_unique,
+ AffineHemigroup.sato_polar_criterion,
+ AffineHemigroup.selfDecomposable_infinitelyDivisible,
+ Classical.choice,
+ Quot.sound]
+'AffineHemigroup.witness_isotropic_stage_absolutelyContinuous' depends on axioms: [propext,
+ AffineHemigroup.levy_khintchine_converse,
+ AffineHemigroup.levy_khintchine_exists,
+ AffineHemigroup.levy_khintchine_unique,
+ AffineHemigroup.sato_polar_criterion,
+ AffineHemigroup.selfDecomposable_infinitelyDivisible,
+ Classical.choice,
+ Quot.sound]

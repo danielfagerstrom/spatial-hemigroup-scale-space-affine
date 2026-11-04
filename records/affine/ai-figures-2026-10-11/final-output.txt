@@ -1,0 +1,15 @@
+CORE old repro (to 10-03 20:00Z): sessions 14, active 15.2 h, span 75.2 h, typed 1268 in 42 turns, agent 43096, ratio 34.0:1, directed(briefs) 12707
+CEILING old repro: sessions 17, active 59.8 h, span 248.1 h, typed 8741 in 220 turns, agent 134124, ratio 15.3:1, directed(briefs) 12707
+
+runs {'n': 22, 'act': 4.688611111111111, 'span': 5.0777777777777775, 'typed': 0, 'tt': 0, 'directed': 23141, 'aw': 16269, 'subs': 0, 'subturns': 0, 'tok': 1670974}
+CORE new, strict continuation (queue runs + Paper VII hub session): sessions 23, active 40.1 h, span 245.0 h, typed 2591 in 78 turns, agent 92013, ratio 35.5:1, directed(briefs) 23141
+CORE new + Lean session dd33ba56: sessions 24, active 103.9 h, span 341.9 h, typed 2974 in 109 turns, agent 120840, ratio 40.6:1, directed(briefs) 23141
+CEILING new, strict continuation (+3 old shifts + Overnight shift): sessions 27, active 96.9 h, span 477.4 h, typed 11007 in 290 turns, agent 198941, ratio 18.1:1, directed(briefs) 23141
+CEILING new + Lean: sessions 28, active 160.7 h, span 574.3 h, typed 11390 in 321 turns, agent 227768, ratio 20.0:1, directed(briefs) 23141
+
+Lean {'n': 1, 'act': 63.78388888888889, 'span': 96.85472222222222, 'typed': 383, 'tt': 31, 'directed': 0, 'aw': 28827, 'subs': 87, 'subturns': 11017, 'tok': 2125575}
+hub {'n': 1, 'act': 35.42666666666667, 'span': 239.96305555555554, 'typed': 2591, 'tt': 78, 'directed': 0, 'aw': 75744, 'subs': 0, 'subturns': 0, 'tok': 0}
+a94 {'n': 1, 'act': 12.263194444444444, 'span': 59.47083333333333, 'typed': 943, 'tt': 34, 'directed': 0, 'aw': 15900, 'subs': 0, 'subturns': 0, 'tok': 0}
+runs list: ['queue/q-0043', 'queue/q-0044', 'queue/q-0150', 'queue/q-0152', 'queue/q-0154', 'queue/q-0176', 'queue/q-0207', 'queue/q-0208', 'queue/q-0210', 'queue/q-0211', 'queue/q-0214', 'queue/q-0225', 'queue/q-0255', 'queue/q-0272', 'queue/q-0300', 'queue/q-0315', 'queue/q-0324', 'queue/q-0325', 'queue/q-0326', 'queue/q-0334', 'queue/q-0357', 'queue/q-0376']
+first 2026-09-25T01:37:30.072000+00:00 last archived turn 2026-10-11T19:55:56.984000+00:00
+core to 10-04 23:59Z (no Lean): sessions 14, active 27.9 h, span 101.0 h, typed 1755 in 60 turns, agent 72017, ratio 41.0:1, directed(briefs) 12707
