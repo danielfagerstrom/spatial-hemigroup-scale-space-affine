@@ -1,0 +1,42 @@
+name: Docs CI
+
+# Publishes this release's three views — the paper, the blueprint, and the blueprint as
+# hypertext with its dependency graph — to the research site, at
+# research.danielfagerstrom.com/papers/hemigroup-affine-covariance/.
+#
+# This repository is a FROZEN verification artifact: the export of the affine paper of
+# spatial-hemigroup-affine at its release v0.1, whose sources do not change. So the trigger
+# is manual, `channel` names the release rather than being read off a ref, and
+# `push_artifacts: false` — the released PDF is already committed at the root, and a CI-built
+# second copy on an `artifacts` branch is a copy a reader could mistake for it.
+#
+# The release channel is write-once (hub ADR-0016 §2): re-running this after a successful
+# publish FAILS, by design, rather than quietly rewriting bytes a DOI names.
+
+on:
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: "Build and validate everything, publish nothing."
+        type: boolean
+        default: false
+
+# `contents: write`, even though this caller sets push_artifacts: false and the job that
+# needs it is skipped. A caller cannot grant LESS than the called workflow's jobs request,
+# and that is checked when the run starts, before any `if` is evaluated.
+permissions:
+  contents: write
+
+jobs:
+  docs:
+    uses: danielfagerstrom/article-kit/.github/workflows/docs.yml@v0.4.0
+    with:
+      slug: hemigroup-affine-covariance
+      channel: v0.1
+      paper_tex: paper/main.tex
+      push_artifacts: false
+      dry_run: ${{ inputs.dry_run }}
+    secrets:
+      R2_ACCESS_KEY_ID: ${{ secrets.R2_ACCESS_KEY_ID }}
+      R2_SECRET_ACCESS_KEY: ${{ secrets.R2_SECRET_ACCESS_KEY }}
+      CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
